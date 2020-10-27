@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#BG",
+    "FLR",
+    "UWU"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:nether_wart"
+    },
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "G": {
+      "item": "minecraft:golden_carrot"
+    },
+    "F": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "L": {
+      "item": "moreboots:plumber_boots"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "U": {
+      "item": "minecraft:glass_bottle"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "moreboots:vanishing_boots",
+    "count": 1
+  }
+}

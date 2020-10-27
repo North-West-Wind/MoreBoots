@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+    "DID",
+    "#N#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:rainbow_wool"
+    },
+    "I": {
+      "item": "moreboots:socks_boots"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "moreboots:rainbow_socks_boots",
+    "count": 1
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#GQ",
+    "L N",
+    "DRE"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_block"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "Q": {
+      "item": "minecraft:quartz_block"
+    },
+    "L": {
+      "item": "minecraft:lapis_block"
+    },
+    "N": {
+      "item": "minecraft:netherite_block"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "E": {
+      "item": "minecraft:emerald_block"
+    }
+  },
+  "result": {
+    "item": "moreboots:metal_mix",
+    "count": 1
+  }
+}

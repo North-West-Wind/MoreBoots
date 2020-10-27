@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#FB",
+    "PLY",
+    "GDS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "B": {
+      "item": "minecraft:blackstone"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "L": {
+      "item": "minecraft:leather_boots"
+    },
+    "Y": {
+      "item": "minecraft:bamboo"
+    },
+    "G": {
+      "item": "minecraft:grass"
+    },
+    "D": {
+      "item": "minecraft:dead_bush"
+    },
+    "S": {
+      "item": "minecraft:snow"
+    }
+  },
+  "result": {
+    "item": "moreboots:plumber_boots",
+    "count": 1
+  }
+}

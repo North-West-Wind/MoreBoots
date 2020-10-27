@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#W#",
+    "#L#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "W": {
+      "item": "moreboots:water_boots"
+    },
+    "L": {
+      "item": "moreboots:lava_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:obsidian_boots",
+    "count": 1
+  }
+}

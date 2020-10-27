@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#GC",
+    "YWB",
+    "FKT"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_dye"
+    },
+    "G": {
+      "item": "minecraft:green_dye"
+    },
+    "C": {
+      "item": "minecraft:cyan_dye"
+    },
+    "Y": {
+      "item": "minecraft:yellow_dye"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "B": {
+      "item": "minecraft:blue_dye"
+    },
+    "F": {
+      "item": "minecraft:white_dye"
+    },
+    "K": {
+      "item": "minecraft:brown_dye"
+    },
+    "T": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "moreboots:rainbow_wool",
+    "count": 1
+  }
+}

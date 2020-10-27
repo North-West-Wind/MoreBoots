@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lava_bucket"
+    }
+  },
+  "result": {
+    "item": "moreboots:lava_boots",
+    "count": 1
+  }
+}

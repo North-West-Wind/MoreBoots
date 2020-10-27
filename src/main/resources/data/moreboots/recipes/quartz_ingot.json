@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#Q#",
+    "QDQ",
+    "#Q#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz_block"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "moreboots:quartz_ingot",
+    "count": 1
+  }
+}

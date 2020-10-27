@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:cobweb"
+    }
+  },
+  "result": {
+    "item": "moreboots:spider_boots",
+    "count": 1
+  }
+}
