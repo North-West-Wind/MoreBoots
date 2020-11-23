@@ -29,6 +29,6 @@ public class VanishingPaneBlock extends PaneBlock {
                 return VoxelShapes.empty();
             }
         }
-        return super.getShape(state, worldIn, pos, context);
+        return super.getCollisionShape(state, worldIn, pos, context);
     }
 }

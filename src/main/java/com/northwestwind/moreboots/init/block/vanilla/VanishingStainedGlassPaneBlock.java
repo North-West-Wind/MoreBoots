@@ -28,6 +28,6 @@ public class VanishingStainedGlassPaneBlock extends StainedGlassPaneBlock {
                 return VoxelShapes.empty();
             }
         }
-        return super.getShape(state, worldIn, pos, context);
+        return super.getCollisionShape(state, worldIn, pos, context);
     }
 }

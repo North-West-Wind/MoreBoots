@@ -1,0 +1,36 @@
+{
+  "parent": "moreboots:moreboots/bone_boots",
+  "display": {
+    "icon": {
+      "item": "moreboots:mushroom_boots",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.moreboots.mushroom_boots.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.mushroom_boots.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mushroom_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:mushroom_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mushroom_boots"
+    ]
+  ]
+}

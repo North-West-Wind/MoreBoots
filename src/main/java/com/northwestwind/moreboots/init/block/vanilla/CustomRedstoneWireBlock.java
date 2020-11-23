@@ -30,7 +30,7 @@ public class CustomRedstoneWireBlock extends RedstoneWireBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if(entityIn instanceof LivingEntity && ((LivingEntity) entityIn).getItemStackFromSlot(EquipmentSlotType.FEET).getItem().equals(ItemInit.redstone_boots)) powered = true;
+        if(entityIn instanceof LivingEntity && ((LivingEntity) entityIn).getItemStackFromSlot(EquipmentSlotType.FEET).getItem().equals(ItemInit.REDSTONE_BOOTS)) powered = true;
         else powered = false;
         super.onEntityCollision(state, worldIn, pos, entityIn);
     }

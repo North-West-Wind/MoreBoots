@@ -1,57 +1,42 @@
 package com.northwestwind.moreboots.init;
 
-import com.mojang.datafixers.types.Type;
 import com.northwestwind.moreboots.MoreBoots;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
-import com.northwestwind.moreboots.init.block.NonFullBlock;
+import com.northwestwind.moreboots.init.block.RainbowWoolBlock;
 import com.northwestwind.moreboots.init.block.vanilla.*;
 import com.northwestwind.moreboots.init.item.GlowstoneDustItemBase;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.tileentity.BedTileEntityRenderer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.tileentity.BedTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Util;
-import net.minecraft.util.datafix.TypeReferences;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.registry.Registry;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import org.apache.logging.log4j.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(Reference.MODID)
 public class BlockInit {
-    public static final Block rainbow_wool = new Block(Block.Properties.create(Material.WOOL).hardnessAndResistance(10.0f, 3600000f).sound(SoundType.CLOTH).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
+    public static final Block rainbow_wool = new RainbowWoolBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(10.0f, 3600000f).sound(SoundType.CLOTH).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
     public static final GlowstoneDustBlock glowstone_dust = (GlowstoneDustBlock) new GlowstoneDustBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().func_235838_a_(value -> 15)).setRegistryName("glowstone_dust");
+    public static final Block cobblestone_8 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(16.0f, 48.0f)).setRegistryName("cobblestone_8");
+    public static final Block cobblestone_64 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(128.0f, 384.0f)).setRegistryName("cobblestone_64");
+    public static final Block cobblestone_512 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
 
     @SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event) {
         event.getRegistry().register(rainbow_wool);
         event.getRegistry().register(glowstone_dust);
+        event.getRegistry().register(cobblestone_8);
+        event.getRegistry().register(cobblestone_64);
+        event.getRegistry().register(cobblestone_512);
         Field[] fields = Blocks.class.getDeclaredFields();
         LogManager.getLogger().info("Found " + fields.length + " blocks");
         for(Field f : fields) {
@@ -64,8 +49,6 @@ public class BlockInit {
                     if(block instanceof AnvilBlock) newBlock = new VanishingAnvilBlock(block);
                     else if(block instanceof BambooSaplingBlock) newBlock = new VanishingBambooSaplingBlock(block);
                     else if(block instanceof BambooBlock) newBlock = new VanishingBambooBlock(block);
-                    //else if(block instanceof BedBlock) newBlock = new VanishingBedBlock((BedBlock) block);
-                    //else if(block instanceof BellBlock) newBlock = new VanishingBellBlock((BellBlock) block);
                     else if(block instanceof FrostedIceBlock) newBlock = new VanishingFrostedIceBlock(block);
                     else if(block instanceof StainedGlassPaneBlock) newBlock = new VanishingStainedGlassPaneBlock((StainedGlassPaneBlock) block);
                     else if(block instanceof StainedGlassBlock) newBlock = new VanishingStainedGlassBlock((StainedGlassBlock) block);
@@ -79,33 +62,23 @@ public class BlockInit {
                     else if(block instanceof CampfireBlock && block.getRegistryName().getPath().equals("soul_campfire")) newBlock = new VanishingCampfireBlock(false, 2, block);
                     else if(block instanceof CarpetBlock) newBlock = new VanishingCarpetBlock((CarpetBlock) block);
                     else if(block instanceof ChainBlock) newBlock = new VanishingChainBlock(block);
-                    //else if(block instanceof ChestBlock) newBlock = new VanishingChestBlock(block);
                     else if(block instanceof ChorusPlantBlock) newBlock = new VanishingChorusPlantBlock(block);
                     else if(block instanceof CocoaBlock) newBlock = new VanishingCocoaBlock(block);
                     else if(block instanceof ComparatorBlock) newBlock = new VanishingComparatorBlock(block);
                     else if(block instanceof ConduitBlock) newBlock = new VanishingConduitBlock(block);
                     else if(block instanceof DaylightDetectorBlock) newBlock = new VanishingDaylighDetectorBlock(block);
                     else if(block instanceof DoorBlock) newBlock = new VanishingDoorBlock(block);
-                    //else if(block instanceof DragonEggBlock) newBlock = new VanishingDragonEggBlock(block);
-                    //else if(block instanceof EnchantingTableBlock) newBlock = new VanishingEnchantingTableBlock(block);
-                    //else if(block instanceof EnderChestBlock) newBlock = new VanishingEnderChestBlock(block);
-                    else if(block instanceof EndPortalFrameBlock) newBlock = new VanishingEndPortalFrameBlock(block);
                     else if(block instanceof EndRodBlock) newBlock = new VanishingEndRodBlock(block);
                     else if(block instanceof FenceBlock) newBlock = new VanishingFenceBlock(block);
                     else if(block instanceof FenceGateBlock) newBlock = new VanishingFenceGateBlock(block);
                     else if(block instanceof FlowerPotBlock) newBlock = new VanishingFlowerPotBlock((FlowerPotBlock) block);
-                    //else if(block instanceof GrindstoneBlock) newBlock = new VanishingGrindstoneBlock(block);
-                    //else if(block instanceof HopperBlock) newBlock = new VanishingHopperBlock(block);
                     else if(block instanceof LadderBlock) newBlock = new VanishingLadderBlock(block);
                     else if(block instanceof LanternBlock) newBlock = new VanishingLanternBlock(block);
-                    else if(block instanceof LecternBlock) newBlock = new VanishingLecternBlock(block);
-                    //else if(block instanceof MovingPistonBlock) newBlock = new VanishingMovingPistonBlock(block);
                     else if(block instanceof PaneBlock) newBlock = new VanishingPaneBlock(block);
-                    //else if(block instanceof PistonHeadBlock) newBlock = new VanishingPistonHeadBlock(block);
                     else if(block instanceof PressurePlateBlock && (block.getRegistryName().getPath().equals("polished_blackstone_pressure_plate") || block.getRegistryName().getPath().equals("stone_pressure_plate"))) newBlock = new VanishingPressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, block);
                     else if(block instanceof PressurePlateBlock) newBlock = new VanishingPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, block);
                     else if(block instanceof RepeaterBlock) newBlock = new VanishingRepeaterBlock(block);
-                    else if(block instanceof RedstoneWireBlock) newBlock = new CustomRedstoneWireBlock(block);
+                    //else if(block instanceof RedstoneWireBlock) newBlock = new CustomRedstoneWireBlock(block);
                     else if(block instanceof ScaffoldingBlock) newBlock = new VanishingScaffoldingBlock(block);
                     else if(block instanceof WitherSkeletonSkullBlock) newBlock = new VanishingWitherSkeletonSkullBlock(block);
                     else if(block instanceof WitherSkeletonWallSkullBlock) newBlock = new VanishingWitherSkeletonWallSkullBlock(block);
@@ -148,7 +121,6 @@ public class BlockInit {
                     else if(block instanceof StairsBlock && block.getRegistryName().getPath().equals("blackstone_stairs")) newBlock = new VanishingStairsBlock(Blocks.field_235406_np_::getDefaultState, block);
                     else if(block instanceof StairsBlock && block.getRegistryName().getPath().equals("polished_blackstone_brick_stairs")) newBlock = new VanishingStairsBlock(Blocks.field_235411_nu_::getDefaultState, block);
                     else if(block instanceof StairsBlock && block.getRegistryName().getPath().equals("polished_blackstone_stairs")) newBlock = new VanishingStairsBlock(Blocks.field_235410_nt_::getDefaultState, block);
-                    else if(block instanceof StandingSignBlock) newBlock = new VanishingStandingSignBlock((StandingSignBlock) block);
                     else if(block instanceof StonecutterBlock) newBlock = new VanishingStonecutterBlock(block);
                     else if(block instanceof SweetBerryBushBlock) newBlock = new VanishingSweetBerryBushBlock(block);
                     else if(block instanceof TrapDoorBlock) newBlock = new VanishingTrapDoorBlock(block);
@@ -156,7 +128,6 @@ public class BlockInit {
                     else if(block instanceof TwistingVinesTopBlock) newBlock = new VanishingTwistingVinesTopBlock(block);
                     else if(block instanceof VineBlock) newBlock = new VanishingVineBlock(block);
                     else if(block instanceof WallBlock) newBlock = new VanishingWallBlock(block);
-                    else if(block instanceof WallSignBlock) newBlock = new VanishingWallSignBlock((WallSignBlock) block);
                     else if(block instanceof WallSkullBlock) newBlock = new VanishingWallSkullBlock((WallSkullBlock) block);
                     else if(block instanceof WebBlock) newBlock = new VanishingWebBlock(block);
                     else if(block instanceof WeepingVinesBlock) newBlock = new VanishingWeepingVinesBlock(block);
@@ -177,9 +148,10 @@ public class BlockInit {
 
     @SubscribeEvent
     public static void registerBlockItems(final RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(
-                new BlockItem(rainbow_wool, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.instance))
-                        .setRegistryName("rainbow_wool"));
+        event.getRegistry().register(new BlockItem(rainbow_wool, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("rainbow_wool"));
+        event.getRegistry().register(new BlockItem(cobblestone_8, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_8"));
+        event.getRegistry().register(new BlockItem(cobblestone_64, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_64"));
+        event.getRegistry().register(new BlockItem(cobblestone_512, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_512"));
         event.getRegistry().register(new GlowstoneDustItemBase(glowstone_dust, new Item.Properties().maxStackSize(64).group(ItemGroup.MATERIALS)).setRegistryName("minecraft", "glowstone_dust"));
     }
 }

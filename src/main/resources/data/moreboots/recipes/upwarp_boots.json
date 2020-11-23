@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:ender_boots"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "item": "moreboots:upwarp_boots",
+    "count": 1
+  }
+}

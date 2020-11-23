@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "# #"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "#": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "moreboots:ender_boots",
+    "count": 1
+  }
+}

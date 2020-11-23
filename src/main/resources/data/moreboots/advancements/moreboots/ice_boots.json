@@ -1,0 +1,36 @@
+{
+  "parent": "moreboots:moreboots/water_boots",
+  "display": {
+    "icon": {
+      "item": "moreboots:ice_boots",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.moreboots.ice_boots.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.ice_boots.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ice_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:ice_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ice_boots"
+    ]
+  ]
+}

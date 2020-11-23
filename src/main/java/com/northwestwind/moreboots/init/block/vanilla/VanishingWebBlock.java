@@ -22,7 +22,7 @@ public class VanishingWebBlock extends WebBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Entity entity = context.getEntity();
         if(entity instanceof LivingEntity) {
             ItemStack boots = ((LivingEntity) entity).getItemStackFromSlot(EquipmentSlotType.FEET);
@@ -31,7 +31,7 @@ public class VanishingWebBlock extends WebBlock {
                 return VoxelShapes.empty();
             }
         }
-        return super.getShape(state, worldIn, pos, context);
+        return super.getCollisionShape(state, worldIn, pos, context);
     }
 
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {

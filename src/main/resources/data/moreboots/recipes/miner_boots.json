@@ -1,18 +1,9 @@
 {
     "type": "minecraft:crafting_shaped",
-    "pattern": ["# A", "G D"],
+    "pattern": ["# #", "# #"],
     "key": {
         "#": {
-            "item": "minecraft:cobblestone"
-        },
-        "A": {
-            "item": "minecraft:andesite"
-        },
-        "G": {
-            "item": "minecraft:granite"
-        },
-        "D": {
-            "item": "minecraft:diorite"
+            "item": "moreboots:cobblestone_512"
         }
     },
     "result": {

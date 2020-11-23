@@ -19,19 +19,6 @@ public class VanishingStainedGlassBlock extends StainedGlassBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        Entity entity = context.getEntity();
-        if(entity instanceof LivingEntity) {
-            ItemStack boots = ((LivingEntity) entity).getItemStackFromSlot(EquipmentSlotType.FEET);
-            ResourceLocation registryName = boots.getItem().getRegistryName();
-            if(registryName != null && registryName.getPath().equals("vanishing_boots")) {
-                return VoxelShapes.empty();
-            }
-        }
-        return super.getShape(state, worldIn, pos, context);
-    }
-
-    @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Entity entity = context.getEntity();
         if(entity instanceof LivingEntity) {
@@ -41,6 +28,6 @@ public class VanishingStainedGlassBlock extends StainedGlassBlock {
                 return VoxelShapes.empty();
             }
         }
-        return super.getShape(state, worldIn, pos, context);
+        return super.getCollisionShape(state, worldIn, pos, context);
     }
 }

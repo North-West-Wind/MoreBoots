@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    },
+    {
+      "item": "moreboots:cobblestone_64"
+    }
+  ],
+  "result": {
+    "item": "moreboots:cobblestone_512",
+    "count": 1
+  }
+}
