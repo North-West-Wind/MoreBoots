@@ -152,18 +152,11 @@ public class MoreBootsHandler {
             FrostWalkerEnchantment.freezeNearby(entity, entity.world, new BlockPos(entity.getPositionVec()), 2);
             int num = rng.nextInt(100);
             if(num == 0) boots.damageItem(1, entity, playerEntity -> playerEntity.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1, 1));
-        } else if (boots.getItem().equals(ItemInit.MILK_BOOTS)) {
-            Field[] fields = Effects.class.getDeclaredFields();
-            for (Field f : fields) {
-                Class<?> cl = f.getType();
-                if (cl.equals(Effects.class) && Modifier.isStatic(f.getModifiers())) {
-                    try {
-                        Effect effect = (Effect) f.get(null);
-                        if (!effect.isBeneficial()) event.getEntityLiving().removePotionEffect(effect);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
+        } else if (boots.getItem().equals(ItemInit.MILK_BOOTS) && !entity.world.isRemote) {
+            Collection<EffectInstance> potions = entity.getActivePotionEffects();
+            for (EffectInstance effect : potions) if (!effect.getPotion().isBeneficial()) {
+                entity.removePotionEffect(effect.getPotion());
+                break;
             }
         } else if (boots.getItem().equals(ItemInit.WATER_BOOTS)) {
             Vector3d pos = entity.getPositionVec();
