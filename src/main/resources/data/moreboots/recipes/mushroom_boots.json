@@ -1,13 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
-    "#B#",
-    "###"
+    "RbR",
+    "SBS",
+    "MMM"
   ],
   "key": {
-    "#": {
-      "item": "moreboots:mushroom_blocks"
+    "M": {
+      "item": "minecraft:mycelium"
+    },
+    "R": {
+      "item": "minecraft:red_mushroom_block"
+    },
+    "b": {
+      "item": "minecraft:brown_mushroom_block"
+    },
+    "S": {
+      "item": "minecraft:mushroom_stem"
     },
     "B": {
       "item": "moreboots:bone_boots"
