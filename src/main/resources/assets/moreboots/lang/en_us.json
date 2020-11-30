@@ -28,9 +28,13 @@
   "item.moreboots.blaze_boots": "Blazing Boots",
   "item.moreboots.cactus_boots": "Cactus Boots",
   "item.moreboots.explosive_boots": "Explosive Boots",
+  "item.moreboots.windy_boots": "Windy Boots",
+  "item.moreboots.skating_boots": "Skater",
+  "item.moreboots.prismarine_boots": "Prismarine Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
+  "item.moreboots.bat_hide": "Bat Hide",
 
   "block.moreboots.rainbow_wool": "Rainbow Wool",
   "block.moreboots.glowstone_dust": "Glowstone Dust Block",
@@ -68,6 +72,9 @@
   "tooltip.moreboots.blaze_boots": "\u00A77\u00A7oSets the floor on fire",
   "tooltip.moreboots.cactus_boots": "\u00A77\u00A7oRebounds melee damage",
   "tooltip.moreboots.explosive_boots": "\u00A77\u00A7oExplodes upon any damage from entities",
+  "tooltip.moreboots.windy_boots": "\u00A77\u00A7oGains velocity in the air",
+  "tooltip.moreboots.skating_boots": "\u00A77\u00A7oSneak to skate on ice",
+  "tooltip.moreboots.prismarine_boots": "\u00A77\u00A7oSwims extremely fast",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -127,6 +134,12 @@
   "advancements.moreboots.explosive_boots.description": "Obtain the Explosive Boots",
   "advancements.moreboots.slime_boots.title": "Tinkers' Construct",
   "advancements.moreboots.slime_boots.description": "Obtain the Slime Boots",
+  "advancements.moreboots.skating_boots.title": "Ice Skating",
+  "advancements.moreboots.skating_boots.description": "Obtain the Skater",
+  "advancements.moreboots.prismarine_boots.title": "Faster than Guardian",
+  "advancements.moreboots.prismarine_boots.description": "Obtain the Prismarine Boots",
+  "advancements.moreboots.windy_boots.title": "Not Gliding",
+  "advancements.moreboots.windy_boots.description": "Obtain the Windy Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"

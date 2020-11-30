@@ -1,0 +1,36 @@
+{
+  "parent": "moreboots:moreboots/prismarine_boots",
+  "display": {
+    "icon": {
+      "item": "moreboots:windy_boots",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.moreboots.windy_boots.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.windy_boots.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "windy_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:windy_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "windy_boots"
+    ]
+  ]
+}

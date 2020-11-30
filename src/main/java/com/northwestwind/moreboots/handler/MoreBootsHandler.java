@@ -7,17 +7,18 @@ import com.northwestwind.moreboots.init.ItemInit;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import com.northwestwind.moreboots.init.block.KeybindInit;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.server.MinecraftServer;
@@ -36,9 +37,8 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.lwjgl.glfw.GLFW;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.*;
 
 public class MoreBootsHandler {
@@ -322,6 +322,20 @@ public class MoreBootsHandler {
             BlockPos under = blockPos.down();
             BlockState underneath = entity.world.getBlockState(under);
             if (underneath.isSolid() && entity.world.isAirBlock(blockPos)) entity.world.setBlockState(blockPos, Blocks.FIRE.getDefaultState());
+        /*} else if(boots.getItem().equals(ItemInit.REDSTONE_BOOTS)) {
+            Vector3d pos = entity.getPositionVec();
+            BlockPos blockPos = new BlockPos(pos);
+            BlockState state = entity.world.getBlockState(blockPos);
+            if (state.func_235901_b_(BlockStateProperties.POWER_0_15)) entity.world.setBlockState(blockPos, state.with(BlockStateProperties.POWER_0_15, 15), 3);
+            if (state.func_235901_b_(BlockStateProperties.POWERED)) entity.world.setBlockState(blockPos, state.with(BlockStateProperties.POWERED, true), 3);*/
+        } else if(boots.getItem().equals(ItemInit.WINDY_BOOTS) && !entity.func_233570_aj_() && !entity.isSneaking() && !entity.isInWater() && !entity.isInLava()) {
+            Vector3d motion = entity.getMotion();
+            entity.setMotion(motion.mul(1.1, 1, 1.1));
+        } else if(boots.getItem().equals(ItemInit.PRISMARINE_BOOTS) && entity.isActualySwimming() && entity.isInWater()) {
+            Vector3d motion = entity.getMotion();
+            Vector3d direction = entity.getLookVec().scale(0.15);
+            entity.setMotion(motion.mul(1.01, 1, 1.01).add(direction));
+            if (rng.nextInt(100) == 0) boots.damageItem(1, entity, entity1 -> entity1.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1, 1));
         }
     }
 
@@ -337,6 +351,30 @@ public class MoreBootsHandler {
             player.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
             boots.damageItem(1, player, playerEntity -> playerEntity.playSound(SoundEvents.ENTITY_ENDERMAN_DEATH, 1, 1));
             if(player.world.isRemote) MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerEnderTeleportPacket());
+        } else if (Minecraft.getInstance().gameSettings.keyBindSneak.isPressed() && event.getAction() == GLFW.GLFW_PRESS) {
+            PlayerEntity player = Minecraft.getInstance().player;
+            if(player == null) return;
+            ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+            if(!boots.getItem().equals(ItemInit.SKATER)) return;
+            BlockPos pos = new BlockPos(player.getPositionVec());
+            Material material = player.world.getBlockState(pos.down()).getMaterial();
+            if (material.equals(Material.ICE) || material.equals(Material.PACKED_ICE)) {
+                Vector3d motion = player.getMotion();
+                Vector3d direction = player.getLookVec().scale(0.75);
+                player.setMotion(motion.mul(0, 1, 0).add(direction.getX(), 0, direction.getZ()));
+            }
+            if (player.world.isRemote) MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerSkatePacket());
         }
+    }
+
+    @SubscribeEvent
+    public void onLivingDrop(final LivingDropsEvent event) {
+        int looting = event.getLootingLevel();
+        int shouldDrop = rng.nextInt((1 + looting) * 2) + looting;
+        if (shouldDrop < 1) return;
+        LivingEntity entity = event.getEntityLiving();
+        ItemStack stack = new ItemStack(ItemInit.BAT_HIDE, shouldDrop);
+        ItemEntity item = new ItemEntity(entity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), stack);
+        event.getDrops().add(item);
     }
 }

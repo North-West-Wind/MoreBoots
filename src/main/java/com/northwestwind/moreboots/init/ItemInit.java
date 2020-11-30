@@ -25,34 +25,38 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(Reference.MODID)
 public class ItemInit {
-    public static final Item SPIDER_BOOTS = new ArmorItemBase(ModArmorMaterial.SPIDER, EquipmentSlotType.FEET, new Item.Properties().group(com.northwestwind.moreboots.MoreBoots.MoreBootsItemGroup.INSTANCE), "spider_boots").setRegistryName("spider_boots");
-    public static final Item QUARTZ_BOOTS = new ArmorItemBase(ModArmorMaterial.QUARTZ, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_boots").setRegistryName("quartz_boots");
-    public static final Item SOCKS_BOOTS = new ArmorItemBase(ModArmorMaterial.SOCKS, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "socks_boots").setRegistryName("socks_boots");
-    public static final Item RAINBOW_SOCKS_BOOTS = new ArmorItemBase(ModArmorMaterial.RAINBOW_SOCKS, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "rainbow_socks_boots").setRegistryName("rainbow_socks_boots");
-    public static final Item MINER_BOOTS = new ArmorItemBase(ModArmorMaterial.MINER, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "miner_boots").setRegistryName("miner_boots");
-    public static final Item LAPIS_BOOTS = new ArmorItemBase(ModArmorMaterial.LAPIS, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "lapis_boots").setRegistryName("lapis_boots");
-    public static final Item GLOWSTONE_BOOTS = new ArmorItemBase(ModArmorMaterial.GLOWSTONE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "glowstone_boots").setRegistryName("glowstone_boots");
-    public static final Item WATER_BOOTS = new ArmorItemBase(ModArmorMaterial.WATER, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "water_boots").setRegistryName("water_boots");
-    public static final Item LAVA_BOOTS = new ArmorItemBase(ModArmorMaterial.LAVA, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "lava_boots").setRegistryName("lava_boots");
-    public static final Item OBSIDIAN_BOOTS = new ArmorItemBase(ModArmorMaterial.OBSIDIAN, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "obsidian_boots").setRegistryName("obsidian_boots");
-    public static final Item ICE_BOOTS = new ArmorItemBase(ModArmorMaterial.ICE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "ice_boots").setRegistryName("ice_boots");
-    public static final Item VANISHING_BOOTS = new ArmorItemBase(ModArmorMaterial.VANISHING, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "vanishing_boots").setRegistryName("vanishing_boots");
-    public static final Item MILK_BOOTS = new ArmorItemBase(ModArmorMaterial.MILK, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "milk_boots").setRegistryName("milk_boots");
-    public static final Item REDSTONE_BOOTS = new ArmorItemBase(ModArmorMaterial.REDSTONE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "redstone_boots").setRegistryName("redstone_boots");
-    public static final Item PLUMBER_BOOTS = new ArmorItemBase(ModArmorMaterial.PLUMBER, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "plumber_boots").setRegistryName("plumber_boots");
-    public static final Item METAL_BOOTS = new ArmorItemBase(ModArmorMaterial.METAL, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "metal_boots").setRegistryName("metal_boots");
-    public static final Item UPWARP_BOOTS = new ArmorItemBase(ModArmorMaterial.UPWARP, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "upwarp_boots").setRegistryName("upwarp_boots");
-    public static final Item DOWNWARP_BOOTS = new ArmorItemBase(ModArmorMaterial.DOWNWARP, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "downwarp_boots").setRegistryName("downwarp_boots");
-    public static final Item ENDER_BOOTS = new ArmorItemBase(ModArmorMaterial.ENDER, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "ender_boots").setRegistryName("ender_boots");
-    public static final Item BONE_BOOTS = new ArmorItemBase(ModArmorMaterial.BONE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "bone_boots").setRegistryName("bone_boots");
-    public static final Item MUSHROOM_BOOTS = new ArmorItemBase(ModArmorMaterial.MUSHROOM, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "mushroom_boots").setRegistryName("mushroom_boots");
-    public static final Item SLIME_BOOTS = new ArmorItemBase(ModArmorMaterial.SLIME, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "slime_boots").setRegistryName("slime_boots");
-    public static final Item BLAZE_BOOTS = new ArmorItemBase(ModArmorMaterial.BLAZE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "blaze_boots").setRegistryName("blaze_boots");
-    public static final Item CACTUS_BOOTS = new ArmorItemBase(ModArmorMaterial.CACTUS, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "cactus_boots").setRegistryName("cactus_boots");
-    public static final Item EXPLOSIVE_BOOTS = new ArmorItemBase(ModArmorMaterial.EXPLOSIVE, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "explosive_boots").setRegistryName("explosive_boots");
+    public static final Item SPIDER_BOOTS = registerBoots(ModArmorMaterial.SPIDER, "spider_boots");
+    public static final Item QUARTZ_BOOTS = registerBoots(ModArmorMaterial.QUARTZ, "quartz_boots");
+    public static final Item SOCKS_BOOTS = registerBoots(ModArmorMaterial.SOCKS, "socks_boots");
+    public static final Item RAINBOW_SOCKS_BOOTS = registerBoots(ModArmorMaterial.RAINBOW_SOCKS, "rainbow_socks_boots");
+    public static final Item MINER_BOOTS = registerBoots(ModArmorMaterial.MINER, "miner_boots");
+    public static final Item LAPIS_BOOTS = registerBoots(ModArmorMaterial.LAPIS, "lapis_boots");
+    public static final Item GLOWSTONE_BOOTS = registerBoots(ModArmorMaterial.GLOWSTONE, "glowstone_boots");
+    public static final Item WATER_BOOTS = registerBoots(ModArmorMaterial.WATER, "water_boots");
+    public static final Item LAVA_BOOTS = registerBoots(ModArmorMaterial.LAVA, "lava_boots");
+    public static final Item OBSIDIAN_BOOTS = registerBoots(ModArmorMaterial.OBSIDIAN, "obsidian_boots");
+    public static final Item ICE_BOOTS = registerBoots(ModArmorMaterial.ICE, "ice_boots");
+    public static final Item VANISHING_BOOTS = registerBoots(ModArmorMaterial.VANISHING, "vanishing_boots");
+    public static final Item MILK_BOOTS = registerBoots(ModArmorMaterial.MILK, "milk_boots");
+    public static final Item REDSTONE_BOOTS = registerBoots(ModArmorMaterial.REDSTONE, "redstone_boots");
+    public static final Item PLUMBER_BOOTS = registerBoots(ModArmorMaterial.PLUMBER, "plumber_boots");
+    public static final Item METAL_BOOTS = registerBoots(ModArmorMaterial.METAL, "metal_boots");
+    public static final Item UPWARP_BOOTS = registerBoots(ModArmorMaterial.UPWARP, "upwarp_boots");
+    public static final Item DOWNWARP_BOOTS = registerBoots(ModArmorMaterial.DOWNWARP, "downwarp_boots");
+    public static final Item ENDER_BOOTS = registerBoots(ModArmorMaterial.ENDER, "ender_boots");
+    public static final Item BONE_BOOTS = registerBoots(ModArmorMaterial.BONE, "bone_boots");
+    public static final Item MUSHROOM_BOOTS = registerBoots(ModArmorMaterial.MUSHROOM, "mushroom_boots");
+    public static final Item SLIME_BOOTS = registerBoots(ModArmorMaterial.SLIME, "slime_boots");
+    public static final Item BLAZE_BOOTS = registerBoots(ModArmorMaterial.BLAZE, "blaze_boots");
+    public static final Item CACTUS_BOOTS = registerBoots(ModArmorMaterial.CACTUS, "cactus_boots");
+    public static final Item EXPLOSIVE_BOOTS = registerBoots(ModArmorMaterial.EXPLOSIVE, "explosive_boots");
+    public static final Item WINDY_BOOTS = registerBoots(ModArmorMaterial.WINDY, "windy_boots");
+    public static final Item SKATER = registerBoots(ModArmorMaterial.SKATER, "skating_boots");
+    public static final Item PRISMARINE_BOOTS = registerBoots(ModArmorMaterial.PRISMARINE, "prismarine_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_ingot").setRegistryName("quartz_ingot");
     public static final Item METAL_MIX = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "metal_mix").setRegistryName("metal_mix");
+    public static final Item BAT_HIDE = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "bat_hide").setRegistryName("bat_hide");
 
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
@@ -81,9 +85,17 @@ public class ItemInit {
         event.getRegistry().register(BLAZE_BOOTS);
         event.getRegistry().register(CACTUS_BOOTS);
         event.getRegistry().register(EXPLOSIVE_BOOTS);
+        event.getRegistry().register(WINDY_BOOTS);
+        event.getRegistry().register(SKATER);
+        event.getRegistry().register(PRISMARINE_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
+        event.getRegistry().register(BAT_HIDE);
+    }
+
+    public static Item registerBoots(IArmorMaterial material, String registryName) {
+        return new ArmorItemBase(material, EquipmentSlotType.FEET, new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), registryName).setRegistryName(registryName);
     }
 
     public enum ModArmorMaterial implements IArmorMaterial {
@@ -141,7 +153,10 @@ public class ItemInit {
         SLIME(Reference.MODID + ":slime", 20, new int[] { 2, 1, 1, 1 }, 16, SoundEvents.BLOCK_SLIME_BLOCK_HIT, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SLIME_BALL)),
         BLAZE(Reference.MODID + ":blaze", 20, new int[] { 5, 1, 1, 1 }, 20, SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0f, 0.0f, () -> Ingredient.fromItems(Items.BLAZE_ROD)),
         CACTUS(Reference.MODID + ":cactus", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.CACTUS)),
-        EXPLOSIVE(Reference.MODID + ":explosive", 0.1875f, new int[] { 4, 1, 1, 1 }, 16, SoundEvents.ENTITY_TNT_PRIMED, 0.0f, 0.0f, () -> Ingredient.EMPTY);
+        EXPLOSIVE(Reference.MODID + ":explosive", 0.1875f, new int[] { 4, 1, 1, 1 }, 16, SoundEvents.ENTITY_TNT_PRIMED, 0.0f, 0.0f, () -> Ingredient.EMPTY),
+        WINDY(Reference.MODID + ":windy", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Blocks.BLUE_ICE)),
+        SKATER(Reference.MODID + ":skating", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SHEARS)),
+        PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(ItemInit.BAT_HIDE));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
