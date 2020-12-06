@@ -53,6 +53,8 @@ public class ItemInit {
     public static final Item WINDY_BOOTS = registerBoots(ModArmorMaterial.WINDY, "windy_boots");
     public static final Item SKATER = registerBoots(ModArmorMaterial.SKATER, "skating_boots");
     public static final Item PRISMARINE_BOOTS = registerBoots(ModArmorMaterial.PRISMARINE, "prismarine_boots");
+    public static final Item BAT_BOOTS = registerBoots(ModArmorMaterial.BAT, "bat_boots");
+    public static final Item KA_BOOTS = registerBoots(ModArmorMaterial.KA, "ka_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_ingot").setRegistryName("quartz_ingot");
     public static final Item METAL_MIX = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "metal_mix").setRegistryName("metal_mix");
@@ -88,6 +90,8 @@ public class ItemInit {
         event.getRegistry().register(WINDY_BOOTS);
         event.getRegistry().register(SKATER);
         event.getRegistry().register(PRISMARINE_BOOTS);
+        event.getRegistry().register(BAT_BOOTS);
+        event.getRegistry().register(KA_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
@@ -156,7 +160,9 @@ public class ItemInit {
         EXPLOSIVE(Reference.MODID + ":explosive", 0.1875f, new int[] { 4, 1, 1, 1 }, 16, SoundEvents.ENTITY_TNT_PRIMED, 0.0f, 0.0f, () -> Ingredient.EMPTY),
         WINDY(Reference.MODID + ":windy", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Blocks.BLUE_ICE)),
         SKATER(Reference.MODID + ":skating", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SHEARS)),
-        PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(ItemInit.BAT_HIDE));
+        PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.PRISMARINE_SHARD)),
+        BAT(Reference.MODID + ":bat", 24, new int[] { 4, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(ItemInit.BAT_HIDE)),
+        KA(Reference.MODID + ":ka", 16, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
