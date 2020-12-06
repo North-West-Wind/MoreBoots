@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,6 +36,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
@@ -43,6 +45,14 @@ import java.util.*;
 
 public class MoreBootsHandler {
     private static final Random rng = new Random();
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
+        PlayerEntity player = event.getPlayer();
+        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+        if (boots.getItem().equals(ItemInit.KA_BOOTS)) MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerKAPacket());
+    }
 
     @SubscribeEvent
     public void onLivingFall(final LivingFallEvent event) {
@@ -336,6 +346,12 @@ public class MoreBootsHandler {
             Vector3d direction = entity.getLookVec().scale(0.15);
             entity.setMotion(motion.mul(1.01, 1, 1.01).add(direction));
             if (rng.nextInt(100) == 0) boots.damageItem(1, entity, entity1 -> entity1.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1, 1));
+        } else if(boots.getItem().equals(ItemInit.BAT_BOOTS)) {
+            Vector3d upper = entity.getPositionVec().add(0, entity.getHeight(), 0);
+            boolean climable = !entity.func_233570_aj_() && !entity.world.isAirBlock(new BlockPos(upper)) && !entity.isSneaking();
+            Vector3d motion = entity.getMotion();
+            if (climable) entity.setMotion(motion.mul(1, 0, 1));
+            if(climable && rng.nextInt(100) == 0) boots.damageItem(1, entity, entity1 -> entity1.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1,1));
         }
     }
 
@@ -373,6 +389,7 @@ public class MoreBootsHandler {
         int shouldDrop = rng.nextInt((1 + looting) * 2) + looting;
         if (shouldDrop < 1) return;
         LivingEntity entity = event.getEntityLiving();
+        if (!entity.getType().equals(EntityType.BAT)) return;
         ItemStack stack = new ItemStack(ItemInit.BAT_HIDE, shouldDrop);
         ItemEntity item = new ItemEntity(entity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), stack);
         event.getDrops().add(item);
