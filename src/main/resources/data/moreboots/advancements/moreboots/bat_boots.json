@@ -1,0 +1,36 @@
+{
+  "parent": "moreboots:moreboots/slime_boots",
+  "display": {
+    "icon": {
+      "item": "moreboots:bat_boots",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.moreboots.bat_boots.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.bat_boots.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bat_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:bat_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bat_boots"
+    ]
+  ]
+}

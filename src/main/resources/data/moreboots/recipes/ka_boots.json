@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "GND",
+    " I "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_sword"
+    },
+    "G": {
+      "item": "minecraft:golden_sword"
+    },
+    "N": {
+      "item": "minecraft:netherite_boots"
+    },
+    "D": {
+      "item": "minecraft:diamond_sword"
+    },
+    "I": {
+      "item": "minecraft:iron_sword"
+    }
+  },
+  "result": {
+    "item": "moreboots:ka_boots",
+    "count": 1
+  }
+}

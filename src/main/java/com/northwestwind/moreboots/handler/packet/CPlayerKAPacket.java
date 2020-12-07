@@ -23,7 +23,7 @@ public class CPlayerKAPacket implements Serializable {
         ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
         if(!boots.getItem().equals(ItemInit.KA_BOOTS)) return;
         BlockPos pos = new BlockPos(player.getPositionVec());
-        AxisAlignedBB area = new AxisAlignedBB(pos).expand(8, 8, 8);
+        AxisAlignedBB area = new AxisAlignedBB(pos).grow(4);
         List<Entity> collidedEntities = player.world.getEntitiesInAABBexcluding(player, area, EntityPredicates.NOT_SPECTATING);
         LivingEntity closest = null;
         for (Entity entity : collidedEntities) {

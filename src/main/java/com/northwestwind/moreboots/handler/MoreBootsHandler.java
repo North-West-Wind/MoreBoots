@@ -228,14 +228,7 @@ public class MoreBootsHandler {
                 entity.setPositionAndUpdate(entity.getPosX(), pos.getY() + 1, entity.getPosZ());
             }
         } else if (boots.getItem().equals(ItemInit.SPIDER_BOOTS)) {
-            if (Utils.isSurroundedByInvalidBlocks(entity) || entity.isInLava() || entity.isInWater() || entity.isSpectator() || entity.func_233570_aj_()) {
-                tag.putBoolean("climable", false);
-                boots.setTag(tag);
-            } else if (entity.collidedHorizontally) {
-                tag.putBoolean("climable", true);
-                boots.setTag(tag);
-            }
-            boolean climable = tag.getBoolean("climable");
+            boolean climable = !Utils.isSurroundedByInvalidBlocks(entity) && !entity.isInLava() && !entity.isInWater() && !entity.isSpectator() && !entity.func_233570_aj_();
             Vector3d motion = entity.getMotion();
             motion = motion.mul(1, 0, 1);
             boolean ascending = entity.collidedHorizontally;
@@ -291,7 +284,7 @@ public class MoreBootsHandler {
                     boots.setDamage(boots.getMaxDamage());
                     entity.world.createExplosion(entity, pos.x, entity.getPosYHeight(-0.0625D), pos.z, 10.0F, Explosion.Mode.BREAK);
                     entity.setMotion(entity.getMotion().add(0, 0.01 * 864000, 0));
-                    if (entity instanceof PlayerEntity) {
+                    if (entity instanceof PlayerEntity && !entity.world.isRemote) {
                         MinecraftServer server = entity.world.getServer();
                         ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) entity;
                         serverPlayerEntity.getAdvancements().grantCriterion(server.getAdvancementManager().getAdvancement(new ResourceLocation("moreboots", "moreboots/twelve_hours")), "twelve_hours");

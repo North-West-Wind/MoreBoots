@@ -31,6 +31,8 @@
   "item.moreboots.windy_boots": "Windy Boots",
   "item.moreboots.skating_boots": "Skater",
   "item.moreboots.prismarine_boots": "Prismarine Boots",
+  "item.moreboots.bat_boots": "Bat Boots",
+  "item.moreboots.ka_boots": "Kill Aura Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -75,6 +77,8 @@
   "tooltip.moreboots.windy_boots": "\u00A77\u00A7oGains velocity in the air",
   "tooltip.moreboots.skating_boots": "\u00A77\u00A7oSneak to skate on ice",
   "tooltip.moreboots.prismarine_boots": "\u00A77\u00A7oSwims extremely fast",
+  "tooltip.moreboots.bat_boots": "\u00A77\u00A7oWalks on ceiling",
+  "tooltip.moreboots.ka_boots": "\u00A77\u00A7oHelps with your aim",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -140,6 +144,10 @@
   "advancements.moreboots.prismarine_boots.description": "Obtain the Prismarine Boots",
   "advancements.moreboots.windy_boots.title": "Not Gliding",
   "advancements.moreboots.windy_boots.description": "Obtain the Windy Boots",
+  "advancements.moreboots.bat_boots.title": "BATMAN!!!",
+  "advancements.moreboots.bat_boots.description": "Obtain the Bat Boots",
+  "advancements.moreboots.ka_boots.title": "Please Stop Hacking",
+  "advancements.moreboots.ka_boots.description": "Obtain the Kill Aura Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"
