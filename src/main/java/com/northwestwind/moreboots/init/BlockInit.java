@@ -74,7 +74,7 @@ public class BlockInit {
                     else if(block instanceof EndRodBlock) newBlock = new VanishingEndRodBlock(block);
                     else if(block instanceof FenceBlock) newBlock = new VanishingFenceBlock(block);
                     else if(block instanceof FenceGateBlock) newBlock = new VanishingFenceGateBlock(block);
-                    else if(block instanceof FlowerPotBlock) newBlock = new VanishingFlowerPotBlock((FlowerPotBlock) block);
+                    //else if(block instanceof FlowerPotBlock) newBlock = new VanishingFlowerPotBlock((FlowerPotBlock) block);
                     else if(block instanceof LadderBlock) newBlock = new VanishingLadderBlock(block);
                     else if(block instanceof LanternBlock) newBlock = new VanishingLanternBlock(block);
                     else if(block instanceof PaneBlock) newBlock = new VanishingPaneBlock(block);
