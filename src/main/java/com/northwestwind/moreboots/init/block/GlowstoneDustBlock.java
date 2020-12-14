@@ -38,7 +38,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.makeCuboidShape(13, 0, 13, 15, 1, 15),
             Block.makeCuboidShape(5, 0, 14, 6, 1, 15),
             Block.makeCuboidShape(9, 0, 13, 10, 1, 14)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_W = Stream.of(
             Block.makeCuboidShape(2, 0, 12, 4, 1, 14),
             Block.makeCuboidShape(12, 0, 12, 13, 1, 13),
@@ -53,7 +53,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.makeCuboidShape(13, 0, 1, 15, 1, 3),
             Block.makeCuboidShape(14, 0, 10, 15, 1, 11),
             Block.makeCuboidShape(13, 0, 6, 14, 1, 7)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_S = Stream.of(
             Block.makeCuboidShape(12, 0, 12, 14, 1, 14),
             Block.makeCuboidShape(12, 0, 3, 13, 1, 4),
@@ -68,7 +68,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.makeCuboidShape(1, 0, 1, 3, 1, 3),
             Block.makeCuboidShape(10, 0, 1, 11, 1, 2),
             Block.makeCuboidShape(6, 0, 2, 7, 1, 3)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_E = Stream.of(
             Block.makeCuboidShape(12, 0, 2, 14, 1, 4),
             Block.makeCuboidShape(3, 0, 3, 4, 1, 4),
@@ -83,7 +83,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.makeCuboidShape(1, 0, 13, 3, 1, 15),
             Block.makeCuboidShape(1, 0, 5, 2, 1, 6),
             Block.makeCuboidShape(2, 0, 9, 3, 1, 10)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
 
     public GlowstoneDustBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);

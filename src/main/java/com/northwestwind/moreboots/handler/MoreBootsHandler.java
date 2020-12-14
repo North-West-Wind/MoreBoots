@@ -243,7 +243,7 @@ public class MoreBootsHandler {
             BlockPos under = blockPos.down();
             BlockState underneath = entity.world.getBlockState(under);
             if (underneath.isSolid() && entity.world.isAirBlock(blockPos)) {
-                entity.world.setBlockState(blockPos, BlockInit.glowstone_dust.getDefaultState().with(GlowstoneDustBlock.FACING, GlowstoneDustBlock.getRandomDirection()));
+                entity.world.setBlockState(blockPos, BlockInit.GLOWSTONE_DUST.getDefaultState().with(GlowstoneDustBlock.FACING, GlowstoneDustBlock.getRandomDirection()));
                 boots.damageItem(1, entity, playerEntity -> playerEntity.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0f, 1.0f));
             }
         } else if (boots.getItem().equals(ItemInit.MINER_BOOTS)) {

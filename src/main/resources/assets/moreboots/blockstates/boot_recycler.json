@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "recycler_powered=false": { "model": "moreboots:block/boot_recycler" },
+    "recycler_powered=true": { "model": "moreboots:block/boot_recycler_powered" }
+  }
+}

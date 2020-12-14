@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "moreboots:blocks/boot_recycler_top",
+    "side": "moreboots:blocks/boot_recycler_side"
+  }
+}

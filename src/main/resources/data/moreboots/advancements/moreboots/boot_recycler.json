@@ -1,0 +1,35 @@
+{
+  "parent": "moreboots:moreboots/root",
+  "display": {
+    "icon": {
+      "item": "moreboots:boot_recycler"
+    },
+    "title": {
+      "translate": "advancements.moreboots.boot_recycler.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.boot_recycler.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "boot_recycler": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:boot_recycler"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "boot_recycler"
+    ]
+  ]
+}

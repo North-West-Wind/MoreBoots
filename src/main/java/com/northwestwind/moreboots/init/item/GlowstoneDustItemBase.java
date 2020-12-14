@@ -38,7 +38,7 @@ public class GlowstoneDustItemBase extends Item {
             if (blockitemusecontext == null) {
                 return ActionResultType.FAIL;
             } else {
-                BlockState blockstate = BlockInit.glowstone_dust.getDefaultState().with(GlowstoneDustBlock.FACING, GlowstoneDustBlock.getRandomDirection());
+                BlockState blockstate = BlockInit.GLOWSTONE_DUST.getDefaultState().with(GlowstoneDustBlock.FACING, GlowstoneDustBlock.getRandomDirection());
                 if (blockstate == null) {
                     return ActionResultType.FAIL;
                 } else if (!context.getWorld().setBlockState(context.getPos(), blockstate, 11)) {

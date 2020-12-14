@@ -43,6 +43,7 @@
   "block.moreboots.cobblestone_8": "Cobblestone^8",
   "block.moreboots.cobblestone_64": "Cobblestone^64",
   "block.moreboots.cobblestone_512": "Cobblestone^512",
+  "block.moreboots.boot_recycler": "Boot Recycler",
 
   "message.moreboots.building_speed": "Building up speed for \u00A76%d ticks",
 
@@ -148,6 +149,8 @@
   "advancements.moreboots.bat_boots.description": "Obtain the Bat Boots",
   "advancements.moreboots.ka_boots.title": "Please Stop Hacking",
   "advancements.moreboots.ka_boots.description": "Obtain the Kill Aura Boots",
+  "advancements.moreboots.boot_recycler.title": "Environmental Friendly",
+  "advancements.moreboots.boot_recycler.description": "Craft the Boot Recycler to convert boots into energy.",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"

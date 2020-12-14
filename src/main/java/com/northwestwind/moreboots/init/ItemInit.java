@@ -103,66 +103,67 @@ public class ItemInit {
     }
 
     public enum ModArmorMaterial implements IArmorMaterial {
-        SPIDER(Reference.MODID + ":spider", 12, new int[] { 2, 4, 6, 3 }, 10, SoundEvents.ENTITY_SPIDER_AMBIENT, 1.0F, 0.0F, () -> {
+        SPIDER(Reference.MODID + ":spider", 12, new int[] { 2, 4, 6, 3 }, 10, SoundEvents.ENTITY_SPIDER_AMBIENT, 1.0F, 0.0F, 10000, () -> {
             return Ingredient.fromItems(Items.COBWEB);
         }),
-        QUARTZ(Reference.MODID + ":quartz", 150, new int[] { 6, 13, 16, 12 }, 120, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 6.0f, 0.0F, () -> {
+        QUARTZ(Reference.MODID + ":quartz", 150, new int[] { 6, 13, 16, 12 }, 120, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 6.0f, 0.0F, 50000, () -> {
             return Ingredient.fromItems(Items.QUARTZ_BLOCK);
         }),
-        SOCKS(Reference.MODID + ":socks", 20, new int[] { 2, 4, 5, 3 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.5f, 0.0F, () -> {
+        SOCKS(Reference.MODID + ":socks", 20, new int[] { 2, 4, 5, 3 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.5f, 0.0F, 20000, () -> {
             return Ingredient.fromItems(Items.WHITE_WOOL);
         }),
-        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 200, new int[] { 10, 15, 15, 15 }, 420, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 10.0f, 0.0F, () -> {
-            return Ingredient.fromItems(BlockInit.rainbow_wool);
+        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 200, new int[] { 10, 15, 15, 15 }, 420, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 10.0f, 0.0F, 150000, () -> {
+            return Ingredient.fromItems(BlockInit.RAINBOW_WOOL);
         }),
-        MINER(Reference.MODID + ":miner", 16, new int[] { 2, 3, 3, 3 }, 15, SoundEvents.BLOCK_BEACON_ACTIVATE, 1.5F, 0.0F, () -> {
+        MINER(Reference.MODID + ":miner", 16, new int[] { 2, 3, 3, 3 }, 15, SoundEvents.BLOCK_BEACON_ACTIVATE, 1.5F, 0.0F, 100000, () -> {
             return Ingredient.fromItems(Blocks.IRON_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.GOLD_ORE);
         }),
-        LAPIS(Reference.MODID + ":lapis", 64, new int[] { 2, 4, 4, 4 }, 690, SoundEvents.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F, () -> {
+        LAPIS(Reference.MODID + ":lapis", 64, new int[] { 2, 4, 4, 4 }, 690, SoundEvents.ENTITY_PLAYER_LEVELUP, 2.0F, 0.0F, 60000, () -> {
             return Ingredient.fromItems(Items.LAPIS_LAZULI);
         }),
-        GLOWSTONE(Reference.MODID + ":glowstone", 24, new int[] { 2, 3, 3, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.0F, 0.0F, () -> {
+        GLOWSTONE(Reference.MODID + ":glowstone", 24, new int[] { 2, 3, 3, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.0F, 0.0F, 30000, () -> {
             return Ingredient.fromItems(Blocks.GLOWSTONE);
         }),
-        WATER(Reference.MODID + ":water", 24, new int[] { 2, 3, 3, 3 }, 12, SoundEvents.AMBIENT_UNDERWATER_ENTER, 1.0f, 0.0F, () -> Ingredient.EMPTY),
-        LAVA(Reference.MODID + ":lava", 24, new int[] { 2, 4, 4, 4 }, 12, SoundEvents.BLOCK_LAVA_POP, 1.0f, 0.0F, () -> Ingredient.EMPTY),
-        OBSIDIAN(Reference.MODID + ":obsidian", 200, new int[] { 3, 3, 3, 3 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+        WATER(Reference.MODID + ":water", 24, new int[] { 2, 3, 3, 3 }, 12, SoundEvents.AMBIENT_UNDERWATER_ENTER, 1.0f, 0.0F, 20000, () -> Ingredient.EMPTY),
+        LAVA(Reference.MODID + ":lava", 24, new int[] { 2, 4, 4, 4 }, 12, SoundEvents.BLOCK_LAVA_POP, 1.0f, 0.0F, 40000, () -> Ingredient.EMPTY),
+        OBSIDIAN(Reference.MODID + ":obsidian", 200, new int[] { 3, 3, 3, 3 }, 20, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, 90000, () -> {
             return Ingredient.fromItems(Blocks.OBSIDIAN);
         }),
-        ICE(Reference.MODID + ":ice", 20, new int[] { 2, 2, 2, 2 }, 5, SoundEvents.BLOCK_GLASS_BREAK, 1.0f, 0.0f, () -> {
+        ICE(Reference.MODID + ":ice", 20, new int[] { 2, 2, 2, 2 }, 5, SoundEvents.BLOCK_GLASS_BREAK, 1.0f, 0.0f, 15000, () -> {
             return Ingredient.fromItems(Blocks.BLUE_ICE);
         }),
-        VANISHING(Reference.MODID + ":vanishing", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ILLUSIONER_PREPARE_MIRROR, 0.0f, 0.0f, () -> Ingredient.EMPTY),
-        MILK(Reference.MODID + ":milk", 24, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ENTITY_COW_MILK, 0.0f, 0.0f, () -> Ingredient.EMPTY),
-        REDSTONE(Reference.MODID + ":redstone", 10, new int[] { 4, 2, 2, 2 }, 12, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, 1.0f, 0.0f, () -> {
+        VANISHING(Reference.MODID + ":vanishing", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ILLUSIONER_PREPARE_MIRROR, 0.0f, 0.0f, 100000, () -> Ingredient.EMPTY),
+        MILK(Reference.MODID + ":milk", 24, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ENTITY_COW_MILK, 0.0f, 0.0f, 20000, () -> Ingredient.EMPTY),
+        REDSTONE(Reference.MODID + ":redstone", 10, new int[] { 4, 2, 2, 2 }, 12, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, 1.0f, 0.0f, 80000, () -> {
             return Ingredient.fromItems(Items.REDSTONE_BLOCK);
         }),
-        PLUMBER(Reference.MODID + ":plumber", 12, new int[] { 4, 1, 1, 1 }, 4, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> {
+        PLUMBER(Reference.MODID + ":plumber", 12, new int[] { 4, 1, 1, 1 }, 4, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 50000, () -> {
             return Ingredient.fromItems(Items.LEATHER);
         }),
-        METAL(Reference.MODID + ":metal", 6, new int[] { 5, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0f, 1.0f, () -> {
+        METAL(Reference.MODID + ":metal", 6, new int[] { 5, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0f, 1.0f, 120000, () -> {
             return Ingredient.fromItems(ItemInit.METAL_MIX);
         }),
-        UPWARP(Reference.MODID + ":upwarp", 10, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, () -> {
+        UPWARP(Reference.MODID + ":upwarp", 10, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, 75000, () -> {
             return Ingredient.fromItems(Items.ENDER_PEARL);
         }),
-        DOWNWARP(Reference.MODID + ":downwarp", 10, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, () -> {
+        DOWNWARP(Reference.MODID + ":downwarp", 10, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, 75000, () -> {
             return Ingredient.fromItems(Items.ENDER_PEARL);
         }),
-        ENDER(Reference.MODID + ":ender", 20, new int[] { 4, 1, 1, 1 }, 4, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, () -> {
+        ENDER(Reference.MODID + ":ender", 20, new int[] { 4, 1, 1, 1 }, 4, SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.0f, 0.0f, 70000, () -> {
             return Ingredient.fromItems(Items.ENDER_PEARL);
         }),
-        BONE(Reference.MODID + ":bone", 12, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_CROP_PLANT, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.BONE)),
-        MUSHROOM(Reference.MODID + ":mushroom", 12, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_CROP_PLANT, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.BROWN_MUSHROOM_BLOCK, Items.RED_MUSHROOM_BLOCK)),
-        SLIME(Reference.MODID + ":slime", 20, new int[] { 2, 1, 1, 1 }, 16, SoundEvents.BLOCK_SLIME_BLOCK_HIT, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SLIME_BALL)),
-        BLAZE(Reference.MODID + ":blaze", 20, new int[] { 5, 1, 1, 1 }, 20, SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0f, 0.0f, () -> Ingredient.fromItems(Items.BLAZE_ROD)),
-        CACTUS(Reference.MODID + ":cactus", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.CACTUS)),
-        EXPLOSIVE(Reference.MODID + ":explosive", 0.1875f, new int[] { 4, 1, 1, 1 }, 16, SoundEvents.ENTITY_TNT_PRIMED, 0.0f, 0.0f, () -> Ingredient.EMPTY),
-        WINDY(Reference.MODID + ":windy", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Blocks.BLUE_ICE)),
-        SKATER(Reference.MODID + ":skating", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SHEARS)),
-        PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.PRISMARINE_SHARD)),
-        BAT(Reference.MODID + ":bat", 24, new int[] { 4, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(ItemInit.BAT_HIDE)),
-        KA(Reference.MODID + ":ka", 16, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.EMPTY);
+        BONE(Reference.MODID + ":bone", 12, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_CROP_PLANT, 0.0f, 0.0f, 25000, () -> Ingredient.fromItems(Items.BONE)),
+        MUSHROOM(Reference.MODID + ":mushroom", 12, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_CROP_PLANT, 0.0f, 0.0f, 25000, () -> Ingredient.fromItems(Items.BROWN_MUSHROOM_BLOCK, Items.RED_MUSHROOM_BLOCK)),
+        SLIME(Reference.MODID + ":slime", 20, new int[] { 2, 1, 1, 1 }, 16, SoundEvents.BLOCK_SLIME_BLOCK_HIT, 0.0f, 0.0f, 50000, () -> Ingredient.fromItems(Items.SLIME_BALL)),
+        BLAZE(Reference.MODID + ":blaze", 20, new int[] { 5, 1, 1, 1 }, 20, SoundEvents.ENTITY_BLAZE_AMBIENT, 1.0f, 0.0f, 100000, () -> Ingredient.fromItems(Items.BLAZE_ROD)),
+        CACTUS(Reference.MODID + ":cactus", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 30000, () -> Ingredient.fromItems(Items.CACTUS)),
+        EXPLOSIVE(Reference.MODID + ":explosive", 0.1875f, new int[] { 4, 1, 1, 1 }, 16, SoundEvents.ENTITY_TNT_PRIMED, 0.0f, 0.0f, 80000, () -> Ingredient.EMPTY),
+        WINDY(Reference.MODID + ":windy", 20, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, 125000, () -> Ingredient.fromItems(Blocks.BLUE_ICE)),
+        SKATER(Reference.MODID + ":skating", 32, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 60000, () -> Ingredient.fromItems(Items.SHEARS)),
+        PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 75000, () -> Ingredient.fromItems(Items.PRISMARINE_SHARD)),
+        BAT(Reference.MODID + ":bat", 24, new int[] { 4, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 50000, () -> Ingredient.fromItems(ItemInit.BAT_HIDE)),
+        KA(Reference.MODID + ":ka", 16, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 120000, () -> Ingredient.EMPTY),
+        GLASS(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 24, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
@@ -172,8 +173,9 @@ public class ItemInit {
         private final float toughness;
         private final float knockbackResistance;
         private final LazyValue<Ingredient> repairMaterial;
+        private final int energy;
         ModArmorMaterial(String nameIn, float maxDamageFactorIn, int[] damageReductionAmountIn,
-                         int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn, float knockbackResistanceIn,
+                         int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn, float knockbackResistanceIn, int energy,
                          Supplier<Ingredient> repairMaterialIn) {
             this.name = nameIn;
             this.maxDamageFactor = maxDamageFactorIn;
@@ -183,6 +185,12 @@ public class ItemInit {
             this.toughness = toughnessIn;
             this.repairMaterial = new LazyValue<>(repairMaterialIn);
             this.knockbackResistance = knockbackResistanceIn;
+            this.energy = energy;
+        }
+        ModArmorMaterial(String nameIn, float maxDamageFactorIn, int[] damageReductionAmountIn,
+                         int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn, float knockbackResistanceIn,
+                         Supplier<Ingredient> repairMaterialIn) {
+            this(nameIn, maxDamageFactorIn, damageReductionAmountIn, enchantabilityIn, soundEventIn, toughnessIn, knockbackResistanceIn, -1, repairMaterialIn);
         }
         @Override
         public int getDurability(EquipmentSlotType slotIn) {
@@ -213,10 +221,12 @@ public class ItemInit {
         public float getToughness() {
             return this.toughness;
         }
-
         @Override
         public float func_230304_f_() {
             return knockbackResistance;
+        }
+        public int getEnergy() {
+            return energy;
         }
     }
 

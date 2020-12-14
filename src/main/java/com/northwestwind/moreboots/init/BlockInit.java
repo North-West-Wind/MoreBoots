@@ -2,6 +2,7 @@ package com.northwestwind.moreboots.init;
 
 import com.northwestwind.moreboots.MoreBoots;
 import com.northwestwind.moreboots.Reference;
+import com.northwestwind.moreboots.init.block.BootRecyclerBlock;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import com.northwestwind.moreboots.init.block.RainbowWoolBlock;
 import com.northwestwind.moreboots.init.block.vanilla.*;
@@ -24,19 +25,21 @@ import java.lang.reflect.Modifier;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(Reference.MODID)
 public class BlockInit {
-    public static final Block rainbow_wool = new RainbowWoolBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(10.0f, 3600000f).sound(SoundType.CLOTH).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
-    public static final GlowstoneDustBlock glowstone_dust = (GlowstoneDustBlock) new GlowstoneDustBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().func_235838_a_(value -> 15)).setRegistryName("glowstone_dust");
-    public static final Block cobblestone_8 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(16.0f, 48.0f)).setRegistryName("cobblestone_8");
-    public static final Block cobblestone_64 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(128.0f, 384.0f)).setRegistryName("cobblestone_64");
-    public static final Block cobblestone_512 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
+    public static final Block RAINBOW_WOOL = new RainbowWoolBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(10.0f, 3600000f).sound(SoundType.CLOTH).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
+    public static final GlowstoneDustBlock GLOWSTONE_DUST = (GlowstoneDustBlock) new GlowstoneDustBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().func_235838_a_(value -> 15)).setRegistryName("glowstone_dust");
+    public static final Block COBBLESTONE_8 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(16.0f, 48.0f)).setRegistryName("cobblestone_8");
+    public static final Block COBBLESTONE_64 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(128.0f, 384.0f)).setRegistryName("cobblestone_64");
+    public static final Block COBBLESTONE_512 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
+    public static final Block BOOT_RECYCLER = new BootRecyclerBlock().setRegistryName("boot_recycler");
 
     @SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(rainbow_wool);
-        event.getRegistry().register(glowstone_dust);
-        event.getRegistry().register(cobblestone_8);
-        event.getRegistry().register(cobblestone_64);
-        event.getRegistry().register(cobblestone_512);
+        event.getRegistry().register(RAINBOW_WOOL);
+        event.getRegistry().register(GLOWSTONE_DUST);
+        event.getRegistry().register(COBBLESTONE_8);
+        event.getRegistry().register(COBBLESTONE_64);
+        event.getRegistry().register(COBBLESTONE_512);
+        event.getRegistry().register(BOOT_RECYCLER);
         Field[] fields = Blocks.class.getDeclaredFields();
         LogManager.getLogger().info("Found " + fields.length + " blocks");
         for(Field f : fields) {
@@ -55,11 +58,11 @@ public class BlockInit {
                     else if(block instanceof GlassBlock) newBlock = new VanishingGlassBlock(block);
                     else if(block instanceof IceBlock) newBlock = new VanishingIceBlock(block);
                     else if(block instanceof BreakableBlock) newBlock = new VanishingBreakableBlock(block);
-                    else if(block instanceof BrewingStandBlock) newBlock = new VanishingBrewingStandBlock(block);
+                    //else if(block instanceof BrewingStandBlock) newBlock = new VanishingBrewingStandBlock(block);
                     else if(block instanceof CactusBlock) newBlock = new VanishingCactusBlock(block);
                     else if(block instanceof CakeBlock) newBlock = new VanishingCakeBlock(block);
-                    else if(block instanceof CampfireBlock && block.getRegistryName().getPath().equals("campfire")) newBlock = new VanishingCampfireBlock(true, 1, block);
-                    else if(block instanceof CampfireBlock && block.getRegistryName().getPath().equals("soul_campfire")) newBlock = new VanishingCampfireBlock(false, 2, block);
+                    //else if(block instanceof CampfireBlock && block.getRegistryName().getPath().equals("campfire")) newBlock = new VanishingCampfireBlock(true, 1, block);
+                    //else if(block instanceof CampfireBlock && block.getRegistryName().getPath().equals("soul_campfire")) newBlock = new VanishingCampfireBlock(false, 2, block);
                     else if(block instanceof CarpetBlock) newBlock = new VanishingCarpetBlock((CarpetBlock) block);
                     else if(block instanceof ChainBlock) newBlock = new VanishingChainBlock(block);
                     else if(block instanceof ChorusPlantBlock) newBlock = new VanishingChorusPlantBlock(block);
@@ -148,10 +151,11 @@ public class BlockInit {
 
     @SubscribeEvent
     public static void registerBlockItems(final RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new BlockItem(rainbow_wool, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("rainbow_wool"));
-        event.getRegistry().register(new BlockItem(cobblestone_8, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_8"));
-        event.getRegistry().register(new BlockItem(cobblestone_64, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_64"));
-        event.getRegistry().register(new BlockItem(cobblestone_512, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_512"));
-        event.getRegistry().register(new GlowstoneDustItemBase(glowstone_dust, new Item.Properties().maxStackSize(64).group(ItemGroup.MATERIALS)).setRegistryName("minecraft", "glowstone_dust"));
+        event.getRegistry().register(new BlockItem(RAINBOW_WOOL, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("rainbow_wool"));
+        event.getRegistry().register(new BlockItem(COBBLESTONE_8, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_8"));
+        event.getRegistry().register(new BlockItem(COBBLESTONE_64, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_64"));
+        event.getRegistry().register(new BlockItem(COBBLESTONE_512, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_512"));
+        event.getRegistry().register(new GlowstoneDustItemBase(GLOWSTONE_DUST, new Item.Properties().maxStackSize(64).group(ItemGroup.MATERIALS)).setRegistryName("minecraft", "glowstone_dust"));
+        event.getRegistry().register(new BlockItem(BOOT_RECYCLER, new Item.Properties().maxStackSize(64).group(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("boot_recycler"));
     }
 }
