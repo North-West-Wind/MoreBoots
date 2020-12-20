@@ -6,6 +6,7 @@ import com.northwestwind.moreboots.init.BlockInit;
 import com.northwestwind.moreboots.init.ItemInit;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import com.northwestwind.moreboots.init.block.KeybindInit;
+import com.northwestwind.moreboots.init.brewing.nbt.PotionNBT;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -20,8 +21,12 @@ import net.minecraft.fluid.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -345,6 +350,17 @@ public class MoreBootsHandler {
             Vector3d motion = entity.getMotion();
             if (climable) entity.setMotion(motion.mul(1, 0, 1));
             if(climable && rng.nextInt(100) == 0) boots.damageItem(1, entity, entity1 -> entity1.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1,1));
+        } else if(boots.getItem().equals(ItemInit.GLASS_BOOTS)) {
+            ListNBT effects = tag.getList("Potions", 0);
+            for (INBT effect : effects) {
+                PotionNBT potion = new PotionNBT();
+                potion.deserializeNBT((CompoundNBT) effect);
+                Potion pot = Potion.getPotionTypeForName(potion.getName());
+                for (EffectInstance instance : pot.getEffects()) {
+                    EffectInstance newEffect = new EffectInstance(instance.getPotion(), 30, potion.getAmp());
+                    entity.addPotionEffect(newEffect);
+                }
+            }
         }
     }
 
