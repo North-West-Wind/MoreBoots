@@ -58,14 +58,14 @@ public class ItemInit {
     public static final Item BAT_BOOTS = registerBoots(ModArmorMaterial.BAT, "bat_boots");
     public static final Item KA_BOOTS = registerBoots(ModArmorMaterial.KA, "ka_boots");
     public static final Item GLASS_BOOTS = registerBoots(ModArmorMaterial.GLASS, "glass_boots");
-    public static final Item GLASS_BOOTS_EMPTY = registerBoots(ModArmorMaterial.GLASS, "glass_boots_empty");
-    public static final Item SNIPER_BOOTS = registerBoots(ModArmorMaterial.SNIPER, "sniper_boots");
+    public static final Item GLASS_BOOTS_EMPTY = registerBoots(ModArmorMaterial.GLASS_EMPTY, "glass_boots_empty");
+    //public static final Item SNIPER_BOOTS = registerBoots(ModArmorMaterial.SNIPER, "sniper_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_ingot").setRegistryName("quartz_ingot");
     public static final Item METAL_MIX = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "metal_mix").setRegistryName("metal_mix");
     public static final Item BAT_HIDE = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "bat_hide").setRegistryName("bat_hide");
 
-    public static final Item CROSSBOW = new SniperCrossbowItem().setRegistryName("minecraft", "crossbow");
+    //public static final Item CROSSBOW = new SniperCrossbowItem().setRegistryName("minecraft", "crossbow");
 
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
@@ -101,13 +101,13 @@ public class ItemInit {
         event.getRegistry().register(KA_BOOTS);
         event.getRegistry().register(GLASS_BOOTS);
         event.getRegistry().register(GLASS_BOOTS_EMPTY);
-        event.getRegistry().register(SNIPER_BOOTS);
+        //event.getRegistry().register(SNIPER_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
         event.getRegistry().register(BAT_HIDE);
 
-        event.getRegistry().register(CROSSBOW);
+        //event.getRegistry().register(CROSSBOW);
     }
 
     public static Item registerBoots(IArmorMaterial material, String registryName) {
@@ -175,7 +175,8 @@ public class ItemInit {
         PRISMARINE(Reference.MODID + ":prismarine", 28, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 75000, () -> Ingredient.fromItems(Items.PRISMARINE_SHARD)),
         BAT(Reference.MODID + ":bat", 24, new int[] { 4, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 50000, () -> Ingredient.fromItems(ItemInit.BAT_HIDE)),
         KA(Reference.MODID + ":ka", 16, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 120000, () -> Ingredient.EMPTY),
-        GLASS(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 24, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
+        GLASS_EMPTY(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.ITEM_BOTTLE_FILL, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
+        GLASS(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
         SNIPER(Reference.MODID + ":sniper", 8, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, 90000, () -> Ingredient.fromItems(Items.TIPPED_ARROW));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;

@@ -1,0 +1,36 @@
+{
+  "parent": "moreboots:moreboots/root",
+  "display": {
+    "icon": {
+      "item": "moreboots:glass_boots",
+      "nbt": "{Damage:0,Potion:\"minecraft:water\"}"
+    },
+    "title": {
+      "translate": "advancements.moreboots.glass_boots.title"
+    },
+    "description": {
+      "translate": "advancements.moreboots.glass_boots.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "glass_boots_empty": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "moreboots:glass_boots_empty"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "glass_boots_empty"
+    ]
+  ]
+}

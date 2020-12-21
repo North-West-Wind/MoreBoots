@@ -155,6 +155,9 @@
   "advancements.moreboots.ka_boots.description": "Obtain the Kill Aura Boots",
   "advancements.moreboots.boot_recycler.title": "Environmental Friendly",
   "advancements.moreboots.boot_recycler.description": "Craft the Boot Recycler to convert boots into energy.",
+  "advancements.moreboots.glass_boots.title": "Permanent Effect",
+  "advancements.moreboots.glass_boots.description": "Obtain the Glass Boots",
+
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"

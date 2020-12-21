@@ -22,7 +22,7 @@ public class SniperCrossbowItem extends CrossbowItem {
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
         ItemStack boots = playerIn.getItemStackFromSlot(EquipmentSlotType.FEET);
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!boots.getItem().equals(ItemInit.SNIPER_BOOTS)) return super.onItemRightClick(worldIn, playerIn, handIn);
+        //if (!boots.getItem().equals(ItemInit.SNIPER_BOOTS)) return super.onItemRightClick(worldIn, playerIn, handIn);
         if (isCharged(itemstack)) {
             fireProjectiles(worldIn, playerIn, handIn, itemstack, 15.0f, 0.0F);
             setCharged(itemstack, false);

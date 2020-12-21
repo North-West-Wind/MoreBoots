@@ -6,22 +6,15 @@ import com.northwestwind.moreboots.handler.Utils;
 import com.northwestwind.moreboots.init.ItemInit;
 import com.northwestwind.moreboots.init.block.KeybindInit;
 import com.northwestwind.moreboots.init.brewing.GlassBootsBrewingRecipe;
-import com.northwestwind.moreboots.init.brewing.nbt.PotionNBT;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -53,12 +46,7 @@ public class MoreBoots {
         KeybindInit.register();
         Minecraft.getInstance().getItemColors().register((stack, layer) -> {
             if (layer == 0) return -1;
-            CompoundNBT tag = stack.getOrCreateTag();
-            ListNBT effects = tag.getList("Potions", 0);
-            if (effects.size() < 1) return 3093151;
-            PotionNBT potionNBT = new PotionNBT();
-            potionNBT.deserializeNBT(effects.getCompound(0));
-            Potion potion = Potion.getPotionTypeForName(potionNBT.getName());
+            Potion potion = PotionUtils.getPotionFromItem(stack);
             return PotionUtils.getPotionColor(potion);
         }, ItemInit.GLASS_BOOTS);
     }
