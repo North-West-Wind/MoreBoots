@@ -7,7 +7,8 @@
     "1.2.0": "Week #2 Update",
     "1.3.0": "Week #3 Update",
     "1.3.1": "Fixed flower pot not rendering",
-    "1.4.0": "Week #4 Update"
+    "1.4.0": "Week #4 Update",
+    "1.4.1": "Fixed random crashes + ice not generating properly"
   },
   "1.16.3": {
     "1.0.0": "The very first release",
@@ -16,7 +17,8 @@
     "1.2.0": "Week #2 Update",
     "1.3.0": "Week #3 Update",
     "1.3.1": "Fixed flower pot not rendering",
-    "1.4.0": "Week #4 Update"
+    "1.4.0": "Week #4 Update",
+    "1.4.1": "Fixed random crashes + ice not generating properly"
   },
   "1.16.2": {
     "1.0.0": "The very first release",
@@ -25,7 +27,8 @@
     "1.2.0": "Week #2 Update",
     "1.3.0": "Week #3 Update",
     "1.3.1": "Fixed flower pot not rendering",
-    "1.4.0": "Week #4 Update"
+    "1.4.0": "Week #4 Update",
+    "1.4.1": "Fixed random crashes + ice not generating properly"
   },
   "1.16.1": {
     "1.0.0": "The very first release",
@@ -34,16 +37,17 @@
     "1.2.0": "Week #2 Update",
     "1.3.0": "Week #3 Update",
     "1.3.1": "Fixed flower pot not rendering",
-    "1.4.0": "Week #4 Update"
+    "1.4.0": "Week #4 Update",
+    "1.4.1": "Fixed random crashes + ice not generating properly"
   },
   "promos": {
-    "1.16.4-latest": "1.4.0",
-    "1.16.4-recommended": "1.4.0",
-    "1.16.3-latest": "1.4.0",
-    "1.16.3-recommended": "1.4.0",
-    "1.16.2-latest": "1.4.0",
-    "1.16.2-recommended": "1.4.0",
-    "1.16.1-latest": "1.4.0",
-    "1.16.1-recommended": "1.4.0"
+    "1.16.4-latest": "1.4.1",
+    "1.16.4-recommended": "1.4.1",
+    "1.16.3-latest": "1.4.1",
+    "1.16.3-recommended": "1.4.1",
+    "1.16.2-latest": "1.4.1",
+    "1.16.2-recommended": "1.4.1",
+    "1.16.1-latest": "1.4.1",
+    "1.16.1-recommended": "1.4.1"
   }
 }

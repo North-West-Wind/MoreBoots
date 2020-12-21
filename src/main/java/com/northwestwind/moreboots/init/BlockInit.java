@@ -56,12 +56,12 @@ public class BlockInit {
                     if(block instanceof AnvilBlock) newBlock = new VanishingAnvilBlock(block);
                     else if(block instanceof BambooSaplingBlock) newBlock = new VanishingBambooSaplingBlock(block);
                     else if(block instanceof BambooBlock) newBlock = new VanishingBambooBlock(block);
-                    else if(block instanceof FrostedIceBlock) newBlock = new VanishingFrostedIceBlock(block);
+                    //else if(block instanceof FrostedIceBlock) newBlock = new VanishingFrostedIceBlock(block);
                     else if(block instanceof StainedGlassPaneBlock) newBlock = new VanishingStainedGlassPaneBlock((StainedGlassPaneBlock) block);
                     else if(block instanceof StainedGlassBlock) newBlock = new VanishingStainedGlassBlock((StainedGlassBlock) block);
-                    else if(block instanceof GlassBlock) newBlock = new VanishingGlassBlock(block);
-                    else if(block instanceof IceBlock) newBlock = new VanishingIceBlock(block);
-                    else if(block instanceof BreakableBlock) newBlock = new VanishingBreakableBlock(block);
+                    //else if(block instanceof GlassBlock) newBlock = new VanishingGlassBlock(block);
+                    //else if(block instanceof IceBlock) newBlock = new VanishingIceBlock(block);
+                    //else if(block instanceof BreakableBlock) newBlock = new VanishingBreakableBlock(block);
                     //else if(block instanceof BrewingStandBlock) newBlock = new VanishingBrewingStandBlock(block);
                     else if(block instanceof CactusBlock) newBlock = new VanishingCactusBlock(block);
                     else if(block instanceof CakeBlock) newBlock = new VanishingCakeBlock(block);
@@ -87,9 +87,9 @@ public class BlockInit {
                     else if(block instanceof RepeaterBlock) newBlock = new VanishingRepeaterBlock(block);
                     //else if(block instanceof RedstoneWireBlock) newBlock = new CustomRedstoneWireBlock(block);
                     else if(block instanceof ScaffoldingBlock) newBlock = new VanishingScaffoldingBlock(block);
-                    else if(block instanceof WitherSkeletonSkullBlock) newBlock = new VanishingWitherSkeletonSkullBlock(block);
-                    else if(block instanceof WitherSkeletonWallSkullBlock) newBlock = new VanishingWitherSkeletonWallSkullBlock(block);
-                    else if(block instanceof SkullBlock) newBlock = new VanishingSkullBlock((SkullBlock) block);
+                    //else if(block instanceof WitherSkeletonSkullBlock) newBlock = new VanishingWitherSkeletonSkullBlock(block);
+                    //else if(block instanceof WitherSkeletonWallSkullBlock) newBlock = new VanishingWitherSkeletonWallSkullBlock(block);
+                    //else if(block instanceof SkullBlock) newBlock = new VanishingSkullBlock((SkullBlock) block);
                     else if(block instanceof SlabBlock) newBlock = new VanishingSlabBlock(block);
                     else if(block instanceof SnowBlock) newBlock = new VanishingSnowBlock(block);
                     else if(block instanceof StairsBlock && block.getRegistryName().getPath().equals("oak_stairs")) newBlock = new VanishingStairsBlock(Blocks.OAK_PLANKS::getDefaultState, block);
@@ -141,7 +141,7 @@ public class BlockInit {
                     else if(block instanceof WeepingVinesTopBlock) newBlock = new VanishingWeepingVinesTopBlock(block);
                     else if(block instanceof WeightedPressurePlateBlock && block.getRegistryName().getPath().equals("light_weighted_pressure_plate")) newBlock = new VanishingWeightedPressurePlateBlock(15, block);
                     else if(block instanceof WeightedPressurePlateBlock && block.getRegistryName().getPath().equals("heavy_weighted_pressure_plate")) newBlock = new VanishingWeightedPressurePlateBlock(150, block);
-                    else if(block.getRegistryName().getPath().equals("packed_ice")) newBlock = new VanishingBlock(block);
+                    //else if(block.getRegistryName().getPath().equals("packed_ice")) newBlock = new VanishingBlock(block);
                     if(newBlock == null) continue;
                     event.getRegistry().register(newBlock.setRegistryName(block.getRegistryName()));
                     Item.BLOCK_TO_ITEM.put(newBlock, block.asItem());
