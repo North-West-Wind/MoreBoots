@@ -3,6 +3,7 @@ package com.northwestwind.moreboots.handler;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.handler.packet.*;
 import com.northwestwind.moreboots.init.BlockInit;
+import com.northwestwind.moreboots.init.EffectInit;
 import com.northwestwind.moreboots.init.ItemInit;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import com.northwestwind.moreboots.init.block.KeybindInit;
@@ -281,11 +282,7 @@ public class MoreBootsHandler {
                     boots.setDisplayName(new TranslationTextComponent("item.moreboots.socks_boots"));
                 }
             } else {
-                Vector3d pos = entity.getPositionVec();
-                Biome biome = entity.world.getBiome(new BlockPos(pos));
-                float temperature = biome.getTemperature(new BlockPos(pos));
-                if (temperature < 0.2) entity.addPotionEffect(new EffectInstance(Effects.SPEED, 20));
-                else if (temperature > 1) entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20));
+                entity.addPotionEffect(new EffectInstance(EffectInit.WARMTH, 205));
             }
             boots.setTag(tag);
         } else if (boots.getItem().equals(ItemInit.RAINBOW_SOCKS_BOOTS)) {

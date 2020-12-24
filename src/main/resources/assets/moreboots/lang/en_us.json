@@ -47,6 +47,8 @@
   "block.moreboots.cobblestone_512": "Cobblestone^512",
   "block.moreboots.boot_recycler": "Boot Recycler",
 
+  "effect.moreboots.warmth": "Warmth",
+
   "message.moreboots.building_speed": "Building up speed for \u00A76%d ticks",
 
   "tooltip.moreboots.quartz_boots": "\u00A77\u00A7oSuper protective but vulnerable to fall damage",
