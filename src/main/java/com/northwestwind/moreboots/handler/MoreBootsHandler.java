@@ -24,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.*;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -40,6 +41,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.apache.logging.log4j.LogManager;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.*;
@@ -373,6 +375,16 @@ public class MoreBootsHandler {
                 ItemStack newBoots = new ItemStack(ItemInit.GLASS_BOOTS_EMPTY);
                 newBoots.setDamage(boots.getDamage());
                 entity.setItemStackToSlot(EquipmentSlotType.FEET, newBoots);
+            }
+        } else if (boots.getItem().equals(ItemInit.JESUS_BOOTS)) {
+            BlockPos pos = new BlockPos(entity.getPositionVec());
+            FluidState under = entity.world.getFluidState(pos.down());
+            if (entity.isInWater()) {
+                entity.setMotion(entity.getMotion().add(0, 0.1, 0));
+                entity.velocityChanged = true;
+            } else if (!entity.world.isRemote && entity.world.isAirBlock(pos.down())) {
+                if (!(under.getFluid().equals(Fluids.WATER) || under.getFluid().equals(Fluids.FLOWING_WATER))) return;
+                entity.world.setBlockState(pos.down(), BlockInit.INVISIBLE.getDefaultState());
             }
         }
     }

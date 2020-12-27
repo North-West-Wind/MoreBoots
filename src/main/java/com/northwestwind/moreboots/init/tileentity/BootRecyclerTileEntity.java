@@ -104,8 +104,4 @@ public class BootRecyclerTileEntity extends TileEntity implements ITickableTileE
         energy = compound.getInt("GuiEnergy");
         storage.readFromNBT(compound);
     }
-
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent("container.moreboots.boot_recycler");
-    }
 }

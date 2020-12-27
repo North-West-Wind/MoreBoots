@@ -2,6 +2,7 @@ package com.northwestwind.moreboots.init;
 
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.init.tileentity.BootRecyclerTileEntity;
+import com.northwestwind.moreboots.init.tileentity.InvisibleTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,9 +16,11 @@ import java.util.function.Supplier;
 @ObjectHolder(Reference.MODID)
 public class TileEntityInit {
     public static final TileEntityType<?> BOOT_RECYCLER = TileEntityType.Builder.create((Supplier<TileEntity>) BootRecyclerTileEntity::new, BlockInit.BOOT_RECYCLER).build(null).setRegistryName("boot_recycler");
+    public static final TileEntityType<?> INVISIBLE = TileEntityType.Builder.create((Supplier<TileEntity>) InvisibleTileEntity::new, BlockInit.INVISIBLE).build(null).setRegistryName("boots_invisible_placeholder");
 
     @SubscribeEvent
     public static void registerTileEntity(final RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().register(BOOT_RECYCLER);
+        event.getRegistry().register(INVISIBLE);
     }
 }

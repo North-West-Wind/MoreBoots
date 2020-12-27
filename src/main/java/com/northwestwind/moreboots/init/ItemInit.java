@@ -59,6 +59,7 @@ public class ItemInit {
     public static final Item KA_BOOTS = registerBoots(ModArmorMaterial.KA, "ka_boots");
     public static final Item GLASS_BOOTS = registerBoots(ModArmorMaterial.GLASS, "glass_boots");
     public static final Item GLASS_BOOTS_EMPTY = registerBoots(ModArmorMaterial.GLASS_EMPTY, "glass_boots_empty");
+    public static final Item JESUS_BOOTS = registerBoots(ModArmorMaterial.JESUS, "jesus_boots");
     //public static final Item SNIPER_BOOTS = registerBoots(ModArmorMaterial.SNIPER, "sniper_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_ingot").setRegistryName("quartz_ingot");
@@ -101,6 +102,7 @@ public class ItemInit {
         event.getRegistry().register(KA_BOOTS);
         event.getRegistry().register(GLASS_BOOTS);
         event.getRegistry().register(GLASS_BOOTS_EMPTY);
+        event.getRegistry().register(JESUS_BOOTS);
         //event.getRegistry().register(SNIPER_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
@@ -177,7 +179,8 @@ public class ItemInit {
         KA(Reference.MODID + ":ka", 16, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 120000, () -> Ingredient.EMPTY),
         GLASS_EMPTY(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.ITEM_BOTTLE_FILL, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
         GLASS(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
-        SNIPER(Reference.MODID + ":sniper", 8, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, 90000, () -> Ingredient.fromItems(Items.TIPPED_ARROW));
+        SNIPER(Reference.MODID + ":sniper", 8, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, 90000, () -> Ingredient.fromItems(Items.TIPPED_ARROW)),
+        JESUS(Reference.MODID + ":jesus", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(Items.field_234759_km_));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

@@ -4,6 +4,7 @@ import com.northwestwind.moreboots.MoreBoots;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.init.block.BootRecyclerBlock;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
+import com.northwestwind.moreboots.init.block.InvisibleBlock;
 import com.northwestwind.moreboots.init.block.RainbowWoolBlock;
 import com.northwestwind.moreboots.init.block.vanilla.*;
 import com.northwestwind.moreboots.init.item.GlowstoneDustItemBase;
@@ -12,29 +13,28 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.state.BooleanProperty;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import org.apache.logging.log4j.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(Reference.MODID)
 public class BlockInit {
+
     public static final Block RAINBOW_WOOL = new RainbowWoolBlock(Block.Properties.create(Material.WOOL).hardnessAndResistance(10.0f, 3600000f).sound(SoundType.CLOTH).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
     public static final GlowstoneDustBlock GLOWSTONE_DUST = (GlowstoneDustBlock) new GlowstoneDustBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance().func_235838_a_(value -> 15)).setRegistryName("glowstone_dust");
     public static final Block COBBLESTONE_8 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(16.0f, 48.0f)).setRegistryName("cobblestone_8");
     public static final Block COBBLESTONE_64 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(128.0f, 384.0f)).setRegistryName("cobblestone_64");
     public static final Block COBBLESTONE_512 = new Block(AbstractBlock.Properties.from(Blocks.COBBLESTONE).hardnessAndResistance(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
     public static final Block BOOT_RECYCLER = new BootRecyclerBlock().setRegistryName("boot_recycler");
+    public static final Block INVISIBLE = new InvisibleBlock().setRegistryName("boots_invisible_placeholder");
 
     @SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event) {
@@ -44,6 +44,7 @@ public class BlockInit {
         event.getRegistry().register(COBBLESTONE_64);
         event.getRegistry().register(COBBLESTONE_512);
         event.getRegistry().register(BOOT_RECYCLER);
+        event.getRegistry().register(INVISIBLE);
         Field[] fields = Blocks.class.getDeclaredFields();
         LogManager.getLogger().info("Found " + fields.length + " blocks");
         for(Field f : fields) {
