@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:strider_foot"
+    },
+    "N": {
+      "item": "minecraft:netherite_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:strider_boots",
+    "count": 1
+  }
+}

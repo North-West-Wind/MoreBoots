@@ -9,32 +9,29 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraftforge.common.util.Constants;
+import org.apache.logging.log4j.LogManager;
 
 public interface IVanillaLoggable extends IBucketPickupHandler, ILiquidContainer {
     default boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return (!state.get(BlockStateProperties.WATERLOGGED) && (fluidIn == Fluids.WATER || fluidIn == Fluids.FLOWING_WATER)) || (!state.get(InvisibleBlock.LAVALOGGED) && (fluidIn == Fluids.LAVA || fluidIn == Fluids.FLOWING_LAVA));
+        return (!state.get(BlockStateProperties.WATERLOGGED) && fluidIn.isIn(FluidTags.WATER)) || (!state.get(InvisibleBlock.LAVALOGGED) && fluidIn.isIn(FluidTags.LAVA));
     }
 
     default boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
         Fluid fluid = fluidStateIn.getFluid();
-        if (!state.get(BlockStateProperties.WATERLOGGED) && (fluid == Fluids.WATER || fluid == Fluids.FLOWING_WATER)) {
+        if (canContainFluid(worldIn, pos, state, fluid)) {
             if (!worldIn.isRemote()) {
-                worldIn.setBlockState(pos, state.with(BlockStateProperties.WATERLOGGED, true), 3);
-                if (fluid == Fluids.FLOWING_WATER) worldIn.setBlockState(pos, state.with(InvisibleBlock.FLOWINGLOGGED, true), 3);
+                BlockState newState = state;
+                if (fluidStateIn.isTagged(FluidTags.WATER)) newState = newState.with(BlockStateProperties.WATERLOGGED, true);
+                else if (fluidStateIn.isTagged(FluidTags.LAVA)) newState = newState.with(InvisibleBlock.LAVALOGGED, true);
+                if (!fluidStateIn.isSource()) newState = newState.with(InvisibleBlock.FLOWINGLOGGED, true);
+                worldIn.setBlockState(pos, newState, Constants.BlockFlags.DEFAULT);
                 worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
             }
-
-            return true;
-        } else if (state.get(InvisibleBlock.LAVALOGGED) && (fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA)) {
-            if (!worldIn.isRemote()) {
-                worldIn.setBlockState(pos, state.with(InvisibleBlock.LAVALOGGED, true), 3);
-                if (fluid == Fluids.FLOWING_LAVA) worldIn.setBlockState(pos, state.with(InvisibleBlock.FLOWINGLOGGED, true), 3);
-                worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
-            }
-
             return true;
         } else {
             return false;

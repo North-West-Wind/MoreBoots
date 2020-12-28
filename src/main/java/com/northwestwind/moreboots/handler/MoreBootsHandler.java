@@ -6,6 +6,7 @@ import com.northwestwind.moreboots.init.BlockInit;
 import com.northwestwind.moreboots.init.EffectInit;
 import com.northwestwind.moreboots.init.ItemInit;
 import com.northwestwind.moreboots.init.block.GlowstoneDustBlock;
+import com.northwestwind.moreboots.init.block.InvisibleBlock;
 import com.northwestwind.moreboots.init.block.KeybindInit;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -25,6 +26,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -32,7 +34,6 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -41,7 +42,6 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.apache.logging.log4j.LogManager;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.*;
@@ -118,7 +118,7 @@ public class MoreBootsHandler {
             if (entity.world.isRemote) return;
             event.setCanceled(true);
             boots.damageItem(1, entity, entity1 -> entity1.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1.0f, 1.0f));
-        } else if (boots.getItem().equals(ItemInit.BLAZE_BOOTS)) {
+        } else if (boots.getItem().equals(ItemInit.BLAZE_BOOTS) || boots.getItem().equals(ItemInit.STRIDER_BOOTS)) {
             DamageSource source = event.getSource();
             if (source.equals(DamageSource.IN_FIRE) || source.equals(DamageSource.LAVA) || source.equals(DamageSource.ON_FIRE))
                 event.setCanceled(true);
@@ -376,16 +376,31 @@ public class MoreBootsHandler {
                 newBoots.setDamage(boots.getDamage());
                 entity.setItemStackToSlot(EquipmentSlotType.FEET, newBoots);
             }
-        } else if (boots.getItem().equals(ItemInit.JESUS_BOOTS)) {
+        } else if (boots.getItem().equals(ItemInit.FLOATIE_BOOTS)) {
             BlockPos pos = new BlockPos(entity.getPositionVec());
-            FluidState under = entity.world.getFluidState(pos.down());
             if (entity.isInWater()) {
                 entity.setMotion(entity.getMotion().add(0, 0.1, 0));
                 entity.velocityChanged = true;
-            } else if (!entity.world.isRemote && entity.world.isAirBlock(pos.down())) {
-                if (!(under.getFluid().equals(Fluids.WATER) || under.getFluid().equals(Fluids.FLOWING_WATER))) return;
-                entity.world.setBlockState(pos.down(), BlockInit.INVISIBLE.getDefaultState());
-            }
+            } else if (!entity.world.isRemote)
+                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1.0D, -1), pos.add(1, -1.0D, 1))) {
+                    FluidState under = entity.world.getFluidState(blockpos);
+                    if (!entity.world.getBlockState(blockpos).getCollisionShape(entity.world, blockpos).equals(VoxelShapes.empty()) || !under.isTagged(FluidTags.WATER))
+                        continue;
+                    entity.world.setBlockState(blockpos, BlockInit.INVISIBLE.getDefaultState().with(BlockStateProperties.WATERLOGGED, true).with(InvisibleBlock.FLOWINGLOGGED, !under.isSource()));
+                }
+        } else if (boots.getItem().equals(ItemInit.STRIDER_BOOTS)) {
+            entity.extinguish();
+            BlockPos pos = new BlockPos(entity.getPositionVec());
+            if (entity.isInLava()) {
+                entity.setMotion(entity.getMotion().add(0, 0.1, 0));
+                entity.velocityChanged = true;
+            } else if (!entity.world.isRemote)
+                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1.0D, -1), pos.add(1, -1.0D, 1))) {
+                    FluidState under = entity.world.getFluidState(blockpos);
+                    if (!entity.world.getBlockState(blockpos).getCollisionShape(entity.world, blockpos).equals(VoxelShapes.empty()) || !under.isTagged(FluidTags.LAVA))
+                        continue;
+                    entity.world.setBlockState(blockpos, BlockInit.INVISIBLE.getDefaultState().with(InvisibleBlock.LAVALOGGED, true).with(InvisibleBlock.FLOWINGLOGGED, !under.isSource()));
+                }
         }
     }
 
@@ -423,10 +438,15 @@ public class MoreBootsHandler {
         int shouldDrop = rng.nextInt((1 + looting) * 2) + looting;
         if (shouldDrop < 1) return;
         LivingEntity entity = event.getEntityLiving();
-        if (!entity.getType().equals(EntityType.BAT)) return;
-        ItemStack stack = new ItemStack(ItemInit.BAT_HIDE, shouldDrop);
-        ItemEntity item = new ItemEntity(entity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), stack);
-        event.getDrops().add(item);
+        if (entity.getType().equals(EntityType.BAT)) {
+            ItemStack stack = new ItemStack(ItemInit.BAT_HIDE, shouldDrop);
+            ItemEntity item = new ItemEntity(entity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), stack);
+            event.getDrops().add(item);
+        } else if (entity.getType().equals(EntityType.field_233589_aE_)) {
+            ItemStack stack = new ItemStack(ItemInit.STRIDER_FOOT, shouldDrop);
+            ItemEntity item = new ItemEntity(entity.world, entity.getPosX(), entity.getPosY(), entity.getPosZ(), stack);
+            event.getDrops().add(item);
+        }
     }
 
     private void breakGlassBoots(ItemStack stack, Potion potion, LivingEntity entity) {
@@ -437,10 +457,10 @@ public class MoreBootsHandler {
         areaeffectcloudentity.setRadius(3.0F);
         areaeffectcloudentity.setRadiusOnUse(-0.5F);
         areaeffectcloudentity.setWaitTime(10);
-        areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float)areaeffectcloudentity.getDuration());
+        areaeffectcloudentity.setRadiusPerTick(-areaeffectcloudentity.getRadius() / (float) areaeffectcloudentity.getDuration());
         areaeffectcloudentity.setPotion(potion);
 
-        for(EffectInstance effectinstance : PotionUtils.getFullEffectsFromItem(stack)) {
+        for (EffectInstance effectinstance : PotionUtils.getFullEffectsFromItem(stack)) {
             areaeffectcloudentity.addEffect(new EffectInstance(effectinstance));
         }
 

@@ -36,9 +36,13 @@ import java.util.Map;
 public class ArmorItemBase extends ArmorItem {
     private String registryName;
 
-    public ArmorItemBase(IArmorMaterial material, String registryName) {
-        super(material, EquipmentSlotType.FEET, material.equals(ItemInit.ModArmorMaterial.REDSTONE) ? new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE).maxStackSize(64) : new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE));
+    public ArmorItemBase(IArmorMaterial material, String registryName, boolean isNetherite) {
+        super(material, EquipmentSlotType.FEET, isNetherite ? new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE).func_234689_a_() : new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE));
         this.registryName = registryName;
+    }
+
+    public ArmorItemBase(IArmorMaterial material, String registryName) {
+        this(material, registryName, false);
     }
 
     @Override

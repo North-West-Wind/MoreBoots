@@ -1,5 +1,8 @@
 package com.northwestwind.moreboots.handler;
 
+import com.northwestwind.moreboots.init.BlockInit;
+import com.northwestwind.moreboots.init.block.InvisibleBlock;
+import it.unimi.dsi.fastutil.objects.Object2ByteLinkedOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,10 +12,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -64,19 +73,18 @@ public class Utils {
                 if (blockstate1.isAir(worldIn, blockpos$mutable)) {
                     BlockState blockstate2 = worldIn.getBlockState(blockpos);
                     boolean shouldChange = target.contains(blockstate2.getBlock());
-                    if (shouldChange) worldIn.setBlockState(blockpos, to.get(new Random().nextInt(to.size())).getDefaultState());
+                    if (shouldChange)
+                        worldIn.setBlockState(blockpos, to.get(new Random().nextInt(to.size())).getDefaultState());
                 }
             }
         }
     }
 
-    public static byte[] objToBytes(Object obj)
-    {
+    public static byte[] objToBytes(Object obj) {
         byte[] bytes = null;
         ByteArrayOutputStream bos = null;
         ObjectOutputStream oos = null;
-        try
-        {
+        try {
             bos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(bos);
             oos.writeObject(obj);
@@ -84,51 +92,35 @@ public class Utils {
             bytes = bos.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally
-        {
+        } finally {
             try {
-                if(oos != null)oos.close();
-                if(bos != null)bos.close();
-            } catch(IOException ex) {
+                if (oos != null) oos.close();
+                if (bos != null) bos.close();
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
         return bytes;
     }
 
-    public static Object bytesToObj(byte[] bytes)
-    {
+    public static Object bytesToObj(byte[] bytes) {
         Object obj = null;
         ByteArrayInputStream bis = null;
         ObjectInputStream ois = null;
-        try
-        {
+        try {
             bis = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(bis);
             obj = ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        } finally
-        {
+        } finally {
             try {
                 if (ois != null) ois.close();
                 if (bis != null) bis.close();
-            } catch(IOException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
         return obj;
-    }
-
-    @Nullable
-    public static Entity findEntityByUUID(UUID uuid, ServerWorld world) {
-        Stream<Entity> entities = world.getEntities();
-        LivingEntity entity = null;
-        for(Entity ent : entities.toArray(Entity[]::new)) {
-            if(ent.getUniqueID().equals(uuid)) {
-                entity = (LivingEntity) ent;
-            }
-        }
-        return entity;
     }
 }

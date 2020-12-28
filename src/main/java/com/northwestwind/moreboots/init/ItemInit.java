@@ -4,7 +4,6 @@ import com.northwestwind.moreboots.MoreBoots;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.init.item.ArmorItemBase;
 import com.northwestwind.moreboots.init.item.ItemBase;
-import com.northwestwind.moreboots.init.item.SniperCrossbowItem;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -59,12 +58,14 @@ public class ItemInit {
     public static final Item KA_BOOTS = registerBoots(ModArmorMaterial.KA, "ka_boots");
     public static final Item GLASS_BOOTS = registerBoots(ModArmorMaterial.GLASS, "glass_boots");
     public static final Item GLASS_BOOTS_EMPTY = registerBoots(ModArmorMaterial.GLASS_EMPTY, "glass_boots_empty");
-    public static final Item JESUS_BOOTS = registerBoots(ModArmorMaterial.JESUS, "jesus_boots");
+    public static final Item FLOATIE_BOOTS = registerBoots(ModArmorMaterial.FLOATIE, "floatie_boots", true);
+    public static final Item STRIDER_BOOTS = registerBoots(ModArmorMaterial.STRIDER, "strider_boots", true);
     //public static final Item SNIPER_BOOTS = registerBoots(ModArmorMaterial.SNIPER, "sniper_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "quartz_ingot").setRegistryName("quartz_ingot");
     public static final Item METAL_MIX = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "metal_mix").setRegistryName("metal_mix");
     public static final Item BAT_HIDE = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "bat_hide").setRegistryName("bat_hide");
+    public static final Item STRIDER_FOOT = new ItemBase(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), "strider_foot").setRegistryName("strider_foot");
 
     //public static final Item CROSSBOW = new SniperCrossbowItem().setRegistryName("minecraft", "crossbow");
 
@@ -102,18 +103,24 @@ public class ItemInit {
         event.getRegistry().register(KA_BOOTS);
         event.getRegistry().register(GLASS_BOOTS);
         event.getRegistry().register(GLASS_BOOTS_EMPTY);
-        event.getRegistry().register(JESUS_BOOTS);
+        event.getRegistry().register(FLOATIE_BOOTS);
+        event.getRegistry().register(STRIDER_BOOTS);
         //event.getRegistry().register(SNIPER_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
         event.getRegistry().register(BAT_HIDE);
+        event.getRegistry().register(STRIDER_FOOT);
 
         //event.getRegistry().register(CROSSBOW);
     }
 
     public static Item registerBoots(IArmorMaterial material, String registryName) {
-        return new ArmorItemBase(material, registryName).setRegistryName(registryName);
+        return registerBoots(material, registryName, false);
+    }
+
+    public static Item registerBoots(IArmorMaterial material, String registryName, boolean isNetherite) {
+        return new ArmorItemBase(material, registryName, isNetherite).setRegistryName(registryName);
     }
 
     public enum ModArmorMaterial implements IArmorMaterial {
@@ -180,7 +187,8 @@ public class ItemInit {
         GLASS_EMPTY(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.ITEM_BOTTLE_FILL, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
         GLASS(Reference.MODID + ":glass", 10, new int[] { 4, 1, 1, 1 }, 20, SoundEvents.BLOCK_GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.GLASS)),
         SNIPER(Reference.MODID + ":sniper", 8, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, 90000, () -> Ingredient.fromItems(Items.TIPPED_ARROW)),
-        JESUS(Reference.MODID + ":jesus", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(Items.field_234759_km_));
+        FLOATIE(Reference.MODID + ":floatie", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(Items.field_234759_km_)),
+        STRIDER(Reference.MODID + ":strider", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(ItemInit.STRIDER_FOOT));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
