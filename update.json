@@ -10,7 +10,8 @@
     "1.4.0": "Week #4 Update",
     "1.4.1": "Fixed random crashes + ice not generating properly",
     "1.4.2": "Fixed Bamboo Generation + Added Custom Warmth Effect",
-    "1.5.0": "Week #5 Update"
+    "1.5.0": "Week #5 Update",
+    "1.6.0": "Week #6 Update"
   },
   "1.16.3": {
     "1.0.0": "The very first release",
@@ -22,7 +23,8 @@
     "1.4.0": "Week #4 Update",
     "1.4.1": "Fixed random crashes + ice not generating properly",
     "1.4.2": "Fixed Bamboo Generation + Added Custom Warmth Effect",
-    "1.5.0": "Week #5 Update"
+    "1.5.0": "Week #5 Update",
+    "1.6.0": "Week #6 Update"
   },
   "1.16.2": {
     "1.0.0": "The very first release",
@@ -34,7 +36,8 @@
     "1.4.0": "Week #4 Update",
     "1.4.1": "Fixed random crashes + ice not generating properly",
     "1.4.2": "Fixed Bamboo Generation + Added Custom Warmth Effect",
-    "1.5.0": "Week #5 Update"
+    "1.5.0": "Week #5 Update",
+    "1.6.0": "Week #6 Update"
   },
   "1.16.1": {
     "1.0.0": "The very first release",
@@ -46,16 +49,17 @@
     "1.4.0": "Week #4 Update",
     "1.4.1": "Fixed random crashes + ice not generating properly",
     "1.4.2": "Fixed Bamboo Generation + Added Custom Warmth Effect",
-    "1.5.0": "Week #5 Update"
+    "1.5.0": "Week #5 Update",
+    "1.6.0": "Week #6 Update"
   },
   "promos": {
-    "1.16.4-latest": "1.5.0",
-    "1.16.4-recommended": "1.5.0",
-    "1.16.3-latest": "1.5.0",
-    "1.16.3-recommended": "1.5.0",
-    "1.16.2-latest": "1.5.0",
-    "1.16.2-recommended": "1.5.0",
-    "1.16.1-latest": "1.5.0",
-    "1.16.1-recommended": "1.5.0"
+    "1.16.4-latest": "1.6.0",
+    "1.16.4-recommended": "1.6.0",
+    "1.16.3-latest": "1.6.0",
+    "1.16.3-recommended": "1.6.0",
+    "1.16.2-latest": "1.6.0",
+    "1.16.2-recommended": "1.6.0",
+    "1.16.1-latest": "1.6.0",
+    "1.16.1-recommended": "1.6.0"
   }
 }

@@ -1,5 +1,6 @@
 package com.northwestwind.moreboots.handler;
 
+import com.google.common.collect.Sets;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.handler.packet.*;
 import com.northwestwind.moreboots.init.BlockInit;
@@ -11,6 +12,7 @@ import com.northwestwind.moreboots.init.block.KeybindInit;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
@@ -22,6 +24,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.*;
 import net.minecraft.server.MinecraftServer;
@@ -429,6 +432,48 @@ public class MoreBootsHandler {
                 player.setMotion(motion.mul(0, 1, 0).add(direction.getX(), 0, direction.getZ()));
             }
             if (player.world.isRemote) MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerSkatePacket());
+        } else if (Minecraft.getInstance().gameSettings.keyBindJump.isPressed() && event.getAction() == GLFW.GLFW_PRESS) {
+            ClientPlayerEntity player = Minecraft.getInstance().player;
+            if (player == null || player.func_233570_aj_() || player.abilities.isFlying) return;
+            ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+            if (!boots.getItem().equals(ItemInit.SANDALS)) return;
+            BlockPos pos = new BlockPos(player.getPositionVec());
+            if (pos.getY() > 255 || pos.getY() < 0) return;
+            if (!player.world.isAirBlock(pos) || !player.inventory.hasAny(Sets.newHashSet(Items.SAND))) return;
+            boolean shouldJump = player.isCreative();
+            if (!shouldJump) for (ItemStack stack : player.inventory.mainInventory) {
+                if (stack.getItem().equals(Items.SAND)) {
+                    int slot = player.inventory.getSlotFor(stack);
+                    stack.shrink(1);
+                    player.inventory.setInventorySlotContents(slot, stack);
+                    shouldJump = true;
+                    break;
+                }
+            }
+            if (!shouldJump) for (ItemStack stack : player.inventory.offHandInventory) {
+                if (stack.getItem().equals(Items.SAND)) {
+                    int slot = player.inventory.getSlotFor(stack);
+                    stack.shrink(1);
+                    player.inventory.setInventorySlotContents(slot, stack);
+                    shouldJump = true;
+                    break;
+                }
+            }
+            if (!shouldJump) for (ItemStack stack : player.inventory.armorInventory) {
+                if (stack.getItem().equals(Items.SAND)) {
+                    int slot = player.inventory.getSlotFor(stack);
+                    stack.shrink(1);
+                    player.inventory.setInventorySlotContents(slot, stack);
+                    shouldJump = true;
+                    break;
+                }
+            }
+            if (shouldJump) {
+                player.world.setBlockState(pos, Blocks.SAND.getDefaultState(), 3);
+                player.jump();
+                player.setMotion(player.getMotion().add(0,1,0));
+                if (player.world.isRemote) MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerMultiJumpPacket());
+            }
         }
     }
 

@@ -29,5 +29,9 @@ public class MoreBootsPacketHandler {
             ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
             ctx.get().setPacketHandled(true);
         });
+        INSTANCE.registerMessage(ID++, CPlayerMultiJumpPacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (CPlayerMultiJumpPacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
+            ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
+            ctx.get().setPacketHandled(true);
+        });
     }
 }

@@ -37,6 +37,7 @@
   "item.moreboots.glass_boots": "Glass Boots",
   "item.moreboots.floatie_boots": "Floatie Boots",
   "item.moreboots.strider_boots": "Strider Boots",
+  "item.moreboots.sand_boots": "SANDals",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -91,6 +92,7 @@
   "tooltip.moreboots.glass_boots": "\u00A77\u00A7oActs like potions but on feet",
   "tooltip.moreboots.floatie_boots": "\u00A77\u00A7oFloats on water",
   "tooltip.moreboots.strider_boots": "\u00A77\u00A7oWalks on lava",
+  "tooltip.moreboots.sand_boots": "\u00A77\u00A7oAllows multi-jumping",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -168,7 +170,8 @@
   "advancements.moreboots.floatie_boots.description": "Obtain the Floatie Boots",
   "advancements.moreboots.strider_boots.title": "I Need Lava",
   "advancements.moreboots.strider_boots.description": "Obtain the Strider Boots",
-
+  "advancements.moreboots.sand_boots.title": "Jumping 2368 Times",
+  "advancements.moreboots.sand_boots.description": "Obtain the SANDals",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"

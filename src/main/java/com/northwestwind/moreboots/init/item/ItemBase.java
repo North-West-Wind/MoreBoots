@@ -1,5 +1,7 @@
 package com.northwestwind.moreboots.init.item;
 
+import com.northwestwind.moreboots.MoreBoots;
+import com.northwestwind.moreboots.Reference;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,9 +20,14 @@ import java.util.List;
 public class ItemBase extends Item {
     private String registryName;
 
-    public ItemBase(Properties p_i48487_1_, String registryName) {
-        super(p_i48487_1_);
+    public ItemBase(Properties properties, String registryName) {
+        super(properties);
         this.registryName = registryName;
+        setRegistryName(Reference.MODID, registryName);
+    }
+
+    public ItemBase(String registryName) {
+        this(new Item.Properties().group(MoreBoots.MoreBootsItemGroup.INSTANCE), registryName);
     }
 
     @Override

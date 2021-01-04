@@ -41,10 +41,6 @@ public class ArmorItemBase extends ArmorItem {
         this.registryName = registryName;
     }
 
-    public ArmorItemBase(IArmorMaterial material, String registryName) {
-        this(material, registryName, false);
-    }
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
