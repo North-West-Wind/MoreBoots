@@ -38,6 +38,7 @@
   "item.moreboots.floatie_boots": "Floatie Boots",
   "item.moreboots.strider_boots": "Strider Boots",
   "item.moreboots.sand_boots": "SANDals",
+  "item.moreboots.music_boots": "Music Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -93,6 +94,7 @@
   "tooltip.moreboots.floatie_boots": "\u00A77\u00A7oFloats on water",
   "tooltip.moreboots.strider_boots": "\u00A77\u00A7oWalks on lava",
   "tooltip.moreboots.sand_boots": "\u00A77\u00A7oAllows multi-jumping",
+  "tooltip.moreboots.music_boots": "\u00A77\u00A7oConverts sound to note block sound",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -172,6 +174,8 @@
   "advancements.moreboots.strider_boots.description": "Obtain the Strider Boots",
   "advancements.moreboots.sand_boots.title": "Jumping 2368 Times",
   "advancements.moreboots.sand_boots.description": "Obtain the SANDals",
+  "advancements.moreboots.music_boots.title": "Musician",
+  "advancements.moreboots.music_boots.description": "Obtain the Music Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport"

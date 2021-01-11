@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "result": {
+    "item": "moreboots:music_boots",
+    "count": 1
+  }
+}

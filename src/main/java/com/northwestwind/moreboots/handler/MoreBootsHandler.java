@@ -1,5 +1,6 @@
 package com.northwestwind.moreboots.handler;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.handler.packet.*;
@@ -12,6 +13,10 @@ import com.northwestwind.moreboots.init.block.KeybindInit;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.LocatableSound;
+import net.minecraft.client.audio.SimpleSound;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.AreaEffectCloudEntity;
@@ -41,6 +46,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
@@ -50,7 +57,19 @@ import org.lwjgl.glfw.GLFW;
 import java.util.*;
 
 public class MoreBootsHandler {
+    public static final List<SoundEvent> INSTRUMENTS = Lists.newArrayList(SoundEvents.BLOCK_NOTE_BLOCK_BANJO, SoundEvents.BLOCK_NOTE_BLOCK_BASS, SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundEvents.BLOCK_NOTE_BLOCK_BIT, SoundEvents.BLOCK_NOTE_BLOCK_CHIME, SoundEvents.BLOCK_NOTE_BLOCK_COW_BELL, SoundEvents.BLOCK_NOTE_BLOCK_DIDGERIDOO, SoundEvents.BLOCK_NOTE_BLOCK_FLUTE, SoundEvents.BLOCK_NOTE_BLOCK_GUITAR, SoundEvents.BLOCK_NOTE_BLOCK_HARP, SoundEvents.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE, SoundEvents.BLOCK_NOTE_BLOCK_PLING, SoundEvents.BLOCK_NOTE_BLOCK_XYLOPHONE);
     private static final Random rng = new Random();
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onPlaySound(PlaySoundEvent event) {
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        if (player == null) return;
+        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+        if (!boots.getItem().equals(ItemInit.MUSIC_BOOTS)) return;
+        ISound sound = event.getSound();
+        event.setResultSound(new SimpleSound(INSTRUMENTS.get(rng.nextInt(INSTRUMENTS.size())), SoundCategory.RECORDS, 1, (float) Math.pow(2.0D, (double)(rng.nextInt(24) - 12) / 12.0D), sound.getX(), sound.getY(), sound.getZ()));
+    }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)

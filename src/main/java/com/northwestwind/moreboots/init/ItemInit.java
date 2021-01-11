@@ -61,6 +61,7 @@ public class ItemInit {
     public static final Item FLOATIE_BOOTS = registerBoots(ModArmorMaterial.FLOATIE, "floatie_boots", true);
     public static final Item STRIDER_BOOTS = registerBoots(ModArmorMaterial.STRIDER, "strider_boots", true);
     public static final Item SANDALS = registerBoots(ModArmorMaterial.SAND, "sand_boots");
+    public static final Item MUSIC_BOOTS = registerBoots(ModArmorMaterial.MUSIC, "music_boots");
     //public static final Item SNIPER_BOOTS = registerBoots(ModArmorMaterial.SNIPER, "sniper_boots");
 
     public static final Item QUARTZ_INGOT = new ItemBase("quartz_ingot");
@@ -107,6 +108,7 @@ public class ItemInit {
         event.getRegistry().register(FLOATIE_BOOTS);
         event.getRegistry().register(STRIDER_BOOTS);
         event.getRegistry().register(SANDALS);
+        event.getRegistry().register(MUSIC_BOOTS);
         //event.getRegistry().register(SNIPER_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
@@ -191,7 +193,8 @@ public class ItemInit {
         SNIPER(Reference.MODID + ":sniper", 8, new int[] { 2, 1, 1, 1 }, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0f, 0.0f, 90000, () -> Ingredient.fromItems(Items.TIPPED_ARROW)),
         FLOATIE(Reference.MODID + ":floatie", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(Items.field_234759_km_)),
         STRIDER(Reference.MODID + ":strider", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(ItemInit.STRIDER_FOOT)),
-        SAND(Reference.MODID + ":sand", 18, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.BLOCK_SAND_PLACE, 0.0f, 0.0f, 40000, () -> Ingredient.fromItems(Items.SAND));
+        SAND(Reference.MODID + ":sand", 18, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.BLOCK_SAND_PLACE, 0.0f, 0.0f, 40000, () -> Ingredient.fromItems(Items.SAND)),
+        MUSIC(Reference.MODID + ":music", 20, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.BLOCK_NOTE_BLOCK_BANJO, 0.0f, 0.0f, 60000, () -> Ingredient.fromItems(Items.NOTE_BLOCK));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
