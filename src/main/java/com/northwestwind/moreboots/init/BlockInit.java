@@ -136,7 +136,7 @@ public class BlockInit {
                     //else if(block instanceof TwistingVinesTopBlock) newBlock = new VanishingTwistingVinesTopBlock(block);
                     //else if(block instanceof VineBlock) newBlock = new VanishingVineBlock(block);
                     else if(block instanceof WallBlock) newBlock = new VanishingWallBlock(block);
-                    else if(block instanceof WallSkullBlock) newBlock = new VanishingWallSkullBlock((WallSkullBlock) block);
+                    //else if(block instanceof WallSkullBlock) newBlock = new VanishingWallSkullBlock((WallSkullBlock) block);
                     else if(block instanceof WebBlock) newBlock = new VanishingWebBlock(block);
                     //else if(block instanceof WeepingVinesBlock) newBlock = new VanishingWeepingVinesBlock(block);
                     //else if(block instanceof WeepingVinesTopBlock) newBlock = new VanishingWeepingVinesTopBlock(block);
