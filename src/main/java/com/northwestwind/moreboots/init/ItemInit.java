@@ -1,6 +1,5 @@
 package com.northwestwind.moreboots.init;
 
-import com.northwestwind.moreboots.MoreBoots;
 import com.northwestwind.moreboots.Reference;
 import com.northwestwind.moreboots.init.item.ArmorItemBase;
 import com.northwestwind.moreboots.init.item.ItemBase;
@@ -194,7 +193,8 @@ public class ItemInit {
         FLOATIE(Reference.MODID + ":floatie", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(Items.field_234759_km_)),
         STRIDER(Reference.MODID + ":strider", 40, new int[] { 4, 1, 1, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.fromItems(ItemInit.STRIDER_FOOT)),
         SAND(Reference.MODID + ":sand", 18, new int[] { 2, 1, 1, 1 }, 8, SoundEvents.BLOCK_SAND_PLACE, 0.0f, 0.0f, 40000, () -> Ingredient.fromItems(Items.SAND)),
-        MUSIC(Reference.MODID + ":music", 20, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.BLOCK_NOTE_BLOCK_BANJO, 0.0f, 0.0f, 60000, () -> Ingredient.fromItems(Items.NOTE_BLOCK));
+        MUSIC(Reference.MODID + ":music", 20, new int[] { 2, 1, 1, 1 }, 10, SoundEvents.BLOCK_NOTE_BLOCK_BANJO, 0.0f, 0.0f, 60000, () -> Ingredient.fromItems(Items.NOTE_BLOCK)),
+        ENERGY(Reference.MODID + ":energy", 1, new int[] { 4, 1, 1, 1 }, 4, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0f, 0.0f, 75000, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
