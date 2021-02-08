@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#L#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:chest"
+    },
+    "L": {
+      "item": "minecraft:leather_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:storage_boots",
+    "count": 1
+  }
+}

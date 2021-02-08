@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "moreboots:block/redstone_dust" },
+    "facing=south": { "model": "moreboots:block/redstone_dust", "y": 180 },
+    "facing=west":  { "model": "moreboots:block/redstone_dust", "y": 270 },
+    "facing=east":  { "model": "moreboots:block/redstone_dust", "y": 90 }
+  }
+}
