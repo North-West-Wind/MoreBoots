@@ -42,6 +42,7 @@
   "item.moreboots.hopper_boots": "Hopper Boots",
   "item.moreboots.storage_boots": "Storage Boots",
   "item.moreboots.gliding_boots": "Glider",
+  "item.moreboots.sponge_boots": "Sponge Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -101,6 +102,7 @@
   "tooltip.moreboots.hopper_boots": "\u00A77\u00A7oPicks up nearby items",
   "tooltip.moreboots.storage_boots": "\u00A77\u00A7oExtra storage",
   "tooltip.moreboots.gliding_boots": "\u00A77\u00A7oGlides while moving in the air",
+  "tooltip.moreboots.sponge_boots": "\u00A77\u00A7oAbsorbs water around",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -188,6 +190,8 @@
   "advancements.moreboots.storage_boots.description": "Obtain the Storage Boots",
   "advancements.moreboots.gliding_boots.title": "Wait... This is not Elytra",
   "advancements.moreboots.gliding_boots.description": "Obtain the Glider",
+  "advancements.moreboots.sponge_boots.title": "Absorption, but Water",
+  "advancements.moreboots.sponge_boots.description": "Obtain the Sponge Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport",

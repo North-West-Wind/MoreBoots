@@ -457,6 +457,9 @@ public class MoreBootsHandler {
                 entity.setMotion(entity.getMotion().mul(1.1, 0, 1.1).add(0, -0.02, 0));
                 entity.velocityChanged = true;
             }
+        } else if (boots.getItem().equals(ItemInit.SPONGE_BOOTS)) {
+            boolean absorbed = Utils.absorb(entity.world, new BlockPos(entity.getPositionVec()));
+            if (absorbed) boots.damageItem(1, entity, ent -> ent.playSound(SoundEvents.BLOCK_GRASS_BREAK, 1, 1));
         }
     }
 
