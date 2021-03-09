@@ -9,6 +9,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Tuple;
@@ -114,7 +115,7 @@ public class Utils {
         return obj;
     }
 
-    public static boolean absorb(World worldIn, BlockPos pos) {
+    public static boolean absorb(World worldIn, BlockPos pos, ITag.INamedTag<Fluid> tag) {
         Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
         queue.add(new Tuple<>(pos, 0));
         int i = 0;
@@ -129,7 +130,7 @@ public class Utils {
                 BlockState blockstate = worldIn.getBlockState(blockpos1);
                 FluidState fluidstate = worldIn.getFluidState(blockpos1);
                 Material material = blockstate.getMaterial();
-                if (fluidstate.isTagged(FluidTags.WATER)) {
+                if (fluidstate.isTagged(tag)) {
                     if (blockstate.getBlock() instanceof IBucketPickupHandler && ((IBucketPickupHandler)blockstate.getBlock()).pickupFluid(worldIn, blockpos1, blockstate) != Fluids.EMPTY) {
                         ++i;
                         if (j < 6) {
@@ -159,5 +160,9 @@ public class Utils {
         }
 
         return i > 0;
+    }
+
+    public static boolean absorb(World worldIn, BlockPos pos) {
+        return absorb(worldIn, pos, FluidTags.WATER);
     }
 }

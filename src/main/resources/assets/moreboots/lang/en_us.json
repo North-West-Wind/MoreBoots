@@ -43,6 +43,7 @@
   "item.moreboots.storage_boots": "Storage Boots",
   "item.moreboots.gliding_boots": "Glider",
   "item.moreboots.sponge_boots": "Sponge Boots",
+  "item.moreboots.lava_sponge_boots": "Lava Sponge Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -103,6 +104,7 @@
   "tooltip.moreboots.storage_boots": "\u00A77\u00A7oExtra storage",
   "tooltip.moreboots.gliding_boots": "\u00A77\u00A7oGlides while moving in the air",
   "tooltip.moreboots.sponge_boots": "\u00A77\u00A7oAbsorbs water around",
+  "tooltip.moreboots.lava_sponge_boots": "\u00A77\u00A7oAbsorbs lava around",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -192,6 +194,8 @@
   "advancements.moreboots.gliding_boots.description": "Obtain the Glider",
   "advancements.moreboots.sponge_boots.title": "Absorption, but Water",
   "advancements.moreboots.sponge_boots.description": "Obtain the Sponge Boots",
+  "advancements.moreboots.lava_sponge_boots.title": "Absorption, but Lava",
+  "advancements.moreboots.lava_sponge_boots.description": "Obtain the Lava Sponge Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.teleport": "Ender Boots Teleport",

@@ -460,6 +460,9 @@ public class MoreBootsHandler {
         } else if (boots.getItem().equals(ItemInit.SPONGE_BOOTS)) {
             boolean absorbed = Utils.absorb(entity.world, new BlockPos(entity.getPositionVec()));
             if (absorbed) boots.damageItem(1, entity, ent -> ent.playSound(SoundEvents.BLOCK_GRASS_BREAK, 1, 1));
+        } else if (boots.getItem().equals(ItemInit.LAVA_SPONGE_BOOTS)) {
+            boolean absorbed = Utils.absorb(entity.world, new BlockPos(entity.getPositionVec()), FluidTags.LAVA);
+            if (absorbed) boots.damageItem(1, entity, ent -> ent.playSound(SoundEvents.BLOCK_GRASS_BREAK, 1, 1));
         }
     }
 

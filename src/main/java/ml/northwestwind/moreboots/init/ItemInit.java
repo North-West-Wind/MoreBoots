@@ -67,6 +67,7 @@ public class ItemInit {
     public static final Item STORAGE_BOOTS = new StorageBootsItem(ModArmorMaterial.STORAGE, "storage_boots", 6);
     public static final Item GLIDER = registerBoots(ModArmorMaterial.GLIDER, "gliding_boots");
     public static final Item SPONGE_BOOTS = registerBoots(ModArmorMaterial.SPONGE, "sponge_boots");
+    public static final Item LAVA_SPONGE_BOOTS = registerBoots(ModArmorMaterial.LAVA_SPONGE, "lava_sponge_boots", true);
 
     public static final Item QUARTZ_INGOT = new ItemBase("quartz_ingot");
     public static final Item METAL_MIX = new ItemBase("metal_mix");
@@ -116,6 +117,7 @@ public class ItemInit {
         event.getRegistry().register(STORAGE_BOOTS);
         event.getRegistry().register(GLIDER);
         event.getRegistry().register(SPONGE_BOOTS);
+        event.getRegistry().register(LAVA_SPONGE_BOOTS);
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
@@ -203,7 +205,8 @@ public class ItemInit {
         LOKI(Reference.MODID + ":loki", 20, 1, 12, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.0f, 0.0f, () -> Ingredient.EMPTY),
         STORAGE(Reference.MODID + ":storage", 10, 1, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.CHEST)),
         GLIDER(Reference.MODID + ":gliding", 20, 1, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.PHANTOM_MEMBRANE)),
-        SPONGE(Reference.MODID + ":sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE, Items.WET_SPONGE));
+        SPONGE(Reference.MODID + ":sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE, Items.WET_SPONGE)),
+        LAVA_SPONGE(Reference.MODID + ":sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
