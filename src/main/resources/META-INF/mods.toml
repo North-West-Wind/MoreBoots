@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/North-West-Wind/MoreBoots/issues"
 
 [[mods]]
 modId="moreboots"
-version="1.10.0"
+version="1.10.1"
 displayName="More Boots"
 updateJSONURL="https://github.com/North-West-Wind/MoreBoots/raw/main/update.json"
 displayURL="https://github.com/North-West-Wind/MoreBoots"
