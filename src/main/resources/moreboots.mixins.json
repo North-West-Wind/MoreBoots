@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "ml.northwestwind.moreboots.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "moreboots.refmap.json",
+  "mixins": [
+    "AbstractBlockState"
+  ],
+  "minVersion": "0.8"
+}

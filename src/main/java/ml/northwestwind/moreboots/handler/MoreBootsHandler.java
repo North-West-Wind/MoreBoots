@@ -414,30 +414,16 @@ public class MoreBootsHandler {
                 entity.setItemStackToSlot(EquipmentSlotType.FEET, newBoots);
             }
         } else if (boots.getItem().equals(ItemInit.FLOATIE_BOOTS)) {
-            BlockPos pos = new BlockPos(entity.getPositionVec());
             if (entity.isInWater()) {
                 entity.setMotion(entity.getMotion().add(0, 0.1, 0));
                 entity.velocityChanged = true;
-            } else if (!entity.world.isRemote)
-                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1.0D, -1), pos.add(1, -1.0D, 1))) {
-                    FluidState under = entity.world.getFluidState(blockpos);
-                    if (!entity.world.getBlockState(blockpos).getCollisionShape(entity.world, blockpos).equals(VoxelShapes.empty()) || !under.isTagged(FluidTags.WATER))
-                        continue;
-                    entity.world.setBlockState(blockpos, BlockInit.INVISIBLE.getDefaultState().with(BlockStateProperties.WATERLOGGED, true).with(InvisibleBlock.FLOWINGLOGGED, !under.isSource()));
-                }
+            }
         } else if (boots.getItem().equals(ItemInit.STRIDER_BOOTS)) {
             entity.extinguish();
-            BlockPos pos = new BlockPos(entity.getPositionVec());
             if (entity.isInLava()) {
                 entity.setMotion(entity.getMotion().add(0, 0.1, 0));
                 entity.velocityChanged = true;
-            } else if (!entity.world.isRemote)
-                for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1.0D, -1), pos.add(1, -1.0D, 1))) {
-                    FluidState under = entity.world.getFluidState(blockpos);
-                    if (!entity.world.getBlockState(blockpos).getCollisionShape(entity.world, blockpos).equals(VoxelShapes.empty()) || !under.isTagged(FluidTags.LAVA))
-                        continue;
-                    entity.world.setBlockState(blockpos, BlockInit.INVISIBLE.getDefaultState().with(InvisibleBlock.LAVALOGGED, true).with(InvisibleBlock.FLOWINGLOGGED, !under.isSource()));
-                }
+            }
         } else if (boots.getItem().equals(ItemInit.HOPPER_BOOTS)) {
             if (!(entity instanceof PlayerEntity)) return;
             PlayerEntity player = (PlayerEntity) entity;

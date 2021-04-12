@@ -1,18 +1,24 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
         mavenCentral()
+        jcenter()
+        maven {
+            name "Forge"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven { url = "https://repo.spongepowered.org/maven" }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.10.1-1.16.x'
+version = '1.11.0'
 group = 'ml.northwestwind.moreboots' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'moreboots'
 
@@ -24,11 +30,12 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+            arg "-mixin.config=moreboots.mixins.json"
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                moreboots {
                     source sourceSets.main
                 }
             }
@@ -40,7 +47,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                moreboots {
                     source sourceSets.main
                 }
             }
@@ -51,10 +58,10 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'moreboots', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                examplemod {
+                moreboots {
                     source sourceSets.main
                 }
             }
@@ -63,19 +70,22 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.3-34.0.7'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 }
 
 jar {
     manifest {
+        classifier "1.16.x"
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Title": "moreboots",
+            "Specification-Vendor": "morebootsforyou",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Implementation-Vendor" :"morebootsforyou",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+
+            "MixinConfigs": "moreboots.mixins.json"
         ])
     }
 }
@@ -92,4 +102,8 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+mixin {
+    add sourceSets.main, "moreboots.refmap.json"
 }

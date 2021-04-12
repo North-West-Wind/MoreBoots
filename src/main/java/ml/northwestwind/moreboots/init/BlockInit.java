@@ -43,7 +43,7 @@ public class BlockInit {
         event.getRegistry().register(COBBLESTONE_512);
         event.getRegistry().register(BOOT_RECYCLER);
         event.getRegistry().register(INVISIBLE);
-        Field[] fields = Blocks.class.getDeclaredFields();
+        /*Field[] fields = Blocks.class.getDeclaredFields();
         LogManager.getLogger().info("Found " + fields.length + " blocks");
         for(Field f : fields) {
             Class<?> cl = f.getType();
@@ -149,7 +149,7 @@ public class BlockInit {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
     @SubscribeEvent
