@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.11.0'
+version = '1.11.1'
 group = 'ml.northwestwind.moreboots' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'moreboots'
 
@@ -69,8 +69,13 @@ minecraft {
     }
 }
 
+repositories {
+    maven { url = "https://repo.spongepowered.org/maven" }
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
+    annotationProcessor "org.spongepowered:mixin:0.8.2:processor"
 }
 
 jar {

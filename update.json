@@ -18,7 +18,8 @@
     "1.9.0": "Week #14 Update",
     "1.10.0": "Week #15 Update",
     "1.10.1": "Fixed Glowstone Boots crashing the game",
-    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements"
+    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements",
+    "1.11.1": "Fixed Game Crashing on Start"
   },
   "1.16.4": {
     "1.0.0": "The very first release",
@@ -38,7 +39,8 @@
     "1.9.0": "Week #14 Update",
     "1.10.0": "Week #15 Update",
     "1.10.1": "Fixed Glowstone Boots crashing the game",
-    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements"
+    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements",
+    "1.11.1": "Fixed Game Crashing on Start"
   },
   "1.16.3": {
     "1.0.0": "The very first release",
@@ -58,7 +60,8 @@
     "1.9.0": "Week #14 Update",
     "1.10.0": "Week #15 Update",
     "1.10.1": "Fixed Glowstone Boots crashing the game",
-    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements"
+    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements",
+    "1.11.1": "Fixed Game Crashing on Start"
   },
   "1.16.2": {
     "1.0.0": "The very first release",
@@ -78,7 +81,8 @@
     "1.9.0": "Week #14 Update",
     "1.10.0": "Week #15 Update",
     "1.10.1": "Fixed Glowstone Boots crashing the game",
-    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements"
+    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements",
+    "1.11.1": "Fixed Game Crashing on Start"
   },
   "1.16.1": {
     "1.0.0": "The very first release",
@@ -98,18 +102,19 @@
     "1.9.0": "Week #14 Update",
     "1.10.0": "Week #15 Update",
     "1.10.1": "Fixed Glowstone Boots crashing the game",
-    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements"
+    "1.11.0": "Vanishing/Floatie/Strider Boots Enhancements",
+    "1.11.1": "Fixed Game Crashing on Start"
   },
   "promos": {
-    "1.16.5-latest": "1.11.0",
-    "1.16.5-recommended": "1.11.0",
-    "1.16.4-latest": "1.11.0",
-    "1.16.4-recommended": "1.11.0",
-    "1.16.3-latest": "1.11.0",
-    "1.16.3-recommended": "1.11.0",
-    "1.16.2-latest": "1.11.0",
-    "1.16.2-recommended": "1.11.0",
-    "1.16.1-latest": "1.11.0",
-    "1.16.1-recommended": "1.11.0"
+    "1.16.5-latest": "1.11.1",
+    "1.16.5-recommended": "1.11.1",
+    "1.16.4-latest": "1.11.1",
+    "1.16.4-recommended": "1.11.1",
+    "1.16.3-latest": "1.11.1",
+    "1.16.3-recommended": "1.11.1",
+    "1.16.2-latest": "1.11.1",
+    "1.16.2-recommended": "1.11.1",
+    "1.16.1-latest": "1.11.1",
+    "1.16.1-recommended": "1.11.1"
   }
 }
