@@ -206,7 +206,7 @@ public class ItemInit {
         STORAGE(Reference.MODID + ":storage", 10, 1, 8, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.CHEST)),
         GLIDER(Reference.MODID + ":gliding", 20, 1, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.PHANTOM_MEMBRANE)),
         SPONGE(Reference.MODID + ":sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE, Items.WET_SPONGE)),
-        LAVA_SPONGE(Reference.MODID + ":sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE));
+        LAVA_SPONGE(Reference.MODID + ":lava_sponge", 10, 1, 6, SoundEvents.BLOCK_GRASS_BREAK, 0.0f, 0.0f, () -> Ingredient.fromItems(Items.SPONGE));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
