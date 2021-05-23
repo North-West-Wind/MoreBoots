@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "E"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_boots"
+    },
+    "E": {
+      "item": "minecraft:enchanted_book",
+      "nbt": "{StoredEnchantments:[{id:channeling,lvl:1}]}"
+    }
+  },
+  "result": {
+    "item": "moreboots:lightning_boots",
+    "count": 1
+  }
+}

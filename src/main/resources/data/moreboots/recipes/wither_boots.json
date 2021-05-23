@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "N#N",
+    " N "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_boots"
+    },
+    "D": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "moreboots:wither_boots",
+    "count": 1
+  }
+}

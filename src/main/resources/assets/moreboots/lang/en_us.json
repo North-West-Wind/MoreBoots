@@ -44,6 +44,10 @@
   "item.moreboots.gliding_boots": "Glider",
   "item.moreboots.sponge_boots": "Sponge Boots",
   "item.moreboots.lava_sponge_boots": "Lava Sponge Boots",
+  "item.moreboots.lightning_boots": "Lightning Boots",
+  "item.moreboots.loki_boots": "Loki Boots",
+  "item.moreboots.magma_boots": "Magma Boots",
+  "item.moreboots.ender_dragon_boots": "Ender Dragon Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -105,6 +109,10 @@
   "tooltip.moreboots.gliding_boots": "\u00A77\u00A7oGlides while moving in the air",
   "tooltip.moreboots.sponge_boots": "\u00A77\u00A7oAbsorbs water around",
   "tooltip.moreboots.lava_sponge_boots": "\u00A77\u00A7oAbsorbs lava around",
+  "tooltip.moreboots.lightning_boots": "\u00A77\u00A7oStrikes your enemies",
+  "tooltip.moreboots.loki_boots": "\u00A77\u00A7oStand still for 10 seconds to become invisible",
+  "tooltip.moreboots.magma_boots": "\u00A77\u00A7oSinks you to the bottom of the ocean",
+  "tooltip.moreboots.ender_dragon_boots": "\u00A77\u00A7oShoots Ender Dragon fireballs",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -198,8 +206,7 @@
   "advancements.moreboots.lava_sponge_boots.description": "Obtain the Lava Sponge Boots",
 
   "key.categories.moreboots": "More Boots",
-  "key.moreboots.teleport": "Ender Boots Teleport",
-  "key.moreboots.openStorage": "Open Storage Boots",
+  "key.moreboots.activate": "Activate Boots Ability",
 
   "container.moreboots.storage_boots": "Storage Boots"
 }

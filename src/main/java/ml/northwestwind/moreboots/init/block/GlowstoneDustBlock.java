@@ -16,6 +16,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
@@ -23,72 +24,72 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class GlowstoneDustBlock extends Block implements IWaterLoggable {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
     private static final VoxelShape SHAPE_N = Stream.of(
-            Block.makeCuboidShape(2, 0, 2, 4, 1, 4),
-            Block.makeCuboidShape(3, 0, 12, 4, 1, 13),
-            Block.makeCuboidShape(13, 0, 8, 14, 1, 9),
-            Block.makeCuboidShape(13, 0, 1, 14, 1, 2),
-            Block.makeCuboidShape(9, 0, 4, 11, 1, 6),
-            Block.makeCuboidShape(7, 0, 3, 8, 1, 4),
-            Block.makeCuboidShape(4, 0, 6, 5, 1, 7),
-            Block.makeCuboidShape(1, 0, 9, 2, 1, 10),
-            Block.makeCuboidShape(6, 0, 9, 8, 1, 11),
-            Block.makeCuboidShape(11, 0, 11, 12, 1, 12),
-            Block.makeCuboidShape(13, 0, 13, 15, 1, 15),
-            Block.makeCuboidShape(5, 0, 14, 6, 1, 15),
-            Block.makeCuboidShape(9, 0, 13, 10, 1, 14)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(2, 0, 2, 4, 1, 4),
+            Block.box(3, 0, 12, 4, 1, 13),
+            Block.box(13, 0, 8, 14, 1, 9),
+            Block.box(13, 0, 1, 14, 1, 2),
+            Block.box(9, 0, 4, 11, 1, 6),
+            Block.box(7, 0, 3, 8, 1, 4),
+            Block.box(4, 0, 6, 5, 1, 7),
+            Block.box(1, 0, 9, 2, 1, 10),
+            Block.box(6, 0, 9, 8, 1, 11),
+            Block.box(11, 0, 11, 12, 1, 12),
+            Block.box(13, 0, 13, 15, 1, 15),
+            Block.box(5, 0, 14, 6, 1, 15),
+            Block.box(9, 0, 13, 10, 1, 14)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_W = Stream.of(
-            Block.makeCuboidShape(2, 0, 12, 4, 1, 14),
-            Block.makeCuboidShape(12, 0, 12, 13, 1, 13),
-            Block.makeCuboidShape(8, 0, 2, 9, 1, 3),
-            Block.makeCuboidShape(1, 0, 2, 2, 1, 3),
-            Block.makeCuboidShape(4, 0, 5, 6, 1, 7),
-            Block.makeCuboidShape(3, 0, 8, 4, 1, 9),
-            Block.makeCuboidShape(6, 0, 11, 7, 1, 12),
-            Block.makeCuboidShape(9, 0, 14, 10, 1, 15),
-            Block.makeCuboidShape(9, 0, 8, 11, 1, 10),
-            Block.makeCuboidShape(11, 0, 4, 12, 1, 5),
-            Block.makeCuboidShape(13, 0, 1, 15, 1, 3),
-            Block.makeCuboidShape(14, 0, 10, 15, 1, 11),
-            Block.makeCuboidShape(13, 0, 6, 14, 1, 7)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(2, 0, 12, 4, 1, 14),
+            Block.box(12, 0, 12, 13, 1, 13),
+            Block.box(8, 0, 2, 9, 1, 3),
+            Block.box(1, 0, 2, 2, 1, 3),
+            Block.box(4, 0, 5, 6, 1, 7),
+            Block.box(3, 0, 8, 4, 1, 9),
+            Block.box(6, 0, 11, 7, 1, 12),
+            Block.box(9, 0, 14, 10, 1, 15),
+            Block.box(9, 0, 8, 11, 1, 10),
+            Block.box(11, 0, 4, 12, 1, 5),
+            Block.box(13, 0, 1, 15, 1, 3),
+            Block.box(14, 0, 10, 15, 1, 11),
+            Block.box(13, 0, 6, 14, 1, 7)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_S = Stream.of(
-            Block.makeCuboidShape(12, 0, 12, 14, 1, 14),
-            Block.makeCuboidShape(12, 0, 3, 13, 1, 4),
-            Block.makeCuboidShape(2, 0, 7, 3, 1, 8),
-            Block.makeCuboidShape(2, 0, 14, 3, 1, 15),
-            Block.makeCuboidShape(5, 0, 10, 7, 1, 12),
-            Block.makeCuboidShape(8, 0, 12, 9, 1, 13),
-            Block.makeCuboidShape(11, 0, 9, 12, 1, 10),
-            Block.makeCuboidShape(14, 0, 6, 15, 1, 7),
-            Block.makeCuboidShape(8, 0, 5, 10, 1, 7),
-            Block.makeCuboidShape(4, 0, 4, 5, 1, 5),
-            Block.makeCuboidShape(1, 0, 1, 3, 1, 3),
-            Block.makeCuboidShape(10, 0, 1, 11, 1, 2),
-            Block.makeCuboidShape(6, 0, 2, 7, 1, 3)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(12, 0, 12, 14, 1, 14),
+            Block.box(12, 0, 3, 13, 1, 4),
+            Block.box(2, 0, 7, 3, 1, 8),
+            Block.box(2, 0, 14, 3, 1, 15),
+            Block.box(5, 0, 10, 7, 1, 12),
+            Block.box(8, 0, 12, 9, 1, 13),
+            Block.box(11, 0, 9, 12, 1, 10),
+            Block.box(14, 0, 6, 15, 1, 7),
+            Block.box(8, 0, 5, 10, 1, 7),
+            Block.box(4, 0, 4, 5, 1, 5),
+            Block.box(1, 0, 1, 3, 1, 3),
+            Block.box(10, 0, 1, 11, 1, 2),
+            Block.box(6, 0, 2, 7, 1, 3)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_E = Stream.of(
-            Block.makeCuboidShape(12, 0, 2, 14, 1, 4),
-            Block.makeCuboidShape(3, 0, 3, 4, 1, 4),
-            Block.makeCuboidShape(7, 0, 13, 8, 1, 14),
-            Block.makeCuboidShape(14, 0, 13, 15, 1, 14),
-            Block.makeCuboidShape(10, 0, 9, 12, 1, 11),
-            Block.makeCuboidShape(12, 0, 7, 13, 1, 8),
-            Block.makeCuboidShape(9, 0, 4, 10, 1, 5),
-            Block.makeCuboidShape(6, 0, 1, 7, 1, 2),
-            Block.makeCuboidShape(5, 0, 6, 7, 1, 8),
-            Block.makeCuboidShape(4, 0, 11, 5, 1, 12),
-            Block.makeCuboidShape(1, 0, 13, 3, 1, 15),
-            Block.makeCuboidShape(1, 0, 5, 2, 1, 6),
-            Block.makeCuboidShape(2, 0, 9, 3, 1, 10)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(12, 0, 2, 14, 1, 4),
+            Block.box(3, 0, 3, 4, 1, 4),
+            Block.box(7, 0, 13, 8, 1, 14),
+            Block.box(14, 0, 13, 15, 1, 14),
+            Block.box(10, 0, 9, 12, 1, 11),
+            Block.box(12, 0, 7, 13, 1, 8),
+            Block.box(9, 0, 4, 10, 1, 5),
+            Block.box(6, 0, 1, 7, 1, 2),
+            Block.box(5, 0, 6, 7, 1, 8),
+            Block.box(4, 0, 11, 5, 1, 12),
+            Block.box(1, 0, 13, 3, 1, 15),
+            Block.box(1, 0, 5, 2, 1, 6),
+            Block.box(2, 0, 9, 3, 1, 10)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
 
     public GlowstoneDustBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     public static Direction getRandomDirection() {
@@ -106,7 +107,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch (state.get(FACING)) {
+        switch (state.getValue(FACING)) {
             case EAST:
                 return SHAPE_E;
             case SOUTH:
@@ -130,28 +131,32 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
         }
     }
 
+    public BlockState updateShape(BlockState state, Direction direction, BlockState newState, IWorld world, BlockPos oldPos, BlockPos newPos) {
+        return direction == Direction.DOWN && !this.canSurvive(state, world, oldPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, newState, world, oldPos, newPos);
+    }
+
     @Override
-    public boolean isValidPosition(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
-        return hasEnoughSolidSide(p_196260_2_, p_196260_3_.down(), Direction.UP);
+    public boolean canSurvive(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
+        return canSupportCenter(p_196260_2_, p_196260_3_.below(), Direction.UP);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.WATERLOGGED);
     }
 

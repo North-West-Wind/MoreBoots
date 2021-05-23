@@ -24,72 +24,72 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class RedstoneDustBlock extends Block implements IWaterLoggable {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
     private static final VoxelShape SHAPE_N = Stream.of(
-            Block.makeCuboidShape(2, 0, 2, 4, 1, 4),
-            Block.makeCuboidShape(3, 0, 12, 4, 1, 13),
-            Block.makeCuboidShape(13, 0, 8, 14, 1, 9),
-            Block.makeCuboidShape(13, 0, 1, 14, 1, 2),
-            Block.makeCuboidShape(9, 0, 4, 11, 1, 6),
-            Block.makeCuboidShape(7, 0, 3, 8, 1, 4),
-            Block.makeCuboidShape(4, 0, 6, 5, 1, 7),
-            Block.makeCuboidShape(1, 0, 9, 2, 1, 10),
-            Block.makeCuboidShape(6, 0, 9, 8, 1, 11),
-            Block.makeCuboidShape(11, 0, 11, 12, 1, 12),
-            Block.makeCuboidShape(13, 0, 13, 15, 1, 15),
-            Block.makeCuboidShape(5, 0, 14, 6, 1, 15),
-            Block.makeCuboidShape(9, 0, 13, 10, 1, 14)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(2, 0, 2, 4, 1, 4),
+            Block.box(3, 0, 12, 4, 1, 13),
+            Block.box(13, 0, 8, 14, 1, 9),
+            Block.box(13, 0, 1, 14, 1, 2),
+            Block.box(9, 0, 4, 11, 1, 6),
+            Block.box(7, 0, 3, 8, 1, 4),
+            Block.box(4, 0, 6, 5, 1, 7),
+            Block.box(1, 0, 9, 2, 1, 10),
+            Block.box(6, 0, 9, 8, 1, 11),
+            Block.box(11, 0, 11, 12, 1, 12),
+            Block.box(13, 0, 13, 15, 1, 15),
+            Block.box(5, 0, 14, 6, 1, 15),
+            Block.box(9, 0, 13, 10, 1, 14)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_W = Stream.of(
-            Block.makeCuboidShape(2, 0, 12, 4, 1, 14),
-            Block.makeCuboidShape(12, 0, 12, 13, 1, 13),
-            Block.makeCuboidShape(8, 0, 2, 9, 1, 3),
-            Block.makeCuboidShape(1, 0, 2, 2, 1, 3),
-            Block.makeCuboidShape(4, 0, 5, 6, 1, 7),
-            Block.makeCuboidShape(3, 0, 8, 4, 1, 9),
-            Block.makeCuboidShape(6, 0, 11, 7, 1, 12),
-            Block.makeCuboidShape(9, 0, 14, 10, 1, 15),
-            Block.makeCuboidShape(9, 0, 8, 11, 1, 10),
-            Block.makeCuboidShape(11, 0, 4, 12, 1, 5),
-            Block.makeCuboidShape(13, 0, 1, 15, 1, 3),
-            Block.makeCuboidShape(14, 0, 10, 15, 1, 11),
-            Block.makeCuboidShape(13, 0, 6, 14, 1, 7)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(2, 0, 12, 4, 1, 14),
+            Block.box(12, 0, 12, 13, 1, 13),
+            Block.box(8, 0, 2, 9, 1, 3),
+            Block.box(1, 0, 2, 2, 1, 3),
+            Block.box(4, 0, 5, 6, 1, 7),
+            Block.box(3, 0, 8, 4, 1, 9),
+            Block.box(6, 0, 11, 7, 1, 12),
+            Block.box(9, 0, 14, 10, 1, 15),
+            Block.box(9, 0, 8, 11, 1, 10),
+            Block.box(11, 0, 4, 12, 1, 5),
+            Block.box(13, 0, 1, 15, 1, 3),
+            Block.box(14, 0, 10, 15, 1, 11),
+            Block.box(13, 0, 6, 14, 1, 7)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_S = Stream.of(
-            Block.makeCuboidShape(12, 0, 12, 14, 1, 14),
-            Block.makeCuboidShape(12, 0, 3, 13, 1, 4),
-            Block.makeCuboidShape(2, 0, 7, 3, 1, 8),
-            Block.makeCuboidShape(2, 0, 14, 3, 1, 15),
-            Block.makeCuboidShape(5, 0, 10, 7, 1, 12),
-            Block.makeCuboidShape(8, 0, 12, 9, 1, 13),
-            Block.makeCuboidShape(11, 0, 9, 12, 1, 10),
-            Block.makeCuboidShape(14, 0, 6, 15, 1, 7),
-            Block.makeCuboidShape(8, 0, 5, 10, 1, 7),
-            Block.makeCuboidShape(4, 0, 4, 5, 1, 5),
-            Block.makeCuboidShape(1, 0, 1, 3, 1, 3),
-            Block.makeCuboidShape(10, 0, 1, 11, 1, 2),
-            Block.makeCuboidShape(6, 0, 2, 7, 1, 3)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(12, 0, 12, 14, 1, 14),
+            Block.box(12, 0, 3, 13, 1, 4),
+            Block.box(2, 0, 7, 3, 1, 8),
+            Block.box(2, 0, 14, 3, 1, 15),
+            Block.box(5, 0, 10, 7, 1, 12),
+            Block.box(8, 0, 12, 9, 1, 13),
+            Block.box(11, 0, 9, 12, 1, 10),
+            Block.box(14, 0, 6, 15, 1, 7),
+            Block.box(8, 0, 5, 10, 1, 7),
+            Block.box(4, 0, 4, 5, 1, 5),
+            Block.box(1, 0, 1, 3, 1, 3),
+            Block.box(10, 0, 1, 11, 1, 2),
+            Block.box(6, 0, 2, 7, 1, 3)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
     private static final VoxelShape SHAPE_E = Stream.of(
-            Block.makeCuboidShape(12, 0, 2, 14, 1, 4),
-            Block.makeCuboidShape(3, 0, 3, 4, 1, 4),
-            Block.makeCuboidShape(7, 0, 13, 8, 1, 14),
-            Block.makeCuboidShape(14, 0, 13, 15, 1, 14),
-            Block.makeCuboidShape(10, 0, 9, 12, 1, 11),
-            Block.makeCuboidShape(12, 0, 7, 13, 1, 8),
-            Block.makeCuboidShape(9, 0, 4, 10, 1, 5),
-            Block.makeCuboidShape(6, 0, 1, 7, 1, 2),
-            Block.makeCuboidShape(5, 0, 6, 7, 1, 8),
-            Block.makeCuboidShape(4, 0, 11, 5, 1, 12),
-            Block.makeCuboidShape(1, 0, 13, 3, 1, 15),
-            Block.makeCuboidShape(1, 0, 5, 2, 1, 6),
-            Block.makeCuboidShape(2, 0, 9, 3, 1, 10)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+            Block.box(12, 0, 2, 14, 1, 4),
+            Block.box(3, 0, 3, 4, 1, 4),
+            Block.box(7, 0, 13, 8, 1, 14),
+            Block.box(14, 0, 13, 15, 1, 14),
+            Block.box(10, 0, 9, 12, 1, 11),
+            Block.box(12, 0, 7, 13, 1, 8),
+            Block.box(9, 0, 4, 10, 1, 5),
+            Block.box(6, 0, 1, 7, 1, 2),
+            Block.box(5, 0, 6, 7, 1, 8),
+            Block.box(4, 0, 11, 5, 1, 12),
+            Block.box(1, 0, 13, 3, 1, 15),
+            Block.box(1, 0, 5, 2, 1, 6),
+            Block.box(2, 0, 9, 3, 1, 10)
+    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
 
     public RedstoneDustBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     public static Direction getRandomDirection() {
@@ -107,7 +107,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch (state.get(FACING)) {
+        switch (state.getValue(FACING)) {
             case EAST:
                 return SHAPE_E;
             case SOUTH:
@@ -132,27 +132,27 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public boolean isValidPosition(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
-        return hasEnoughSolidSide(p_196260_2_, p_196260_3_.down(), Direction.UP);
+    public boolean canSurvive(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
+        return canSupportCenter(p_196260_2_, p_196260_3_.below(), Direction.UP);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
@@ -162,39 +162,41 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
         return 15;
     }
 
     private void notifyWireNeighborsOfStateChange(World worldIn, BlockPos pos) {
-        if (worldIn.getBlockState(pos).isIn(this)) {
-            worldIn.notifyNeighborsOfStateChange(pos, this);
+        if (worldIn.getBlockState(pos).is(this)) {
+            worldIn.updateNeighborsAt(pos, this);
 
             for (Direction direction : Direction.values()) {
-                worldIn.notifyNeighborsOfStateChange(pos.offset(direction), this);
+                worldIn.updateNeighborsAt(pos.relative(direction), this);
             }
 
         }
     }
 
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-        if (!oldState.isIn(state.getBlock()) && !worldIn.isRemote) {
+    @Override
+    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (!oldState.is(state.getBlock()) && !worldIn.isClientSide) {
             this.func_235547_a_(worldIn, pos, state);
 
             for (Direction direction : Direction.Plane.VERTICAL) {
-                worldIn.notifyNeighborsOfStateChange(pos.offset(direction), this);
+                worldIn.updateNeighborsAt(pos.relative(direction), this);
             }
 
             this.func_235553_d_(worldIn, pos);
         }
     }
 
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!isMoving && !state.isIn(newState.getBlock())) {
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
-            if (!worldIn.isRemote) {
+    @Override
+    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!isMoving && !state.is(newState.getBlock())) {
+            super.onRemove(state, worldIn, pos, newState, isMoving);
+            if (!worldIn.isClientSide) {
                 for (Direction direction : Direction.values()) {
-                    worldIn.notifyNeighborsOfStateChange(pos.offset(direction), this);
+                    worldIn.updateNeighborsAt(pos.relative(direction), this);
                 }
 
                 this.func_235547_a_(worldIn, pos, state);
@@ -205,15 +207,15 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
 
     private void func_235553_d_(World p_235553_1_, BlockPos p_235553_2_) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            this.notifyWireNeighborsOfStateChange(p_235553_1_, p_235553_2_.offset(direction));
+            this.notifyWireNeighborsOfStateChange(p_235553_1_, p_235553_2_.relative(direction));
         }
 
         for (Direction direction1 : Direction.Plane.HORIZONTAL) {
-            BlockPos blockpos = p_235553_2_.offset(direction1);
-            if (p_235553_1_.getBlockState(blockpos).isNormalCube(p_235553_1_, blockpos)) {
-                this.notifyWireNeighborsOfStateChange(p_235553_1_, blockpos.up());
+            BlockPos blockpos = p_235553_2_.relative(direction1);
+            if (p_235553_1_.getBlockState(blockpos).isRedstoneConductor(p_235553_1_, blockpos)) {
+                this.notifyWireNeighborsOfStateChange(p_235553_1_, blockpos.above());
             } else {
-                this.notifyWireNeighborsOfStateChange(p_235553_1_, blockpos.down());
+                this.notifyWireNeighborsOfStateChange(p_235553_1_, blockpos.below());
             }
         }
 
@@ -224,15 +226,15 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
         set.add(p_235547_2_);
 
         for (Direction direction : Direction.values()) {
-            set.add(p_235547_2_.offset(direction));
+            set.add(p_235547_2_.relative(direction));
         }
         for (BlockPos blockpos : set) {
-            p_235547_1_.notifyNeighborsOfStateChange(blockpos, this);
+            p_235547_1_.updateNeighborsAt(blockpos, this);
         }
     }
 
     @Override
-    public boolean canProvidePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return true;
     }
 }

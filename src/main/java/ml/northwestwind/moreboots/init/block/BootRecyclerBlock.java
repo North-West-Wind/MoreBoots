@@ -30,18 +30,18 @@ public class BootRecyclerBlock extends Block {
     public static BooleanProperty POWERED = BooleanProperty.create("recycler_powered");
 
     public BootRecyclerBlock() {
-        super(Properties.create(Material.IRON).hardnessAndResistance(2, 2.4F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
+        super(Properties.of(Material.METAL).strength(2, 2.4F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) worldIn.getTileEntity(pos);
-        if (tileEntity == null || !(player.getHeldItem(handIn).getItem() instanceof ArmorItem) || !((ArmorItem) player.getHeldItem(handIn).getItem()).getEquipmentSlot().equals(EquipmentSlotType.FEET)) return ActionResultType.PASS;
-        IItemHandler itemHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getFace()).resolve().get();
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) worldIn.getBlockEntity(pos);
+        if (tileEntity == null || !(player.getItemInHand(handIn).getItem() instanceof ArmorItem) || !((ArmorItem) player.getItemInHand(handIn).getItem()).getSlot().equals(EquipmentSlotType.FEET)) return ActionResultType.PASS;
+        IItemHandler itemHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getDirection()).resolve().get();
         if (!itemHandler.getStackInSlot(0).isEmpty()) return ActionResultType.PASS;
-        if (!worldIn.isRemote) player.setHeldItem(handIn, itemHandler.insertItem(0, player.getHeldItem(handIn), false));
-        else player.playSound(SoundEvents.BLOCK_WOOL_PLACE, 1, 1);
-        tileEntity.markDirty();
+        if (!worldIn.isClientSide) player.setItemInHand(handIn, itemHandler.insertItem(0, player.getItemInHand(handIn), false));
+        else player.playSound(SoundEvents.WOOD_PLACE, 1, 1);
+        tileEntity.setChanged();
         return ActionResultType.SUCCESS;
     }
 
@@ -57,21 +57,21 @@ public class BootRecyclerBlock extends Block {
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
-        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) worldIn.getTileEntity(pos);
-        if (tileEntity != null) worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0)));
-        super.onBlockHarvested(worldIn, pos, state, player);
+    public void playerWillDestroy(World worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull PlayerEntity player) {
+        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) worldIn.getBlockEntity(pos);
+        if (tileEntity != null) worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0)));
+        super.playerWillDestroy(worldIn, pos, state, player);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) context.getWorld().getTileEntity(context.getPos());
-        if (tileEntity == null) return this.getDefaultState().with(POWERED, false);
-        return this.getDefaultState().with(POWERED, !tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0).isEmpty());
+        BootRecyclerTileEntity tileEntity = (BootRecyclerTileEntity) context.getLevel().getBlockEntity(context.getClickedPos());
+        if (tileEntity == null) return this.defaultBlockState().setValue(POWERED, false);
+        return this.defaultBlockState().setValue(POWERED, !tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0).isEmpty());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(POWERED);
     }
 }

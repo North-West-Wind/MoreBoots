@@ -15,22 +15,22 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.io.Serializable;
 import java.util.List;
 
-public class CPlayerKAPacket implements Serializable {
+public class CPlayerKAPacket implements IPacket {
     public void handle(final NetworkEvent.Context ctx) {
         if (!ctx.getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) return;
         ServerPlayerEntity player = ctx.getSender();
         if(player == null) return;
-        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
         if(!boots.getItem().equals(ItemInit.KA_BOOTS)) return;
-        BlockPos pos = new BlockPos(player.getPositionVec());
-        AxisAlignedBB area = new AxisAlignedBB(pos).grow(4);
-        List<Entity> collidedEntities = player.world.getEntitiesInAABBexcluding(player, area, EntityPredicates.NOT_SPECTATING);
+        BlockPos pos = new BlockPos(player.position());
+        AxisAlignedBB area = new AxisAlignedBB(pos).inflate(4);
+        List<Entity> collidedEntities = player.level.getEntities(player, area, EntityPredicates.NO_SPECTATORS);
         LivingEntity closest = null;
         for (Entity entity : collidedEntities) {
             if (!(entity instanceof LivingEntity)) continue;
-            if (closest == null || closest.getPositionVec().distanceTo(player.getPositionVec()) > entity.getPositionVec().distanceTo(player.getPositionVec())) closest = (LivingEntity) entity;
+            if (closest == null || closest.position().distanceTo(player.position()) > entity.position().distanceTo(player.position())) closest = (LivingEntity) entity;
         }
         if (closest == null) return;
-        player.attackTargetEntityWithCurrentItem(closest);
+        player.attack(closest);
     }
 }

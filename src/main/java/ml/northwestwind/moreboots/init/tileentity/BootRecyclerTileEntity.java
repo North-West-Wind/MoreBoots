@@ -38,15 +38,14 @@ public class BootRecyclerTileEntity extends TileEntity implements ITickableTileE
     public void tick() {
         energy = storage.getEnergyStored();
         if (!handler.getStackInSlot(0).isEmpty() && isItemFuel(handler.getStackInSlot(0))) {
-            if (world != null && !world.isRemote) world.setBlockState(pos, world.getBlockState(pos).with(BootRecyclerBlock.POWERED, true));
-            //else if (world != null) for (int i = 0; i < 100; i++) world.addParticle(RedstoneParticleData.REDSTONE_DUST, pos.getX() + rng.nextDouble(), pos.getY(), pos.getZ() + rng.nextDouble(), rng.nextDouble() - 0.5, rng.nextDouble(), rng.nextDouble() - 0.5);
+            if (level != null && !level.isClientSide) level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(BootRecyclerBlock.POWERED, true));
             cookTime++;
             energy += getFuelValue(handler.getStackInSlot(0)) / 100;
             if (cookTime == 1000) {
                 cookTime = 0;
                 handler.getStackInSlot(0).shrink(1);
             }
-        } else if (world != null && !world.isRemote) world.setBlockState(pos, world.getBlockState(pos).with(BootRecyclerBlock.POWERED, false));
+        } else if (level != null && !level.isClientSide) level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(BootRecyclerBlock.POWERED, false));
         storage.setEnergyStored(energy);
     }
 
@@ -57,21 +56,21 @@ public class BootRecyclerTileEntity extends TileEntity implements ITickableTileE
     private int getFuelValue(ItemStack stack) {
         Item item = stack.getItem();
         if (!(item instanceof ArmorItem)) return 0;
-        if (!((ArmorItem) item).getEquipmentSlot().equals(EquipmentSlotType.FEET)) return 0;
-        if (((ArmorItem) item).getArmorMaterial() instanceof ItemInit.ModArmorMaterial) {
-            int shouldGenerate = ((ItemInit.ModArmorMaterial) ((ArmorItem) item).getArmorMaterial()).getEnergy();
+        if (!((ArmorItem) item).getSlot().equals(EquipmentSlotType.FEET)) return 0;
+        if (((ArmorItem) item).getMaterial() instanceof ItemInit.ModArmorMaterial) {
+            int shouldGenerate = ((ItemInit.ModArmorMaterial) ((ArmorItem) item).getMaterial()).getEnergy();
             if (shouldGenerate > -1) return shouldGenerate;
         }
         return calculateFuelValue(stack);
     }
 
     private int calculateFuelValue(ItemStack stack) {
-        IArmorMaterial material = ((ArmorItem) stack.getItem()).getArmorMaterial();
-        int armor = material.getDamageReductionAmount(EquipmentSlotType.FEET);
+        IArmorMaterial material = ((ArmorItem) stack.getItem()).getMaterial();
+        int armor = material.getDefenseForSlot(EquipmentSlotType.FEET);
         float toughness = material.getToughness();
-        int enchantability = material.getEnchantability();
+        int enchantability = material.getEnchantmentValue();
         int enchantments = EnchantmentHelper.getEnchantments(stack).size();
-        int durability = material.getDurability(EquipmentSlotType.FEET);
+        int durability = material.getDurabilityForSlot(EquipmentSlotType.FEET);
 
         return (int) ((Math.pow(durability, 2) / 2.0 + Math.pow(armor + toughness, 4) + Math.pow(enchantability + enchantments, 4)));
     }
@@ -84,8 +83,9 @@ public class BootRecyclerTileEntity extends TileEntity implements ITickableTileE
         return super.getCapability(cap, side);
     }
 
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    @Override
+    public CompoundNBT save(CompoundNBT compound) {
+        super.save(compound);
         compound.put("Inventory", handler.getStackInSlot(0).serializeNBT());
         compound.putInt("GuiEnergy", energy);
         compound.putInt("CookTime", cookTime);
@@ -93,8 +93,8 @@ public class BootRecyclerTileEntity extends TileEntity implements ITickableTileE
         return compound;
     }
 
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
+    public void load(BlockState state, CompoundNBT compound) {
+        super.load(state, compound);
         handler.getStackInSlot(0).deserializeNBT(compound.getCompound("Inventory"));
         cookTime = compound.getInt("CookTime");
         energy = compound.getInt("GuiEnergy");

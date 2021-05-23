@@ -2,8 +2,11 @@ package ml.northwestwind.moreboots.handler;
 
 import ml.northwestwind.moreboots.handler.packet.*;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+
+import java.util.Optional;
 
 public class MoreBootsPacketHandler {
     private static final String PROTOCOL_VERSION = "1";
@@ -17,25 +20,19 @@ public class MoreBootsPacketHandler {
     public static int ID = 0;
 
     public static void registerPackets() {
-        INSTANCE.registerMessage(ID++, CPlayerEnderTeleportPacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (CPlayerEnderTeleportPacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
+        registerPacket(CPlayerEnderTeleportPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CPlayerSkatePacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CPlayerKAPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CPlayerMultiJumpPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(COpenStorageBootsPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CShootDragonBallPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CShootWitherSkullPacket.class, NetworkDirection.PLAY_TO_SERVER);
+    }
+
+    private static <P extends IPacket> void registerPacket(Class<P> clazz, NetworkDirection direction) {
+        INSTANCE.registerMessage(ID++, clazz, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.packetToBytes(packet)), packetBuffer -> Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
             ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
             ctx.get().setPacketHandled(true);
-        });
-        INSTANCE.registerMessage(ID++, CPlayerSkatePacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (CPlayerSkatePacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
-            ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
-            ctx.get().setPacketHandled(true);
-        });
-        INSTANCE.registerMessage(ID++, CPlayerKAPacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (CPlayerKAPacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
-            ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
-            ctx.get().setPacketHandled(true);
-        });
-        INSTANCE.registerMessage(ID++, CPlayerMultiJumpPacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (CPlayerMultiJumpPacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
-            ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
-            ctx.get().setPacketHandled(true);
-        });
-        INSTANCE.registerMessage(ID++, COpenStorageBootsPacket.class, (packet, packetBuffer) -> packetBuffer.writeByteArray(Utils.objToBytes(packet)), packetBuffer -> (COpenStorageBootsPacket) Utils.bytesToObj(packetBuffer.readByteArray()), (msg, ctx) -> {
-            ctx.get().enqueueWork(() -> msg.handle(ctx.get()));
-            ctx.get().setPacketHandled(true);
-        });
+        }, Optional.of(direction));
     }
 }

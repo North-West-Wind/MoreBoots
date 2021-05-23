@@ -20,7 +20,7 @@ public class GlassBootsBrewingRecipe implements IBrewingRecipe {
 
     @Override
     public boolean isIngredient(@Nonnull ItemStack ingredient) {
-        return PotionBrewing.isReagent(ingredient);
+        return PotionBrewing.isIngredient(ingredient);
     }
 
     @Nonnull
@@ -28,25 +28,26 @@ public class GlassBootsBrewingRecipe implements IBrewingRecipe {
     public ItemStack getOutput(@Nonnull ItemStack input, @Nonnull ItemStack ingredient) {
         if (ingredient.isEmpty() || !isIngredient(ingredient)) return ItemStack.EMPTY;
         CompoundNBT tag = input.getOrCreateTag();
-        Potion potion = PotionUtils.getPotionFromItem(input);
+        Potion potion = PotionUtils.getPotion(input);
         if (potion.equals(Potions.WATER)) {
             Potion pot = waterBrewing(ingredient);
             if (pot.equals(potion)) return ItemStack.EMPTY;
             tag.putString("Potion", pot.getRegistryName().toString());
         } else {
-            ItemStack bottle = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), potion);
-            ItemStack result = PotionBrewing.doReaction(bottle, ingredient);
-            Potion pot = PotionUtils.getPotionFromItem(result);
+            ItemStack bottle = PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
+            ItemStack result = PotionBrewing.mix(bottle, ingredient);
+            Potion pot = PotionUtils.getPotion(result);
             if (pot.equals(potion)) return ItemStack.EMPTY;
             tag.putString("Potion", pot.getRegistryName().toString());
         }
+        if (tag.contains("Duration") && ingredient.getItem().equals(Items.REDSTONE)) tag.putInt("Duration", 9600);
         input.setTag(tag);
         return input;
     }
 
     private static Potion waterBrewing(ItemStack ingredient) {
-        ItemStack waterBottle = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.WATER);
-        ItemStack result = PotionBrewing.doReaction(ingredient, waterBottle);
-        return PotionUtils.getPotionFromItem(result);
+        ItemStack waterBottle = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
+        ItemStack result = PotionBrewing.mix(ingredient, waterBottle);
+        return PotionUtils.getPotion(result);
     }
 }

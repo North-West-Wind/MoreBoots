@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D",
+    "#",
+    "D"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_boots"
+    },
+    "D": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "result": {
+    "item": "moreboots:ender_dragon_boots",
+    "count": 1
+  }
+}

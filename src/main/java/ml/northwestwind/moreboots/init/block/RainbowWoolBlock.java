@@ -1,5 +1,6 @@
 package ml.northwestwind.moreboots.init.block;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,18 +9,19 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RainbowWoolBlock extends Block {
-    private ArrayList<Item> dyes;
+    private static final ArrayList<Item> dyes = Lists.newArrayList();
 
-    public RainbowWoolBlock(Properties properties) {
-        super(properties);
-        dyes = new ArrayList<Item>();
+    static {
         dyes.add(Items.BLACK_DYE);
         dyes.add(Items.WHITE_DYE);
         dyes.add(Items.RED_DYE);
@@ -38,9 +40,16 @@ public class RainbowWoolBlock extends Block {
         dyes.add(Items.PURPLE_DYE);
     }
 
+    public RainbowWoolBlock(Properties properties) {
+        super(properties);
+    }
+
     @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        if(player.getHeldItemMainhand().getItem() instanceof DyeItem) player.replaceItemInInventory(EquipmentSlotType.MAINHAND.getIndex(), new ItemStack(dyes.get(new Random().nextInt(dyes.size()))));
-        super.onBlockClicked(state, worldIn, pos, player);
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+        if(player.getItemInHand(hand).getItem() instanceof DyeItem) {
+            if (!world.isClientSide) player.setItemInHand(hand, new ItemStack(dyes.get(new Random().nextInt(dyes.size()))));
+            return ActionResultType.SUCCESS;
+        }
+        return super.use(state, world, pos, player, hand, result);
     }
 }

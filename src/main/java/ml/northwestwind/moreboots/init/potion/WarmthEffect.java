@@ -15,16 +15,16 @@ public class WarmthEffect extends Effect {
     }
 
     @Override
-    public void performEffect(@Nonnull LivingEntity livingEntity, int amplifier) {
-        Vector3d pos = livingEntity.getPositionVec();
-        Biome biome = livingEntity.world.getBiome(new BlockPos(pos));
+    public void applyEffectTick(@Nonnull LivingEntity livingEntity, int amplifier) {
+        Vector3d pos = livingEntity.position();
+        Biome biome = livingEntity.level.getBiome(new BlockPos(pos));
         float temperature = biome.getTemperature(new BlockPos(pos));
-        if (temperature < 0.2) applyAttributesModifiersToEntity(livingEntity, livingEntity.func_233645_dx_(), 0);
-        else removeAttributesModifiersFromEntity(livingEntity, livingEntity.func_233645_dx_(), 0);
+        if (temperature < 0.2) addAttributeModifiers(livingEntity, livingEntity.getAttributes(), 0);
+        else removeAttributeModifiers(livingEntity, livingEntity.getAttributes(), 0);
     }
 
     @Override
-    public boolean isReady(int duration, int amplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return duration > 0;
     }
 }

@@ -12,19 +12,19 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.io.Serializable;
 
-public class CPlayerSkatePacket implements Serializable {
+public class CPlayerSkatePacket implements IPacket {
     public void handle(final NetworkEvent.Context ctx) {
         if (!ctx.getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) return;
         ServerPlayerEntity player = ctx.getSender();
         if(player == null) return;
-        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
+        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
         if(!boots.getItem().equals(ItemInit.SKATER)) return;
-        BlockPos pos = new BlockPos(player.getPositionVec());
-        Material material = player.world.getBlockState(pos.down()).getMaterial();
-        if (material.equals(Material.ICE) || material.equals(Material.PACKED_ICE)) {
-            Vector3d motion = player.getMotion();
-            Vector3d direction = player.getLookVec().scale(0.75);
-            player.setMotion(motion.mul(0, 1, 0).add(direction.getX(), 0, direction.getZ()));
+        BlockPos pos = new BlockPos(player.position());
+        Material material = player.level.getBlockState(pos.below()).getMaterial();
+        if (material.equals(Material.ICE) || material.equals(Material.ICE_SOLID)) {
+            Vector3d motion = player.getDeltaMovement();
+            Vector3d direction = player.getLookAngle().scale(0.75);
+            player.setDeltaMovement(motion.multiply(0, 1, 0).add(direction.x(), 0, direction.z()));
         }
     }
 }

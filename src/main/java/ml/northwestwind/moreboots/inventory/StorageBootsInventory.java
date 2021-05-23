@@ -1,5 +1,6 @@
 package ml.northwestwind.moreboots.inventory;
 
+import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -17,40 +18,26 @@ public class StorageBootsInventory extends Inventory
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player)
+    public boolean stillValid(PlayerEntity player)
     {
-        return !player.getItemStackFromSlot(EquipmentSlotType.FEET).isEmpty();
+        return player.getItemBySlot(EquipmentSlotType.FEET).getItem().equals(ItemInit.STORAGE_BOOTS);
     }
 
     @Override
-    public void openInventory(PlayerEntity player)
-    {
-        this.clear();
-        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
-        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS))
-        {
-            CompoundNBT compound = boots.getTag();
-            if(compound != null)
-            {
-                if(compound.contains("Items", Constants.NBT.TAG_LIST))
-                {
-                    loadAllItems(compound.getList("Items", Constants.NBT.TAG_COMPOUND), this);
-                }
-            }
+    public void startOpen(PlayerEntity player) {
+        this.clearContent();
+        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
+        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS)) {
+            CompoundNBT compound = boots.getOrCreateTag();
+            if(compound.contains("Items")) loadAllItems(compound.getList("Items", Constants.NBT.TAG_COMPOUND), this);
         }
     }
 
     @Override
-    public void closeInventory(PlayerEntity player)
-    {
-        ItemStack boots = player.getItemStackFromSlot(EquipmentSlotType.FEET);
-        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS))
-        {
-            CompoundNBT compound = boots.getTag();
-            if(compound == null)
-            {
-                compound = new CompoundNBT();
-            }
+    public void stopOpen(PlayerEntity player) {
+        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
+        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS)) {
+            CompoundNBT compound = boots.getOrCreateTag();
             ListNBT list = new ListNBT();
             saveAllItems(list, this);
             compound.put("Items", list);
@@ -60,27 +47,22 @@ public class StorageBootsInventory extends Inventory
 
     public static void loadAllItems(ListNBT list, Inventory inventory)
     {
-        for(int i = 0; i < list.size(); i++)
-        {
+        for(int i = 0; i < list.size(); i++) {
             CompoundNBT compound = list.getCompound(i);
-            int slot = compound.getByte("Slot") & 255;
-            if(slot < inventory.getSizeInventory())
-            {
-                inventory.setInventorySlotContents(slot, ItemStack.read(compound));
-            }
+            int slot = compound.getInt("Slot");
+            if(slot < inventory.getContainerSize()) inventory.setItem(slot, ItemStack.of(compound.getCompound("Item")));
         }
     }
 
     public static ListNBT saveAllItems(ListNBT list, Inventory inventory)
     {
-        for(int i = 0; i < inventory.getSizeInventory(); ++i)
-        {
-            ItemStack itemstack = inventory.getStackInSlot(i);
-            if(!itemstack.isEmpty())
-            {
-                CompoundNBT compound = new CompoundNBT();
-                compound.putByte("Slot", (byte) i);
-                itemstack.write(compound);
+        for(int i = 0; i < inventory.getContainerSize(); ++i) {
+            ItemStack itemstack = inventory.getItem(i);
+            if(!itemstack.isEmpty()) {
+                CompoundNBT compound = new CompoundNBT(), item = new CompoundNBT();
+                compound.putInt("Slot", i);
+                itemstack.save(item);
+                compound.put("Item", item);
                 list.add(compound);
             }
         }
