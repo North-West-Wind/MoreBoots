@@ -48,6 +48,8 @@
   "item.moreboots.loki_boots": "Loki Boots",
   "item.moreboots.magma_boots": "Magma Boots",
   "item.moreboots.ender_dragon_boots": "Ender Dragon Boots",
+  "item.moreboots.wither_boots": "Wither Boots",
+  "item.moreboots.machine_bow_boots": "Machine Bow Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -113,6 +115,8 @@
   "tooltip.moreboots.loki_boots": "\u00A77\u00A7oStand still for 10 seconds to become invisible",
   "tooltip.moreboots.magma_boots": "\u00A77\u00A7oSinks you to the bottom of the ocean",
   "tooltip.moreboots.ender_dragon_boots": "\u00A77\u00A7oShoots Ender Dragon fireballs",
+  "tooltip.moreboots.wither_boots": "\u00A77\u00A7oShoots Wither Skulls",
+  "tooltip.moreboots.machine_bow_boots": "\u00A77\u00A7oShoots tons of arrows",
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",

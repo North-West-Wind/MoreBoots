@@ -71,6 +71,7 @@ public class ItemInit {
     public static final Item MAGMA_BOOTS = new MagmaBootsItem();
     public static final Item ENDER_DRAGON_BOOTS = new EnderDragonBootsItem();
     public static final Item WITHER_BOOTS = new WitherBootsItem();
+    public static final Item MACHINE_BOW_BOOTS = new MachineBowBoots();
 
     public static final Item QUARTZ_INGOT = new TooltipItem("quartz_ingot");
     public static final Item METAL_MIX = new TooltipItem("metal_mix");
@@ -79,52 +80,55 @@ public class ItemInit {
 
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(SPIDER_BOOTS);
-        event.getRegistry().register(QUARTZ_BOOTS);
-        event.getRegistry().register(SOCKS_BOOTS);
-        event.getRegistry().register(RAINBOW_SOCKS_BOOTS);
-        event.getRegistry().register(MINER_BOOTS);
-        event.getRegistry().register(LAPIS_BOOTS);
-        event.getRegistry().register(GLOWSTONE_BOOTS);
-        event.getRegistry().register(WATER_BOOTS);
-        event.getRegistry().register(LAVA_BOOTS);
-        event.getRegistry().register(OBSIDIAN_BOOTS);
-        event.getRegistry().register(ICE_BOOTS);
-        event.getRegistry().register(VANISHING_BOOTS);
-        event.getRegistry().register(MILK_BOOTS);
-        event.getRegistry().register(REDSTONE_BOOTS);
-        event.getRegistry().register(PLUMBER_BOOTS);
-        event.getRegistry().register(METAL_BOOTS);
-        event.getRegistry().register(UPWARP_BOOTS);
-        event.getRegistry().register(DOWNWARP_BOOTS);
-        event.getRegistry().register(ENDER_BOOTS);
-        event.getRegistry().register(BONE_BOOTS);
-        event.getRegistry().register(MUSHROOM_BOOTS);
-        event.getRegistry().register(SLIME_BOOTS);
-        event.getRegistry().register(BLAZE_BOOTS);
-        event.getRegistry().register(CACTUS_BOOTS);
-        event.getRegistry().register(EXPLOSIVE_BOOTS);
-        event.getRegistry().register(WINDY_BOOTS);
-        event.getRegistry().register(SKATER);
-        event.getRegistry().register(PRISMARINE_BOOTS);
-        event.getRegistry().register(BAT_BOOTS);
-        event.getRegistry().register(KA_BOOTS);
-        event.getRegistry().register(GLASS_BOOTS);
-        event.getRegistry().register(GLASS_BOOTS_EMPTY);
-        event.getRegistry().register(FLOATIE_BOOTS);
-        event.getRegistry().register(STRIDER_BOOTS);
-        event.getRegistry().register(SANDALS);
-        event.getRegistry().register(MUSIC_BOOTS);
-        event.getRegistry().register(HOPPER_BOOTS);
-        event.getRegistry().register(LOKI_BOOTS);
-        event.getRegistry().register(STORAGE_BOOTS);
-        event.getRegistry().register(GLIDER);
-        event.getRegistry().register(SPONGE_BOOTS);
-        event.getRegistry().register(LAVA_SPONGE_BOOTS);
-        event.getRegistry().register(LIGHTNING_BOOTS);
-        event.getRegistry().register(MAGMA_BOOTS);
-        event.getRegistry().register(ENDER_DRAGON_BOOTS);
-        event.getRegistry().register(WITHER_BOOTS);
+        event.getRegistry().registerAll(
+                SPIDER_BOOTS,
+                QUARTZ_BOOTS,
+                SOCKS_BOOTS,
+                RAINBOW_SOCKS_BOOTS,
+                MINER_BOOTS,
+                LAPIS_BOOTS,
+                GLOWSTONE_BOOTS,
+                WATER_BOOTS,
+                LAVA_BOOTS,
+                OBSIDIAN_BOOTS,
+                ICE_BOOTS,
+                VANISHING_BOOTS,
+                MILK_BOOTS,
+                REDSTONE_BOOTS,
+                PLUMBER_BOOTS,
+                METAL_BOOTS,
+                UPWARP_BOOTS,
+                DOWNWARP_BOOTS,
+                ENDER_BOOTS,
+                BONE_BOOTS,
+                MUSHROOM_BOOTS,
+                SLIME_BOOTS,
+                BLAZE_BOOTS,
+                CACTUS_BOOTS,
+                EXPLOSIVE_BOOTS,
+                WINDY_BOOTS,
+                SKATER,
+                PRISMARINE_BOOTS,
+                BAT_BOOTS,
+                KA_BOOTS,
+                GLASS_BOOTS,
+                GLASS_BOOTS_EMPTY,
+                FLOATIE_BOOTS,
+                STRIDER_BOOTS,
+                SANDALS,
+                MUSIC_BOOTS,
+                HOPPER_BOOTS,
+                LOKI_BOOTS,
+                STORAGE_BOOTS,
+                GLIDER,
+                SPONGE_BOOTS,
+                LAVA_SPONGE_BOOTS,
+                LIGHTNING_BOOTS,
+                MAGMA_BOOTS,
+                ENDER_DRAGON_BOOTS,
+                WITHER_BOOTS,
+                MACHINE_BOW_BOOTS
+        );
 
         event.getRegistry().register(QUARTZ_INGOT);
         event.getRegistry().register(METAL_MIX);
@@ -209,7 +213,8 @@ public class ItemInit {
         LIGHTNING(Reference.MODID + ":lightning", 12, 4, 8, SoundEvents.LIGHTNING_BOLT_THUNDER, 0f, 0f, 120000, () -> Ingredient.EMPTY),
         MAGMA(Reference.MODID + ":magma", 16, 2, 8, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_INSIDE, 0f, 0f, 100000, () -> Ingredient.of(Items.MAGMA_CREAM)),
         DRAGON(Reference.MODID + ":ender_dragon", 40, 4, 20, SoundEvents.ENDER_DRAGON_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
-        WITHER(Reference.MODID + ":wither", 40, 5, 24, SoundEvents.WITHER_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY);
+        WITHER(Reference.MODID + ":wither", 40, 5, 24, SoundEvents.WITHER_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
+        MACHINE_BOW(Reference.MODID + ":machine_bow", 20, 1, 10, SoundEvents.ARROW_SHOOT, 0f, 0f, 90000, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
