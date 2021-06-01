@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    " B "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_boots"
+    },
+    "B": {
+      "item": "minecraft:bow"
+    }
+  },
+  "result": {
+    "item": "moreboots:machine_bow_boots",
+    "count": 1
+  }
+}

@@ -11,6 +11,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 public class LokiBootsItem extends BootsItem {
     public LokiBootsItem() {
@@ -42,6 +43,6 @@ public class LokiBootsItem extends BootsItem {
 
     @Override
     public void renderNameplate(RenderNameplateEvent event) {
-        event.setCanceled(true);
+        event.setResult(Event.Result.DENY);
     }
 }

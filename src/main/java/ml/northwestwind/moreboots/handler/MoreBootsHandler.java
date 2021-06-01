@@ -78,6 +78,9 @@ public class MoreBootsHandler {
     @SubscribeEvent
     public static void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) {
         ItemStack boots = event.getEntityLiving().getItemBySlot(EquipmentSlotType.FEET);
+        ItemStack to = event.getTo();
+        ItemStack from = event.getFrom();
+        if (from.getItem().equals(ItemInit.LOKI_BOOTS) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
         if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingEquipmentChange(event);
     }
 

@@ -2,15 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#",
-    "E"
+    "T"
   ],
   "key": {
     "#": {
       "item": "minecraft:netherite_boots"
     },
-    "E": {
-      "item": "minecraft:enchanted_book",
-      "nbt": "{StoredEnchantments:[{id:channeling,lvl:1}]}"
+    "T": {
+      "item": "minecraft:trident"
     }
   },
   "result": {

@@ -7,9 +7,11 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -37,12 +39,46 @@ public class MachineBowBoots extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
         CompoundNBT tag = boots.getOrCreateTag();
-        if (tag.getBoolean("Activated")) {
+        if (tag.getBoolean("Activated") && hasArrows(entity)) {
             ArrowEntity arrow = new ArrowEntity(entity.level, entity);
             arrow.shootFromRotation(entity, entity.xRot, entity.yRot, 0, 1, 1);
             entity.level.addFreshEntity(arrow);
             entity.level.playSound(null, entity.blockPosition(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1, 1);
             if (entity.getRandom().nextInt(100) == 0) boots.hurtAndBreak(1, entity, e -> e.playSound(SoundEvents.ITEM_BREAK, 1, 1));
         }
+    }
+
+    private boolean hasArrows(LivingEntity entity) {
+        if (!(entity instanceof PlayerEntity)) return true;
+        PlayerEntity player = (PlayerEntity) entity;
+        boolean shouldJump = player.isCreative();
+        if (!shouldJump) for (ItemStack stack : player.inventory.items) {
+            if (stack.getItem().equals(Items.ARROW)) {
+                int slot = player.inventory.findSlotMatchingItem(stack);
+                stack.shrink(1);
+                player.inventory.setItem(slot, stack);
+                shouldJump = true;
+                break;
+            }
+        }
+        if (!shouldJump) for (ItemStack stack : player.inventory.offhand) {
+            if (stack.getItem().equals(Items.ARROW)) {
+                int slot = player.inventory.findSlotMatchingItem(stack);
+                stack.shrink(1);
+                player.inventory.setItem(slot, stack);
+                shouldJump = true;
+                break;
+            }
+        }
+        if (!shouldJump) for (ItemStack stack : player.inventory.armor) {
+            if (stack.getItem().equals(Items.ARROW)) {
+                int slot = player.inventory.findSlotMatchingItem(stack);
+                stack.shrink(1);
+                player.inventory.setItem(slot, stack);
+                shouldJump = true;
+                break;
+            }
+        }
+        return shouldJump;
     }
 }
