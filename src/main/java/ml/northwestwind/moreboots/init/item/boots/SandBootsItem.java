@@ -7,20 +7,22 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SandBootsItem extends BootsItem {
     public SandBootsItem() {
         super(ItemInit.ModArmorMaterial.SAND, "sand_boots");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void onJump() {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
+        net.minecraft.client.entity.player.ClientPlayerEntity player = Minecraft.getInstance().player;
         if (player == null || player.isOnGround() || player.abilities.flying) return;
         BlockPos pos = player.blockPosition();
         if (pos.getY() > 255 || pos.getY() < 0) return;

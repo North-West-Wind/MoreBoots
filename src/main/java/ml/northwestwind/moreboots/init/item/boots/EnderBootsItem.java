@@ -5,22 +5,24 @@ import ml.northwestwind.moreboots.handler.packet.CPlayerEnderTeleportPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderBootsItem extends BootsItem {
     public EnderBootsItem() {
         super(ItemInit.ModArmorMaterial.ENDER, "ender_boots");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void activateBoots() {
         Minecraft minecraft = Minecraft.getInstance();
-        ClientPlayerEntity player = minecraft.player;
+        net.minecraft.client.entity.player.ClientPlayerEntity player = minecraft.player;
         if (player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
         Vector3d pos = player.position().add(player.getLookAngle().multiply(8, 8, 8));

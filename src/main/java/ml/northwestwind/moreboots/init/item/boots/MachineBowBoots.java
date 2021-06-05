@@ -5,7 +5,6 @@ import ml.northwestwind.moreboots.handler.packet.CActivateBootsPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -15,6 +14,8 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class MachineBowBoots extends BootsItem {
@@ -22,9 +23,10 @@ public class MachineBowBoots extends BootsItem {
         super(ItemInit.ModArmorMaterial.MACHINE_BOW, "machine_bow_boots");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void activateBoots() {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
+        net.minecraft.client.entity.player.ClientPlayerEntity player = Minecraft.getInstance().player;
         if (player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
         CompoundNBT tag = boots.getOrCreateTag();

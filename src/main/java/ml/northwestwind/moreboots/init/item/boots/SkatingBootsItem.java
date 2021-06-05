@@ -9,12 +9,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class SkatingBootsItem extends BootsItem {
     public SkatingBootsItem() {
         super(ItemInit.ModArmorMaterial.SKATER, "skating_boots");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void onShift() {
         PlayerEntity player = Minecraft.getInstance().player;

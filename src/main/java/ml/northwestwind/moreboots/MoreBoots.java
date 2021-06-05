@@ -14,6 +14,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -34,30 +36,8 @@ public class MoreBoots {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public MoreBoots() {
-        FMLJavaModLoadingContext.get().getModEventBus().register(this);
         Utils.initialize();
         INSTANCE = this;
-    }
-
-    @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {
-        MoreBootsPacketHandler.registerPackets();
-        BrewingRecipeRegistry.addRecipe(new GlassBootsBrewingRecipe());
-    }
-
-    @SubscribeEvent
-    public void clientSetup(final FMLClientSetupEvent event) {
-        KeybindInit.register();
-        ScreenManager.register(ContainerInit.STORAGE_BOOTS, StorageBootsScreen::new);
-    }
-
-    @SubscribeEvent
-    public void itemColors(final ColorHandlerEvent.Item event) {
-        event.getItemColors().register((stack, layer) -> {
-            if (layer == 0) return -1;
-            Potion potion = PotionUtils.getPotion(stack);
-            return PotionUtils.getColor(potion);
-        }, ItemInit.GLASS_BOOTS);
     }
 
     public static class MoreBootsItemGroup extends ItemGroup {

@@ -54,7 +54,6 @@ public class BootsItem extends ArmorItem {
 
     @OnlyIn(Dist.CLIENT)
     public void onPlaySound(final PlaySoundEvent event) { }
-    @OnlyIn(Dist.CLIENT)
     public void onPlayerLeftClick(final PlayerInteractEvent.LeftClickEmpty event) { }
     public void onLivingFall(final LivingFallEvent event) { }
     public void onLivingJump(final LivingEvent.LivingJumpEvent event) { }
@@ -63,10 +62,15 @@ public class BootsItem extends ArmorItem {
     public void onPlayerXpChange(final PlayerXpEvent.XpChange event) { }
     public void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) { }
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) { }
+    @OnlyIn(Dist.CLIENT)
     public void activateBoots() { }
+    @OnlyIn(Dist.CLIENT)
     public void onShift() { }
+    @OnlyIn(Dist.CLIENT)
     public void onJump() { }
+    @OnlyIn(Dist.CLIENT)
     public void preRenderLiving(final RenderLivingEvent.Pre<?, ?> event) { }
+    @OnlyIn(Dist.CLIENT)
     public void renderNameplate(final RenderNameplateEvent event) { }
 
     public void getCollisionShape(IBlockReader worldIn, BlockPos pos, ISelectionContext context, CallbackInfoReturnable<VoxelShape> cir) { }

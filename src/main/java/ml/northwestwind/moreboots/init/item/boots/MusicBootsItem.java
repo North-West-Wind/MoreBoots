@@ -6,10 +6,11 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 
 import java.util.List;
@@ -21,9 +22,10 @@ public class MusicBootsItem extends BootsItem {
         super(ItemInit.ModArmorMaterial.MUSIC, "music_boots");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void onPlaySound(PlaySoundEvent event) {
-        ClientPlayerEntity player = Minecraft.getInstance().player;
+        net.minecraft.client.entity.player.ClientPlayerEntity player = Minecraft.getInstance().player;
         if (player == null) return;
         ISound sound = event.getSound();
         event.setResultSound(new SimpleSound(INSTRUMENTS.get(player.getRandom().nextInt(INSTRUMENTS.size())), SoundCategory.RECORDS, 1, (float) Math.pow(2.0D, (double) (player.getRandom().nextInt(24) - 12) / 12.0D), sound.getX(), sound.getY(), sound.getZ()));
