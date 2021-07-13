@@ -10,8 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.io.Serializable;
-
 public class CPlayerMultiJumpPacket implements IPacket {
     public void handle(final NetworkEvent.Context ctx) {
         if (!ctx.getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) return;

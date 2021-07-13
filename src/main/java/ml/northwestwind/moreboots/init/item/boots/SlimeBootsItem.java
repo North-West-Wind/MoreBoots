@@ -1,6 +1,5 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
-import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.entity.LivingEntity;

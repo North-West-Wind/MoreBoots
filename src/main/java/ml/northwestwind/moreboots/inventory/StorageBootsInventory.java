@@ -1,6 +1,5 @@
 package ml.northwestwind.moreboots.inventory;
 
-import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;

@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class CPlayerKAPacket implements IPacket {

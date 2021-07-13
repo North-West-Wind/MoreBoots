@@ -2,11 +2,12 @@ package ml.northwestwind.moreboots.init;
 
 import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.init.item.TooltipItem;
-import ml.northwestwind.moreboots.init.item.boots.StorageBootsItem;
 import ml.northwestwind.moreboots.init.item.boots.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.LazyValue;

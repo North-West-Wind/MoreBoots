@@ -1,22 +1,16 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
-import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.container.StorageBootsContainer;
-import ml.northwestwind.moreboots.container.screen.StorageBootsScreen;
 import ml.northwestwind.moreboots.handler.MoreBootsPacketHandler;
 import ml.northwestwind.moreboots.handler.packet.COpenStorageBootsPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import ml.northwestwind.moreboots.inventory.StorageBootsInventory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.NetworkHooks;
 

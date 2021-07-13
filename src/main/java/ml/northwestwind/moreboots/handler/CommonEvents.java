@@ -10,7 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonEvents {
     @SubscribeEvent
-    public void setup(final FMLCommonSetupEvent event) {
+    public static void setup(final FMLCommonSetupEvent event) {
         MoreBootsPacketHandler.registerPackets();
         BrewingRecipeRegistry.addRecipe(new GlassBootsBrewingRecipe());
     }

@@ -2,7 +2,10 @@ package ml.northwestwind.moreboots.init;
 
 import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.Reference;
-import ml.northwestwind.moreboots.init.block.*;
+import ml.northwestwind.moreboots.init.block.BootRecyclerBlock;
+import ml.northwestwind.moreboots.init.block.GlowstoneDustBlock;
+import ml.northwestwind.moreboots.init.block.RainbowWoolBlock;
+import ml.northwestwind.moreboots.init.block.RedstoneDustBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
