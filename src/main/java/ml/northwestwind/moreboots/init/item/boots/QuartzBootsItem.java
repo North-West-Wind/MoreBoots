@@ -2,10 +2,10 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 public class QuartzBootsItem extends BootsItem {
@@ -17,7 +17,7 @@ public class QuartzBootsItem extends BootsItem {
     public void onLivingFall(final LivingFallEvent event) {
         LivingEntity entity = event.getEntityLiving();
         float distance = event.getDistance();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (entity.level.isClientSide) return;
         if (distance < 3.0f) return;
         boots.hurtAndBreak((int) (4 * distance), entity, playerEntity -> playerEntity.playSound(SoundEvents.ITEM_BREAK, 1.0f, 1.0f));

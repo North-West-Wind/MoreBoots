@@ -1,10 +1,10 @@
 package ml.northwestwind.moreboots.handler.packet;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 public class CActivateBootsPacket implements IPacket {
     private final boolean activate;
@@ -15,10 +15,10 @@ public class CActivateBootsPacket implements IPacket {
 
     @Override
     public void handle(NetworkEvent.Context ctx) {
-        ServerPlayerEntity player = ctx.getSender();
+        ServerPlayer player = ctx.getSender();
         if (player == null) return;
-        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
-        CompoundNBT tag = boots.getOrCreateTag();
+        ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+        CompoundTag tag = boots.getOrCreateTag();
         tag.putBoolean("Activated", activate);
         boots.setTag(tag);
     }

@@ -3,8 +3,8 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class MushroomBootsItem extends BootsItem {

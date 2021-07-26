@@ -1,6 +1,6 @@
 package ml.northwestwind.moreboots;
 
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 
 public class Reference {
     public static final String MODID = "moreboots";

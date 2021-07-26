@@ -5,9 +5,9 @@ import ml.northwestwind.moreboots.container.screen.StorageBootsScreen;
 import ml.northwestwind.moreboots.init.ContainerInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.KeybindInit;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +19,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
         KeybindInit.register();
-        ScreenManager.register(ContainerInit.STORAGE_BOOTS, StorageBootsScreen::new);
+        MenuScreens.register(ContainerInit.STORAGE_BOOTS, StorageBootsScreen::new);
     }
 
     @SubscribeEvent

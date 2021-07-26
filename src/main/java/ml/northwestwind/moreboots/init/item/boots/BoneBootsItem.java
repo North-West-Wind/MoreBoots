@@ -2,11 +2,11 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassPathBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.DirtPathBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.Iterator;
@@ -25,8 +25,8 @@ public class BoneBootsItem extends BootsItem {
         while (iterator.hasNext()) {
             BlockPos blockPos = iterator.next();
             BlockState state = entity.level.getBlockState(blockPos);
-            if (!(state.getBlock() instanceof GrassPathBlock))
-                state.randomTick((ServerWorld) entity.level, blockPos, entity.getRandom());
+            if (!(state.getBlock() instanceof DirtPathBlock))
+                state.randomTick((ServerLevel) entity.level, blockPos, entity.getRandom());
         }
     }
 }

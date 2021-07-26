@@ -2,24 +2,21 @@ package ml.northwestwind.moreboots.handler;
 
 import com.google.common.collect.Lists;
 import ml.northwestwind.moreboots.handler.packet.IPacket;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.potion.Effects;
-import net.minecraft.tags.ITag;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.Tuple;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BucketPickup;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.*;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -51,20 +48,20 @@ public class Utils {
             BlockPos blockPos = iterator.next();
             Block block = player.level.getBlockState(blockPos).getBlock();
             Fluid fluid = player.level.getFluidState(blockPos).getType();
-            if (!player.level.isEmptyBlock(blockPos) && !(fluid instanceof FlowingFluid) && !block.getCollisionShape(player.level.getBlockState(blockPos), player.level, blockPos, ISelectionContext.empty()).equals(VoxelShapes.empty()))
+            if (!player.level.isEmptyBlock(blockPos) && !(fluid instanceof FlowingFluid) && !block.getCollisionShape(player.level.getBlockState(blockPos), player.level, blockPos, CollisionContext.empty()).equals(Shapes.empty()))
                 return false;
         }
         return true;
     }
 
-    public static void changeGroundBlocks(LivingEntity living, World worldIn, BlockPos pos, int level, ArrayList<Block> target, ArrayList<Block> to) {
+    public static void changeGroundBlocks(LivingEntity living, Level worldIn, BlockPos pos, int level, ArrayList<Block> target, ArrayList<Block> to) {
         float f = (float) Math.min(16, 2 + level);
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
         for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
             if (blockpos.closerThan(living.position(), f)) {
                 blockpos$mutable.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                 BlockState blockstate1 = worldIn.getBlockState(blockpos$mutable);
-                if (blockstate1.isAir(worldIn, blockpos$mutable)) {
+                if (blockstate1.isAir()) {
                     BlockState blockstate2 = worldIn.getBlockState(blockpos);
                     boolean shouldChange = target.contains(blockstate2.getBlock());
                     if (shouldChange)
@@ -118,7 +115,7 @@ public class Utils {
         return (P) obj;
     }
 
-    public static boolean absorb(World worldIn, BlockPos pos, ITag.INamedTag<Fluid> tag) {
+    public static boolean absorb(Level worldIn, BlockPos pos, Tag.Named<Fluid> tag) {
         Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
         queue.add(new Tuple<>(pos, 0));
         int i = 0;
@@ -134,19 +131,19 @@ public class Utils {
                 FluidState fluidstate = worldIn.getFluidState(blockpos1);
                 Material material = blockstate.getMaterial();
                 if (fluidstate.is(tag)) {
-                    if (blockstate.getBlock() instanceof IBucketPickupHandler && ((IBucketPickupHandler)blockstate.getBlock()).takeLiquid(worldIn, blockpos1, blockstate) != Fluids.EMPTY) {
+                    if (blockstate.getBlock() instanceof BucketPickup && !((BucketPickup)blockstate.getBlock()).pickupBlock(worldIn, blockpos1, blockstate).isEmpty()) {
                         ++i;
                         if (j < 6) {
                             queue.add(new Tuple<>(blockpos1, j + 1));
                         }
-                    } else if (blockstate.getBlock() instanceof FlowingFluidBlock) {
+                    } else if (blockstate.getBlock() instanceof LiquidBlock) {
                         worldIn.setBlockAndUpdate(blockpos1, Blocks.AIR.defaultBlockState());
                         ++i;
                         if (j < 6) {
                             queue.add(new Tuple<>(blockpos1, j + 1));
                         }
                     } else if (material == Material.WATER_PLANT || material == Material.REPLACEABLE_WATER_PLANT) {
-                        TileEntity tileentity = blockstate.hasTileEntity() ? worldIn.getBlockEntity(blockpos1) : null;
+                        BlockEntity tileentity = worldIn.getBlockEntity(blockpos1);
                         Block.dropResources(blockstate, worldIn, blockpos1, tileentity);
                         worldIn.setBlockAndUpdate(blockpos1, Blocks.AIR.defaultBlockState());
                         ++i;
@@ -163,22 +160,5 @@ public class Utils {
         }
 
         return i > 0;
-    }
-
-    public static void jumpFromGround(LivingEntity entity) {
-        float factor = entity.level.getBlockState(entity.blockPosition()).getBlock().getJumpFactor();
-        float factor1 = entity.level.getBlockState(new BlockPos(entity.position().x, entity.getBoundingBox().minY - 0.5000001D, entity.position().z)).getBlock().getJumpFactor();
-        float f = 0.42f * ((double)factor == 1.0D ? factor1 : factor);
-        if (entity.hasEffect(Effects.JUMP)) f += 0.1F * (float)(entity.getEffect(Effects.JUMP).getAmplifier() + 1);
-
-        Vector3d vector3d = entity.getDeltaMovement();
-        entity.setDeltaMovement(vector3d.x, f, vector3d.z);
-        if (entity.isSprinting()) {
-            float f1 = entity.yRot * ((float)Math.PI / 180F);
-            entity.setDeltaMovement(entity.getDeltaMovement().add(-MathHelper.sin(f1) * 0.2F, 0.0D, MathHelper.cos(f1) * 0.2F));
-        }
-
-        entity.hasImpulse = true;
-        entity.setDeltaMovement(entity.getDeltaMovement().add(0, 1, 0));
     }
 }

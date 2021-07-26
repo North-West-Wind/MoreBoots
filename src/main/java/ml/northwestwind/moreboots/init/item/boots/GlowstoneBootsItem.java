@@ -4,13 +4,13 @@ import ml.northwestwind.moreboots.init.BlockInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class GlowstoneBootsItem extends BootsItem {
@@ -21,8 +21,8 @@ public class GlowstoneBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-        Vector3d pos = entity.position();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        Vec3 pos = entity.position();
         BlockPos blockPos = new BlockPos(pos);
         BlockPos under = blockPos.below();
         BlockState underneath = entity.level.getBlockState(under);

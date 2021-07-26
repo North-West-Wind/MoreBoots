@@ -1,18 +1,18 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.Explosion;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
@@ -35,9 +35,9 @@ public class RainbowSocksBootItem extends SocksBootsItem {
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntityLiving();
         if (entity.isCrouching()) return;
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-        Vector3d motion = entity.getDeltaMovement();
-        CompoundNBT tag = boots.getOrCreateTag();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        Vec3 motion = entity.getDeltaMovement();
+        CompoundTag tag = boots.getOrCreateTag();
         entity.setDeltaMovement(motion.add(0, 0.01 * tag.getLong("tickSneak"), 0));
         tag.putLong("tickSneak", 0);
         boots.setTag(tag);
@@ -47,22 +47,22 @@ public class RainbowSocksBootItem extends SocksBootsItem {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         if (entity.isCrouching() && entity.isOnGround()) {
-            ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-            CompoundNBT tag = boots.getOrCreateTag();
+            ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+            CompoundTag tag = boots.getOrCreateTag();
             long tickSneak = tag.getLong("tickSneak");
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             tickSneak += 1;
-            if (entity instanceof PlayerEntity && !entity.level.isClientSide)
-                ((PlayerEntity) entity).displayClientMessage(new TranslationTextComponent("message.moreboots.building_speed", tickSneak), true);
+            if (entity instanceof Player && !entity.level.isClientSide)
+                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.building_speed", tickSneak), true);
             if (tickSneak >= 864000 && !entity.isSpectator()) {
-                Vector3d pos = entity.position();
+                Vec3 pos = entity.position();
                 tag.putLong("tickSneak", 0);
                 boots.setDamageValue(boots.getMaxDamage());
-                entity.level.explode(entity, pos.x, entity.getY(-0.0625D), pos.z, 10.0F, Explosion.Mode.BREAK);
+                entity.level.explode(entity, pos.x, entity.getY(-0.0625D), pos.z, 10.0F, Explosion.BlockInteraction.BREAK);
                 entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * 864000, 0));
-                if (entity instanceof PlayerEntity && !entity.level.isClientSide) {
+                if (entity instanceof Player && !entity.level.isClientSide) {
                     MinecraftServer server = entity.level.getServer();
-                    ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) entity;
+                    ServerPlayer serverPlayerEntity = (ServerPlayer) entity;
                     serverPlayerEntity.getAdvancements().award(server.getAdvancements().getAdvancement(new ResourceLocation("moreboots", "moreboots/twelve_hours")), "twelve_hours");
                 }
             }

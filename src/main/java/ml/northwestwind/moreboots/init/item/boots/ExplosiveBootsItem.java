@@ -2,14 +2,14 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import java.util.List;
@@ -26,8 +26,8 @@ public class ExplosiveBootsItem extends BootsItem {
         if (!(event.getSource() instanceof EntityDamageSource) || !(attacker instanceof LivingEntity))
             event.setCanceled(true);
         else {
-            entity.level.explode(entity, entity.getX(), entity.getY(0.0625D), entity.getZ(), 4.0F, Explosion.Mode.BREAK);
-            List<Entity> collidedEntities = entity.level.getEntities(entity, new AxisAlignedBB(new BlockPos(entity.position())).inflate(3, 3, 3), EntityPredicates.NO_SPECTATORS);
+            entity.level.explode(entity, entity.getX(), entity.getY(0.0625D), entity.getZ(), 4.0F, Explosion.BlockInteraction.BREAK);
+            List<Entity> collidedEntities = entity.level.getEntities(entity, new AABB(new BlockPos(entity.position())).inflate(3, 3, 3), EntitySelector.NO_SPECTATORS);
             for (Entity collidedEntity : collidedEntities) {
                 if (!(collidedEntity instanceof LivingEntity)) continue;
                 collidedEntity.hurt(new DamageSource("explosion"), 40);

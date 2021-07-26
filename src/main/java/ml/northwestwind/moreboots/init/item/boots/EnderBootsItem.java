@@ -5,11 +5,12 @@ import ml.northwestwind.moreboots.handler.packet.CPlayerEnderTeleportPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -22,10 +23,10 @@ public class EnderBootsItem extends BootsItem {
     @Override
     public void activateBoots() {
         Minecraft minecraft = Minecraft.getInstance();
-        net.minecraft.client.entity.player.ClientPlayerEntity player = minecraft.player;
+        LocalPlayer player = minecraft.player;
         if (player == null) return;
-        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
-        Vector3d pos = player.position().add(player.getLookAngle().multiply(8, 8, 8));
+        ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+        Vec3 pos = player.position().add(player.getLookAngle().multiply(8, 8, 8));
         BlockPos blockPos = new BlockPos(pos);
         while (!player.level.isEmptyBlock(blockPos)) blockPos = blockPos.above();
         player.setPos(pos.x(), blockPos.getY() + pos.y() % 1, pos.z());

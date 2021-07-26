@@ -2,17 +2,17 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.LavaFluid;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.LavaFluid;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class WaterBootsItem extends BootsItem {
@@ -23,13 +23,13 @@ public class WaterBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-        Vector3d pos = entity.position();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        Vec3 pos = entity.position();
         BlockPos blockPos = new BlockPos(pos);
         BlockPos under = blockPos.below();
         FluidState underneath = entity.level.getFluidState(under);
         BlockState underneathBlock = entity.level.getBlockState(under);
-        if (underneath.getType() instanceof LavaFluid && !(underneathBlock.getBlock() instanceof IWaterLoggable)) {
+        if (underneath.getType() instanceof LavaFluid && !(underneathBlock.getBlock() instanceof SimpleWaterloggedBlock)) {
             LavaFluid lava = (LavaFluid) underneath.getType();
             if (lava.isSource(underneath)) entity.level.setBlockAndUpdate(under, Blocks.OBSIDIAN.defaultBlockState());
             else entity.level.setBlockAndUpdate(under, Blocks.COBBLESTONE.defaultBlockState());

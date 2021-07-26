@@ -7,12 +7,12 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import ml.northwestwind.moreboots.inventory.StorageBootsInventory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 public class StorageBootsItem extends BootsItem {
     private static final int rows = 6;
@@ -21,11 +21,11 @@ public class StorageBootsItem extends BootsItem {
         super(ItemInit.ModArmorMaterial.STORAGE, "storage_boots");
     }
 
-    public void showInventory(ServerPlayerEntity player) {
-        ItemStack backpack = player.getItemBySlot(EquipmentSlotType.FEET);
+    public void showInventory(ServerPlayer player) {
+        ItemStack backpack = player.getItemBySlot(EquipmentSlot.FEET);
         if (!backpack.isEmpty()) {
             int rows = this.getRows();
-            NetworkHooks.openGui(player, new SimpleNamedContainerProvider((id, playerInventory, entity) -> new StorageBootsContainer(id, player.inventory, new StorageBootsInventory(rows), rows), new TranslationTextComponent("container.moreboots.storage_boots")), buffer -> buffer.writeVarInt(rows));
+            NetworkHooks.openGui(player, new SimpleMenuProvider((id, playerInventory, entity) -> new StorageBootsContainer(id, player.getInventory(), new StorageBootsInventory(rows), rows), new TranslatableComponent("container.moreboots.storage_boots")), buffer -> buffer.writeVarInt(rows));
         }
     }
 

@@ -2,9 +2,9 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class MinerBootsItem extends BootsItem {
@@ -15,7 +15,7 @@ public class MinerBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        entity.addEffect(new EffectInstance(Effects.DIG_SPEED, 20, 1));
-        entity.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 20, 1));
+        entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 1));
+        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 1));
     }
 }

@@ -2,8 +2,8 @@ package ml.northwestwind.moreboots;
 
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.ItemInit;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,8 +20,8 @@ public class MoreBoots {
         INSTANCE = this;
     }
 
-    public static class MoreBootsItemGroup extends ItemGroup {
-        public static final ItemGroup INSTANCE = new MoreBootsItemGroup(ItemGroup.TABS.length, "morebootstab");
+    public static class MoreBootsItemGroup extends CreativeModeTab {
+        public static final CreativeModeTab INSTANCE = new MoreBootsItemGroup(CreativeModeTab.TABS.length, "morebootstab");
 
         private MoreBootsItemGroup(int index, String label) {
             super(index, label);

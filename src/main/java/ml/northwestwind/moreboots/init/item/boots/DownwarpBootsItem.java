@@ -2,9 +2,9 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class DownwarpBootsItem extends BootsItem {
@@ -17,10 +17,10 @@ public class DownwarpBootsItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         BlockPos pos = entity.blockPosition();
         if (!entity.isOnGround()) {
-            boolean isThisAirBlock = entity.level.isEmptyBlock(pos) || entity.level.getBlockState(pos).getCollisionShape(entity.level, pos).equals(VoxelShapes.empty());
+            boolean isThisAirBlock = entity.level.isEmptyBlock(pos) || entity.level.getBlockState(pos).getCollisionShape(entity.level, pos).equals(Shapes.empty());
             while (isThisAirBlock && pos.getY() > 0) {
                 pos = pos.below();
-                isThisAirBlock = entity.level.isEmptyBlock(pos) || entity.level.getBlockState(pos).getCollisionShape(entity.level, pos).equals(VoxelShapes.empty());
+                isThisAirBlock = entity.level.isEmptyBlock(pos) || entity.level.getBlockState(pos).getCollisionShape(entity.level, pos).equals(Shapes.empty());
             }
             if (pos.getY() <= 0 || entity.getY() - pos.above().getY() < 0.2) return;
             entity.fallDistance = 0;

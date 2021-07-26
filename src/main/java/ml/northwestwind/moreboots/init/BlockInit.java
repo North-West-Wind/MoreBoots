@@ -6,14 +6,14 @@ import ml.northwestwind.moreboots.init.block.BootRecyclerBlock;
 import ml.northwestwind.moreboots.init.block.GlowstoneDustBlock;
 import ml.northwestwind.moreboots.init.block.RainbowWoolBlock;
 import ml.northwestwind.moreboots.init.block.RedstoneDustBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,9 +27,9 @@ public class BlockInit {
     public static final Block RAINBOW_WOOL = new RainbowWoolBlock(Block.Properties.of(Material.WOOL).strength(10.0f, 3600000f).sound(SoundType.WOOL).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
     public static final Block GLOWSTONE_DUST = new GlowstoneDustBlock(Block.Properties.of(Material.AIR).noCollission().instabreak().strength(0.5f).lightLevel(value -> 15)).setRegistryName("glowstone_dust");
     public static final Block REDSTONE_DUST = new RedstoneDustBlock(Block.Properties.of(Material.AIR).noCollission().instabreak().strength(0.5f)).setRegistryName("redstone_dust");
-    public static final Block COBBLESTONE_8 = new Block(AbstractBlock.Properties.copy(Blocks.COBBLESTONE).strength(16.0f, 48.0f)).setRegistryName("cobblestone_8");
-    public static final Block COBBLESTONE_64 = new Block(AbstractBlock.Properties.copy(Blocks.COBBLESTONE).strength(128.0f, 384.0f)).setRegistryName("cobblestone_64");
-    public static final Block COBBLESTONE_512 = new Block(AbstractBlock.Properties.copy(Blocks.COBBLESTONE).strength(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
+    public static final Block COBBLESTONE_8 = new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(16.0f, 48.0f)).setRegistryName("cobblestone_8");
+    public static final Block COBBLESTONE_64 = new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(128.0f, 384.0f)).setRegistryName("cobblestone_64");
+    public static final Block COBBLESTONE_512 = new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(1024.0f, 3072.0f)).setRegistryName("cobblestone_512");
     public static final Block BOOT_RECYCLER = new BootRecyclerBlock().setRegistryName("boot_recycler");
 
     @SubscribeEvent
@@ -49,7 +49,7 @@ public class BlockInit {
         event.getRegistry().register(new BlockItem(COBBLESTONE_8, new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_8"));
         event.getRegistry().register(new BlockItem(COBBLESTONE_64, new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_64"));
         event.getRegistry().register(new BlockItem(COBBLESTONE_512, new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("cobblestone_512"));
-        event.getRegistry().register(new BlockItem(GLOWSTONE_DUST, new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_MATERIALS)).setRegistryName("minecraft", "glowstone_dust"));
+        event.getRegistry().register(new BlockItem(GLOWSTONE_DUST, new Item.Properties().stacksTo(64).tab(CreativeModeTab.TAB_MATERIALS)).setRegistryName("minecraft", "glowstone_dust"));
         event.getRegistry().register(new BlockItem(BOOT_RECYCLER, new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("boot_recycler"));
     }
 }

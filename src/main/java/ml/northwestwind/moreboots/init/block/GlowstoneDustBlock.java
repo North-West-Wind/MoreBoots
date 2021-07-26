@@ -1,29 +1,28 @@
 package ml.northwestwind.moreboots.init.block;
 
-import net.minecraft.block.*;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class GlowstoneDustBlock extends Block implements IWaterLoggable {
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+public class GlowstoneDustBlock extends Block implements SimpleWaterloggedBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.box(2, 0, 2, 4, 1, 4),
@@ -39,7 +38,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(13, 0, 13, 15, 1, 15),
             Block.box(5, 0, 14, 6, 1, 15),
             Block.box(9, 0, 13, 10, 1, 14)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_W = Stream.of(
             Block.box(2, 0, 12, 4, 1, 14),
             Block.box(12, 0, 12, 13, 1, 13),
@@ -54,7 +53,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(13, 0, 1, 15, 1, 3),
             Block.box(14, 0, 10, 15, 1, 11),
             Block.box(13, 0, 6, 14, 1, 7)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_S = Stream.of(
             Block.box(12, 0, 12, 14, 1, 14),
             Block.box(12, 0, 3, 13, 1, 4),
@@ -69,7 +68,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(1, 0, 1, 3, 1, 3),
             Block.box(10, 0, 1, 11, 1, 2),
             Block.box(6, 0, 2, 7, 1, 3)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_E = Stream.of(
             Block.box(12, 0, 2, 14, 1, 4),
             Block.box(3, 0, 3, 4, 1, 4),
@@ -84,7 +83,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(1, 0, 13, 3, 1, 15),
             Block.box(1, 0, 5, 2, 1, 6),
             Block.box(2, 0, 9, 3, 1, 10)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public GlowstoneDustBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
@@ -105,7 +104,8 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
         }
     }
 
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)) {
             case EAST:
                 return SHAPE_E;
@@ -130,17 +130,18 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
         }
     }
 
-    public BlockState updateShape(BlockState state, Direction direction, BlockState newState, IWorld world, BlockPos oldPos, BlockPos newPos) {
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState newState, LevelAccessor world, BlockPos oldPos, BlockPos newPos) {
         return direction == Direction.DOWN && !this.canSurvive(state, world, oldPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, newState, world, oldPos, newPos);
     }
 
     @Override
-    public boolean canSurvive(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
-        return canSupportCenter(p_196260_2_, p_196260_3_.below(), Direction.UP);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSupportCenter(level, pos.below(), Direction.UP);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
@@ -155,7 +156,7 @@ public class GlowstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, BlockStateProperties.WATERLOGGED);
     }
 

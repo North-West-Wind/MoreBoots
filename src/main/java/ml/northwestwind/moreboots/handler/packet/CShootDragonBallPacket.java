@@ -1,21 +1,21 @@
 package ml.northwestwind.moreboots.handler.packet;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.DragonFireballEntity;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.projectile.DragonFireball;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 public class CShootDragonBallPacket implements IPacket {
     @Override
     public void handle(NetworkEvent.Context ctx) {
-        ServerPlayerEntity player = ctx.getSender();
+        ServerPlayer player = ctx.getSender();
         if (player == null) return;
-        Vector3d position = player.getEyePosition(1f).add(player.getLookAngle().normalize());
-        DragonFireballEntity dragonBall = new DragonFireballEntity(player.level, player, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
+        Vec3 position = player.getEyePosition(1f).add(player.getLookAngle().normalize());
+        DragonFireball dragonBall = new DragonFireball(player.level, player, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z);
         dragonBall.setPos(position.x, position.y, position.z);
         player.level.addFreshEntity(dragonBall);
-        player.level.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_SHOOT, SoundCategory.PLAYERS, 1, 1);
+        player.level.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_SHOOT, SoundSource.PLAYERS, 1, 1);
     }
 }

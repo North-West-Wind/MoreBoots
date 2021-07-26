@@ -3,26 +3,26 @@ package ml.northwestwind.moreboots.container;
 import ml.northwestwind.moreboots.init.ContainerInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.inventory.StorageBootsInventory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 
-public class StorageBootsContainer extends Container {
-    private final IInventory storage;
+public class StorageBootsContainer extends ChestMenu {
+    private final Container storage;
     private final int containerRows;
 
-    public StorageBootsContainer(int id, PlayerInventory playerInventory, int containerRows) {
+    public StorageBootsContainer(int id, Inventory playerInventory, int containerRows) {
         this(id, playerInventory, new StorageBootsInventory(containerRows), containerRows);
     }
 
-    public StorageBootsContainer(int id, PlayerInventory playerInventory, IInventory storage, int containerRows) {
-        super(ContainerInit.STORAGE_BOOTS, id);
+    public StorageBootsContainer(int id, Inventory playerInventory, Container storage, int containerRows) {
+        super(ContainerInit.STORAGE_BOOTS, id, playerInventory, storage, containerRows);
         checkContainerSize(storage, containerRows * 9);
         this.storage = storage;
         this.containerRows = containerRows;
@@ -35,12 +35,12 @@ public class StorageBootsContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        return this.storage.stillValid(playerIn) && playerIn.getItemBySlot(EquipmentSlotType.FEET).getItem().equals(ItemInit.STORAGE_BOOTS);
+    public boolean stillValid(Player playerIn) {
+        return this.storage.stillValid(playerIn) && playerIn.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.STORAGE_BOOTS);
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity p_82846_1_, int p_82846_2_) {
+    public ItemStack quickMoveStack(Player p_82846_1_, int p_82846_2_) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(p_82846_2_);
         if (slot != null && slot.hasItem()) {
@@ -65,10 +65,10 @@ public class StorageBootsContainer extends Container {
     }
 
     @Override
-    public void removed(PlayerEntity playerIn) {
+    public void removed(Player playerIn) {
         super.removed(playerIn);
         this.storage.stopOpen(playerIn);
-        playerIn.level.playSound(null, playerIn.blockPosition(), SoundEvents.CHEST_CLOSE, SoundCategory.PLAYERS, 0.75f, 1f);
+        playerIn.level.playSound(null, playerIn.blockPosition(), SoundEvents.CHEST_CLOSE, SoundSource.PLAYERS, 0.75f, 1f);
     }
 
     public int getContainerRows() {

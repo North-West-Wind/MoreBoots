@@ -2,18 +2,17 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
@@ -24,18 +23,18 @@ public class EmptyGlassBootsItem extends BootsItem {
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> use(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        BlockRayTraceResult blockRayTraceResult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
-        if (!blockRayTraceResult.getType().equals(RayTraceResult.Type.BLOCK)) return ActionResult.pass(stack);
+        BlockHitResult blockRayTraceResult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.ANY);
+        if (!blockRayTraceResult.getType().equals(BlockHitResult.Type.BLOCK)) return InteractionResultHolder.pass(stack);
         BlockPos pos = blockRayTraceResult.getBlockPos();
-        if (!worldIn.mayInteract(playerIn, pos)) return ActionResult.pass(stack);
+        if (!worldIn.mayInteract(playerIn, pos)) return InteractionResultHolder.pass(stack);
         if (worldIn.getFluidState(pos).is(FluidTags.WATER)) {
             ItemStack newStack = new ItemStack(ItemInit.GLASS_BOOTS, 1);
             PotionUtils.setPotion(newStack, Potions.WATER);
             playerIn.setItemInHand(handIn, newStack);
-            return ActionResult.consume(newStack);
+            return InteractionResultHolder.consume(newStack);
         }
-        return ActionResult.pass(stack);
+        return InteractionResultHolder.pass(stack);
     }
 }

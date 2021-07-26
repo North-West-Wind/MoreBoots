@@ -1,6 +1,6 @@
 package ml.northwestwind.moreboots.handler.packet;
 
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.io.Serializable;
 

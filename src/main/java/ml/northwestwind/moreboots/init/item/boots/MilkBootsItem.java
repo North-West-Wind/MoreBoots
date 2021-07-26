@@ -2,8 +2,8 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.Collection;
@@ -16,8 +16,8 @@ public class MilkBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        Collection<EffectInstance> potions = entity.getActiveEffects();
-        for (EffectInstance effect : potions)
+        Collection<MobEffectInstance> potions = entity.getActiveEffects();
+        for (MobEffectInstance effect : potions)
             if (!effect.getEffect().isBeneficial()) {
                 entity.removeEffect(effect.getEffect());
                 break;

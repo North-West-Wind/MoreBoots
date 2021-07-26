@@ -1,14 +1,14 @@
 package ml.northwestwind.moreboots.init.brewing;
 
 import ml.northwestwind.moreboots.init.ItemInit;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionBrewing;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
 
 import javax.annotation.Nonnull;
@@ -30,7 +30,7 @@ public class GlassBootsBrewingRecipe implements IBrewingRecipe {
     @Override
     public ItemStack getOutput(@Nonnull ItemStack input, @Nonnull ItemStack ingredient) {
         if (ingredient.isEmpty() || !isIngredient(ingredient)) return ItemStack.EMPTY;
-        CompoundNBT tag = input.getOrCreateTag();
+        CompoundTag tag = input.getOrCreateTag();
         Potion potion = PotionUtils.getPotion(input);
         if (potion.equals(Potions.WATER)) {
             Potion pot = waterBrewing(ingredient);

@@ -3,16 +3,16 @@ package ml.northwestwind.moreboots.init;
 import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.init.item.TooltipItem;
 import ml.northwestwind.moreboots.init.item.boots.*;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.LazyValue;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -137,7 +137,7 @@ public class ItemInit {
         event.getRegistry().register(STRIDER_FOOT);
     }
 
-    public enum ModArmorMaterial implements IArmorMaterial {
+    public enum ModArmorMaterial implements ArmorMaterial {
         SPIDER(Reference.MODID + ":spider", 12, 1, 10, SoundEvents.SPIDER_AMBIENT, 1.0F, 0.0F, 10000, () -> {
             return Ingredient.of(Items.COBWEB);
         }),
@@ -224,7 +224,7 @@ public class ItemInit {
         private final SoundEvent soundEvent;
         private final float toughness;
         private final float knockbackResistance;
-        private final LazyValue<Ingredient> repairMaterial;
+        private final LazyLoadedValue<Ingredient> repairMaterial;
         private final int energy;
         ModArmorMaterial(String name, float maxDmg, int dmgRed,
                          int enchant, SoundEvent sound, float tough, float kbRes, int energy,
@@ -235,7 +235,7 @@ public class ItemInit {
             this.enchantability = enchant;
             this.soundEvent = sound;
             this.toughness = tough;
-            this.repairMaterial = new LazyValue<>(repairMat);
+            this.repairMaterial = new LazyLoadedValue<>(repairMat);
             this.knockbackResistance = kbRes;
             this.energy = energy;
         }
@@ -245,11 +245,11 @@ public class ItemInit {
             this(name, maxDmg, dmgRed, enchant, sound, tough, kbRes, -1, repairMat);
         }
         @Override
-        public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+        public int getDurabilityForSlot(EquipmentSlot slotIn) {
             return (int) (MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.maxDamageFactor);
         }
         @Override
-        public int getDefenseForSlot(EquipmentSlotType slotIn) {
+        public int getDefenseForSlot(EquipmentSlot slotIn) {
             return this.damageReductionAmountArray[slotIn.getIndex()];
         }
         @Override

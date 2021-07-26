@@ -3,11 +3,11 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class SpiderBootsItem extends BootsItem {
@@ -18,9 +18,9 @@ public class SpiderBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         boolean climable = !Utils.isSurroundedByInvalidBlocks(entity) && !entity.isInLava() && !entity.isInWater() && !entity.isSpectator() && !entity.isOnGround();
-        Vector3d motion = entity.getDeltaMovement();
+        Vec3 motion = entity.getDeltaMovement();
         motion = motion.multiply(1, 0, 1);
         boolean ascending = entity.horizontalCollision;
         boolean descending = !ascending && entity.isCrouching();

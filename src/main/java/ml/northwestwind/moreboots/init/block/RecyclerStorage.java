@@ -1,6 +1,6 @@
 package ml.northwestwind.moreboots.init.block;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class RecyclerStorage extends EnergyStorage {
@@ -24,14 +24,14 @@ public class RecyclerStorage extends EnergyStorage {
         this.energy = energy;
     }
 
-    public void readFromNBT(CompoundNBT compound) {
+    public void readFromNBT(CompoundTag compound) {
         this.energy = compound.getInt("Energy");
         this.capacity = compound.getInt("Capacity");
         this.maxReceive = compound.getInt("MaxReceive");
         this.maxExtract = compound.getInt("MaxExtract");
     }
 
-    public void writeToNBT(CompoundNBT compound) {
+    public void writeToNBT(CompoundTag compound) {
         compound.putInt("Energy", this.energy);
         compound.putInt("Capacity", this.capacity);
         compound.putInt("MaxReceive", this.maxReceive);

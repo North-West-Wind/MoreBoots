@@ -4,11 +4,12 @@ import com.google.common.collect.Lists;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
@@ -25,9 +26,9 @@ public class MusicBootsItem extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void onPlaySound(PlaySoundEvent event) {
-        net.minecraft.client.entity.player.ClientPlayerEntity player = Minecraft.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        ISound sound = event.getSound();
-        event.setResultSound(new SimpleSound(INSTRUMENTS.get(player.getRandom().nextInt(INSTRUMENTS.size())), SoundCategory.RECORDS, 1, (float) Math.pow(2.0D, (double) (player.getRandom().nextInt(24) - 12) / 12.0D), sound.getX(), sound.getY(), sound.getZ()));
+        SoundInstance sound = event.getSound();
+        event.setResultSound(new SimpleSoundInstance(INSTRUMENTS.get(player.getRandom().nextInt(INSTRUMENTS.size())), SoundSource.RECORDS, 1, (float) Math.pow(2.0D, (double) (player.getRandom().nextInt(24) - 12) / 12.0D), sound.getX(), sound.getY(), sound.getZ()));
     }
 }

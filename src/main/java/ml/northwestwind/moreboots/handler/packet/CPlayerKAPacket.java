@@ -1,29 +1,29 @@
 package ml.northwestwind.moreboots.handler.packet;
 
 import ml.northwestwind.moreboots.init.ItemInit;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.List;
 
 public class CPlayerKAPacket implements IPacket {
     public void handle(final NetworkEvent.Context ctx) {
         if (!ctx.getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) return;
-        ServerPlayerEntity player = ctx.getSender();
+        ServerPlayer player = ctx.getSender();
         if(player == null) return;
-        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
+        ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
         if(!boots.getItem().equals(ItemInit.KA_BOOTS)) return;
         BlockPos pos = new BlockPos(player.position());
-        AxisAlignedBB area = new AxisAlignedBB(pos).inflate(4);
-        List<Entity> collidedEntities = player.level.getEntities(player, area, EntityPredicates.NO_SPECTATORS);
+        AABB area = new AABB(pos).inflate(4);
+        List<Entity> collidedEntities = player.level.getEntities(player, area, EntitySelector.NO_SPECTATORS);
         LivingEntity closest = null;
         for (Entity entity : collidedEntities) {
             if (!(entity instanceof LivingEntity)) continue;

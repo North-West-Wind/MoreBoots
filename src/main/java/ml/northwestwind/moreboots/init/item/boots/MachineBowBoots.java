@@ -5,15 +5,16 @@ import ml.northwestwind.moreboots.handler.packet.CActivateBootsPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -26,10 +27,10 @@ public class MachineBowBoots extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void activateBoots() {
-        net.minecraft.client.entity.player.ClientPlayerEntity player = Minecraft.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        ItemStack boots = player.getItemBySlot(EquipmentSlotType.FEET);
-        CompoundNBT tag = boots.getOrCreateTag();
+        ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+        CompoundTag tag = boots.getOrCreateTag();
         boolean newState = !tag.getBoolean("Activated");
         tag.putBoolean("Activated", newState);
         boots.setTag(tag);
@@ -39,44 +40,44 @@ public class MachineBowBoots extends BootsItem {
     @Override
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-        CompoundNBT tag = boots.getOrCreateTag();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        CompoundTag tag = boots.getOrCreateTag();
         if (tag.getBoolean("Activated") && hasArrows(entity)) {
-            ArrowEntity arrow = new ArrowEntity(entity.level, entity);
-            arrow.shootFromRotation(entity, entity.xRot, entity.yRot, 0, 1, 1);
+            Arrow arrow = new Arrow(entity.level, entity);
+            arrow.shootFromRotation(entity, entity.getXRot(), entity.getYRot(), 0, 1, 1);
             entity.level.addFreshEntity(arrow);
-            entity.level.playSound(null, entity.blockPosition(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1, 1);
+            entity.level.playSound(null, entity.blockPosition(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1, 1);
             if (entity.getRandom().nextInt(100) == 0) boots.hurtAndBreak(1, entity, e -> e.playSound(SoundEvents.ITEM_BREAK, 1, 1));
         }
     }
 
     private boolean hasArrows(LivingEntity entity) {
-        if (!(entity instanceof PlayerEntity)) return true;
-        PlayerEntity player = (PlayerEntity) entity;
+        if (!(entity instanceof Player)) return true;
+        Player player = (Player) entity;
         boolean shouldJump = player.isCreative();
-        if (!shouldJump) for (ItemStack stack : player.inventory.items) {
+        if (!shouldJump) for (ItemStack stack : player.getInventory().items) {
             if (stack.getItem().equals(Items.ARROW)) {
-                int slot = player.inventory.findSlotMatchingItem(stack);
+                int slot = player.getInventory().findSlotMatchingItem(stack);
                 stack.shrink(1);
-                player.inventory.setItem(slot, stack);
+                player.getInventory().setItem(slot, stack);
                 shouldJump = true;
                 break;
             }
         }
-        if (!shouldJump) for (ItemStack stack : player.inventory.offhand) {
+        if (!shouldJump) for (ItemStack stack : player.getInventory().offhand) {
             if (stack.getItem().equals(Items.ARROW)) {
-                int slot = player.inventory.findSlotMatchingItem(stack);
+                int slot = player.getInventory().findSlotMatchingItem(stack);
                 stack.shrink(1);
-                player.inventory.setItem(slot, stack);
+                player.getInventory().setItem(slot, stack);
                 shouldJump = true;
                 break;
             }
         }
-        if (!shouldJump) for (ItemStack stack : player.inventory.armor) {
+        if (!shouldJump) for (ItemStack stack : player.getInventory().armor) {
             if (stack.getItem().equals(Items.ARROW)) {
-                int slot = player.inventory.findSlotMatchingItem(stack);
+                int slot = player.getInventory().findSlotMatchingItem(stack);
                 stack.shrink(1);
-                player.inventory.setItem(slot, stack);
+                player.getInventory().setItem(slot, stack);
                 shouldJump = true;
                 break;
             }

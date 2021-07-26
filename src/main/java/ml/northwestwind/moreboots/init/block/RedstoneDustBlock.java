@@ -1,33 +1,29 @@
 package ml.northwestwind.moreboots.init.block;
 
 import com.google.common.collect.Sets;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class RedstoneDustBlock extends Block implements IWaterLoggable {
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+public class RedstoneDustBlock extends Block implements SimpleWaterloggedBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.box(2, 0, 2, 4, 1, 4),
@@ -43,7 +39,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(13, 0, 13, 15, 1, 15),
             Block.box(5, 0, 14, 6, 1, 15),
             Block.box(9, 0, 13, 10, 1, 14)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_W = Stream.of(
             Block.box(2, 0, 12, 4, 1, 14),
             Block.box(12, 0, 12, 13, 1, 13),
@@ -58,7 +54,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(13, 0, 1, 15, 1, 3),
             Block.box(14, 0, 10, 15, 1, 11),
             Block.box(13, 0, 6, 14, 1, 7)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_S = Stream.of(
             Block.box(12, 0, 12, 14, 1, 14),
             Block.box(12, 0, 3, 13, 1, 4),
@@ -73,7 +69,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(1, 0, 1, 3, 1, 3),
             Block.box(10, 0, 1, 11, 1, 2),
             Block.box(6, 0, 2, 7, 1, 3)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape SHAPE_E = Stream.of(
             Block.box(12, 0, 2, 14, 1, 4),
             Block.box(3, 0, 3, 4, 1, 4),
@@ -88,7 +84,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
             Block.box(1, 0, 13, 3, 1, 15),
             Block.box(1, 0, 5, 2, 1, 6),
             Block.box(2, 0, 9, 3, 1, 10)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public RedstoneDustBlock(Properties p_i48440_1_) {
         super(p_i48440_1_);
@@ -109,7 +105,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
         }
     }
 
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)) {
             case EAST:
                 return SHAPE_E;
@@ -135,12 +131,12 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public boolean canSurvive(BlockState p_196260_1_, IWorldReader p_196260_2_, BlockPos p_196260_3_) {
+    public boolean canSurvive(BlockState p_196260_1_, LevelReader p_196260_2_, BlockPos p_196260_3_) {
         return canSupportCenter(p_196260_2_, p_196260_3_.below(), Direction.UP);
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
@@ -155,7 +151,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
 
@@ -165,11 +161,11 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
         return 15;
     }
 
-    private void notifyWireNeighborsOfStateChange(World worldIn, BlockPos pos) {
+    private void notifyWireNeighborsOfStateChange(Level worldIn, BlockPos pos) {
         if (worldIn.getBlockState(pos).is(this)) {
             worldIn.updateNeighborsAt(pos, this);
 
@@ -181,7 +177,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+    public void onPlace(BlockState state, Level worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (!oldState.is(state.getBlock()) && !worldIn.isClientSide) {
             this.func_235547_a_(worldIn, pos, state);
 
@@ -194,7 +190,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!isMoving && !state.is(newState.getBlock())) {
             super.onRemove(state, worldIn, pos, newState, isMoving);
             if (!worldIn.isClientSide) {
@@ -208,7 +204,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
         }
     }
 
-    private void func_235553_d_(World p_235553_1_, BlockPos p_235553_2_) {
+    private void func_235553_d_(Level p_235553_1_, BlockPos p_235553_2_) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             this.notifyWireNeighborsOfStateChange(p_235553_1_, p_235553_2_.relative(direction));
         }
@@ -224,7 +220,7 @@ public class RedstoneDustBlock extends Block implements IWaterLoggable {
 
     }
 
-    private void func_235547_a_(World p_235547_1_, BlockPos p_235547_2_, BlockState p_235547_3_) {
+    private void func_235547_a_(Level p_235547_1_, BlockPos p_235547_2_, BlockState p_235547_3_) {
         Set<BlockPos> set = Sets.newHashSet();
         set.add(p_235547_2_);
 

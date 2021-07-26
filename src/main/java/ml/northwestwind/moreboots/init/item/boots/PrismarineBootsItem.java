@@ -2,11 +2,11 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class PrismarineBootsItem extends BootsItem {
@@ -18,9 +18,9 @@ public class PrismarineBootsItem extends BootsItem {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         if (!entity.isVisuallySwimming() || !entity.isInWater()) return;
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
-        Vector3d motion = entity.getDeltaMovement();
-        Vector3d direction = entity.getLookAngle().scale(0.15);
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        Vec3 motion = entity.getDeltaMovement();
+        Vec3 direction = entity.getLookAngle().scale(0.15);
         entity.setDeltaMovement(motion.multiply(1.01, 1, 1.01).add(direction));
         if (entity.getRandom().nextInt(100) == 0)
             boots.hurtAndBreak(1, entity, entity1 -> entity1.playSound(SoundEvents.ITEM_BREAK, 1, 1));

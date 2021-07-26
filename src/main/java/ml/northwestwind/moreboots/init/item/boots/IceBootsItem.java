@@ -2,12 +2,12 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.enchantment.FrostWalkerEnchantment;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class IceBootsItem extends BootsItem {
@@ -18,7 +18,7 @@ public class IceBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        ItemStack boots = entity.getItemBySlot(EquipmentSlotType.FEET);
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         FrostWalkerEnchantment.onEntityMoved(entity, entity.level, new BlockPos(entity.position()), 2);
         int num = entity.getRandom().nextInt(100);
         if (num == 0)
