@@ -2,10 +2,10 @@ package ml.northwestwind.moreboots.init.item;
 
 import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.Reference;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

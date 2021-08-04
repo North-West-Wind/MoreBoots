@@ -2,15 +2,15 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class ExplosiveBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingDamage(LivingDamageEvent event) {
+    public void onLivingHurt(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
         Entity attacker = event.getSource().getEntity();
         if (!(event.getSource() instanceof EntityDamageSource) || !(attacker instanceof LivingEntity))

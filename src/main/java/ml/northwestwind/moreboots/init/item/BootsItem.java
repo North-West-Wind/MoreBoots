@@ -2,24 +2,24 @@ package ml.northwestwind.moreboots.init.item;
 
 import ml.northwestwind.moreboots.MoreBoots;
 import ml.northwestwind.moreboots.Reference;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 
@@ -51,8 +51,8 @@ public class BootsItem extends ArmorItem {
     public void onPlayerLeftClick(final PlayerInteractEvent.LeftClickEmpty event) { }
     public void onLivingFall(final LivingFallEvent event) { }
     public void onLivingJump(final LivingEvent.LivingJumpEvent event) { }
-    public void onLivingDamage(final LivingDamageEvent event) { }
-    public void onLivingAttack(final LivingDamageEvent event) { }
+    public void onLivingHurt(final LivingHurtEvent event) { }
+    public void onLivingAttack(final LivingHurtEvent event) { }
     public void onPlayerXpChange(final PlayerXpEvent.XpChange event) { }
     public void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) { }
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) { }

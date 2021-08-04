@@ -2,11 +2,11 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class MetalBootsItem extends BootsItem {
     public MetalBootsItem() {
@@ -14,7 +14,7 @@ public class MetalBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingDamage(LivingDamageEvent event) {
+    public void onLivingHurt(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (entity.level.isClientSide) return;

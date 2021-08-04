@@ -5,9 +5,9 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -40,13 +40,13 @@ public class MoreBootsHandler {
     }
 
     @SubscribeEvent
-    public static void onLivingDamage(final LivingDamageEvent event) {
+    public static void onLivingHurt(final LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
         Entity attacker = event.getSource().getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         ItemStack atBoots;
         if (attacker instanceof LivingEntity && (atBoots = ((LivingEntity) attacker).getItemBySlot(EquipmentSlot.FEET)).getItem() instanceof BootsItem) ((BootsItem) atBoots.getItem()).onLivingAttack(event);
-        else if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingDamage(event);
+        else if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingHurt(event);
     }
 
     @SubscribeEvent

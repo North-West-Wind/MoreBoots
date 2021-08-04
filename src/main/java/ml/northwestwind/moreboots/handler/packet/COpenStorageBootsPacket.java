@@ -2,10 +2,10 @@ package ml.northwestwind.moreboots.handler.packet;
 
 import ml.northwestwind.moreboots.init.item.boots.StorageBootsItem;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 public class COpenStorageBootsPacket implements IPacket {

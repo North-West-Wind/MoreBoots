@@ -5,7 +5,7 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class LightningBootsItem extends BootsItem {
     public LightningBootsItem() {
@@ -13,7 +13,7 @@ public class LightningBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingDamage(LivingDamageEvent event) {
+    public void onLivingHurt(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
         LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level);
         lightning.setPos(entity.getX(), entity.getY(), entity.getZ());
@@ -21,7 +21,7 @@ public class LightningBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingAttack(LivingDamageEvent event) {
-        onLivingDamage(event);
+    public void onLivingAttack(LivingHurtEvent event) {
+        onLivingHurt(event);
     }
 }
