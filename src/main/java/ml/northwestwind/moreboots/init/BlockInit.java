@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +23,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(Reference.MODID)
 public class BlockInit {
 
-    public static final Block RAINBOW_WOOL = new RainbowWoolBlock(Block.Properties.of(Material.WOOL).strength(10.0f, 3600000f).sound(SoundType.WOOL).harvestTool(ToolType.get("shears"))).setRegistryName("rainbow_wool");
+    public static final Block RAINBOW_WOOL = new RainbowWoolBlock(Block.Properties.of(Material.WOOL).strength(10.0f, 3600000f).sound(SoundType.WOOL)).setRegistryName("rainbow_wool");
     public static final Block GLOWSTONE_DUST = new GlowstoneDustBlock(Block.Properties.of(Material.AIR).noCollission().instabreak().strength(0.5f).lightLevel(value -> 15)).setRegistryName("glowstone_dust");
     public static final Block REDSTONE_DUST = new RedstoneDustBlock(Block.Properties.of(Material.AIR).noCollission().instabreak().strength(0.5f)).setRegistryName("redstone_dust");
     public static final Block COBBLESTONE_8 = new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE).strength(16.0f, 48.0f)).setRegistryName("cobblestone_8");

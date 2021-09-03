@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 public class PlumberBootsItem extends BootsItem {
-    private static final Method jumpFromGround = ObfuscationReflectionHelper.findMethod(LivingEntity.class, "func_70664_aZ");
+    private static final Method jumpFromGround = ObfuscationReflectionHelper.findMethod(LivingEntity.class, "m_6135_");
 
     public PlumberBootsItem() {
         super(ItemInit.ModArmorMaterial.PLUMBER, "plumber_boots");

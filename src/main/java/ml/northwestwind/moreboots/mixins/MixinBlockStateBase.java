@@ -15,10 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BlockBehaviour.class)
-public class AbstractBlockState {
-
-    @Inject(at = @At("HEAD"), method = "", cancellable = true)
+@Mixin(BlockBehaviour.BlockStateBase.class)
+public class MixinBlockStateBase {
+    @Inject(at = @At("HEAD"), method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true)
     public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         if (!(context instanceof EntityCollisionContext)) return;
         EntityCollisionContext entCtx = (EntityCollisionContext) context;

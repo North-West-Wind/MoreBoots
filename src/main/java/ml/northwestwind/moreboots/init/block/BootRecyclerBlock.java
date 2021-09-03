@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -33,7 +32,7 @@ public class BootRecyclerBlock extends BaseEntityBlock {
     public static BooleanProperty POWERED = BooleanProperty.create("recycler_powered");
 
     public BootRecyclerBlock() {
-        super(Properties.of(Material.METAL).strength(2, 2.4F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
+        super(Properties.of(Material.METAL).strength(2, 2.4F).requiresCorrectToolForDrops());
     }
 
     @Override

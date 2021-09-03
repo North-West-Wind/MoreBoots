@@ -72,11 +72,21 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven { url = "https://repo.spongepowered.org/maven" }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.22'
-    annotationProcessor "org.spongepowered:mixin:0.8.2:processor"
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.53'
+    annotationProcessor "org.spongepowered:mixin:0.8.3:processor"
+    implementation name: "MixinBootstrap"
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
 
 jar {
