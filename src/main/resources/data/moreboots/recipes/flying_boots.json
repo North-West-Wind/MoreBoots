@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "F#F",
+    "EGE"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:floating_core"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "E": {
+      "item": "minecraft:elytra"
+    },
+    "G": {
+      "item": "moreboots:gliding_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:flying_boots",
+    "count": 1
+  }
+}

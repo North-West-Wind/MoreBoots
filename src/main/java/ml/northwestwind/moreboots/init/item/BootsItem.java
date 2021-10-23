@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BootsItem extends ArmorItem {
-    private final String registryName;
+    protected final String registryName;
 
     public BootsItem(ArmorMaterial material, String registryName, boolean isNetherite) {
         super(material, EquipmentSlot.FEET, isNetherite ? new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE).fireResistant() : new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE));

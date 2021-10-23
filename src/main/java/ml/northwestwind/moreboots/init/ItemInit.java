@@ -73,11 +73,14 @@ public class ItemInit {
     public static final Item ENDER_DRAGON_BOOTS = new EnderDragonBootsItem();
     public static final Item WITHER_BOOTS = new WitherBootsItem();
     public static final Item MACHINE_BOW_BOOTS = new MachineBowBoots();
+    public static final Item SLIPPERY_BOOTS = new SlipperyBootsItem();
+    public static final Item FLYING_BOOTS = new FlyingBootsItem();
 
     public static final Item QUARTZ_INGOT = new TooltipItem("quartz_ingot");
     public static final Item METAL_MIX = new TooltipItem("metal_mix");
     public static final Item BAT_HIDE = new TooltipItem("bat_hide");
     public static final Item STRIDER_FOOT = new TooltipItem("strider_foot");
+    public static final Item FLOATING_CORE = new TooltipItem("floating_core");
 
     @SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event) {
@@ -128,13 +131,18 @@ public class ItemInit {
                 MAGMA_BOOTS,
                 ENDER_DRAGON_BOOTS,
                 WITHER_BOOTS,
-                MACHINE_BOW_BOOTS
+                MACHINE_BOW_BOOTS,
+                SLIPPERY_BOOTS,
+                FLYING_BOOTS
         );
 
-        event.getRegistry().register(QUARTZ_INGOT);
-        event.getRegistry().register(METAL_MIX);
-        event.getRegistry().register(BAT_HIDE);
-        event.getRegistry().register(STRIDER_FOOT);
+        event.getRegistry().registerAll(
+                QUARTZ_INGOT,
+                METAL_MIX,
+                BAT_HIDE,
+                STRIDER_FOOT,
+                FLOATING_CORE
+        );
     }
 
     public enum ModArmorMaterial implements ArmorMaterial {
@@ -215,7 +223,9 @@ public class ItemInit {
         MAGMA(Reference.MODID + ":magma", 16, 2, 8, SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_INSIDE, 0f, 0f, 100000, () -> Ingredient.of(Items.MAGMA_CREAM)),
         DRAGON(Reference.MODID + ":ender_dragon", 40, 4, 20, SoundEvents.ENDER_DRAGON_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
         WITHER(Reference.MODID + ":wither", 40, 5, 24, SoundEvents.WITHER_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
-        MACHINE_BOW(Reference.MODID + ":machine_bow", 20, 1, 10, SoundEvents.ARROW_SHOOT, 0f, 0f, 90000, () -> Ingredient.EMPTY);
+        MACHINE_BOW(Reference.MODID + ":machine_bow", 20, 1, 10, SoundEvents.ARROW_SHOOT, 0f, 0f, 90000, () -> Ingredient.EMPTY),
+        SLIPPERY("slippery", 20, 1, 8, SoundEvents.GLASS_BREAK, 0f, 0f, 20000, () -> Ingredient.of(Items.BLUE_ICE)),
+        FLYING("flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

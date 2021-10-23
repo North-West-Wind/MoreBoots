@@ -3,12 +3,17 @@ package ml.northwestwind.moreboots.handler;
 import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
@@ -20,6 +25,7 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class MoreBootsHandler {
     private static final Random rng = new Random();
+    private static final ResourceLocation END_CITY_TREASURE_LOOT_TABLE = new ResourceLocation("chests/end_city_treasure");
 
     @SubscribeEvent
     public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
@@ -85,5 +91,14 @@ public class MoreBootsHandler {
             ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
             event.getDrops().add(item);
         }
+    }
+
+    @SubscribeEvent
+    public static void onLootTableLoad(final LootTableLoadEvent event) {
+        if (!END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) return;
+        event.getTable().addPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(0.01f))
+                .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE))
+                .build());
     }
 }

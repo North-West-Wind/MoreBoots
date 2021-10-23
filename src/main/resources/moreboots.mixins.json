@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "moreboots.refmap.json",
   "mixins": [
-    "MixinBlockStateBase"
+    "MixinBlockStateBase",
+    "MixinBoat",
+    "MixinLivingEntity"
   ],
   "minVersion": "0.8"
 }

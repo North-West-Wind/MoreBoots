@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#F#",
+    "FLF"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blue_ice"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "L": {
+      "item": "moreboots:ice_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:slippery_boots",
+    "count": 1
+  }
+}

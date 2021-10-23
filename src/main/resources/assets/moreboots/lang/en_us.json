@@ -50,11 +50,14 @@
   "item.moreboots.ender_dragon_boots": "Ender Dragon Boots",
   "item.moreboots.wither_boots": "Wither Boots",
   "item.moreboots.machine_bow_boots": "Machine Bow Boots",
+  "item.moreboots.slippery_boots": "Slippery Boots",
+  "item.moreboots.flying_boots": "Flying Boots",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
   "item.moreboots.bat_hide": "Bat Hide",
   "item.moreboots.strider_foot": "Strider Foot",
+  "item.moreboots.floating_core": "Floating Core",
 
   "block.moreboots.rainbow_wool": "Rainbow Wool",
   "block.moreboots.glowstone_dust": "Glowstone Dust Block",
@@ -117,6 +120,12 @@
   "tooltip.moreboots.ender_dragon_boots": "\u00A77\u00A7oShoots Ender Dragon fireballs",
   "tooltip.moreboots.wither_boots": "\u00A77\u00A7oShoots Wither Skulls",
   "tooltip.moreboots.machine_bow_boots": "\u00A77\u00A7oShoots tons of arrows",
+  "tooltip.moreboots.slippery_boots": "\u00A77\u00A7oSlides uncontrollably",
+  "tooltip.moreboots.flying_boots": "\u00A77\u00A7oFlies freely",
+
+  "credit.moreboots.slippery_boots": "\u00A77\u00A7oFrom yinzhi24 on GitHub",
+  "credit.moreboots.flying_boots": "\u00A77\u00A7oFrom yinzhi24 on GitHub",
+
   "itemGroup.morebootstab": "More Boots",
 
   "death.attack.stomp": "%1$s was stomped by %2$s",
@@ -218,11 +227,17 @@
   "advancements.moreboots.ender_dragon_boots.description": "Obtain the Ender Dragon Boots",
   "advancements.moreboots.wither_boots.title": "I Don't Have 3 Heads",
   "advancements.moreboots.wither_boots.description": "Obtain the Wither Boots",
-  "advancements.moreboots.machine_bow_boots.title": "Say Hello to My Little Friend",
+  "advancements.moreboots.machine_bow_boots.title": "Say Hello to My Lil' Friend",
   "advancements.moreboots.machine_bow_boots.description": "Obtain the Machine Bow Boots",
+  "advancements.moreboots.slippery_boots.title": "Why Do I Hear SM64 Music?",
+  "advancements.moreboots.slippery_boots.description": "Obtain the Slippery Boots",
+  "advancements.moreboots.flying_boots.title": "Vertical Displacement",
+  "advancements.moreboots.flying_boots.description": "Obtain the Flying Boots",
 
   "key.categories.moreboots": "More Boots",
   "key.moreboots.activate": "Activate Boots Ability",
 
-  "container.moreboots.storage_boots": "Storage Boots"
+  "container.moreboots.storage_boots": "Storage Boots",
+
+  "warning.moreboots.ender_boots": "Please avoid teleporting into solid blocks."
 }
