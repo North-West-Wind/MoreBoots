@@ -21,7 +21,7 @@ public class MixinBlockStateBase {
     public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         if (!(context instanceof EntityCollisionContext)) return;
         EntityCollisionContext entCtx = (EntityCollisionContext) context;
-        if (!entCtx.getEntity().isPresent() || !(entCtx.getEntity().get() instanceof LivingEntity entity)) return;
+        if (entCtx.getEntity() == null || !(entCtx.getEntity() instanceof LivingEntity entity)) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).getCollisionShape(worldIn, pos, context, cir);
     }

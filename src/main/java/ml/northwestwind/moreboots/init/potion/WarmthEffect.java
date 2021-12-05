@@ -18,8 +18,7 @@ public class WarmthEffect extends MobEffect {
     public void applyEffectTick(@Nonnull LivingEntity livingEntity, int amplifier) {
         Vec3 pos = livingEntity.position();
         Biome biome = livingEntity.level.getBiome(new BlockPos(pos));
-        float temperature = biome.getTemperature(new BlockPos(pos));
-        if (temperature < 0.2) addAttributeModifiers(livingEntity, livingEntity.getAttributes(), 0);
+        if (biome.coldEnoughToSnow(new BlockPos(pos))) addAttributeModifiers(livingEntity, livingEntity.getAttributes(), 0);
         else removeAttributeModifiers(livingEntity, livingEntity.getAttributes(), 0);
     }
 

@@ -224,8 +224,8 @@ public class ItemInit {
         DRAGON(Reference.MODID + ":ender_dragon", 40, 4, 20, SoundEvents.ENDER_DRAGON_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
         WITHER(Reference.MODID + ":wither", 40, 5, 24, SoundEvents.WITHER_AMBIENT, 1.0f, 1.0f, 240000, () -> Ingredient.EMPTY),
         MACHINE_BOW(Reference.MODID + ":machine_bow", 20, 1, 10, SoundEvents.ARROW_SHOOT, 0f, 0f, 90000, () -> Ingredient.EMPTY),
-        SLIPPERY("slippery", 20, 1, 8, SoundEvents.GLASS_BREAK, 0f, 0f, 20000, () -> Ingredient.of(Items.BLUE_ICE)),
-        FLYING("flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY);
+        SLIPPERY(Reference.MODID + ":slippery", 20, 1, 8, SoundEvents.GLASS_BREAK, 0f, 0f, 20000, () -> Ingredient.of(Items.BLUE_ICE)),
+        FLYING(Reference.MODID + ":flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

@@ -15,15 +15,15 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '2.1.0'
+version = '3.0.0'
 group = 'ml.northwestwind.moreboots'
 archivesBaseName = 'moreboots'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: 'official', version: '1.18'
     runs {
         client {
             workingDirectory project.file('run')
@@ -72,25 +72,22 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven { url = "https://repo.spongepowered.org/maven" }
-    maven {
+    //maven {
         // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    flatDir {
-        dirs 'libs'
-    }
+        //name = "Progwml6 maven"
+        //url = "https://dvs1.progwml6.com/files/maven/"
+    //}
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.84'
+    minecraft 'net.minecraftforge:forge:1.18-38.0.12'
     annotationProcessor "org.spongepowered:mixin:0.8.4:processor"
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    //runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
 
 jar {
     manifest {
-        classifier "1.17.x"
+        classifier "1.18.x"
         attributes([
                 "Specification-Title": "moreboots",
                 "Specification-Vendor": "morebootsforyou",

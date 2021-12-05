@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[38,)"
 license="MIT"
 issueTrackerURL="https://github.com/North-West-Wind/MoreBoots/issues"
 
 [[mods]]
 modId="moreboots"
-version="2.1.0"
+version="3.0.0"
 displayName="More Boots"
 updateJSONURL="https://github.com/North-West-Wind/MoreBoots/raw/main/update.json"
 displayURL="https://github.com/North-West-Wind/MoreBoots"
@@ -20,13 +20,13 @@ Oh, you love shoes? Name every boots in this mod.
 [[dependencies.moreboots]]
     modId="forge"
     mandatory=true
-    versionRange="[37,)"
+    versionRange="[38,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.moreboots]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.17.1,1.18)"
+    versionRange="[1.18,1.19)"
     ordering="NONE"
     side="BOTH"

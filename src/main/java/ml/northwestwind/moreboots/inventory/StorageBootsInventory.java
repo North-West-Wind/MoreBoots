@@ -9,7 +9,6 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.Constants;
 
 import java.util.List;
 
@@ -78,7 +77,7 @@ public class StorageBootsInventory implements Container {
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
         if(boots.getItem().equals(ItemInit.STORAGE_BOOTS)) {
             CompoundTag compound = boots.getOrCreateTag();
-            if(compound.contains("Items")) loadAllItems(compound.getList("Items", Constants.NBT.TAG_COMPOUND), this);
+            if(compound.contains("Items")) loadAllItems((ListTag) compound.get("Items"), this);
         }
     }
 
