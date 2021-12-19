@@ -30,6 +30,10 @@ If you want a pair of boots of your dream to appear in the mod, please let me kn
 
 You can help out by expanding a [wiki](https://moreboots.fandom.com) on Fandom, so it can be seen be many people!
 
+These updates are being planned:
+- Content Update 2 (Coming Soon!)
+- Heroic Update (Coming Soon!)
+
 ## Supports
 If you are looking for supports, you can join the [MoreBoots Discord](https://discord.gg/UFEMhuY9xT) kindly made by Zinaida.
 
