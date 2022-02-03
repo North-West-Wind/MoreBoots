@@ -5,6 +5,7 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.DirtPathBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -25,7 +26,7 @@ public class BoneBootsItem extends BootsItem {
         while (iterator.hasNext()) {
             BlockPos blockPos = iterator.next();
             BlockState state = entity.level.getBlockState(blockPos);
-            if (!(state.getBlock() instanceof DirtPathBlock))
+            if (state.getBlock() instanceof BonemealableBlock)
                 state.randomTick((ServerLevel) entity.level, blockPos, entity.getRandom());
         }
     }
