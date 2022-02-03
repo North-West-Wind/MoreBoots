@@ -18,7 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.12.3'
+version = '1.12.4'
 group = 'ml.northwestwind.moreboots' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'moreboots'
 

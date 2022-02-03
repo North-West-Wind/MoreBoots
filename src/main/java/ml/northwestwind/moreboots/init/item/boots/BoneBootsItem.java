@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.GrassPathBlock;
+import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
@@ -25,7 +26,7 @@ public class BoneBootsItem extends BootsItem {
         while (iterator.hasNext()) {
             BlockPos blockPos = iterator.next();
             BlockState state = entity.level.getBlockState(blockPos);
-            if (!(state.getBlock() instanceof GrassPathBlock))
+            if (state.getBlock() instanceof IGrowable)
                 state.randomTick((ServerWorld) entity.level, blockPos, entity.getRandom());
         }
     }
