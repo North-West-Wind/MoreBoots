@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "SCS"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:spider_boots"
+    },
+    "S": {
+      "tag": "forge:slimeballs"
+    },
+    "C": {
+      "item": "moreboots:smooth_fabric"
+    }
+  },
+  "result": {
+    "item": "moreboots:viscous_boots",
+    "count": 1
+  }
+}

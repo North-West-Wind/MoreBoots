@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "moreboots:block/viscous_height2"
+    },
+    "layers=2": {
+      "model": "moreboots:block/viscous_height4"
+    },
+    "layers=3": {
+      "model": "moreboots:block/viscous_height6"
+    },
+    "layers=4": {
+      "model": "moreboots:block/viscous_height8"
+    },
+    "layers=5": {
+      "model": "moreboots:block/viscous_height10"
+    },
+    "layers=6": {
+      "model": "moreboots:block/viscous_height12"
+    },
+    "layers=7": {
+      "model": "moreboots:block/viscous_height14"
+    },
+    "layers=8": {
+      "model": "moreboots:block/viscous_block"
+    }
+  }
+}

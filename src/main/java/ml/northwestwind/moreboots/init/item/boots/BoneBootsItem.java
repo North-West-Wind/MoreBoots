@@ -5,6 +5,7 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -19,7 +20,7 @@ public class BoneBootsItem extends BootsItem {
     @Override
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        if (entity.level.isClientSide) return;
+        if (entity.level.isClientSide || entity instanceof ArmorStand) return;
         BlockPos pos = new BlockPos(entity.position());
         Iterator<BlockPos> iterator = BlockPos.betweenClosedStream(pos.offset(5, 5, 5), pos.offset(-5, -5, -5)).iterator();
         while (iterator.hasNext()) {

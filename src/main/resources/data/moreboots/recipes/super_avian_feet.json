@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "VAV",
+    "SPS"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:rainbow_socks"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    },
+    "V": {
+      "item": "moreboots:viscous_goo"
+    },
+    "A": {
+      "item": "moreboots:avian_feet"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "item": "moreboots:super_avian_feet",
+    "count": 1
+  }
+}

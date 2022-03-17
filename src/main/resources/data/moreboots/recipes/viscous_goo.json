@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "CHC",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:slimeballs"
+    },
+    "C": {
+      "item": "minecraft:cobweb"
+    },
+    "H": {
+      "item": "minecraft:honey_block"
+    }
+  },
+  "result": {
+    "item": "moreboots:viscous_goo",
+    "count": 3
+  }
+}

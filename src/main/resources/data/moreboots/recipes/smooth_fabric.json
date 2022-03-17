@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "SHS",
+    "BWB"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:magma_cream"
+    },
+    "S": {
+      "tag": "forge:slimeballs"
+    },
+    "H": {
+      "item": "minecraft:honey_block"
+    },
+    "B": {
+      "item": "minecraft:blue_ice"
+    },
+    "W": {
+      "item": "minecraft:white_carpet"
+    }
+  },
+  "result": {
+    "item": "moreboots:smooth_fabric",
+    "count": 2
+  }
+}

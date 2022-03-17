@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#g#",
+    "gWg",
+    "SES"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "g": {
+      "item": "moreboots:golden_feather"
+    },
+    "W": {
+      "item": "moreboots:windy_boots"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    },
+    "E": {
+      "item": "minecraft:ice"
+    }
+  },
+  "result": {
+    "item": "moreboots:avian_feet",
+    "count": 1
+  }
+}

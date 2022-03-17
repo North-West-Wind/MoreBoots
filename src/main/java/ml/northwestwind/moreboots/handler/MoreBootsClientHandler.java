@@ -55,6 +55,12 @@ public class MoreBootsClientHandler {
     }
 
     @SubscribeEvent
+    public static void postRenderLiving(final RenderLivingEvent.Post<?, ?> event) {
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
+        if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).postRenderLiving(event);
+    }
+
+    @SubscribeEvent
     public static void renderNameplate(final RenderNameplateEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
         ItemStack boots = ((LivingEntity) event.getEntity()).getItemBySlot(EquipmentSlot.FEET);

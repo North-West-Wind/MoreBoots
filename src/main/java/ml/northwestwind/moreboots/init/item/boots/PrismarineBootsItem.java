@@ -21,8 +21,7 @@ public class PrismarineBootsItem extends BootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
         Vec3 direction = entity.getLookAngle().scale(0.15);
-        entity.setDeltaMovement(motion.multiply(1.01, 1, 1.01).add(direction));
-        if (entity.getRandom().nextInt(100) == 0)
-            boots.hurtAndBreak(1, entity, entity1 -> entity1.playSound(SoundEvents.ITEM_BREAK, 1, 1));
+        entity.setDeltaMovement(motion.multiply(1.02, 1, 1.02).add(direction));
+        boots.hurtAndBreak(1, entity, entity1 -> entity1.playSound(SoundEvents.ITEM_BREAK, 1, 1));
     }
 }
