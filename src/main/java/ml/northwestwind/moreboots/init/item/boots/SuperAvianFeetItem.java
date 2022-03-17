@@ -115,7 +115,7 @@ public class SuperAvianFeetItem extends BootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
         CompoundTag tag = boots.getOrCreateTag();
-        entity.setDeltaMovement(motion.add(0, 0.15 + 0.01 * tag.getLong("tickSneak"), 0));
+        entity.setDeltaMovement(motion.add(0, 0.3 + 0.01 * tag.getLong("tickSneak"), 0));
         tag.putLong("tickSneak", 0);
         boots.setTag(tag);
     }
