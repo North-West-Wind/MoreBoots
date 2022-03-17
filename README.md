@@ -3,7 +3,7 @@ Adds more boots to your Minecraft game!
 Fabric version available [here](https://github.com/North-West-Wind/MoreBoots-Fabric)!  
 To download, you can either download it from:
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/moreboots)
-- [GitHub](https://github.com/North-West-Wind/MoreBoots/releases/latest)
+- [GitHub](https://github.com/North-West-Wind/MoreBoots/releases/latest) (This is no longer updated after version 3.0.0)
 
 ## Feature
 (Boots of course)  
