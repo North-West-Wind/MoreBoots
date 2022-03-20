@@ -131,7 +131,9 @@ public class SuperAvianFeetItem extends BootsItem {
     @Override
     public void preRenderLiving(RenderLivingEvent.Pre<?, ?> event) {
         LivingEntity entity = event.getEntity();
-        if (!(entity instanceof Player) || !entity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SUPER_AVIAN_FEET)) return;
+        PoseStack matrix = event.getPoseStack();
+        matrix.pushPose();
+        if (!(entity instanceof Player)) return;
         BlockPos blockPos = entity.blockPosition();
         BlockPos closest = blockPos;
         double distanceSqr = 4;
@@ -146,8 +148,6 @@ public class SuperAvianFeetItem extends BootsItem {
                 }
             }
         }
-        PoseStack matrix = event.getPoseStack();
-        matrix.pushPose();
         if (blockPos.equals(closest)) return;
         BlockPos subtracted = blockPos.subtract(closest);
         if (subtracted.getX() == 1) matrix.mulPose(Vector3f.ZN.rotationDegrees(90));
