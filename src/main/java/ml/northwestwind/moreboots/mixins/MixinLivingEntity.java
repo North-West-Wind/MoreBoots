@@ -1,5 +1,6 @@
 package ml.northwestwind.moreboots.mixins;
 
+import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.boots.SlipperyBootsItem;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,8 @@ public class MixinLivingEntity {
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
     public float getFriction(BlockState instance, LevelReader levelReader, BlockPos blockPos, Entity entity) {
         LivingEntity lvEnt = (LivingEntity) (Object) this;
-        return lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SLIPPERY_BOOTS) && !lvEnt.isCrouching() ? SlipperyBootsItem.SLIPPERINESS : instance.getFriction(levelReader, blockPos, entity);
+        if (lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SLIPPERY_BOOTS) && !lvEnt.isCrouching()) return SlipperyBootsItem.SLIPPERINESS;
+        else if (lvEnt.hasEffect(EffectInit.SLIPPERINESS)) return 0.989F + lvEnt.getEffect(EffectInit.SLIPPERINESS).getAmplifier() * 0.05F;
+        else return instance.getFriction(levelReader, blockPos, entity);
     }
 }

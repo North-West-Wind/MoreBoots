@@ -1,6 +1,7 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -11,10 +12,17 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 public class RainbowSocksBootItem extends SocksBootsItem {
     public RainbowSocksBootItem() {
@@ -68,5 +76,11 @@ public class RainbowSocksBootItem extends SocksBootsItem {
             }
             boots.setTag(tag);
         }
+    }
+
+    @Override
+    public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        BlockState state = worldIn.getBlockState(pos);
+        if(state.getMaterial().equals(Material.WATER) && context.isAbove(Shapes.block(), pos, true)) cir.setReturnValue(Shapes.block());
     }
 }

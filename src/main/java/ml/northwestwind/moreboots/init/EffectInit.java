@@ -1,6 +1,7 @@
 package ml.northwestwind.moreboots.init;
 
 import ml.northwestwind.moreboots.Reference;
+import ml.northwestwind.moreboots.init.potion.SlipperinessEffect;
 import ml.northwestwind.moreboots.init.potion.WarmthEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,9 +15,13 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(Reference.MODID)
 public class EffectInit {
     public static final MobEffect WARMTH = new WarmthEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL).setRegistryName("warmth");
+    public static final MobEffect SLIPPERINESS = new SlipperinessEffect().setRegistryName("slipperiness");
 
     @SubscribeEvent
     public static void registerEffects(final RegistryEvent.Register<MobEffect> event) {
-        event.getRegistry().register(WARMTH);
+        event.getRegistry().registerAll(
+                WARMTH,
+                SLIPPERINESS
+        );
     }
 }

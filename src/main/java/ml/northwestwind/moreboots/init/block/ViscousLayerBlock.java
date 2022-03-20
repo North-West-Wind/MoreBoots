@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,14 +28,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Random;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ViscousLayerBlock extends Block {
-    public static final int MAX_HEIGHT = 8;
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{Shapes.empty(), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
-    public static final int HEIGHT_IMPASSABLE = 5;
 
     public ViscousLayerBlock(Properties p_49795_) {
         super(p_49795_);
@@ -105,5 +105,19 @@ public class ViscousLayerBlock extends Block {
     @Override
     public Item asItem() {
         return ItemInit.VISCOUS_GOO;
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState p_49921_) {
+        return true;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
+        if (random.nextDouble() < 0.1) {
+            int layers = state.getValue(LAYERS);
+            if (layers > 1) level.setBlockAndUpdate(pos, state.setValue(LAYERS, layers - 1));
+            else level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        }
     }
 }
