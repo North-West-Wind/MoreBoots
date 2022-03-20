@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.BlockInit;
+import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.core.BlockPos;
@@ -65,7 +66,7 @@ public class SuperAvianFeetItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1) entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false, false));
-        if (entity.getDeltaMovement().y() < 0.02 && !entity.isCrouching() && (entity.getDeltaMovement().x() != 0 || entity.getDeltaMovement().z() != 0)) {
+        if (entity.getDeltaMovement().y() < 0.02 && !entity.isCrouching()) {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.05, 0, 1.05).add(0, -0.02, 0));
             entity.hasImpulse = true;
             entity.fallDistance = 0;
@@ -103,6 +104,7 @@ public class SuperAvianFeetItem extends BootsItem {
             entity.fallDistance = 0f;
         }
         BlockState state = entity.level.getBlockState(entity.blockPosition().below());
+        if (state.getFriction(entity.level, entity.blockPosition().below(), entity) > 0.6f) entity.addEffect(new MobEffectInstance(EffectInit.SLIPPERINESS, 600, 1, false, false));
         BlockState blockState = entity.level.getBlockState(entity.blockPosition());
         if (blockState.is(BlockInit.VISCOUS_GOO) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
         entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.defaultBlockState());
@@ -129,7 +131,7 @@ public class SuperAvianFeetItem extends BootsItem {
     @Override
     public void preRenderLiving(RenderLivingEvent.Pre<?, ?> event) {
         LivingEntity entity = event.getEntity();
-        if (!(entity instanceof Player) || !entity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.VISCOUS_BOOTS)) return;
+        if (!(entity instanceof Player) || !entity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SUPER_AVIAN_FEET)) return;
         BlockPos blockPos = entity.blockPosition();
         BlockPos closest = blockPos;
         double distanceSqr = 4;

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "moreboots:viscous_goo"
+  },
+  "result": "minecraft:gunpowder",
+  "experience": 0.1,
+  "cookingtime": 100
+}

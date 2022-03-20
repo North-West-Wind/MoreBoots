@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/North-West-Wind/MoreBoots/issues"
 
 [[mods]]
 modId="moreboots"
-version="3.1.0"
+version="3.1.1"
 displayName="More Boots"
 updateJSONURL="https://github.com/North-West-Wind/MoreBoots/raw/main/update.json"
 displayURL="https://github.com/North-West-Wind/MoreBoots"
@@ -27,6 +27,6 @@ Oh, you love shoes? Name every boots in this mod.
 [[dependencies.moreboots]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="[1.18,1.18.2)"
     ordering="NONE"
     side="BOTH"

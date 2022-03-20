@@ -15,7 +15,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '3.1.0'
+version = '3.1.1'
 group = 'ml.northwestwind.moreboots'
 archivesBaseName = 'moreboots'
 
@@ -87,7 +87,7 @@ dependencies {
 
 jar {
     manifest {
-        classifier "1.18.x"
+        classifier "1.18"
         attributes([
                 "Specification-Title": "moreboots",
                 "Specification-Vendor": "morebootsforyou",

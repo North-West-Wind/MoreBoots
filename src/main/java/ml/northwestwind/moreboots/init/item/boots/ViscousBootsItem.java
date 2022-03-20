@@ -49,7 +49,7 @@ public class ViscousBootsItem extends BootsItem {
             if (!ascending && !descending) entity.setDeltaMovement(motion);
             else if (ascending) entity.setDeltaMovement(motion.add(0, 0.2, 0));
             else entity.setDeltaMovement(motion.subtract(0, 0.2, 0));
-            if (entity.getRandom().nextInt(200) == 0)
+            if (entity.getRandom().nextInt(Math.max(1, boots.getMaxDamage() - boots.getDamageValue())) == 0)
                 boots.hurtAndBreak(1, entity, entity1 -> entity1.playSound(SoundEvents.ITEM_BREAK, 1, 1));
             entity.fallDistance = 0f;
         }
