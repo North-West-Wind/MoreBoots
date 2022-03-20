@@ -9,19 +9,19 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@ObjectHolder(Reference.MODID)
 public class EffectInit {
-    public static final MobEffect WARMTH = new WarmthEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL).setRegistryName("warmth");
-    public static final MobEffect SLIPPERINESS = new SlipperinessEffect().setRegistryName("slipperiness");
+    private static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Reference.MODID);
 
-    @SubscribeEvent
-    public static void registerEffects(final RegistryEvent.Register<MobEffect> event) {
-        event.getRegistry().registerAll(
-                WARMTH,
-                SLIPPERINESS
-        );
+    public static final RegistryObject<MobEffect> WARMTH = EFFECTS.register("warmth", () -> new WarmthEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL));
+    public static final RegistryObject<MobEffect> SLIPPERINESS = EFFECTS.register("slipperiness", SlipperinessEffect::new);
+
+    public static void registerEffects() {
+        EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

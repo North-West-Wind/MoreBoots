@@ -22,7 +22,7 @@ public class StorageBootsContainer extends ChestMenu {
     }
 
     public StorageBootsContainer(int id, Inventory playerInventory, Container storage, int containerRows) {
-        super(ContainerInit.STORAGE_BOOTS, id, playerInventory, storage, containerRows);
+        super(ContainerInit.STORAGE_BOOTS.get(), id, playerInventory, storage, containerRows);
         checkContainerSize(storage, containerRows * 9);
         this.storage = storage;
         this.containerRows = containerRows;
@@ -36,7 +36,7 @@ public class StorageBootsContainer extends ChestMenu {
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return this.storage.stillValid(playerIn) && playerIn.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.STORAGE_BOOTS);
+        return this.storage.stillValid(playerIn) && playerIn.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.STORAGE_BOOTS.get());
     }
 
     @Override

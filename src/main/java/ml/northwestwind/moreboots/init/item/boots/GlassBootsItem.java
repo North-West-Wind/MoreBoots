@@ -62,7 +62,7 @@ public class GlassBootsItem extends BootsItem {
             entity.addEffect(newEffect);
         }
         if (potion.hasInstantEffects()) {
-            ItemStack newBoots = new ItemStack(ItemInit.GLASS_BOOTS_EMPTY);
+            ItemStack newBoots = new ItemStack(ItemInit.GLASS_BOOTS_EMPTY.get());
             newBoots.setDamageValue(boots.getDamageValue());
             entity.setItemSlot(EquipmentSlot.FEET, newBoots);
         } else {
@@ -71,7 +71,7 @@ public class GlassBootsItem extends BootsItem {
             tag.putInt("Duration", ticksLeft);
             boots.setTag(tag);
             if (ticksLeft <= 0) {
-                ItemStack newBoots = new ItemStack(ItemInit.GLASS_BOOTS_EMPTY);
+                ItemStack newBoots = new ItemStack(ItemInit.GLASS_BOOTS_EMPTY.get());
                 newBoots.setDamageValue(boots.getDamageValue());
                 entity.setItemSlot(EquipmentSlot.FEET, newBoots);
             }

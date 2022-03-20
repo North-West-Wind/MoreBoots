@@ -7,15 +7,18 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@ObjectHolder(Reference.MODID)
 public class BlockEntityInit {
-    public static final BlockEntityType<?> BOOT_RECYCLER = BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) BootRecyclerBlockEntity::new, BlockInit.BOOT_RECYCLER).build(null).setRegistryName("boot_recycler");
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Reference.MODID);
 
-    @SubscribeEvent
-    public static void registerTileEntity(final RegistryEvent.Register<BlockEntityType<?>> event) {
-        event.getRegistry().register(BOOT_RECYCLER);
+    public static final RegistryObject<BlockEntityType<?>> BOOT_RECYCLER = BLOCK_ENTITIES.register("boot_recycler", () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) BootRecyclerBlockEntity::new, BlockInit.BOOT_RECYCLER.get()).build(null));
+
+    public static void registerTileEntity() {
+        BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

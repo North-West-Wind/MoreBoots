@@ -5,6 +5,7 @@ import ml.northwestwind.moreboots.handler.packet.IPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -61,7 +62,7 @@ public class Utils {
         float f = (float) Math.min(16, 2 + level);
         BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
         for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
-            if (blockpos.closerThan(living.position(), f)) {
+            if (blockpos.closerThan(living.blockPosition(), f)) {
                 blockpos$mutable.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                 BlockState blockstate1 = worldIn.getBlockState(blockpos$mutable);
                 if (blockstate1.isAir()) {
@@ -118,7 +119,7 @@ public class Utils {
         return (P) obj;
     }
 
-    public static boolean absorb(Level worldIn, BlockPos pos, Tag.Named<Fluid> tag) {
+    public static boolean absorb(Level worldIn, BlockPos pos, TagKey<Fluid> tag) {
         Queue<Tuple<BlockPos, Integer>> queue = Lists.newLinkedList();
         queue.add(new Tuple<>(pos, 0));
         int i = 0;

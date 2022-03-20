@@ -27,6 +27,6 @@ Oh, you love shoes? Name every boots in this mod.
 [[dependencies.moreboots]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.18.2)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"

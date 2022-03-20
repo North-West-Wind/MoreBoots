@@ -69,7 +69,7 @@ public class BootRecyclerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, BlockEntityInit.BOOT_RECYCLER, (BlockEntityTicker<BlockEntity>) (level1, pos, state1, tile) -> ((BootRecyclerBlockEntity) tile).tick());
+        return level.isClientSide ? null : createTickerHelper(type, BlockEntityInit.BOOT_RECYCLER.get(), (BlockEntityTicker<BlockEntity>) (level1, pos, state1, tile) -> ((BootRecyclerBlockEntity) tile).tick());
     }
 
     @Nullable

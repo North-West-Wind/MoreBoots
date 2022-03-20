@@ -57,7 +57,7 @@ public class SandBootsItem extends BootsItem {
             }
         }
         if (shouldJump) {
-            FallingBlockEntity sand = new FallingBlockEntity(player.level, pos.getX(), pos.getY(), pos.getZ(), Blocks.SAND.defaultBlockState());
+            FallingBlockEntity sand = FallingBlockEntity.fall(player.level, pos, Blocks.SAND.defaultBlockState());
             player.level.addFreshEntity(sand);
             player.jumpFromGround();
             player.setDeltaMovement(player.getDeltaMovement().add(0, 1, 0));

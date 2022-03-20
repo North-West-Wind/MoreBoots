@@ -16,7 +16,7 @@ public class CPlayerSkatePacket implements IPacket {
         ServerPlayer player = ctx.getSender();
         if(player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(!boots.getItem().equals(ItemInit.SKATER)) return;
+        if(!boots.getItem().equals(ItemInit.SKATER.get())) return;
         BlockPos pos = new BlockPos(player.position());
         Material material = player.level.getBlockState(pos.below()).getMaterial();
         if (material.equals(Material.ICE) || material.equals(Material.ICE_SOLID)) {

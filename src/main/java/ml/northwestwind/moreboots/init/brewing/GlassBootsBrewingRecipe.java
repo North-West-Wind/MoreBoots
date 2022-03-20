@@ -18,7 +18,7 @@ public class GlassBootsBrewingRecipe implements IBrewingRecipe {
     @Override
     public boolean isInput(ItemStack input) {
         Item item = input.getItem();
-        return item.equals(ItemInit.GLASS_BOOTS);
+        return item.equals(ItemInit.GLASS_BOOTS.get());
     }
 
     @Override

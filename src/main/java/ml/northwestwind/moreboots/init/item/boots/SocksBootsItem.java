@@ -51,7 +51,7 @@ public class SocksBootsItem extends BootsItem {
                 boots.setHoverName(new TranslatableComponent("item.moreboots.socks_boots"));
             }
         } else {
-            entity.addEffect(new MobEffectInstance(EffectInit.WARMTH, 205));
+            entity.addEffect(new MobEffectInstance(EffectInit.WARMTH.get(), 205));
         }
         boots.setTag(tag);
     }

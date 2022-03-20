@@ -32,7 +32,6 @@ public class BootsItem extends ArmorItem {
 
     public BootsItem(ArmorMaterial material, String registryName, boolean isNetherite) {
         super(material, EquipmentSlot.FEET, isNetherite ? new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE).fireResistant() : new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE));
-        setRegistryName(Reference.MODID, registryName);
         this.registryName = registryName;
     }
 

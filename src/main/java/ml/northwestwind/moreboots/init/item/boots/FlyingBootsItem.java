@@ -35,8 +35,8 @@ public class FlyingBootsItem extends BootsItem {
         ItemStack to = event.getTo();
         boolean oldMayFly = player.getAbilities().mayfly;
         boolean oldFlying = player.getAbilities().flying;
-        if (!from.getItem().equals(ItemInit.FLYING_BOOTS) && to.getItem().equals(ItemInit.FLYING_BOOTS)) player.getAbilities().mayfly = true;
-        else if (from.getItem().equals(ItemInit.FLYING_BOOTS) && !to.getItem().equals(ItemInit.FLYING_BOOTS)) {
+        if (!from.getItem().equals(ItemInit.FLYING_BOOTS.get()) && to.getItem().equals(ItemInit.FLYING_BOOTS.get())) player.getAbilities().mayfly = true;
+        else if (from.getItem().equals(ItemInit.FLYING_BOOTS.get()) && !to.getItem().equals(ItemInit.FLYING_BOOTS.get())) {
             player.getAbilities().mayfly = false;
             player.getAbilities().flying = false;
         }

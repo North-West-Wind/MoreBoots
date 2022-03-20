@@ -18,8 +18,8 @@ public class MixinLivingEntity {
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
     public float getFriction(BlockState instance, LevelReader levelReader, BlockPos blockPos, Entity entity) {
         LivingEntity lvEnt = (LivingEntity) (Object) this;
-        if (lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SLIPPERY_BOOTS) && !lvEnt.isCrouching()) return SlipperyBootsItem.SLIPPERINESS;
-        else if (lvEnt.hasEffect(EffectInit.SLIPPERINESS)) return 0.989F + lvEnt.getEffect(EffectInit.SLIPPERINESS).getAmplifier() * 0.05F;
+        if (lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SLIPPERY_BOOTS.get()) && !lvEnt.isCrouching()) return SlipperyBootsItem.SLIPPERINESS;
+        else if (lvEnt.hasEffect(EffectInit.SLIPPERINESS.get())) return 0.989F + lvEnt.getEffect(EffectInit.SLIPPERINESS.get()).getAmplifier() * 0.05F;
         else return instance.getFriction(levelReader, blockPos, entity);
     }
 }

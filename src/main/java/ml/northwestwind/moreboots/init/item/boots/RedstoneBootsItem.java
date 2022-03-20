@@ -27,7 +27,7 @@ public class RedstoneBootsItem extends BootsItem {
         BlockPos under = blockPos.below();
         BlockState underneath = entity.level.getBlockState(under);
         if (underneath.canOcclude() && entity.level.isEmptyBlock(blockPos) && entity.getRandom().nextInt(100) == 0) {
-            entity.level.setBlockAndUpdate(blockPos, BlockInit.REDSTONE_DUST.defaultBlockState().setValue(RedstoneDustBlock.FACING, RedstoneDustBlock.getRandomDirection()));
+            entity.level.setBlockAndUpdate(blockPos, BlockInit.REDSTONE_DUST.get().defaultBlockState().setValue(RedstoneDustBlock.FACING, RedstoneDustBlock.getRandomDirection()));
             boots.hurtAndBreak(1, entity, playerEntity -> playerEntity.playSound(SoundEvents.ITEM_BREAK, 1.0f, 1.0f));
         }
     }

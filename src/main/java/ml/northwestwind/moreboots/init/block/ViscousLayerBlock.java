@@ -50,7 +50,7 @@ public class ViscousLayerBlock extends Block {
     }
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SUPER_AVIAN_FEET))) entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
+        if (!(entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SUPER_AVIAN_FEET.get()))) entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
     }
 
     public boolean useShapeForLightOcclusion(BlockState p_56630_) {
@@ -104,7 +104,7 @@ public class ViscousLayerBlock extends Block {
 
     @Override
     public Item asItem() {
-        return ItemInit.VISCOUS_GOO;
+        return ItemInit.VISCOUS_GOO.get();
     }
 
     @Override

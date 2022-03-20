@@ -55,14 +55,14 @@ public class ViscousBootsItem extends BootsItem {
         }
         BlockState state = entity.level.getBlockState(entity.blockPosition().below());
         BlockState blockState = entity.level.getBlockState(entity.blockPosition());
-        if (blockState.is(BlockInit.VISCOUS_GOO) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
-        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.defaultBlockState());
+        if (blockState.is(BlockInit.VISCOUS_GOO.get()) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
+        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.get().defaultBlockState());
     }
 
     @Override
     public void preRenderLiving(RenderLivingEvent.Pre<?, ?> event) {
         LivingEntity entity = event.getEntity();
-        if (!(entity instanceof Player) || !entity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.VISCOUS_BOOTS)) return;
+        if (!(entity instanceof Player)) return;
         BlockPos blockPos = entity.blockPosition();
         BlockPos closest = blockPos;
         double distanceSqr = 4;
