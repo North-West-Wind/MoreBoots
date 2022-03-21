@@ -16,7 +16,7 @@ public class CPlayerMultiJumpPacket implements IPacket {
         ServerPlayer player = ctx.getSender();
         if(player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(!boots.getItem().equals(ItemInit.SANDALS)) return;
+        if(!boots.getItem().equals(ItemInit.SANDALS.get())) return;
         BlockPos pos = new BlockPos(player.position());
         if (pos.getY() > 255 || pos.getY() < 0) return;
         if (!player.level.isEmptyBlock(pos)) return;

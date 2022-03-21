@@ -1,7 +1,7 @@
 package ml.northwestwind.moreboots;
 
 import ml.northwestwind.moreboots.handler.Utils;
-import ml.northwestwind.moreboots.init.ItemInit;
+import ml.northwestwind.moreboots.init.*;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -16,8 +16,13 @@ public class MoreBoots {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public MoreBoots() {
-        Utils.initialize();
         INSTANCE = this;
+        Utils.initialize();
+        ItemInit.registerItems();
+        BlockInit.registerBlocks();
+        BlockEntityInit.registerTileEntity();
+        ContainerInit.registerContainer();
+        EffectInit.registerEffects();
     }
 
     public static class MoreBootsItemGroup extends CreativeModeTab {
@@ -30,7 +35,7 @@ public class MoreBoots {
         @Nonnull
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemInit.CACTUS_BOOTS);
+            return new ItemStack(ItemInit.CACTUS_BOOTS.get());
         }
     }
 }

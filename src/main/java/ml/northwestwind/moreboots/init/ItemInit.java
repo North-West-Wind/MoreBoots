@@ -9,158 +9,96 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@ObjectHolder(Reference.MODID)
 public class ItemInit {
-    public static final Item SPIDER_BOOTS = new SpiderBootsItem();
-    public static final Item QUARTZ_BOOTS = new QuartzBootsItem();
-    public static final Item SOCKS_BOOTS = new SocksBootsItem();
-    public static final Item RAINBOW_SOCKS_BOOTS = new RainbowSocksBootItem();
-    public static final Item MINER_BOOTS = new MinerBootsItem();
-    public static final Item LAPIS_BOOTS = new LapisBootsItem();
-    public static final Item GLOWSTONE_BOOTS = new GlowstoneBootsItem();
-    public static final Item WATER_BOOTS = new WaterBootsItem();
-    public static final Item LAVA_BOOTS = new LavaBootsItem();
-    public static final Item OBSIDIAN_BOOTS = new ObsidianBootsItem();
-    public static final Item ICE_BOOTS = new IceBootsItem();
-    public static final Item VANISHING_BOOTS = new VanishingBootsItem();
-    public static final Item MILK_BOOTS = new MilkBootsItem();
-    public static final Item REDSTONE_BOOTS = new RedstoneBootsItem();
-    public static final Item PLUMBER_BOOTS = new PlumberBootsItem();
-    public static final Item METAL_BOOTS = new MetalBootsItem();
-    public static final Item UPWARP_BOOTS = new UpwarpBootsItem();
-    public static final Item DOWNWARP_BOOTS = new DownwarpBootsItem();
-    public static final Item ENDER_BOOTS = new EnderBootsItem();
-    public static final Item BONE_BOOTS = new BoneBootsItem();
-    public static final Item MUSHROOM_BOOTS = new MushroomBootsItem();
-    public static final Item SLIME_BOOTS = new SlimeBootsItem();
-    public static final Item BLAZE_BOOTS = new BlazeBootsItem();
-    public static final Item CACTUS_BOOTS = new CactusBootsItem();
-    public static final Item EXPLOSIVE_BOOTS = new ExplosiveBootsItem();
-    public static final Item WINDY_BOOTS = new WindyBootsItem();
-    public static final Item SKATER = new SkatingBootsItem();
-    public static final Item PRISMARINE_BOOTS = new PrismarineBootsItem();
-    public static final Item BAT_BOOTS = new BatBootsItem();
-    public static final Item KA_BOOTS = new KABootsItem();
-    public static final Item GLASS_BOOTS = new GlassBootsItem();
-    public static final Item GLASS_BOOTS_EMPTY = new EmptyGlassBootsItem();
-    public static final Item FLOATIE_BOOTS = new FloatieBootsItem();
-    public static final Item STRIDER_BOOTS = new StriderBootsItem();
-    public static final Item SANDALS = new SandBootsItem();
-    public static final Item MUSIC_BOOTS = new MusicBootsItem();
-    public static final Item HOPPER_BOOTS = new HopperBootsItem();
-    public static final Item LOKI_BOOTS = new LokiBootsItem();
-    public static final Item STORAGE_BOOTS = new StorageBootsItem();
-    public static final Item GLIDER = new GlidingBootsItem();
-    public static final Item SPONGE_BOOTS = new SpongeBootsItem(ModArmorMaterial.SPONGE, "sponge_boots", FluidTags.WATER, false);
-    public static final Item LAVA_SPONGE_BOOTS = new SpongeBootsItem(ModArmorMaterial.LAVA_SPONGE, "lava_sponge_boots", FluidTags.LAVA, true);
-    public static final Item LIGHTNING_BOOTS = new LightningBootsItem();
-    public static final Item MAGMA_BOOTS = new MagmaBootsItem();
-    public static final Item ENDER_DRAGON_BOOTS = new EnderDragonBootsItem();
-    public static final Item WITHER_BOOTS = new WitherBootsItem();
-    public static final Item MACHINE_BOW_BOOTS = new MachineBowBoots();
-    public static final Item SLIPPERY_BOOTS = new SlipperyBootsItem();
-    public static final Item FLYING_BOOTS = new FlyingBootsItem();
-    public static final Item VISCOUS_BOOTS = new ViscousBootsItem();
-    public static final Item AVIAN_FEET = new AvianFeetItem();
-    public static final Item SUPER_AVIAN_FEET = new SuperAvianFeetItem();
-    public static final Item TANOOKI_FEET = new TanookiFeetItem();
-    public static final Item TURTLE_BOOTS = new TurtleBootsItem();
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+    private static final DeferredRegister<Item> MINECRAFT_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "minecraft");
+    
+    public static final RegistryObject<Item> SPIDER_BOOTS = ITEMS.register("spider_boots", SpiderBootsItem::new);
+    public static final RegistryObject<Item> QUARTZ_BOOTS = ITEMS.register("quartz_boots", QuartzBootsItem::new);
+    public static final RegistryObject<Item> SOCKS_BOOTS = ITEMS.register("socks_boots", SocksBootsItem::new);
+    public static final RegistryObject<Item> RAINBOW_SOCKS_BOOTS = ITEMS.register("rainbow_socks_boots", RainbowSocksBootItem::new);
+    public static final RegistryObject<Item> MINER_BOOTS = ITEMS.register("miner_boots", MinerBootsItem::new);
+    public static final RegistryObject<Item> LAPIS_BOOTS = ITEMS.register("lapis_boots", LapisBootsItem::new);
+    public static final RegistryObject<Item> GLOWSTONE_BOOTS = ITEMS.register("glowstone_boots", GlowstoneBootsItem::new);
+    public static final RegistryObject<Item> WATER_BOOTS = ITEMS.register("water_boots", WaterBootsItem::new);
+    public static final RegistryObject<Item> LAVA_BOOTS = ITEMS.register("lava_boots", LavaBootsItem::new);
+    public static final RegistryObject<Item> OBSIDIAN_BOOTS = ITEMS.register("obsidian_boots", ObsidianBootsItem::new);
+    public static final RegistryObject<Item> ICE_BOOTS = ITEMS.register("ice_boots", IceBootsItem::new);
+    public static final RegistryObject<Item> VANISHING_BOOTS = ITEMS.register("vanishing_boots", VanishingBootsItem::new);
+    public static final RegistryObject<Item> MILK_BOOTS = ITEMS.register("milk_boots", MilkBootsItem::new);
+    public static final RegistryObject<Item> REDSTONE_BOOTS = ITEMS.register("redstone_boots", RedstoneBootsItem::new);
+    public static final RegistryObject<Item> PLUMBER_BOOTS = ITEMS.register("plumber_boots", PlumberBootsItem::new);
+    public static final RegistryObject<Item> METAL_BOOTS = ITEMS.register("metal_boots", MetalBootsItem::new);
+    public static final RegistryObject<Item> UPWARP_BOOTS = ITEMS.register("upwarp_boots", UpwarpBootsItem::new);
+    public static final RegistryObject<Item> DOWNWARP_BOOTS = ITEMS.register("downwarp_boots", DownwarpBootsItem::new);
+    public static final RegistryObject<Item> ENDER_BOOTS = ITEMS.register("ender_boots", EnderBootsItem::new);
+    public static final RegistryObject<Item> BONE_BOOTS = ITEMS.register("bone_boots", BoneBootsItem::new);
+    public static final RegistryObject<Item> MUSHROOM_BOOTS = ITEMS.register("mushroom_boots", MushroomBootsItem::new);
+    public static final RegistryObject<Item> SLIME_BOOTS = ITEMS.register("slime_boots", SlimeBootsItem::new);
+    public static final RegistryObject<Item> BLAZE_BOOTS = ITEMS.register("blaze_boots", BlazeBootsItem::new);
+    public static final RegistryObject<Item> CACTUS_BOOTS = ITEMS.register("cactus_boots", CactusBootsItem::new);
+    public static final RegistryObject<Item> EXPLOSIVE_BOOTS = ITEMS.register("explosive_boots", ExplosiveBootsItem::new);
+    public static final RegistryObject<Item> WINDY_BOOTS = ITEMS.register("windy_boots", WindyBootsItem::new);
+    public static final RegistryObject<Item> SKATER = ITEMS.register("skating_boots", SkatingBootsItem::new);
+    public static final RegistryObject<Item> PRISMARINE_BOOTS = ITEMS.register("prismarine_boots", PrismarineBootsItem::new);
+    public static final RegistryObject<Item> BAT_BOOTS = ITEMS.register("bat_boots", BatBootsItem::new);
+    public static final RegistryObject<Item> KA_BOOTS = ITEMS.register("ka_boots", KABootsItem::new);
+    public static final RegistryObject<Item> GLASS_BOOTS = ITEMS.register("glass_boots", GlassBootsItem::new);
+    public static final RegistryObject<Item> GLASS_BOOTS_EMPTY = ITEMS.register("glass_boots_empty", EmptyGlassBootsItem::new);
+    public static final RegistryObject<Item> FLOATIE_BOOTS = ITEMS.register("floatie_boots", FloatieBootsItem::new);
+    public static final RegistryObject<Item> STRIDER_BOOTS = ITEMS.register("strider_boots", StriderBootsItem::new);
+    public static final RegistryObject<Item> SANDALS = ITEMS.register("sand_boots", SandBootsItem::new);
+    public static final RegistryObject<Item> MUSIC_BOOTS = ITEMS.register("music_boots", MusicBootsItem::new);
+    public static final RegistryObject<Item> HOPPER_BOOTS = ITEMS.register("hopper_boots", HopperBootsItem::new);
+    public static final RegistryObject<Item> LOKI_BOOTS = ITEMS.register("loki_boots", LokiBootsItem::new);
+    public static final RegistryObject<Item> STORAGE_BOOTS = ITEMS.register("storage_boots", StorageBootsItem::new);
+    public static final RegistryObject<Item> GLIDER = ITEMS.register("gliding_boots", GlidingBootsItem::new);
+    public static final RegistryObject<Item> SPONGE_BOOTS = ITEMS.register("sponge_boots", () -> new SpongeBootsItem(ModArmorMaterial.SPONGE, "sponge_boots", FluidTags.WATER, false));
+    public static final RegistryObject<Item> LAVA_SPONGE_BOOTS = ITEMS.register("lava_sponge_boots", () -> new SpongeBootsItem(ModArmorMaterial.LAVA_SPONGE, "lava_sponge_boots", FluidTags.LAVA, true));
+    public static final RegistryObject<Item> LIGHTNING_BOOTS = ITEMS.register("lightning_boots", LightningBootsItem::new);
+    public static final RegistryObject<Item> MAGMA_BOOTS = ITEMS.register("magma_boots", MagmaBootsItem::new);
+    public static final RegistryObject<Item> ENDER_DRAGON_BOOTS = ITEMS.register("ender_dragon_boots", EnderDragonBootsItem::new);
+    public static final RegistryObject<Item> WITHER_BOOTS = ITEMS.register("wither_boots", WitherBootsItem::new);
+    public static final RegistryObject<Item> MACHINE_BOW_BOOTS = ITEMS.register("machine_bow_boots", MachineBowBoots::new);
+    public static final RegistryObject<Item> SLIPPERY_BOOTS = ITEMS.register("slippery_boots", SlipperyBootsItem::new);
+    public static final RegistryObject<Item> FLYING_BOOTS = ITEMS.register("flying_boots", FlyingBootsItem::new);
+    public static final RegistryObject<Item> VISCOUS_BOOTS = ITEMS.register("viscous_boots", ViscousBootsItem::new);
+    public static final RegistryObject<Item> AVIAN_FEET = ITEMS.register("avian_feet", AvianFeetItem::new);
+    public static final RegistryObject<Item> SUPER_AVIAN_FEET = ITEMS.register("super_avian_feet", SuperAvianFeetItem::new);
+    public static final RegistryObject<Item> TANOOKI_FEET = ITEMS.register("tanooki_feet", TanookiFeetItem::new);
+    public static final RegistryObject<Item> TURTLE_BOOTS = ITEMS.register("turtle_boots", TurtleBootsItem::new);
 
-    public static final Item QUARTZ_INGOT = new TooltipItem("quartz_ingot");
-    public static final Item METAL_MIX = new TooltipItem("metal_mix");
-    public static final Item BAT_HIDE = new TooltipItem("bat_hide");
-    public static final Item STRIDER_FOOT = new TooltipItem("strider_foot");
-    public static final Item FLOATING_CORE = new TooltipItem("floating_core");
-    public static final Item GOLDEN_FEATHER = new TooltipItem("golden_feather");
-    public static final Item VISCOUS_GOO = new ItemNameBlockItem(BlockInit.VISCOUS_GOO, new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE)).setRegistryName("viscous_goo");
-    public static final Item SMOOTH_FABRIC = new TooltipItem("smooth_fabric");
+    public static final RegistryObject<Item> QUARTZ_INGOT = ITEMS.register("quartz_ingot", () -> new TooltipItem("quartz_ingot"));
+    public static final RegistryObject<Item> METAL_MIX = ITEMS.register("metal_mix", () -> new TooltipItem("metal_mix"));
+    public static final RegistryObject<Item> BAT_HIDE = ITEMS.register("bat_hide", () -> new TooltipItem("bat_hide"));
+    public static final RegistryObject<Item> STRIDER_FOOT = ITEMS.register("strider_foot", () -> new TooltipItem("strider_foot"));
+    public static final RegistryObject<Item> FLOATING_CORE = ITEMS.register("floating_core", () -> new TooltipItem("floating_core"));
+    public static final RegistryObject<Item> GOLDEN_FEATHER = ITEMS.register("golden_feather", () -> new TooltipItem("golden_feather"));
+    public static final RegistryObject<Item> VISCOUS_GOO = ITEMS.register("viscous_goo", () -> new ItemNameBlockItem(BlockInit.VISCOUS_GOO.get(), new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+    public static final RegistryObject<Item> SMOOTH_FABRIC = ITEMS.register("smooth_fabric", () -> new TooltipItem("smooth_fabric"));
 
-    @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(
-                SPIDER_BOOTS,
-                QUARTZ_BOOTS,
-                SOCKS_BOOTS,
-                RAINBOW_SOCKS_BOOTS,
-                MINER_BOOTS,
-                LAPIS_BOOTS,
-                GLOWSTONE_BOOTS,
-                WATER_BOOTS,
-                LAVA_BOOTS,
-                OBSIDIAN_BOOTS,
-                ICE_BOOTS,
-                VANISHING_BOOTS,
-                MILK_BOOTS,
-                REDSTONE_BOOTS,
-                PLUMBER_BOOTS,
-                METAL_BOOTS,
-                UPWARP_BOOTS,
-                DOWNWARP_BOOTS,
-                ENDER_BOOTS,
-                BONE_BOOTS,
-                MUSHROOM_BOOTS,
-                SLIME_BOOTS,
-                BLAZE_BOOTS,
-                CACTUS_BOOTS,
-                EXPLOSIVE_BOOTS,
-                WINDY_BOOTS,
-                SKATER,
-                PRISMARINE_BOOTS,
-                BAT_BOOTS,
-                KA_BOOTS,
-                GLASS_BOOTS,
-                GLASS_BOOTS_EMPTY,
-                FLOATIE_BOOTS,
-                STRIDER_BOOTS,
-                SANDALS,
-                MUSIC_BOOTS,
-                HOPPER_BOOTS,
-                LOKI_BOOTS,
-                STORAGE_BOOTS,
-                GLIDER,
-                SPONGE_BOOTS,
-                LAVA_SPONGE_BOOTS,
-                LIGHTNING_BOOTS,
-                MAGMA_BOOTS,
-                ENDER_DRAGON_BOOTS,
-                WITHER_BOOTS,
-                MACHINE_BOW_BOOTS,
-                SLIPPERY_BOOTS,
-                FLYING_BOOTS,
-                VISCOUS_BOOTS,
-                AVIAN_FEET,
-                SUPER_AVIAN_FEET,
-                TANOOKI_FEET,
-                TURTLE_BOOTS
-        );
+    public static void registerItems() {
+        ITEMS.register("rainbow_wool", () -> new BlockItem(BlockInit.RAINBOW_WOOL.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+        ITEMS.register("cobblestone_8", () -> new BlockItem(BlockInit.COBBLESTONE_8.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+        ITEMS.register("cobblestone_64", () -> new BlockItem(BlockInit.COBBLESTONE_64.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+        ITEMS.register("cobblestone_512", () -> new BlockItem(BlockInit.COBBLESTONE_512.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+        MINECRAFT_ITEMS.register("glowstone_dust", () -> new BlockItem(BlockInit.GLOWSTONE_DUST.get(), new Item.Properties().stacksTo(64).tab(CreativeModeTab.TAB_MATERIALS)));
+        ITEMS.register("boot_recycler", () -> new BlockItem(BlockInit.BOOT_RECYCLER.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
 
-        event.getRegistry().registerAll(
-                QUARTZ_INGOT,
-                METAL_MIX,
-                BAT_HIDE,
-                STRIDER_FOOT,
-                FLOATING_CORE,
-                VISCOUS_GOO,
-                SMOOTH_FABRIC,
-                GOLDEN_FEATHER
-        );
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     public enum ModArmorMaterial implements ArmorMaterial {
@@ -174,7 +112,7 @@ public class ItemInit {
             return Ingredient.of(Items.WHITE_WOOL);
         }),
         RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 100, 10, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 10.0f, 0.0F, 150000, () -> {
-            return Ingredient.of(BlockInit.RAINBOW_WOOL);
+            return Ingredient.of(BlockInit.RAINBOW_WOOL.get());
         }),
         MINER(Reference.MODID + ":miner", 16, 2, 15, SoundEvents.BEACON_ACTIVATE, 1.5F, 0.0F, 100000, () -> {
             return Ingredient.of(Blocks.IRON_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.GOLD_ORE);
@@ -202,7 +140,7 @@ public class ItemInit {
             return Ingredient.of(Items.LEATHER);
         }),
         METAL(Reference.MODID + ":metal", 6, 5, 12, SoundEvents.ARMOR_EQUIP_IRON, 3.0f, 1.0f, 120000, () -> {
-            return Ingredient.of(ItemInit.METAL_MIX);
+            return Ingredient.of(ItemInit.METAL_MIX.get());
         }),
         UPWARP(Reference.MODID + ":upwarp", 10, 2, 8, SoundEvents.ENDERMAN_TELEPORT, 0.0f, 0.0f, 75000, () -> {
             return Ingredient.of(Items.ENDER_PEARL);
@@ -222,12 +160,12 @@ public class ItemInit {
         WINDY(Reference.MODID + ":windy", 20, 1, 12, SoundEvents.GLASS_BREAK, 0.0f, 0.0f, 125000, () -> Ingredient.of(Blocks.BLUE_ICE)),
         SKATER(Reference.MODID + ":skating", 32, 1, 8, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 60000, () -> Ingredient.of(Items.SHEARS)),
         PRISMARINE(Reference.MODID + ":prismarine", 28, 2, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 75000, () -> Ingredient.of(Items.PRISMARINE_SHARD)),
-        BAT(Reference.MODID + ":bat", 24, 1, 12, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 50000, () -> Ingredient.of(ItemInit.BAT_HIDE)),
+        BAT(Reference.MODID + ":bat", 24, 1, 12, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 50000, () -> Ingredient.of(ItemInit.BAT_HIDE.get())),
         KA(Reference.MODID + ":ka", 16, 2, 8, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 120000, () -> Ingredient.EMPTY),
         GLASS_EMPTY(Reference.MODID + ":glass", 10, 1, 20, SoundEvents.BOTTLE_FILL, 0.0f, 0.0f, () -> Ingredient.of(Items.GLASS)),
         GLASS(Reference.MODID + ":glass", 10, 1, 20, SoundEvents.GLASS_BREAK, 0.0f, 0.0f, () -> Ingredient.of(Items.GLASS)),
         FLOATIE(Reference.MODID + ":floatie", 40, 4, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.of(Items.OAK_PLANKS)),
-        STRIDER(Reference.MODID + ":strider", 40, 4, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.of(ItemInit.STRIDER_FOOT)),
+        STRIDER(Reference.MODID + ":strider", 40, 4, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 1.0f, 0.0f, 160000, () -> Ingredient.of(ItemInit.STRIDER_FOOT.get())),
         SAND(Reference.MODID + ":sand", 18, 1, 8, SoundEvents.SAND_PLACE, 0.0f, 0.0f, 40000, () -> Ingredient.of(Items.SAND)),
         MUSIC(Reference.MODID + ":music", 20, 1, 10, SoundEvents.NOTE_BLOCK_BANJO, 0.0f, 0.0f, 60000, () -> Ingredient.of(Items.NOTE_BLOCK)),
         ENERGY(Reference.MODID + ":energy", 1, 4, 4, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0f, 0.0f, 75000, () -> Ingredient.EMPTY),
@@ -244,9 +182,9 @@ public class ItemInit {
         MACHINE_BOW(Reference.MODID + ":machine_bow", 20, 1, 10, SoundEvents.ARROW_SHOOT, 0f, 0f, 90000, () -> Ingredient.EMPTY),
         SLIPPERY(Reference.MODID + ":slippery", 20, 1, 8, SoundEvents.GLASS_BREAK, 0f, 0f, 20000, () -> Ingredient.of(Items.BLUE_ICE)),
         FLYING(Reference.MODID + ":flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY),
-        VISCOUS(Reference.MODID + ":viscous", 15, 3, 12, SoundEvents.SPIDER_AMBIENT, 0f, 0f, 20000, () -> Ingredient.of(VISCOUS_GOO)),
+        VISCOUS(Reference.MODID + ":viscous", 15, 3, 12, SoundEvents.SPIDER_AMBIENT, 0f, 0f, 20000, () -> Ingredient.of(VISCOUS_GOO.get())),
         AVIAN(Reference.MODID + ":avian", 22, 2, 12, SoundEvents.GLASS_BREAK, 0f, 0f, 150000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
-        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 10, 42, SoundEvents.GLASS_BREAK, 8f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL)),
+        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 10, 42, SoundEvents.GLASS_BREAK, 8f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         TANOOKI(Reference.MODID + ":tanooki", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 80000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
         TURTLE(Reference.MODID + ":turtle", 25, 2, 10, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(Items.SCUTE));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };

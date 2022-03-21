@@ -69,7 +69,7 @@ public class SuperAvianFeetItem extends BootsItem {
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1) entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false, false));
         if (!entity.isCrouching()) {
             double addToY = 0;
-            if (entity instanceof Player && ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.02;
+            if (entity instanceof Player && entity.getDeltaMovement().y() < 0.02 &&  ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.02;
             else if (entity.getDeltaMovement().y() < 0) addToY = -0.02;
             if (addToY != 0) {
                 entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.05, 0, 1.05).add(0, addToY, 0));
@@ -109,10 +109,10 @@ public class SuperAvianFeetItem extends BootsItem {
             entity.fallDistance = 0f;
         }
         BlockState state = entity.level.getBlockState(entity.blockPosition().below());
-        if (state.getFriction(entity.level, entity.blockPosition().below(), entity) > 0.6f) entity.addEffect(new MobEffectInstance(EffectInit.SLIPPERINESS, 600, 1, false, false));
+        if (state.getFriction(entity.level, entity.blockPosition().below(), entity) > 0.6f) entity.addEffect(new MobEffectInstance(EffectInit.SLIPPERINESS.get(), 600, 1, false, false));
         BlockState blockState = entity.level.getBlockState(entity.blockPosition());
-        if (blockState.is(BlockInit.VISCOUS_GOO) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
-        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.defaultBlockState());
+        if (blockState.is(BlockInit.VISCOUS_GOO.get()) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
+        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.get().defaultBlockState());
     }
 
     @Override

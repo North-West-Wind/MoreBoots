@@ -31,7 +31,7 @@ public class BootRecyclerBlockEntity extends BlockEntity {
     private int cookTime;
 
     public BootRecyclerBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.BOOT_RECYCLER, pos, state);
+        super(BlockEntityInit.BOOT_RECYCLER.get(), pos, state);
     }
 
     public void tick() {
@@ -83,13 +83,11 @@ public class BootRecyclerBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound) {
-        super.save(compound);
+    public void saveAdditional(CompoundTag compound) {
         compound.put("Inventory", handler.getStackInSlot(0).serializeNBT());
         compound.putInt("GuiEnergy", energy);
         compound.putInt("CookTime", cookTime);
         storage.writeToNBT(compound);
-        return compound;
     }
 
     @Override

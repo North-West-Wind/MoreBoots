@@ -19,7 +19,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
         KeybindInit.register();
-        MenuScreens.register(ContainerInit.STORAGE_BOOTS, StorageBootsScreen::new);
+        MenuScreens.register(ContainerInit.STORAGE_BOOTS.get(), StorageBootsScreen::new);
     }
 
     @SubscribeEvent
@@ -28,6 +28,6 @@ public class ClientEvents {
             if (layer == 0) return -1;
             Potion potion = PotionUtils.getPotion(stack);
             return PotionUtils.getColor(potion);
-        }, ItemInit.GLASS_BOOTS);
+        }, ItemInit.GLASS_BOOTS.get());
     }
 }

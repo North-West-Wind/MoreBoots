@@ -1,7 +1,6 @@
 package ml.northwestwind.moreboots.init.item;
 
 import ml.northwestwind.moreboots.MoreBoots;
-import ml.northwestwind.moreboots.Reference;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +18,6 @@ public class TooltipItem extends Item {
     public TooltipItem(Properties properties, String registryName) {
         super(properties);
         this.registryName = registryName;
-        setRegistryName(Reference.MODID, registryName);
     }
 
     public TooltipItem(String registryName) {
@@ -28,7 +26,7 @@ public class TooltipItem extends Item {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn)
-    {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+
     }
 }

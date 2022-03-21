@@ -65,7 +65,7 @@ public class MoreBootsHandler {
     public static void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) {
         ItemStack to = event.getTo();
         ItemStack from = event.getFrom();
-        if (from.getItem().equals(ItemInit.LOKI_BOOTS) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
+        if (from.getItem().equals(ItemInit.LOKI_BOOTS.get()) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
         else {
             if (from.getItem() instanceof BootsItem) ((BootsItem) from.getItem()).onLivingEquipmentChange(event);
             if (to.getItem() instanceof BootsItem) ((BootsItem) to.getItem()).onLivingEquipmentChange(event);
@@ -85,11 +85,11 @@ public class MoreBootsHandler {
         if (shouldDrop < 1) return;
         LivingEntity entity = event.getEntityLiving();
         if (entity.getType().equals(EntityType.BAT)) {
-            ItemStack stack = new ItemStack(ItemInit.BAT_HIDE, shouldDrop);
+            ItemStack stack = new ItemStack(ItemInit.BAT_HIDE.get(), shouldDrop);
             ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
             event.getDrops().add(item);
         } else if (entity.getType().equals(EntityType.STRIDER)) {
-            ItemStack stack = new ItemStack(ItemInit.STRIDER_FOOT, shouldDrop);
+            ItemStack stack = new ItemStack(ItemInit.STRIDER_FOOT.get(), shouldDrop);
             ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
             event.getDrops().add(item);
         }
@@ -100,7 +100,7 @@ public class MoreBootsHandler {
         if (!END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) return;
         event.getTable().addPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(0.01f))
-                .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE))
+                .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE.get()))
                 .build());
     }
 }

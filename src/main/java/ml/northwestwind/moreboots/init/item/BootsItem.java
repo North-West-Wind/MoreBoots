@@ -1,7 +1,6 @@
 package ml.northwestwind.moreboots.init.item;
 
 import ml.northwestwind.moreboots.MoreBoots;
-import ml.northwestwind.moreboots.Reference;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -32,7 +31,6 @@ public class BootsItem extends ArmorItem {
 
     public BootsItem(ArmorMaterial material, String registryName, boolean isNetherite) {
         super(material, EquipmentSlot.FEET, isNetherite ? new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE).fireResistant() : new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE));
-        setRegistryName(Reference.MODID, registryName);
         this.registryName = registryName;
     }
 

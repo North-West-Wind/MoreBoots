@@ -30,7 +30,7 @@ public class EmptyGlassBootsItem extends BootsItem {
         BlockPos pos = blockRayTraceResult.getBlockPos();
         if (!worldIn.mayInteract(playerIn, pos)) return InteractionResultHolder.pass(stack);
         if (worldIn.getFluidState(pos).is(FluidTags.WATER)) {
-            ItemStack newStack = new ItemStack(ItemInit.GLASS_BOOTS, 1);
+            ItemStack newStack = new ItemStack(ItemInit.GLASS_BOOTS.get(), 1);
             PotionUtils.setPotion(newStack, Potions.WATER);
             playerIn.setItemInHand(handIn, newStack);
             return InteractionResultHolder.consume(newStack);

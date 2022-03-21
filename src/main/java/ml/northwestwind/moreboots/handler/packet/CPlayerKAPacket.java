@@ -20,7 +20,7 @@ public class CPlayerKAPacket implements IPacket {
         ServerPlayer player = ctx.getSender();
         if(player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(!boots.getItem().equals(ItemInit.KA_BOOTS)) return;
+        if(!boots.getItem().equals(ItemInit.KA_BOOTS.get())) return;
         BlockPos pos = new BlockPos(player.position());
         AABB area = new AABB(pos).inflate(4);
         List<Entity> collidedEntities = player.level.getEntities(player, area, EntitySelector.NO_SPECTATORS);

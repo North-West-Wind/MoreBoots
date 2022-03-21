@@ -16,7 +16,7 @@ public class CPlayerEnderTeleportPacket implements IPacket {
         ServerPlayer player = ctx.getSender();
         if(player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(!boots.getItem().equals(ItemInit.ENDER_BOOTS)) return;
+        if(!boots.getItem().equals(ItemInit.ENDER_BOOTS.get())) return;
         Vec3 pos = player.position().add(player.getLookAngle().multiply(8, 8, 8));
         BlockPos blockPos = new BlockPos(pos);
         while (!player.level.isEmptyBlock(blockPos)) blockPos = blockPos.above();

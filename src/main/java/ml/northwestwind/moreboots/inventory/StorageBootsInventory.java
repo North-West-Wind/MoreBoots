@@ -68,14 +68,14 @@ public class StorageBootsInventory implements Container {
     @Override
     public boolean stillValid(Player player)
     {
-        return player.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.STORAGE_BOOTS);
+        return player.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.STORAGE_BOOTS.get());
     }
 
     @Override
     public void startOpen(Player player) {
         this.clearContent();
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS)) {
+        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS.get())) {
             CompoundTag compound = boots.getOrCreateTag();
             if(compound.contains("Items")) loadAllItems((ListTag) compound.get("Items"), this);
         }
@@ -84,7 +84,7 @@ public class StorageBootsInventory implements Container {
     @Override
     public void stopOpen(Player player) {
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS)) {
+        if(boots.getItem().equals(ItemInit.STORAGE_BOOTS.get())) {
             CompoundTag compound = boots.getOrCreateTag();
             ListTag list = new ListTag();
             saveAllItems(list, this);
