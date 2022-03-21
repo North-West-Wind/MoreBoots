@@ -6,7 +6,8 @@
   "mixins": [
     "MixinBlockStateBase",
     "MixinBoat",
-    "MixinLivingEntity"
+    "MixinLivingEntity",
+    "MixinLivingEntityAccessor"
   ],
   "minVersion": "0.8"
 }
