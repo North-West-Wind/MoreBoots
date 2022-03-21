@@ -7,6 +7,7 @@ import ml.northwestwind.moreboots.init.BlockInit;
 import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
+import ml.northwestwind.moreboots.mixins.MixinLivingEntityAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -66,12 +67,16 @@ public class SuperAvianFeetItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1) entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false, false));
-        if (entity.getDeltaMovement().y() < 0.02 && !entity.isCrouching()) {
-            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.05, 0, 1.05).add(0, -0.02, 0));
-            entity.hasImpulse = true;
-            entity.fallDistance = 0;
-        }
-        if (entity.isCrouching() && entity.isOnGround()) {
+        if (!entity.isCrouching()) {
+            double addToY = 0;
+            if (entity instanceof Player && ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.02;
+            else if (entity.getDeltaMovement().y() < 0) addToY = -0.02;
+            if (addToY != 0) {
+                entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.05, 0, 1.05).add(0, addToY, 0));
+                entity.hasImpulse = true;
+                entity.fallDistance = 0;
+            }
+        } else if (entity.isOnGround()) {
             CompoundTag tag = boots.getOrCreateTag();
             long tickSneak = tag.getLong("tickSneak");
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
