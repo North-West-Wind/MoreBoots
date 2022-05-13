@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    },
+    {
+      "tag": "forge:ingots/titanium"
+    }
+  ],
+  "result": {
+    "item": "moreboots:titanium_block",
+    "count": 1
+  }
+}

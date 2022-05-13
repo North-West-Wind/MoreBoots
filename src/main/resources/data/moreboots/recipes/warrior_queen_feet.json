@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "WHW",
+    "FRF"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:purple_wool"
+    },
+    "W": {
+      "item": "moreboots:war_stone"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "R": {
+      "item": "moreboots:rainbow_socks_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:warrior_queen_feet",
+    "count": 1
+  }
+}

@@ -97,10 +97,28 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onLootTableLoad(final LootTableLoadEvent event) {
-        if (!END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) return;
-        event.getTable().addPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(0.01f))
-                .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE.get()))
-                .build());
+        if (event.getName().getPath().startsWith("chests")) {
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.1f))
+                            .add(LootItem.lootTableItem(ItemInit.SUPER_AVIAN_FEET.get()))
+                            .build()
+            );
+        }
+        if (END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) {
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.01f))
+                            .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE.get()))
+                            .add(LootItem.lootTableItem(ItemInit.HEROIC_CORE.get()))
+                            .build()
+            );
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.00027f))
+                            .add(LootItem.lootTableItem(ItemInit.BIONIC_CORE.get()))
+                            .build()
+            );
+        }
     }
 }

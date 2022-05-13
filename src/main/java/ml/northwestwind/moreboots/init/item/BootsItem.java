@@ -41,7 +41,6 @@ public class BootsItem extends ArmorItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        if (!(stack.getItem() instanceof BootsItem)) return;
         tooltip.add(new TranslatableComponent("tooltip.moreboots." + registryName));
     }
 

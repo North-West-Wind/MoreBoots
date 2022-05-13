@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "CnC",
+    "#C#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dusts/titanium"
+    },
+    "C": {
+      "item": "moreboots:cobblestone_512"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "moreboots:titanium_ingot",
+    "count": 1
+  }
+}
