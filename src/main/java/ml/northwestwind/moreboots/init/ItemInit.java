@@ -95,6 +95,10 @@ public class ItemInit {
     public static final RegistryObject<Item> WARRIOR_QUEEN_FEET = ITEMS.register("warrior_queen_feet", WarriorQueenFeet::new);
     public static final RegistryObject<Item> CINDERING_FEET = ITEMS.register("cindering_feet", CinderingFeetItem::new);
     public static final RegistryObject<Item> INCINERATING_FEET = ITEMS.register("incinerating_feet", IncineratingFeetItem::new);
+    public static final RegistryObject<Item> MIGHTY_FEET = ITEMS.register("mighty_feet", MightyFeetItem::new);
+    public static final RegistryObject<Item> POWER_FEET = ITEMS.register("power_feet", PowerFeetItem::new);
+    public static final RegistryObject<Item> JOLT_FEET = ITEMS.register("jolt_feet", JoltFeetItem::new);
+    public static final RegistryObject<Item> WATER_NINJA_FEET = ITEMS.register("water_ninja_feet", WaterNinjaFeet::new);
 
     public static final RegistryObject<Item> HEROIC_CORE = ITEMS.register("heroic_core", () -> new TooltipItem("heroic_core"));
     public static final RegistryObject<Item> TITANIUM_DUST = ITEMS.register("titanium_dust", () -> new TooltipItem("titanium_dust"));
@@ -212,7 +216,11 @@ public class ItemInit {
         SUPER(Reference.MODID + ":super", 8, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.PURENESS_STONE.get())),
         WARRIOR_QUEEN(Reference.MODID + ":warrior_queen", 40, 6, 45, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f, 160000, () -> Ingredient.of(ItemInit.WAR_STONE.get())),
         CINDERING(Reference.MODID + ":cindering", 40, 3, 30, SoundEvents.FIREWORK_ROCKET_BLAST, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.FIRE_STONE.get())),
-        INCINERATING(Reference.MODID + ":incinerating", 50, 4, 50, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FIRE_STONE.get()));
+        INCINERATING(Reference.MODID + ":incinerating", 50, 4, 50, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FIRE_STONE.get())),
+        MIGHTY(Reference.MODID + ":mighty", 18, 4, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 50000, () -> Ingredient.of(ItemInit.WAR_STONE.get(), ItemInit.METAL_STONE.get())),
+        POWER(Reference.MODID + ":power", 16, 3, 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, 40000, () -> Ingredient.of(Items.GLOW_INK_SAC)),
+        JOLT(Reference.MODID + ":jolt", 15, 4, 10, SoundEvents.LIGHTNING_BOLT_THUNDER, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
+        WATER_NINJA(Reference.MODID + ":water_ninja", 15, 3, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.WATER_STONE.get()));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

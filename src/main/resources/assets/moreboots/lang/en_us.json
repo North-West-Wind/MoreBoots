@@ -80,11 +80,12 @@
   "effect.moreboots.slipperiness": "Slipperiness",
 
   "message.moreboots.building_speed": "Building up speed for \u00A76%d ticks",
+  "message.moreboots.charging_explosion": "Charging explosion power: \u00A76%d/10",
 
   "tooltip.moreboots.quartz_boots": "\u00A77\u00A7oSuper protective but vulnerable to fall damage.",
   "tooltip.moreboots.spider_boots": "\u00A77\u00A7oClimbs faster than ladder.",
   "tooltip.moreboots.socks_boots": "\u00A77\u00A7oUseful in cold biomes.",
-  "tooltip.moreboots.rainbow_socks_boots": "\u00A77\u00A7oThe Legendary Rainbow Socks.",
+  "tooltip.moreboots.rainbow_socks_boots": "\u00A77\u00A7oThe Legendary Rainbow Socks, for 1 only.",
   "tooltip.moreboots.miner_boots": "\u00A77\u00A7oPermanent haste effect.",
   "tooltip.moreboots.lapis_boots": "\u00A77\u00A7oDoubles the experience.",
   "tooltip.moreboots.glowstone_boots": "\u00A77\u00A7oIlluminates the surroundings.",
@@ -141,6 +142,10 @@
   "tooltip.moreboots.super_feet": "\u00A77\u00A7oAlways slightly above the ground.",
   "tooltip.moreboots.warrior_queen_feet": "\u00A77\u00A7oYour punches become explosive.",
   "tooltip.moreboots.cindering_feet": "\u00A77\u00A7oBurns every enemy.",
+  "tooltip.moreboots.mighty_feet": "\u00A77\u00A7oCharges like a creeper.",
+  "tooltip.moreboots.power_feet": "\u00A77\u00A7oHit them like a baseball!",
+  "tooltip.moreboots.jolt_feet": "\u00A77\u00A7oStrikes every enemy in the area. Don't use in water!",
+  "tooltip.moreboots.water_ninja_feet": "\u00A77\u00A7oCrosses water with ease.",
 
   "tooltip.moreboots.quartz_ingot": "\u00A77\u00A7oStrengthened quartz.",
   "tooltip.moreboots.metal_mix": "\u00A77\u00A7oThe combination of minerals.",

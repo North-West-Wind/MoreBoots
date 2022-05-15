@@ -164,4 +164,9 @@ public class Utils {
 
         return i > 0;
     }
+
+    public static double roundTo(double val, int deci) {
+        double tens = Math.pow(10, deci);
+        return Math.round(val * tens) / tens;
+    }
 }

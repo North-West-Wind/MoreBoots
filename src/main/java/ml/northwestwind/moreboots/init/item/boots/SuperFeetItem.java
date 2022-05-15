@@ -45,7 +45,7 @@ public class SuperFeetItem extends BootsItem {
     public void onLivingAttack(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
         Entity source = event.getSource().getEntity();
-        Vec3 pos = source.position().add(source.getLookAngle());
+        Vec3 pos = source.getEyePosition().add(source.getLookAngle().scale(0.1));
         entity.level.explode(source, pos.x, pos.y, pos.z, 1, Explosion.BlockInteraction.NONE);
         event.setAmount(event.getAmount() * 1.1f);
     }

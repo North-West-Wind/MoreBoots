@@ -28,6 +28,7 @@ public class MoreBootsPacketHandler {
         registerPacket(CShootDragonBallPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CShootWitherSkullPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CActivateBootsPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CStrikeAreaPacket.class, NetworkDirection.PLAY_TO_SERVER);
     }
 
     private static <P extends IPacket> void registerPacket(Class<P> clazz, NetworkDirection direction) {

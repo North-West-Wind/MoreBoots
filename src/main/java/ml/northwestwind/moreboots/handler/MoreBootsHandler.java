@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -52,7 +53,7 @@ public class MoreBootsHandler {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         ItemStack atBoots;
         if (attacker instanceof LivingEntity && (atBoots = ((LivingEntity) attacker).getItemBySlot(EquipmentSlot.FEET)).getItem() instanceof BootsItem) ((BootsItem) atBoots.getItem()).onLivingAttack(event);
-        else if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingHurt(event);
+        if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingHurt(event);
     }
 
     @SubscribeEvent
@@ -93,6 +94,18 @@ public class MoreBootsHandler {
             ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
             event.getDrops().add(item);
         }
+    }
+
+    @SubscribeEvent
+    public static void onLivingKnockBack(final LivingKnockBackEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        DamageSource source = entity.getLastDamageSource();
+        if (source != null && (source.getEntity() instanceof LivingEntity attacker)) {
+            ItemStack attBoots = attacker.getItemBySlot(EquipmentSlot.FEET);
+            if (attBoots.getItem() instanceof BootsItem item) item.onLivingKnockBack(event);
+        }
+        if (boots.getItem() instanceof BootsItem item) item.onLivingKnockedBack(event);
     }
 
     @SubscribeEvent
