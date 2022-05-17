@@ -6,6 +6,7 @@
   "mixins": [
     "MixinBlockStateBase",
     "MixinBoat",
+    "MixinInventory",
     "MixinLivingEntity",
     "MixinLivingEntityAccessor"
   ],

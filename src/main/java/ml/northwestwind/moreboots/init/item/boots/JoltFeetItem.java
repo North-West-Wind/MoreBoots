@@ -2,26 +2,21 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.handler.MoreBootsPacketHandler;
+import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.handler.packet.CStrikeAreaPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.List;
 
 public class JoltFeetItem extends BootsItem {
     private static final ResourceLocation ELECTRIC_TAG = new ResourceLocation(Reference.MODID, "wools");
@@ -47,6 +42,16 @@ public class JoltFeetItem extends BootsItem {
     public void activateBoots() {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        MoreBootsPacketHandler.INSTANCE.sendToServer(new CStrikeAreaPacket());
+        if (player.getInventory().countItem(Items.SAND) == 0) return;
+        boolean shouldStrike = player.isCreative();
+        if (!shouldStrike) {
+            int slot = Utils.getStackSlot(player.getInventory(), Items.LIGHTNING_ROD);
+            if (slot > -1) {
+                ItemStack stack = player.getInventory().getItem(slot);
+                stack.shrink(1);
+                shouldStrike = true;
+            }
+        }
+        if (shouldStrike && player.level.isClientSide) MoreBootsPacketHandler.INSTANCE.sendToServer(new CStrikeAreaPacket());
     }
 }

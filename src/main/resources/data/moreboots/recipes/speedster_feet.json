@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#F#",
+    "FSF",
+    "#F#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:electric_stone"
+    },
+    "F": {
+      "item": "moreboots:fire_stone"
+    },
+    "S": {
+      "item": "moreboots:slippery_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:speedster_feet",
+    "count": 1
+  }
+}

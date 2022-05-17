@@ -79,8 +79,9 @@
   "effect.moreboots.warmth": "Warmth",
   "effect.moreboots.slipperiness": "Slipperiness",
 
-  "message.moreboots.building_speed": "Building up speed for \u00A76%d ticks",
+  "message.moreboots.charging_jump": "Building up speed for \u00A76%d ticks",
   "message.moreboots.charging_explosion": "Charging explosion power: \u00A76%d/10",
+  "message.moreboots.charging_speed": "Charging up speed for \u00A76%d ticks",
 
   "tooltip.moreboots.quartz_boots": "\u00A77\u00A7oSuper protective but vulnerable to fall damage.",
   "tooltip.moreboots.spider_boots": "\u00A77\u00A7oClimbs faster than ladder.",

@@ -61,7 +61,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             tickSneak += 1;
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.building_speed", tickSneak), true);
+                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_jump", tickSneak), true);
             if (tickSneak >= 864000 && !entity.isSpectator()) {
                 Vec3 pos = entity.position();
                 tag.putLong("tickSneak", 0);

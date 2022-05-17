@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "SJS"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:electric_stone"
+    },
+    "B": {
+      "item": "minecraft:blue_ice"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    },
+    "J": {
+      "item": "moreboots:jolt_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:electricity_feet",
+    "count": 1
+  }
+}

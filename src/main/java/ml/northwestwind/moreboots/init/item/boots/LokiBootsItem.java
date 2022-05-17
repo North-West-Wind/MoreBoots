@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -33,6 +34,13 @@ public class LokiBootsItem extends BootsItem {
         else entity.setInvisible(true);
         tag.putInt("tickStill", tickStill);
         boots.setTag(tag);
+    }
+
+    @Override
+    public void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
+        ItemStack to = event.getTo();
+        ItemStack from = event.getFrom();
+        if (from.getItem().equals(ItemInit.LOKI_BOOTS.get()) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
     }
 
     @Override
