@@ -15,8 +15,6 @@ public class CactusBootsItem extends BootsItem {
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
         Entity attacker = event.getSource().getEntity();
-        if (event.getSource().isProjectile()) return;
-        float amount = event.getAmount();
-        if (attacker instanceof LivingEntity) attacker.hurt(DamageSource.CACTUS, amount / 3.0f);
+        if (attacker instanceof LivingEntity) attacker.hurt(DamageSource.CACTUS, event.getAmount() / 3.0f);
     }
 }

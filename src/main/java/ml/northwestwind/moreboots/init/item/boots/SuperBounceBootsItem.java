@@ -1,48 +1,35 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
-import net.minecraft.core.BlockPos;
+import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-public class RainbowSocksBootItem extends SocksBootsItem {
-    public RainbowSocksBootItem() {
-        super(ItemInit.ModArmorMaterial.RAINBOW_SOCKS, "rainbow_socks_boots");
+public class SuperBounceBootsItem extends BootsItem {
+    public SuperBounceBootsItem() {
+        super(ItemInit.ModArmorMaterial.SUPER_BOUNCE, "super_bounce_boots");
     }
 
     @Override
-    public void onLivingFall(LivingFallEvent event) {
+    public void onLivingFall(final LivingFallEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        if (entity.isCrouching()) return;
         float distance = event.getDistance();
-        if (distance < 1.5) return;
-        Vec3 motion = entity.getDeltaMovement();
-        entity.setDeltaMovement(motion.x * 1.05, Math.sqrt(distance) / 3.0, motion.z * 1.05);
-        entity.hasImpulse = true;
-        entity.playSound(SoundEvents.SLIME_BLOCK_HIT, 1, 1);
+        if (entity.level.isClientSide) return;
         event.setCanceled(true);
-        if (!entity.level.isClientSide) ((ServerLevel) entity.level).getServer().getPlayerList().broadcastAll(new ClientboundSetEntityMotionPacket(entity));
+        if (distance > 10) entity.playSound(SoundEvents.PLAYER_BIG_FALL, 1, 1);
+        else if (distance > 3) entity.playSound(SoundEvents.PLAYER_SMALL_FALL, 1, 1);
     }
 
     @Override
@@ -52,7 +39,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
         CompoundTag tag = boots.getOrCreateTag();
-        entity.setDeltaMovement(motion.add(0, 0.005 * tag.getLong("tickSneak"), 0));
+        entity.setDeltaMovement(motion.add(0, 0.01 * tag.getLong("tickSneak"), 0));
         tag.putLong("tickSneak", 0);
         boots.setTag(tag);
     }

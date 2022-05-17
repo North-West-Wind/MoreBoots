@@ -2,6 +2,7 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -26,9 +27,11 @@ public class WarriorQueenFeet extends BootsItem {
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        Entity source = event.getSource().getEntity();
-        Vec3 pos = source.position().add(source.getLookAngle());
-        entity.level.explode(source, pos.x, pos.y, pos.z, 2, Explosion.BlockInteraction.NONE);
+        DamageSource source = event.getSource();
+        if (source.isProjectile()) return;
+        Entity attacker = source.getDirectEntity();
+        Vec3 pos = attacker.position().add(attacker.getLookAngle());
+        entity.level.explode(attacker, pos.x, pos.y, pos.z, 2, Explosion.BlockInteraction.NONE);
         event.setAmount(event.getAmount() * 1.5f);
     }
 }

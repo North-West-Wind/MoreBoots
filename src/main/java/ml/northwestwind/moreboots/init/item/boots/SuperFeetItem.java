@@ -7,6 +7,7 @@ import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
@@ -43,9 +44,11 @@ public class SuperFeetItem extends BootsItem {
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        Entity source = event.getSource().getEntity();
-        Vec3 pos = source.getEyePosition().add(source.getLookAngle().scale(0.1));
-        entity.level.explode(source, pos.x, pos.y, pos.z, 1, Explosion.BlockInteraction.NONE);
+        DamageSource source = event.getSource();
+        if (source.isProjectile()) return;
+        Entity attacker = source.getDirectEntity();
+        Vec3 pos = attacker.getEyePosition().add(attacker.getLookAngle().scale(0.1));
+        entity.level.explode(attacker, pos.x, pos.y, pos.z, 1, Explosion.BlockInteraction.NONE);
         event.setAmount(event.getAmount() * 1.1f);
     }
 

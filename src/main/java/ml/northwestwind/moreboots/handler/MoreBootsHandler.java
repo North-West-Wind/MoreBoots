@@ -49,7 +49,7 @@ public class MoreBootsHandler {
     @SubscribeEvent
     public static void onLivingHurt(final LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        Entity attacker = event.getSource().getEntity();
+        Entity attacker = event.getSource().getDirectEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         ItemStack atBoots;
         if (attacker instanceof LivingEntity && (atBoots = ((LivingEntity) attacker).getItemBySlot(EquipmentSlot.FEET)).getItem() instanceof BootsItem) ((BootsItem) atBoots.getItem()).onLivingAttack(event);
@@ -100,7 +100,7 @@ public class MoreBootsHandler {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         DamageSource source = entity.getLastDamageSource();
-        if (source != null && (source.getEntity() instanceof LivingEntity attacker)) {
+        if (source != null && (source.getDirectEntity() instanceof LivingEntity attacker)) {
             ItemStack attBoots = attacker.getItemBySlot(EquipmentSlot.FEET);
             if (attBoots.getItem() instanceof BootsItem item) item.onLivingKnockBack(event);
         }

@@ -38,7 +38,7 @@ public class MightyFeetItem extends BootsItem {
 
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
-        LivingEntity source = (LivingEntity) event.getSource().getEntity();
+        LivingEntity source = (LivingEntity) event.getSource().getDirectEntity();
         ItemStack boots = source.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         float power = tag.getLong("tickSneak") / 60f;
