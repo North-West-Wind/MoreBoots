@@ -10,16 +10,23 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.IReverseTag;
+
+import java.util.Optional;
 
 public class JoltFeetItem extends BootsItem {
-    private static final ResourceLocation ELECTRIC_TAG = new ResourceLocation(Reference.MODID, "wools");
+    private static final TagKey<Block> ELECTRIC_TAG = BlockTags.create(new ResourceLocation(Reference.MODID, "wools"));
 
     public JoltFeetItem() {
         super(ItemInit.ModArmorMaterial.JOLT, "jolt_feet");
@@ -29,7 +36,9 @@ public class JoltFeetItem extends BootsItem {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         BlockPos pos = entity.blockPosition();
-        if (entity.level.getBlockState(pos).getBlock().getTags().contains(ELECTRIC_TAG) || entity.level.getBlockState(pos.below()).getBlock().getTags().contains(ELECTRIC_TAG)) {
+        Optional<IReverseTag<Block>> thisBlockTag = ForgeRegistries.BLOCKS.tags().getReverseTag(entity.level.getBlockState(pos).getBlock());
+        Optional<IReverseTag<Block>> downBlockTag = ForgeRegistries.BLOCKS.tags().getReverseTag(entity.level.getBlockState(pos.below()).getBlock());
+        if ((thisBlockTag.isPresent() && thisBlockTag.get().containsTag(ELECTRIC_TAG)) || (downBlockTag.isPresent() && downBlockTag.get().containsTag(ELECTRIC_TAG))) {
             if (!entity.getDeltaMovement().equals(Vec3.ZERO) && entity.level.getRandom().nextDouble() < 0.005) {
                 LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level);
                 lightning.setPos(entity.getX(), entity.getY(), entity.getZ());
