@@ -4,8 +4,10 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,13 +32,17 @@ public class RainbowSocksBootItem extends SocksBootsItem {
     }
 
     @Override
-    public void onLivingFall(final LivingFallEvent event) {
+    public void onLivingFall(LivingFallEvent event) {
         LivingEntity entity = event.getEntityLiving();
+        if (entity.isCrouching()) return;
         float distance = event.getDistance();
-        if (entity.level.isClientSide) return;
+        if (distance < 1.5) return;
+        Vec3 motion = entity.getDeltaMovement();
+        entity.setDeltaMovement(motion.x * 1.05, Math.sqrt(distance) / 3.0, motion.z * 1.05);
+        entity.hasImpulse = true;
+        entity.playSound(SoundEvents.SLIME_BLOCK_HIT, 1, 1);
         event.setCanceled(true);
-        if (distance > 10) entity.playSound(SoundEvents.PLAYER_BIG_FALL, 1, 1);
-        else if (distance > 3) entity.playSound(SoundEvents.PLAYER_SMALL_FALL, 1, 1);
+        if (!entity.level.isClientSide) ((ServerLevel) entity.level).getServer().getPlayerList().broadcastAll(new ClientboundSetEntityMotionPacket(entity));
     }
 
     @Override
@@ -46,7 +52,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
         CompoundTag tag = boots.getOrCreateTag();
-        entity.setDeltaMovement(motion.add(0, 0.01 * tag.getLong("tickSneak"), 0));
+        entity.setDeltaMovement(motion.add(0, 0.005 * tag.getLong("tickSneak"), 0));
         tag.putLong("tickSneak", 0);
         boots.setTag(tag);
     }
@@ -61,7 +67,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             tickSneak += 1;
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.building_speed", tickSneak), true);
+                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_jump", tickSneak), true);
             if (tickSneak >= 864000 && !entity.isSpectator()) {
                 Vec3 pos = entity.position();
                 tag.putLong("tickSneak", 0);
@@ -76,11 +82,5 @@ public class RainbowSocksBootItem extends SocksBootsItem {
             }
             boots.setTag(tag);
         }
-    }
-
-    @Override
-    public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        BlockState state = worldIn.getBlockState(pos);
-        if(state.getMaterial().equals(Material.WATER) && context.isAbove(Shapes.block(), pos, true)) cir.setReturnValue(Shapes.block());
     }
 }

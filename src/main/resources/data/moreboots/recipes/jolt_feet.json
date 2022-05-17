@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "EHE",
+    "GLG"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lightning_rod"
+    },
+    "E": {
+      "item": "moreboots:electric_stone"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "L": {
+      "item": "moreboots:lightning_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:jolt_feet",
+    "count": 1
+  }
+}

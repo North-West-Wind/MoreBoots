@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "THT",
+    "PMG"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:war_stone"
+    },
+    "T": {
+      "tag": "forge:ingots/titanium"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "P": {
+      "item": "moreboots:power_feet"
+    },
+    "M": {
+      "item": "moreboots:metal_stone"
+    },
+    "G": {
+      "item": "moreboots:gliding_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:mighty_feet",
+    "count": 1
+  }
+}

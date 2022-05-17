@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "CHC",
+    "#V#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "C": {
+      "item": "minecraft:cobweb"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "V": {
+      "item": "moreboots:viscous_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:power_feet",
+    "count": 1
+  }
+}

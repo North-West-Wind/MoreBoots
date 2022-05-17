@@ -1,5 +1,9 @@
 {
   "values": [
-    "moreboots:boot_recycler"
+    "moreboots:boot_recycler",
+    "moreboots:cobblestone_8",
+    "moreboots:cobblestone_64",
+    "moreboots:cobblestone_512",
+    "moreboots:titanium_block"
   ]
 }

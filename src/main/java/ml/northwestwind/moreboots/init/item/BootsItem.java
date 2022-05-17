@@ -15,10 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -41,7 +38,6 @@ public class BootsItem extends ArmorItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        if (!(stack.getItem() instanceof BootsItem)) return;
         tooltip.add(new TranslatableComponent("tooltip.moreboots." + registryName));
     }
 
@@ -55,6 +51,8 @@ public class BootsItem extends ArmorItem {
     public void onPlayerXpChange(final PlayerXpEvent.XpChange event) { }
     public void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) { }
     public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) { }
+    public void onLivingKnockBack(final LivingKnockBackEvent event) { }
+    public void onLivingKnockedBack(final LivingKnockBackEvent event) { }
     @OnlyIn(Dist.CLIENT)
     public void activateBoots() { }
     @OnlyIn(Dist.CLIENT)

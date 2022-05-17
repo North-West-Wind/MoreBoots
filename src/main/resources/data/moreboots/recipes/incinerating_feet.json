@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#F#",
+    "MCM",
+    "MLM"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:magma_block"
+    },
+    "F": {
+      "item": "moreboots:fire_stone"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "C": {
+      "item": "moreboots:cindering_feet"
+    },
+    "L": {
+      "item": "minecraft:lava_bucket"
+    }
+  },
+  "result": {
+    "item": "moreboots:incinerating_boots",
+    "count": 1
+  }
+}

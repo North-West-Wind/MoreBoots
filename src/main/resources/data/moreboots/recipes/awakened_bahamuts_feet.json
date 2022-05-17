@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "EBE",
+    "PFP"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:soul_stone"
+    },
+    "E": {
+      "item": "moreboots:electric_stone"
+    },
+    "B": {
+      "item": "moreboots:bahamuts_feet"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "F": {
+      "item": "moreboots:floating_core"
+    }
+  },
+  "result": {
+    "item": "moreboots:awakened_bahamuts_feet",
+    "count": 1
+  }
+}

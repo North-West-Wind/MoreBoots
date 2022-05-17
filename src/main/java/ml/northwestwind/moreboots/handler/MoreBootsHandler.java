@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -48,11 +49,11 @@ public class MoreBootsHandler {
     @SubscribeEvent
     public static void onLivingHurt(final LivingHurtEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        Entity attacker = event.getSource().getEntity();
+        Entity attacker = event.getSource().getDirectEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         ItemStack atBoots;
         if (attacker instanceof LivingEntity && (atBoots = ((LivingEntity) attacker).getItemBySlot(EquipmentSlot.FEET)).getItem() instanceof BootsItem) ((BootsItem) atBoots.getItem()).onLivingAttack(event);
-        else if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingHurt(event);
+        if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).onLivingHurt(event);
     }
 
     @SubscribeEvent
@@ -65,8 +66,7 @@ public class MoreBootsHandler {
     public static void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) {
         ItemStack to = event.getTo();
         ItemStack from = event.getFrom();
-        if (from.getItem().equals(ItemInit.LOKI_BOOTS.get()) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
-        else {
+        if (event.getSlot().equals(EquipmentSlot.FEET)) {
             if (from.getItem() instanceof BootsItem) ((BootsItem) from.getItem()).onLivingEquipmentChange(event);
             if (to.getItem() instanceof BootsItem) ((BootsItem) to.getItem()).onLivingEquipmentChange(event);
         }
@@ -96,11 +96,41 @@ public class MoreBootsHandler {
     }
 
     @SubscribeEvent
+    public static void onLivingKnockBack(final LivingKnockBackEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+        DamageSource source = entity.getLastDamageSource();
+        if (source != null && (source.getDirectEntity() instanceof LivingEntity attacker)) {
+            ItemStack attBoots = attacker.getItemBySlot(EquipmentSlot.FEET);
+            if (attBoots.getItem() instanceof BootsItem item) item.onLivingKnockBack(event);
+        }
+        if (boots.getItem() instanceof BootsItem item) item.onLivingKnockedBack(event);
+    }
+
+    @SubscribeEvent
     public static void onLootTableLoad(final LootTableLoadEvent event) {
-        if (!END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) return;
-        event.getTable().addPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(0.01f))
-                .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE.get()))
-                .build());
+        if (event.getName().getPath().startsWith("chests")) {
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.1f))
+                            .add(LootItem.lootTableItem(ItemInit.SUPER_AVIAN_FEET.get()))
+                            .build()
+            );
+        }
+        if (END_CITY_TREASURE_LOOT_TABLE.equals(event.getName())) {
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.01f))
+                            .add(LootItem.lootTableItem(ItemInit.FLOATING_CORE.get()))
+                            .add(LootItem.lootTableItem(ItemInit.HEROIC_CORE.get()))
+                            .build()
+            );
+            event.getTable().addPool(
+                    LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(0.00027f))
+                            .add(LootItem.lootTableItem(ItemInit.BIONIC_CORE.get()))
+                            .build()
+            );
+        }
     }
 }

@@ -5,16 +5,19 @@ issueTrackerURL="https://github.com/North-West-Wind/MoreBoots/issues"
 
 [[mods]]
 modId="moreboots"
-version="3.1.2"
+version="3.2.0"
 displayName="More Boots"
 updateJSONURL="https://github.com/North-West-Wind/MoreBoots/raw/main/update.json"
 displayURL="https://github.com/North-West-Wind/MoreBoots"
 logoFile="moreboots.png"
 credits="Thanks for playing with More Boots!"
-authors="NorthWestWind"
+authors="NorthWestWind, Zinaida"
 description='''
 Oh, you love shoes? Name every boots in this mod.
 (Note: There isn't a lot of boots in this mod currently, but it will receive constant updates in the future.)
+
+Major Updates:
+Heroic Update - Fully suggested by Zinaida
 '''
 
 [[dependencies.moreboots]]

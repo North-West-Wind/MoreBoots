@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "SSS",
+    "PPP"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:rainbow_socks_boots"
+    },
+    "S": {
+      "item": "minecraft:slime_block"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "result": {
+    "item": "moreboots:super_bounce_boots",
+    "count": 1
+  }
+}

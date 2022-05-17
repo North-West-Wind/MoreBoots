@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "gHg",
+    "GFG"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:pureness_stone"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "F": {
+      "item": "moreboots:flying_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:super_feet",
+    "count": 1
+  }
+}

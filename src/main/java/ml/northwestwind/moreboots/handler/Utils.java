@@ -2,12 +2,16 @@ package ml.northwestwind.moreboots.handler;
 
 import com.google.common.collect.Lists;
 import ml.northwestwind.moreboots.handler.packet.IPacket;
+import ml.northwestwind.moreboots.mixins.MixinInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,10 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 public class Utils {
     public static ArrayList<Block> target = new ArrayList<>();
@@ -164,5 +165,26 @@ public class Utils {
         }
 
         return i > 0;
+    }
+
+    public static double roundTo(double val, int deci) {
+        double tens = Math.pow(10, deci);
+        return Math.round(val * tens) / tens;
+    }
+
+    public static int getStackSlot(Inventory inventory, Item item) {
+        boolean found = false;
+        int slot = -1;
+        for (List<ItemStack> stacks : ((MixinInventory) inventory).compartments()) {
+            for (ItemStack stack : stacks) {
+                if (stack.getItem().equals(item)) {
+                    slot = inventory.findSlotMatchingItem(stack);
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        return slot;
     }
 }

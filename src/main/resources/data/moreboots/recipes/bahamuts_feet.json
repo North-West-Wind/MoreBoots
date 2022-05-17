@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "WHW",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:soul_stone"
+    },
+    "W": {
+      "item": "moreboots:war_stone"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "G": {
+      "item": "moreboots:gliding_boots"
+    }
+  },
+  "result": {
+    "item": "moreboots:bahamuts_feet",
+    "count": 1
+  }
+}

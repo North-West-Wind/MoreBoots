@@ -90,6 +90,37 @@ public class ItemInit {
     public static final RegistryObject<Item> VISCOUS_GOO = ITEMS.register("viscous_goo", () -> new ItemNameBlockItem(BlockInit.VISCOUS_GOO.get(), new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
     public static final RegistryObject<Item> SMOOTH_FABRIC = ITEMS.register("smooth_fabric", () -> new TooltipItem("smooth_fabric"));
 
+    // Heroic update items
+    public static final RegistryObject<Item> SUPER_FEET = ITEMS.register("super_feet", SuperFeetItem::new);
+    public static final RegistryObject<Item> WARRIOR_QUEEN_FEET = ITEMS.register("warrior_queen_feet", WarriorQueenFeet::new);
+    public static final RegistryObject<Item> CINDERING_FEET = ITEMS.register("cindering_feet", CinderingFeetItem::new);
+    public static final RegistryObject<Item> INCINERATING_FEET = ITEMS.register("incinerating_feet", IncineratingFeetItem::new);
+    public static final RegistryObject<Item> MIGHTY_FEET = ITEMS.register("mighty_feet", MightyFeetItem::new);
+    public static final RegistryObject<Item> POWER_FEET = ITEMS.register("power_feet", PowerFeetItem::new);
+    public static final RegistryObject<Item> JOLT_FEET = ITEMS.register("jolt_feet", JoltFeetItem::new);
+    public static final RegistryObject<Item> WATER_NINJA_FEET = ITEMS.register("water_ninja_feet", WaterNinjaFeet::new);
+    public static final RegistryObject<Item> ELECTRICITY_FEET = ITEMS.register("electricity_feet", ElectricityFeetItem::new);
+    public static final RegistryObject<Item> BAHAMUTS_FEET = ITEMS.register("bahamuts_feet", BahamutsFeetItem::new);
+    public static final RegistryObject<Item> AWAKENED_BAHAMUTS_FEET = ITEMS.register("awakened_bahamuts_feet", AwakenedBahamutsFeet::new);
+    public static final RegistryObject<Item> SPEEDSTER_FEET = ITEMS.register("speedster_feet", SpeedsterFeetItem::new);
+    public static final RegistryObject<Item> SUPER_BOUNCE_BOOTS = ITEMS.register("super_bounce_boots", SuperBounceBootsItem::new);
+    public static final RegistryObject<Item> SOUL_BOOTS = ITEMS.register("soul_boots", SoulBootsItem::new);
+
+    public static final RegistryObject<Item> HEROIC_CORE = ITEMS.register("heroic_core", () -> new TooltipItem("heroic_core"));
+    public static final RegistryObject<Item> TITANIUM_DUST = ITEMS.register("titanium_dust", () -> new TooltipItem("titanium_dust"));
+    public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", () -> new TooltipItem("titanium_ingot"));
+    public static final RegistryObject<Item> BIONIC_INGOT = ITEMS.register("bionic_ingot", () -> new TooltipItem("bionic_ingot"));
+    public static final RegistryObject<Item> SOUL_STONE = ITEMS.register("soul_stone", () -> new TooltipItem("soul_stone"));
+    public static final RegistryObject<Item> ELECTRIC_STONE = ITEMS.register("electric_stone", () -> new TooltipItem("electric_stone"));
+    public static final RegistryObject<Item> WATER_STONE = ITEMS.register("water_stone", () -> new TooltipItem("water_stone"));
+    public static final RegistryObject<Item> FIRE_STONE = ITEMS.register("fire_stone", () -> new TooltipItem("fire_stone"));
+    public static final RegistryObject<Item> METAL_STONE = ITEMS.register("metal_stone", () -> new TooltipItem("metal_stone"));
+    public static final RegistryObject<Item> PURENESS_STONE = ITEMS.register("pureness_stone", () -> new TooltipItem("pureness_stone"));
+    public static final RegistryObject<Item> WAR_STONE = ITEMS.register("war_stone", () -> new TooltipItem("war_stone"));
+    public static final RegistryObject<Item> NATURE_STONE = ITEMS.register("nature_stone", () -> new TooltipItem("nature_stone"));
+    public static final RegistryObject<Item> BIONIC_CORE = ITEMS.register("bionic_core", () -> new TooltipItem("bionic_core"));
+    public static final RegistryObject<Item> SUPERPOWERED_FEET = ITEMS.register("superpowered_feet", () -> new TooltipItem("superpowered_feet"));
+
     public static void registerItems() {
         ITEMS.register("rainbow_wool", () -> new BlockItem(BlockInit.RAINBOW_WOOL.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
         ITEMS.register("cobblestone_8", () -> new BlockItem(BlockInit.COBBLESTONE_8.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
@@ -111,7 +142,7 @@ public class ItemInit {
         SOCKS(Reference.MODID + ":socks", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0.5f, 0.0F, 20000, () -> {
             return Ingredient.of(Items.WHITE_WOOL);
         }),
-        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 100, 10, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 10.0f, 0.0F, 150000, () -> {
+        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 100, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0F, 150000, () -> {
             return Ingredient.of(BlockInit.RAINBOW_WOOL.get());
         }),
         MINER(Reference.MODID + ":miner", 16, 2, 15, SoundEvents.BEACON_ACTIVATE, 1.5F, 0.0F, 100000, () -> {
@@ -186,7 +217,22 @@ public class ItemInit {
         AVIAN(Reference.MODID + ":avian", 22, 2, 12, SoundEvents.GLASS_BREAK, 0f, 0f, 150000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
         SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 10, 42, SoundEvents.GLASS_BREAK, 8f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         TANOOKI(Reference.MODID + ":tanooki", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 80000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
-        TURTLE(Reference.MODID + ":turtle", 25, 2, 10, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(Items.SCUTE));
+        TURTLE(Reference.MODID + ":turtle", 25, 2, 10, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(Items.SCUTE)),
+        // Heroic update materials
+        SUPER(Reference.MODID + ":super", 16, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.PURENESS_STONE.get())),
+        WARRIOR_QUEEN(Reference.MODID + ":warrior_queen", 40, 6, 45, SoundEvents.ARMOR_EQUIP_DIAMOND, 2f, 0f, 160000, () -> Ingredient.of(ItemInit.WAR_STONE.get())),
+        CINDERING(Reference.MODID + ":cindering", 40, 3, 30, SoundEvents.FIREWORK_ROCKET_BLAST, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.FIRE_STONE.get())),
+        INCINERATING(Reference.MODID + ":incinerating", 50, 4, 50, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FIRE_STONE.get())),
+        MIGHTY(Reference.MODID + ":mighty", 18, 4, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 50000, () -> Ingredient.of(ItemInit.WAR_STONE.get(), ItemInit.METAL_STONE.get())),
+        POWER(Reference.MODID + ":power", 16, 3, 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, 40000, () -> Ingredient.of(Items.GLOW_INK_SAC)),
+        JOLT(Reference.MODID + ":jolt", 15, 4, 10, SoundEvents.LIGHTNING_BOLT_THUNDER, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
+        WATER_NINJA(Reference.MODID + ":water_ninja", 15, 3, 15, SoundEvents.ARMOR_EQUIP_DIAMOND, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.WATER_STONE.get())),
+        ELECTRICITY(Reference.MODID + ":electricity", 15, 4, 10, SoundEvents.LIGHTNING_BOLT_IMPACT, 0f, 0f, 180000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
+        BAHAMUTS(Reference.MODID + ":bahamuts", 20, 2, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 100000, () -> Ingredient.of(ItemInit.SOUL_STONE.get(), ItemInit.WAR_STONE.get())),
+        AWAKENED(Reference.MODID + ":awakened_bahamuts", 20, 2, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.SOUL_STONE.get(), ItemInit.ELECTRIC_STONE.get())),
+        SPEEDSTER(Reference.MODID + ":speedster", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 40000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get(), ItemInit.FIRE_STONE.get())),
+        SUPER_BOUNCE(Reference.MODID + ":super_bounce", 80, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
+        SOUL(Reference.MODID + ":soul", 25, 3, 16, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.SOUL_STONE.get()));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

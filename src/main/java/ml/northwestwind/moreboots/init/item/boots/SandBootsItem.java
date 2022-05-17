@@ -1,7 +1,7 @@
 package ml.northwestwind.moreboots.init.item.boots;
 
-import com.google.common.collect.Sets;
 import ml.northwestwind.moreboots.handler.MoreBootsPacketHandler;
+import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.handler.packet.CPlayerMultiJumpPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
@@ -27,33 +27,14 @@ public class SandBootsItem extends BootsItem {
         if (player == null || player.isOnGround() || player.getAbilities().flying) return;
         BlockPos pos = player.blockPosition();
         if (pos.getY() > 255 || pos.getY() < 0) return;
-        if (!player.level.isEmptyBlock(pos) || !player.getInventory().hasAnyOf(Sets.newHashSet(Items.SAND))) return;
+        if (!player.level.isEmptyBlock(pos) || player.getInventory().countItem(Items.SAND) == 0) return;
         boolean shouldJump = player.isCreative();
-        if (!shouldJump) for (ItemStack stack : player.getInventory().items) {
-            if (stack.getItem().equals(Items.SAND)) {
-                int slot = player.getInventory().findSlotMatchingItem(stack);
+        if (!shouldJump) {
+            int slot = Utils.getStackSlot(player.getInventory(), Items.LIGHTNING_ROD);
+            if (slot > -1) {
+                ItemStack stack = player.getInventory().getItem(slot);
                 stack.shrink(1);
-                player.getInventory().setItem(slot, stack);
                 shouldJump = true;
-                break;
-            }
-        }
-        if (!shouldJump) for (ItemStack stack : player.getInventory().offhand) {
-            if (stack.getItem().equals(Items.SAND)) {
-                int slot = player.getInventory().findSlotMatchingItem(stack);
-                stack.shrink(1);
-                player.getInventory().setItem(slot, stack);
-                shouldJump = true;
-                break;
-            }
-        }
-        if (!shouldJump) for (ItemStack stack : player.getInventory().armor) {
-            if (stack.getItem().equals(Items.SAND)) {
-                int slot = player.getInventory().findSlotMatchingItem(stack);
-                stack.shrink(1);
-                player.getInventory().setItem(slot, stack);
-                shouldJump = true;
-                break;
             }
         }
         if (shouldJump) {

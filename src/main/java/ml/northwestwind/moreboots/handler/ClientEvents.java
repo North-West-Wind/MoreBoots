@@ -2,10 +2,13 @@ package ml.northwestwind.moreboots.handler;
 
 import ml.northwestwind.moreboots.Reference;
 import ml.northwestwind.moreboots.container.screen.StorageBootsScreen;
+import ml.northwestwind.moreboots.init.BlockInit;
 import ml.northwestwind.moreboots.init.ContainerInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.KeybindInit;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,6 +23,8 @@ public class ClientEvents {
     public static void clientSetup(final FMLClientSetupEvent event) {
         KeybindInit.register();
         MenuScreens.register(ContainerInit.STORAGE_BOOTS.get(), StorageBootsScreen::new);
+        ItemBlockRenderTypes.setRenderLayer(BlockInit.VISCOUS_GOO.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockInit.VISCOUS_BLOCK.get(), RenderType.translucent());
     }
 
     @SubscribeEvent

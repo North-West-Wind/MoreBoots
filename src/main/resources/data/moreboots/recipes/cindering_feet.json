@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "MFM"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:fire_stone"
+    },
+    "R": {
+      "item": "moreboots:rainbow_socks_boots"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "F": {
+      "item": "minecraft:fire_charge"
+    }
+  },
+  "result": {
+    "item": "moreboots:cindering_feet",
+    "count": 1
+  }
+}
