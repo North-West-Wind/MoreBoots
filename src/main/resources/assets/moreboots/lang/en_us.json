@@ -70,6 +70,8 @@
   "item.moreboots.speedster_feet": "Speedster Feet",
   "item.moreboots.super_bounce_boots": "Super Bounce Boots",
   "item.moreboots.soul_boots": "Soul Boots",
+  "item.moreboots.bomber_feet": "Bomberfeet",
+  "item.moreboots.cosmic_fire_feet": "Cosmic Fire Feet",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -166,6 +168,8 @@
   "tooltip.moreboots.speedster_feet": "\u00A77\u00A7oNot too fast though.",
   "tooltip.moreboots.super_bounce_boots": "\u00A77\u00A7oThe all-in-one jump & bounce boots.",
   "tooltip.moreboots.soul_boots": "\u00A77\u00A7oPunches them in their souls.",
+  "tooltip.moreboots.bomber_feet": "\u00A77\u00A7oExplosive jumps.",
+  "tooltip.moreboots.cosmic_fire_feet": "\u00A77\u00A7oThe flying-explosive destruction boots.",
 
   "tooltip.moreboots.quartz_ingot": "\u00A77\u00A7oStrengthened quartz.",
   "tooltip.moreboots.metal_mix": "\u00A77\u00A7oThe combination of minerals.",

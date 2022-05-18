@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#V#",
+    "MFM",
+    "VOV"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:fire_stone"
+    },
+    "V": {
+      "item": "moreboots:viscous_goo"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "F": {
+      "item": "moreboots:floating_core"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "moreboots:cosmic_fire_feet",
+    "count": 1
+  }
+}
