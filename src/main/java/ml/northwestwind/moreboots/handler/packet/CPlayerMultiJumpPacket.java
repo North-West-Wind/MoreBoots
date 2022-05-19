@@ -43,6 +43,9 @@ public class CPlayerMultiJumpPacket implements IPacket {
             player.jumpFromGround();
             player.setDeltaMovement(player.getDeltaMovement().add(0, 0.25, 0));
             player.level.explode(player, player.getX(), player.getY() - 0.5, player.getZ(), 2, Explosion.BlockInteraction.BREAK);
+        } else if (boots.getItem().equals(ItemInit.SUPER_SOCKS.get()) || boots.getItem().equals(ItemInit.RUNNER_FEET.get())) {
+            player.jumpFromGround();
+            player.setDeltaMovement(player.getDeltaMovement().add(0, 1, 0));
         }
     }
 }

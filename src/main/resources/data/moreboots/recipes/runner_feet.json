@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#S#",
+    "J_J",
+    "RVR"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:golden_feather"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    },
+    "J": {
+      "item": "moreboots:strider_foot"
+    },
+    "_": {
+      "item": "moreboots:odd1sout_feet"
+    },
+    "R": {
+      "item": "minecraft:rabbit_foot"
+    },
+    "V": {
+      "item": "moreboots:viscous_goo"
+    }
+  },
+  "result": {
+    "item": "moreboots:runner_feet",
+    "count": 1
+  }
+}

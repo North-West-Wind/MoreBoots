@@ -107,6 +107,10 @@ public class ItemInit {
     public static final RegistryObject<Item> SOUL_BOOTS = ITEMS.register("soul_boots", SoulBootsItem::new);
     public static final RegistryObject<Item> BOMBERFEET = ITEMS.register("bomber_feet", BomberFeetItem::new);
     public static final RegistryObject<Item> COSMIC_FIRE_FEET = ITEMS.register("cosmic_fire_feet", CosmicFireFeetItem::new);
+    public static final RegistryObject<Item> LIGHTUP_FEET = ITEMS.register("lightup_feet", LightupFeetItem::new);
+    public static final RegistryObject<Item> ODD1SOUT_FEET = ITEMS.register("odd1sout_feet", Odd1sOutFeetItem::new);
+    public static final RegistryObject<Item> SUPER_SOCKS = ITEMS.register("super_socks", SuperSocksItem::new);
+    public static final RegistryObject<Item> RUNNER_FEET = ITEMS.register("runner_feet", RunnerFeetItem::new);
 
     public static final RegistryObject<Item> HEROIC_CORE = ITEMS.register("heroic_core", () -> new TooltipItem("heroic_core"));
     public static final RegistryObject<Item> TITANIUM_DUST = ITEMS.register("titanium_dust", () -> new TooltipItem("titanium_dust"));
@@ -144,7 +148,7 @@ public class ItemInit {
         SOCKS(Reference.MODID + ":socks", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0.5f, 0.0F, 20000, () -> {
             return Ingredient.of(Items.WHITE_WOOL);
         }),
-        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 100, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0F, 150000, () -> {
+        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 50, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0F, 150000, () -> {
             return Ingredient.of(BlockInit.RAINBOW_WOOL.get());
         }),
         MINER(Reference.MODID + ":miner", 16, 2, 15, SoundEvents.BEACON_ACTIVATE, 1.5F, 0.0F, 100000, () -> {
@@ -236,7 +240,11 @@ public class ItemInit {
         SUPER_BOUNCE(Reference.MODID + ":super_bounce", 80, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         SOUL(Reference.MODID + ":soul", 25, 3, 16, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.SOUL_STONE.get())),
         BOMBER(Reference.MODID + ":bomber", 80, 4, 40, SoundEvents.GENERIC_EXPLODE, 1f, 0f, 150000, () -> Ingredient.EMPTY),
-        COSMIC_FIRE(Reference.MODID + ":cosmic_fire", 40, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FLOATING_CORE.get()));
+        COSMIC_FIRE(Reference.MODID + ":cosmic_fire", 40, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FLOATING_CORE.get())),
+        LIGHTUP(Reference.MODID + ":lightup", 27, 2, 10, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, 40000, () -> Ingredient.of(Items.GLOWSTONE)),
+        ODD1SOUT(Reference.MODID + ":odd1sout", 54, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
+        SUPER_SOCKS(Reference.MODID + ":super_socks", 55, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
+        RUNNER(Reference.MODID + ":runner", 50, 5, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY);
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

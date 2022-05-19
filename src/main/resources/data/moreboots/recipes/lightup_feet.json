@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#G#",
+    "SSS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "G": {
+      "item": "moreboots:glowstone_boots"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    }
+  },
+  "result": {
+    "item": "moreboots:lightup_feet",
+    "count": 1
+  }
+}

@@ -72,6 +72,9 @@
   "item.moreboots.soul_boots": "Soul Boots",
   "item.moreboots.bomber_feet": "Bomberfeet",
   "item.moreboots.cosmic_fire_feet": "Cosmic Fire Feet",
+  "item.moreboots.lightup_feet": "Lightup Feet",
+  "item.moreboots.odd1sout_feet": "Odd1sOut Feet",
+  "item.moreboots.super_socks": "Super Socks",
 
   "item.moreboots.quartz_ingot": "Quartz Ingot",
   "item.moreboots.metal_mix": "Metal Mix",
@@ -170,6 +173,8 @@
   "tooltip.moreboots.soul_boots": "\u00A77\u00A7oPunches them in their souls.",
   "tooltip.moreboots.bomber_feet": "\u00A77\u00A7oExplosive jumps.",
   "tooltip.moreboots.cosmic_fire_feet": "\u00A77\u00A7oThe flying-explosive destruction boots.",
+  "tooltip.moreboots.lightup_feet": "\u00A77\u00A7oThe noble gas within somehow reaches your eyes and act as a night filter.",
+  "tooltip.moreboots.odd1sout_feet": "\u00A77\u00A7oOddly enough, floats on top of fluids.",
 
   "tooltip.moreboots.quartz_ingot": "\u00A77\u00A7oStrengthened quartz.",
   "tooltip.moreboots.metal_mix": "\u00A77\u00A7oThe combination of minerals.",
