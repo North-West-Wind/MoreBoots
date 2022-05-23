@@ -44,7 +44,7 @@ public class SuperSocksItem extends BootsItem {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null || player.isOnGround() || player.getAbilities().flying) return;
         player.jumpFromGround();
-        player.setDeltaMovement(player.getDeltaMovement().add(0, 1, 0));
+        player.setDeltaMovement(player.getDeltaMovement().add(0, 0.25, 0));
         if (player.level.isClientSide)
             MoreBootsPacketHandler.INSTANCE.sendToServer(new CPlayerMultiJumpPacket());
     }

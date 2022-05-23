@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#M#",
+    "MTM",
+    "MTM"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:rainbow_wool"
+    },
+    "M": {
+      "item": "minecraft:magenta_dye"
+    },
+    "T": {
+      "item": "moreboots:tanooki_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:bug_feet",
+    "count": 1
+  }
+}

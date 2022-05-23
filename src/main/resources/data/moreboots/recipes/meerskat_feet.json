@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#S#",
+    "BTB"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:orange_wool"
+    },
+    "S": {
+      "item": "moreboots:salamander_feet"
+    },
+    "B": {
+      "item": "minecraft:brown_wool"
+    },
+    "T": {
+      "item": "moreboots:tanooki_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:meerkat_feet",
+    "count": 1
+  }
+}

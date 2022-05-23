@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "EBE",
+    "SWS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:yellow_dye"
+    },
+    "B": {
+      "item": "minecraft:black_dye"
+    },
+    "E": {
+      "item": "moreboots:electric_stone"
+    },
+    "S": {
+      "item": "moreboots:strider_foot"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result": {
+    "item": "moreboots:salamander_feet",
+    "count": 1
+  }
+}
