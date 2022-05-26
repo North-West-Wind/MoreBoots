@@ -34,3 +34,7 @@ jobs:
         gradle-version: 7.3
         arguments: build
         cache-disabled: true
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: build/libs/*.jar
