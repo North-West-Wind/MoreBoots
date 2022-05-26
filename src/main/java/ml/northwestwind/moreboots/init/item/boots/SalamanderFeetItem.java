@@ -27,7 +27,7 @@ public class SalamanderFeetItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         BlockPos pos = entity.blockPosition();
         int skylight = entity.level.getLightEngine().getLayerListener(LightLayer.SKY).getLightValue(pos);
-        Biome biome = entity.level.getBiome(pos);
+        Biome biome = entity.level.getBiome(pos).value();
         int amplifier = (int) (skylight * (biome.getBaseTemperature() - (pos.getY() - entity.level.getSeaLevel()) / 600) / 5);
         if (!entity.hasEffect(MobEffects.REGENERATION) || entity.getEffect(MobEffects.REGENERATION).getAmplifier() < amplifier + 1)
             entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 10, amplifier, false, false, false));
