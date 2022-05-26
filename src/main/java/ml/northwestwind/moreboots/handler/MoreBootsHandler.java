@@ -30,6 +30,7 @@ public class MoreBootsHandler {
     private static final ResourceLocation END_CITY_TREASURE_LOOT_TABLE = new ResourceLocation("chests/end_city_treasure");
     private static Function<LivingEvent, Void> aftermathInjection = null;
     private static long aftermathTicks = 0;
+    private static boolean aftermathCollision = false;
 
     @SubscribeEvent
     public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
@@ -102,6 +103,10 @@ public class MoreBootsHandler {
     @SubscribeEvent
     public static void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
         if (aftermathTicks > 0) aftermathTicks--;
+        else {
+            aftermathInjection = null;
+            aftermathCollision = false;
+        }
         ItemStack boots = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onLivingUpdate(event);
@@ -176,7 +181,11 @@ public class MoreBootsHandler {
         aftermathTicks = 300;
     }
 
-    public static boolean afterMathCollision() {
-        return aftermathTicks > 0 && aftermathInjection == null;
+    public static void setCollision() {
+        aftermathCollision = true;
+    }
+
+    public static boolean aftermathCollision() {
+        return aftermathTicks > 0 && aftermathCollision;
     }
 }
