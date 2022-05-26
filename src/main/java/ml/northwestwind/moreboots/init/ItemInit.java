@@ -105,6 +105,20 @@ public class ItemInit {
     public static final RegistryObject<Item> SPEEDSTER_FEET = ITEMS.register("speedster_feet", SpeedsterFeetItem::new);
     public static final RegistryObject<Item> SUPER_BOUNCE_BOOTS = ITEMS.register("super_bounce_boots", SuperBounceBootsItem::new);
     public static final RegistryObject<Item> SOUL_BOOTS = ITEMS.register("soul_boots", SoulBootsItem::new);
+    public static final RegistryObject<Item> BOMBERFEET = ITEMS.register("bomber_feet", BomberFeetItem::new);
+    public static final RegistryObject<Item> COSMIC_FIRE_FEET = ITEMS.register("cosmic_fire_feet", CosmicFireFeetItem::new);
+    public static final RegistryObject<Item> LIGHTUP_FEET = ITEMS.register("lightup_feet", LightupFeetItem::new);
+    public static final RegistryObject<Item> ODD1SOUT_FEET = ITEMS.register("odd1sout_feet", Odd1sOutFeetItem::new);
+    public static final RegistryObject<Item> SUPER_SOCKS = ITEMS.register("super_socks", SuperSocksItem::new);
+    public static final RegistryObject<Item> RUNNER_FEET = ITEMS.register("runner_feet", RunnerFeetItem::new);
+    public static final RegistryObject<Item> NATURE_FAIRY_FEET = ITEMS.register("nature_fairy_feet", NatureFairyFeetItem::new);
+    public static final RegistryObject<Item> WOODPECKER_FEET = ITEMS.register("woodpecker_feet", WoodpeckerFeetItem::new);
+    public static final RegistryObject<Item> BOLTER_FEET = ITEMS.register("bolter_feet", BolterFeetItem::new);
+    public static final RegistryObject<Item> FLUTTERING_FEET = ITEMS.register("fluttering_feet", FlutteringFeetItem::new);
+    public static final RegistryObject<Item> BUG_FEET = ITEMS.register("bug_feet", BugFeetItem::new);
+    public static final RegistryObject<Item> SALAMANDER_FEET = ITEMS.register("salamander_feet", SalamanderFeetItem::new);
+    public static final RegistryObject<Item> MEERKAT_FEET = ITEMS.register("meerkat_feet", MeerkatFeetItem::new);
+    public static final RegistryObject<Item> BIONIC_BEETLE_FEET = ITEMS.register("bionic_beetle_feet", BionicBeetleFeetItem::new);
 
     public static final RegistryObject<Item> HEROIC_CORE = ITEMS.register("heroic_core", () -> new TooltipItem("heroic_core"));
     public static final RegistryObject<Item> TITANIUM_DUST = ITEMS.register("titanium_dust", () -> new TooltipItem("titanium_dust"));
@@ -142,7 +156,7 @@ public class ItemInit {
         SOCKS(Reference.MODID + ":socks", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0.5f, 0.0F, 20000, () -> {
             return Ingredient.of(Items.WHITE_WOOL);
         }),
-        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 100, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0F, 150000, () -> {
+        RAINBOW_SOCKS(Reference.MODID + ":rainbow_socks", 50, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0F, 150000, () -> {
             return Ingredient.of(BlockInit.RAINBOW_WOOL.get());
         }),
         MINER(Reference.MODID + ":miner", 16, 2, 15, SoundEvents.BEACON_ACTIVATE, 1.5F, 0.0F, 100000, () -> {
@@ -215,7 +229,7 @@ public class ItemInit {
         FLYING(Reference.MODID + ":flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY),
         VISCOUS(Reference.MODID + ":viscous", 15, 3, 12, SoundEvents.SPIDER_AMBIENT, 0f, 0f, 20000, () -> Ingredient.of(VISCOUS_GOO.get())),
         AVIAN(Reference.MODID + ":avian", 22, 2, 12, SoundEvents.GLASS_BREAK, 0f, 0f, 150000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
-        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 10, 42, SoundEvents.GLASS_BREAK, 8f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
+        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 5, 42, SoundEvents.GLASS_BREAK, 4f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         TANOOKI(Reference.MODID + ":tanooki", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 80000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
         TURTLE(Reference.MODID + ":turtle", 25, 2, 10, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(Items.SCUTE)),
         // Heroic update materials
@@ -232,7 +246,21 @@ public class ItemInit {
         AWAKENED(Reference.MODID + ":awakened_bahamuts", 20, 2, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.SOUL_STONE.get(), ItemInit.ELECTRIC_STONE.get())),
         SPEEDSTER(Reference.MODID + ":speedster", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 40000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get(), ItemInit.FIRE_STONE.get())),
         SUPER_BOUNCE(Reference.MODID + ":super_bounce", 80, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
-        SOUL(Reference.MODID + ":soul", 25, 3, 16, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.SOUL_STONE.get()));
+        SOUL(Reference.MODID + ":soul", 25, 3, 16, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.SOUL_STONE.get())),
+        BOMBER(Reference.MODID + ":bomber", 80, 4, 40, SoundEvents.GENERIC_EXPLODE, 1f, 0f, 150000, () -> Ingredient.EMPTY),
+        COSMIC_FIRE(Reference.MODID + ":cosmic_fire", 40, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FLOATING_CORE.get())),
+        LIGHTUP(Reference.MODID + ":lightup", 27, 2, 10, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, 40000, () -> Ingredient.of(Items.GLOWSTONE)),
+        ODD1SOUT(Reference.MODID + ":odd1sout", 54, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
+        SUPER_SOCKS(Reference.MODID + ":super_socks", 55, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
+        RUNNER(Reference.MODID + ":runner", 50, 5, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
+        NATURE_FAIRY(Reference.MODID + ":nature_fairy", 50, 5, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(ItemInit.NATURE_STONE.get())),
+        WOODPECKER(Reference.MODID + ":woodpecker", 120, 5, 42, SoundEvents.ARMOR_EQUIP_ELYTRA, 4f, 0f, 200000, () -> Ingredient.of(ItemInit.GOLDEN_FEATHER.get())),
+        BOLTER(Reference.MODID + ":bolter", 20, 4, 15, SoundEvents.LIGHTNING_BOLT_THUNDER, 0f, 0f, 160000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
+        FLUTTERING(Reference.MODID + ":fluttering", 5, 1, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 10000, () -> Ingredient.of(Items.ORANGE_WOOL)),
+        BUG(Reference.MODID + ":bug", 40, 2, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
+        SALAMANDER(Reference.MODID + ":salamander", 10, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 50000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
+        MEERKAT(Reference.MODID + ":meerkat", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 75000, () -> Ingredient.of(Items.BROWN_WOOL, Items.ORANGE_WOOL)),
+        BIONIC(Reference.MODID + ":bionic", 100, 8, 60, SoundEvents.ARMOR_EQUIP_NETHERITE, 4f, 0f, 500000, () -> Ingredient.of(ItemInit.BIONIC_CORE.get()));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

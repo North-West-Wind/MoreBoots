@@ -187,4 +187,11 @@ public class Utils {
         }
         return slot;
     }
+
+    public static double getGroundHeight(Level level, BlockPos pos) {
+        while (level.getBlockState(pos).isAir()) {
+            pos = pos.below();
+        }
+        return pos.getY();
+    }
 }

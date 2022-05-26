@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#H#",
+    "S_S",
+    "#S#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:nature_stone"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "S": {
+      "item": "moreboots:superpowered_feet"
+    },
+    "_": {
+      "item": "moreboots:odd1sout_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:nature_fairy_feet",
+    "count": 1
+  }
+}

@@ -33,7 +33,7 @@ public abstract class MixinLivingEntity {
     @Inject(at = @At("HEAD"), method = "decreaseAirSupply", cancellable = true)
     public void decreaseAirSupply(int airSupply, CallbackInfoReturnable<Integer> cir) {
         LivingEntity lvEnt = (LivingEntity) (Object) this;
-        if (lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SLIPPERY_BOOTS.get()))
+        if (lvEnt.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.WATER_NINJA_FEET.get()))
             cir.setReturnValue(this.getRandom().nextInt(2) > 0 ? airSupply : airSupply - 1);
     }
 }

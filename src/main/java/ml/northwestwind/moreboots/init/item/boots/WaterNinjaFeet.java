@@ -44,6 +44,6 @@ public class WaterNinjaFeet extends BootsItem {
     @Override
     public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) {
         BlockState state = worldIn.getBlockState(pos);
-        if(state.getMaterial().equals(Material.WATER) && context.isAbove(Shapes.block(), pos, true)) cir.setReturnValue(Shapes.block());
+        if((state.getMaterial().equals(Material.WATER) || state.getMaterial().equals(Material.POWDER_SNOW)) && context.isAbove(Shapes.block(), pos, true)) cir.setReturnValue(Shapes.block());
     }
 }

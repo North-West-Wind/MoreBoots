@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#G#",
+    "A#A"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:golden_feather"
+    },
+    "G": {
+      "item": "moreboots:gliding_boots"
+    },
+    "A": {
+      "item": "moreboots:super_avian_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:woodpecker_feet",
+    "count": 1
+  }
+}

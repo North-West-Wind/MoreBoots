@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "FRF",
+    "SAS"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "F": {
+      "item": "moreboots:superpowered_feet"
+    },
+    "R": {
+      "item": "moreboots:rainbow_socks_boots"
+    },
+    "S": {
+      "item": "moreboots:smooth_fabric"
+    },
+    "A": {
+      "item": "moreboots:avian_feet"
+    }
+  },
+  "result": {
+    "item": "moreboots:super_socks",
+    "count": 1
+  }
+}

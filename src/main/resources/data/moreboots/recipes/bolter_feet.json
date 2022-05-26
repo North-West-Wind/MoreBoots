@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#J#",
+    "EHE",
+    "RRR"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lightning_rod"
+    },
+    "J": {
+      "item": "moreboots:jolt_feet"
+    },
+    "E": {
+      "item": "moreboots:electric_stone"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "R": {
+      "item": "minecraft:rabbit_foot"
+    }
+  },
+  "result": {
+    "item": "moreboots:bolter_feet",
+    "count": 1
+  }
+}

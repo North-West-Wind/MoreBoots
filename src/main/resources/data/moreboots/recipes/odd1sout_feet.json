@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R#",
+    "#V#"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:golden_feather"
+    },
+    "R": {
+      "item": "moreboots:rainbow_socks_boots"
+    },
+    "V": {
+      "item": "moreboots:viscous_goo"
+    }
+  },
+  "result": {
+    "item": "moreboots:odd1sout_feet",
+    "count": 1
+  }
+}

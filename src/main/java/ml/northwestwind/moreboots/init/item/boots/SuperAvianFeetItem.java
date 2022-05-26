@@ -48,8 +48,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class SuperAvianFeetItem extends BootsItem {
+    public SuperAvianFeetItem(ItemInit.ModArmorMaterial material, String registryName) {
+        super (material, registryName);
+    }
+
     public SuperAvianFeetItem() {
-        super(ItemInit.ModArmorMaterial.SUPER_AVIAN, "super_avian_feet");
+        this(ItemInit.ModArmorMaterial.SUPER_AVIAN, "super_avian_feet");
     }
 
     @Override
