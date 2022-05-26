@@ -27,7 +27,7 @@ public class MixinBlockStateBase {
         if (entCtx.getEntity() == null || !(entCtx.getEntity() instanceof LivingEntity entity)) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).getCollisionShape(worldIn, pos, context, cir);
-        if (MoreBootsHandler.afterMathCollision()) {
+        if (MoreBootsHandler.aftermathCollision()) {
             BlockState state = worldIn.getBlockState(pos);
             if (state.getMaterial().equals(Material.WATER) || state.getMaterial().equals(Material.POWDER_SNOW) || state.getMaterial().equals(Material.LAVA))
                 cir.setReturnValue(Shapes.block());
