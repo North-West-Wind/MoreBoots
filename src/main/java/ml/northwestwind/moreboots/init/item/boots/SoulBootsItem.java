@@ -22,9 +22,11 @@ public class SoulBootsItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         ItemStack stack = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = stack.getOrCreateTag();
+        int ticks = tag.getInt("remaining_ticks");
+        if (ticks > 0) tag.putInt("remaining_ticks", --ticks);
         int punches = tag.getInt("punches");
-        if (entity.hasEffect(MobEffects.DIG_SPEED) || entity.getEffect(MobEffects.DIG_SPEED).getAmplifier() > punches) return;
-        entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 10, punches, false, false, false));
+        if (punches > 0 && (!entity.hasEffect(MobEffects.DIG_SPEED) || entity.getEffect(MobEffects.DIG_SPEED).getAmplifier() < punches + 1))
+            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 10, punches, false, false, false));
     }
 
     @Override
@@ -37,6 +39,7 @@ public class SoulBootsItem extends BootsItem {
             if (tag.getInt("punches") < 127)
                 tag.putInt("punches", tag.getInt("punches") + 1);
         } else tag.putInt("punches", 1);
+        tag.putInt("remaining_ticks", 100);
         stack.setTag(tag);
     }
 }

@@ -71,10 +71,9 @@ public class BionicBeetleFeetItem extends BootsItem {
         int weight = tag.getInt("weight");
         int bounciness = tag.getInt("bounciness");
         boolean[] abilities = new boolean[10];
-        IntStream stream = Arrays.stream(tag.getIntArray("abilities"));
         for (int ii = 0; ii < 10; ii++) {
             int finali = ii;
-            abilities[ii] = stream.anyMatch(jj -> jj == finali);
+            abilities[ii] = Arrays.stream(tag.getIntArray("abilities")).anyMatch(jj -> jj == finali);
         }
         if (viscousity == 0) sticky(entity, boots);
         else slippery(entity);
@@ -103,10 +102,9 @@ public class BionicBeetleFeetItem extends BootsItem {
         ItemStack from = event.getFrom(), to = event.getTo();
         if (from.getItem().equals(ItemInit.BIONIC_BEETLE_FEET.get()) && !to.getItem().equals(ItemInit.BIONIC_BEETLE_FEET.get())) {
             boolean[] aftermaths = new boolean[11];
-            IntStream stream = Arrays.stream(from.getOrCreateTag().getIntArray("aftermaths"));
             for (int ii = 0; ii < 10; ii++) {
                 int finali = ii;
-                aftermaths[ii] = stream.anyMatch(jj -> jj == finali);
+                aftermaths[ii] = Arrays.stream(from.getOrCreateTag().getIntArray("aftermaths")).anyMatch(jj -> jj == finali);
             }
             if (aftermaths[10] && (!aftermaths[9] || from.getOrCreateTag().getBoolean("switched"))) MoreBootsHandler.setCollision();
             MoreBootsHandler.setAftermath(livingEvent -> {

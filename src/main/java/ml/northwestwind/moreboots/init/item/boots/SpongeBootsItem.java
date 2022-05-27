@@ -3,7 +3,6 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;

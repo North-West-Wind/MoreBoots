@@ -5,7 +5,6 @@ import ml.northwestwind.moreboots.handler.packet.IPacket;
 import ml.northwestwind.moreboots.mixins.MixinInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
