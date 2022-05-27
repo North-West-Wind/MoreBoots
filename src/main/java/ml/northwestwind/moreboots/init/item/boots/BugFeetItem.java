@@ -6,7 +6,6 @@ import ml.northwestwind.moreboots.mixins.MixinLivingEntityAccessor;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class BugFeetItem extends BootsItem {
@@ -21,9 +20,15 @@ public class BugFeetItem extends BootsItem {
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10, 0, false, false, false));
         if (!entity.hasEffect(MobEffects.WEAKNESS) || entity.getEffect(MobEffects.WEAKNESS).getAmplifier() < 1)
             entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 0, false, false, false));
-        if (entity instanceof Player && entity.getDeltaMovement().y() < 0.1 &&  ((MixinLivingEntityAccessor) entity).isJumping()) {
-            entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1, 0));
-            entity.fallDistance = 0;
+        if (!entity.isCrouching()) {
+            double addToY = 0;
+            if (entity.getDeltaMovement().y() < 0.05 && ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.02;
+            else if (entity.getDeltaMovement().y() < 0) addToY = -0.05;
+            if (addToY != 0) {
+                entity.setDeltaMovement(entity.getDeltaMovement().add(0, addToY, 0));
+                entity.hasImpulse = true;
+                entity.fallDistance = 0;
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ public class IncineratingFeetItem extends BootsItem {
         if (!entity.fireImmune()) {
             entity.setRemainingFireTicks(entity.getRemainingFireTicks() + 20);
             if (entity.getRemainingFireTicks() == 0) {
-                entity.setSecondsOnFire(600);
+                entity.setSecondsOnFire(620);
             }
             entity.hurt(DamageSource.IN_FIRE, 2);
         }

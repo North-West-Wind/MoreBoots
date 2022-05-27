@@ -25,7 +25,7 @@ public class CinderingFeetItem extends BootsItem {
         if (!entity.fireImmune()) {
             entity.setRemainingFireTicks(entity.getRemainingFireTicks() + 10);
             if (entity.getRemainingFireTicks() == 0) {
-                entity.setSecondsOnFire(200);
+                entity.setSecondsOnFire(220);
             }
             entity.hurt(DamageSource.IN_FIRE, 2);
         }
