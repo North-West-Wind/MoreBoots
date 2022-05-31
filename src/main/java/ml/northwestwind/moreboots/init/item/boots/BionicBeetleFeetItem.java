@@ -155,8 +155,10 @@ public class BionicBeetleFeetItem extends BootsItem {
         if (player == null) return;
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
-        IntStream abilities = Arrays.stream(tag.getIntArray("ability"));
+        IntStream abilities = Arrays.stream(tag.getIntArray("abilities"));
         if (abilities.anyMatch(ii -> ii == 9)) dash();
+        else tag.putBoolean("switched", !tag.getBoolean("switched"));
+        boots.setTag(tag);
     }
 
     @Override
@@ -166,7 +168,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         boolean switched = tag.getBoolean("switched");
-        IntStream abilities = Arrays.stream(tag.getIntArray("ability"));
+        IntStream abilities = Arrays.stream(tag.getIntArray("abilities"));
         if (abilities.anyMatch(ii -> ii == 1) && (abilities.noneMatch(ii -> ii == 4) || !switched)) jesus(worldIn, pos, cir);
     }
 

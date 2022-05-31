@@ -23,7 +23,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18'
+    mappings channel: 'official', version: '1.18.1'
     runs {
         client {
             workingDirectory project.file('run')
@@ -85,7 +85,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18-38.0.12'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.1.2'
     annotationProcessor "org.spongepowered:mixin:0.8.4:processor"
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }

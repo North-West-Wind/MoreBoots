@@ -38,6 +38,15 @@ public class SuperSocksItem extends BootsItem {
                 entity.hasImpulse = true;
                 entity.fallDistance = 0;
             }
+            ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
+            CompoundTag tag = boots.getOrCreateTag();
+            int flutterTicks = tag.getInt("flutter_ticks");
+            if (flutterTicks <= 20 && !entity.isOnGround() && entity.getDeltaMovement().y < 0.1 && ((MixinLivingEntityAccessor) entity).isJumping()) {
+                entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * flutterTicks, 0));
+                entity.hasImpulse = true;
+                tag.putInt("flutter_ticks", flutterTicks + 1);
+            } else if (flutterTicks > 0 && entity.isOnGround()) tag.putInt("flutter_ticks", 0);
+            boots.setTag(tag);
         } else if (entity.isOnGround()) {
             ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
             CompoundTag tag = boots.getOrCreateTag();
@@ -58,16 +67,6 @@ public class SuperSocksItem extends BootsItem {
                     serverPlayerEntity.getAdvancements().award(server.getAdvancements().getAdvancement(new ResourceLocation("moreboots", "moreboots/twelve_hours")), "twelve_hours");
                 }
             }
-            boots.setTag(tag);
-        } else {
-            ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
-            CompoundTag tag = boots.getOrCreateTag();
-            int flutterTicks = tag.getInt("flutter_ticks");
-            if (flutterTicks <= 20 && !entity.isOnGround() && entity.getDeltaMovement().y < 0.1 && ((MixinLivingEntityAccessor) entity).isJumping()) {
-                entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * flutterTicks, 0));
-                entity.hasImpulse = true;
-                tag.putInt("flutter_ticks", flutterTicks + 1);
-            } else if (flutterTicks > 0 && entity.isOnGround()) tag.putInt("flutter_ticks", 0);
             boots.setTag(tag);
         }
     }

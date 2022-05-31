@@ -26,9 +26,17 @@ import java.util.List;
 public class BootsItem extends ArmorItem {
     protected final String registryName;
 
-    public BootsItem(ArmorMaterial material, String registryName, boolean isNetherite) {
-        super(material, EquipmentSlot.FEET, isNetherite ? new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE).fireResistant() : new Item.Properties().tab(MoreBoots.MoreBootsItemGroup.INSTANCE));
+    public BootsItem(ArmorMaterial material, String registryName, CreativeModeTab tab, boolean isNetherite) {
+        super(material, EquipmentSlot.FEET, isNetherite ? new Item.Properties().tab(tab == null ? MoreBoots.MoreBootsItemGroup.INSTANCE : tab).fireResistant() : new Item.Properties().tab(tab == null ? MoreBoots.MoreBootsItemGroup.INSTANCE : tab));
         this.registryName = registryName;
+    }
+
+    public BootsItem(ArmorMaterial material, String registryName, boolean isNetherite) {
+        this(material, registryName, null, isNetherite);
+    }
+
+    public BootsItem(ArmorMaterial material, String registryName, CreativeModeTab tab) {
+        this(material, registryName, tab, false);
     }
 
     public BootsItem(ArmorMaterial material, String registryName) {

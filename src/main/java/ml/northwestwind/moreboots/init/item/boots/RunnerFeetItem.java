@@ -26,7 +26,7 @@ public class RunnerFeetItem extends BootsItem {
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        entity.setDeltaMovement(entity.getDeltaMovement().add(0, 1, 0));
+        entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.25, 0));
     }
 
     @Override

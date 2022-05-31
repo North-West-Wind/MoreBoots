@@ -16,6 +16,6 @@ public class LightupFeetItem extends BootsItem {
     public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         if (!entity.hasEffect(MobEffects.NIGHT_VISION) || entity.getEffect(MobEffects.NIGHT_VISION).getAmplifier() < 1)
-            entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 10, 0, false, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 0, false, false, false));
     }
 }
