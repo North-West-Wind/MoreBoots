@@ -29,6 +29,7 @@ public class MoreBootsPacketHandler {
         registerPacket(CShootWitherSkullPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CActivateBootsPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CStrikeAreaPacket.class, NetworkDirection.PLAY_TO_SERVER);
+        registerPacket(CShootFireballPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CThrowTNTPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CPlayerRandomTeleportPacket.class, NetworkDirection.PLAY_TO_SERVER);
         registerPacket(CPlayerDashPacket.class, NetworkDirection.PLAY_TO_SERVER);

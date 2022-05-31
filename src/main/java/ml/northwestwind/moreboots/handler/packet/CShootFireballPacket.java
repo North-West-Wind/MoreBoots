@@ -13,7 +13,7 @@ public class CShootFireballPacket implements IPacket {
         ServerPlayer player = ctx.getSender();
         if (player == null || !player.getAbilities().flying) return;
         Vec3 position = player.getEyePosition(1f).add(player.getLookAngle().normalize());
-        LargeFireball fireball = new LargeFireball(player.level, player, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z, 10);
+        LargeFireball fireball = new LargeFireball(player.level, player, player.getLookAngle().x, player.getLookAngle().y, player.getLookAngle().z, 4);
         fireball.setPos(position.x, position.y, position.z);
         player.level.addFreshEntity(fireball);
         player.level.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_SHOOT, SoundSource.PLAYERS, 1, 1);

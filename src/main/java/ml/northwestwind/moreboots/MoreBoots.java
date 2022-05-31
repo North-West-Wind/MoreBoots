@@ -27,7 +27,7 @@ public class MoreBoots {
         ContainerInit.registerContainer();
         EffectInit.registerEffects();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MoreBootsConfig.getConfigSpec());
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MoreBootsConfig.getConfigSpec());
     }
 
     public static class MoreBootsItemGroup extends CreativeModeTab {

@@ -3,6 +3,7 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.handler.MoreBootsPacketHandler;
 import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.handler.packet.CPlayerMultiJumpPacket;
+import ml.northwestwind.moreboots.handler.packet.CThrowTNTPacket;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import ml.northwestwind.moreboots.mixins.MixinLivingEntityAccessor;
@@ -43,5 +44,10 @@ public class BomberFeetItem extends BootsItem {
                 entity.fallDistance = 0;
             }
         }
+    }
+
+    @Override
+    public void activateBoots() {
+        MoreBootsPacketHandler.INSTANCE.sendToServer(new CThrowTNTPacket());
     }
 }
