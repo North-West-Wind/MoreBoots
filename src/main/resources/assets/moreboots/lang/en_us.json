@@ -107,6 +107,8 @@
   "item.moreboots.nature_stone": "Nature Stone",
   "item.moreboots.bionic_core": "Bionic Core",
   "item.moreboots.superpowered_feet": "Superpowered Feet",
+  "item.moreboots.bionic_core_activator": "Bionic Core Activator",
+  "item.moreboots.pure_bionic_core": "Pure Bionic Core",
 
   "block.moreboots.rainbow_wool": "Rainbow Wool",
   "block.moreboots.glowstone_dust": "Glowstone Dust Block",
@@ -232,6 +234,8 @@
   "tooltip.moreboots.nature_stone": "\u00A77\u00A7oA stone created by nature and is used to craft items.",
   "tooltip.moreboots.bionic_core": "\u00A77\u00A7oThe legendary mystic core that can bring things to life! Only found in End Cities.",
   "tooltip.moreboots.superpowered_feet": "\u00A77\u00A7oSomeone else's foot. Only found in chests.",
+  "tooltip.moreboots.bionic_core_activator": "\u00A77\u00A7oUnlocks the true power of Bionic Core.",
+  "tooltip.moreboots.pure_bionic_core": "\u00A77\u00A7oBionic Core with its true power unlocked.",
 
   "credit.moreboots.slippery_boots": "\u00A77\u00A7oFrom Zinaida (yinzhi24) on GitHub",
   "credit.moreboots.flying_boots": "\u00A77\u00A7oFrom Zinaida (yinzhi24) on GitHub",

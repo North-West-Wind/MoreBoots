@@ -134,6 +134,8 @@ public class ItemInit {
     public static final RegistryObject<Item> NATURE_STONE = ITEMS.register("nature_stone", () -> new TooltipItem("nature_stone"));
     public static final RegistryObject<Item> BIONIC_CORE = ITEMS.register("bionic_core", () -> new TooltipItem("bionic_core"));
     public static final RegistryObject<Item> SUPERPOWERED_FEET = ITEMS.register("superpowered_feet", () -> new TooltipItem("superpowered_feet"));
+    public static final RegistryObject<Item> BIONIC_CORE_ACTIVATOR = ITEMS.register("bionic_core_activator", () -> new TooltipItem("bionic_core_activator"));
+    public static final RegistryObject<Item> PURE_BIONIC_CORE = ITEMS.register("pure_bionic_core", () -> new TooltipItem("pure_bionic_core"));
 
     public static void registerItems() {
         ITEMS.register("rainbow_wool", () -> new BlockItem(BlockInit.RAINBOW_WOOL.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
