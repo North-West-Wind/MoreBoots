@@ -143,7 +143,7 @@ public class ItemInit {
         ITEMS.register("cobblestone_64", () -> new BlockItem(BlockInit.COBBLESTONE_64.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
         ITEMS.register("cobblestone_512", () -> new BlockItem(BlockInit.COBBLESTONE_512.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
         MINECRAFT_ITEMS.register("glowstone_dust", () -> new BlockItem(BlockInit.GLOWSTONE_DUST.get(), new Item.Properties().stacksTo(64).tab(CreativeModeTab.TAB_MATERIALS)));
-        ITEMS.register("boot_recycler", () -> new BlockItem(BlockInit.BOOT_RECYCLER.get(), new Item.Properties().stacksTo(64).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
+        ITEMS.register("boot_recycler", () -> new BlockItem(BlockInit.BOOT_RECYCLER.get(), new Item.Properties().stacksTo(1).tab(MoreBoots.MoreBootsItemGroup.INSTANCE)));
 
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
@@ -230,8 +230,8 @@ public class ItemInit {
         SLIPPERY(Reference.MODID + ":slippery", 20, 1, 8, SoundEvents.GLASS_BREAK, 0f, 0f, 20000, () -> Ingredient.of(Items.BLUE_ICE)),
         FLYING(Reference.MODID + ":flying", 5, 2, 20, SoundEvents.FIREWORK_ROCKET_LAUNCH, 0f, 0f, 180000, () -> Ingredient.EMPTY),
         VISCOUS(Reference.MODID + ":viscous", 15, 3, 12, SoundEvents.SPIDER_AMBIENT, 0f, 0f, 20000, () -> Ingredient.of(VISCOUS_GOO.get())),
-        AVIAN(Reference.MODID + ":avian", 22, 2, 12, SoundEvents.GLASS_BREAK, 0f, 0f, 150000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
-        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 5, 42, SoundEvents.GLASS_BREAK, 4f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
+        AVIAN(Reference.MODID + ":avian", 22, 2, 12, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 150000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
+        SUPER_AVIAN(Reference.MODID + ":super_avian", 120, 5, 42, SoundEvents.ARMOR_EQUIP_ELYTRA, 4f, 0f, 420000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         TANOOKI(Reference.MODID + ":tanooki", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0f, 0.0f, 80000, () -> Ingredient.of(Items.PHANTOM_MEMBRANE)),
         TURTLE(Reference.MODID + ":turtle", 25, 2, 10, SoundEvents.ARMOR_EQUIP_TURTLE, 0f, 0f, () -> Ingredient.of(Items.SCUTE)),
         // Heroic update materials
@@ -262,7 +262,7 @@ public class ItemInit {
         BUG(Reference.MODID + ":bug", 40, 2, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         SALAMANDER(Reference.MODID + ":salamander", 10, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 50000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
         MEERKAT(Reference.MODID + ":meerkat", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 75000, () -> Ingredient.of(Items.BROWN_WOOL, Items.ORANGE_WOOL)),
-        BIONIC(Reference.MODID + ":bionic", 100, 8, 60, SoundEvents.ARMOR_EQUIP_NETHERITE, 4f, 0f, 500000, () -> Ingredient.of(ItemInit.BIONIC_CORE.get()));
+        BIONIC(Reference.MODID + ":bionic", 69420, 8, 60, SoundEvents.ARMOR_EQUIP_NETHERITE, 4f, 0f, 1240000, () -> Ingredient.of(ItemInit.BIONIC_CORE.get()));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;
