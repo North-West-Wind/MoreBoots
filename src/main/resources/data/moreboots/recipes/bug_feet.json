@@ -1,19 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#M#",
-    "MTM",
-    "MTM"
+    "#R#",
+    "DSD",
+    "DTD"
   ],
   "key": {
     "#": {
       "item": "moreboots:rainbow_wool"
     },
-    "M": {
-      "item": "minecraft:magenta_dye"
+    "D": {
+      "item": "minecraft:red_dye"
     },
     "T": {
       "item": "moreboots:tanooki_feet"
+    },
+    "R": {
+      "item": "moreboots:rainbow_socks_boots"
     }
   },
   "result": {

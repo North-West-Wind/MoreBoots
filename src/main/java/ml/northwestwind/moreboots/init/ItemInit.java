@@ -255,14 +255,14 @@ public class ItemInit {
         ODD1SOUT(Reference.MODID + ":odd1sout", 54, 5, 42, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
         SUPER_SOCKS(Reference.MODID + ":super_socks", 55, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
         RUNNER(Reference.MODID + ":runner", 50, 5, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 2f, 0f, 150000, () -> Ingredient.EMPTY),
-        NATURE_FAIRY(Reference.MODID + ":nature_fairy", 50, 5, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(ItemInit.NATURE_STONE.get())),
+        NATURE_FAIRY(Reference.MODID + ":nature_fairy", 50, 5, 45, SoundEvents.AZALEA_LEAVES_STEP, 1f, 0f, 150000, () -> Ingredient.of(ItemInit.NATURE_STONE.get())),
         WOODPECKER(Reference.MODID + ":woodpecker", 120, 5, 42, SoundEvents.ARMOR_EQUIP_ELYTRA, 4f, 0f, 200000, () -> Ingredient.of(ItemInit.GOLDEN_FEATHER.get())),
         BOLTER(Reference.MODID + ":bolter", 20, 4, 15, SoundEvents.LIGHTNING_BOLT_THUNDER, 0f, 0f, 160000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
-        FLUTTERING(Reference.MODID + ":fluttering", 5, 1, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 10000, () -> Ingredient.of(Items.ORANGE_WOOL)),
+        FLUTTERING(Reference.MODID + ":fluttering", 5, 1, 15, SoundEvents.ENDER_DRAGON_FLAP, 0f, 0f, 10000, () -> Ingredient.of(Items.ORANGE_WOOL)),
         BUG(Reference.MODID + ":bug", 40, 2, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 160000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         SALAMANDER(Reference.MODID + ":salamander", 10, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 50000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get())),
         MEERKAT(Reference.MODID + ":meerkat", 20, 1, 20, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 75000, () -> Ingredient.of(Items.BROWN_WOOL, Items.ORANGE_WOOL)),
-        BIONIC(Reference.MODID + ":bionic", 69420, 8, 60, SoundEvents.ARMOR_EQUIP_NETHERITE, 4f, 0f, 1240000, () -> Ingredient.of(ItemInit.BIONIC_CORE.get()));
+        BIONIC(Reference.MODID + ":bionic", 69420, 8, 100, SoundEvents.ENCHANTMENT_TABLE_USE, 4f, 0f, 1240000, () -> Ingredient.of(ItemInit.BIONIC_CORE.get()));
         private static final int[] MAX_DAMAGE_ARRAY = new int[] { 16, 16, 16, 16 };
         private final String name;
         private final float maxDamageFactor;

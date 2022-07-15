@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#N#",
-    "DID",
+    "#D#",
+    "#I#",
     "#N#"
   ],
   "key": {
@@ -16,7 +16,7 @@
       "item": "minecraft:diamond"
     },
     "N": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_block"
     }
   },
   "result": {

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WSW",
+    "S#S",
+    "BWB"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:pure_bionic_core"
+    },
+    "W": {
+      "item": "moreboots:woodpecker_feet"
+    },
+    "B": {
+      "item": "moreboots:bomber_feet"
+    },
+    "S": {
+      "item": "moreboots:super_socks"
+    }
+  },
+  "result": {
+    "item": "moreboots:bionic_beetle_feet",
+    "count": 1
+  }
+}

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "# #",
-    "###",
+    "#T#",
     "YYY"
   ],
   "key": {
@@ -11,6 +11,9 @@
     },
     "Y": {
       "item": "minecraft:yellow_dye"
+    },
+    "T": {
+      "item": "moreboots:tanooki_feet"
     }
   },
   "result": {

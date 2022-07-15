@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LBL",
+    "B#B",
+    "LBL"
+  ],
+  "key": {
+    "B": {
+      "item": "moreboots:bionic_ingot"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "#": {
+      "item": "moreboots:heroic_core"
+    }
+  },
+  "result": {
+    "item": "moreboots:bionic_core",
+    "count": 1
+  }
+}

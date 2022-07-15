@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "H#H",
+    "NNN"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dragon_egg"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    }
+  },
+  "result": {
+    "item": "moreboots:bionic_core_activator",
+    "count": 1
+  }
+}

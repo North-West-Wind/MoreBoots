@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " # ",
-    "SSS",
-    "PPP"
+    "R#R",
+    "SRS",
+    "RSR"
   ],
   "key": {
     "#": {
@@ -12,8 +12,8 @@
     "S": {
       "item": "minecraft:slime_block"
     },
-    "P": {
-      "item": "minecraft:piston"
+    "R": {
+      "item": "moreboots:rainbow_wool"
     }
   },
   "result": {

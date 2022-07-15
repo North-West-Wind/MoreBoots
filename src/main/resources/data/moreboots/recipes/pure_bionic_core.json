@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HTH",
+    "B#B",
+    "HTH"
+  ],
+  "key": {
+    "#": {
+      "item": "moreboots:bionic_core_activator"
+    },
+    "B": {
+      "item": "moreboots:bionic_core"
+    },
+    "H": {
+      "item": "moreboots:heroic_core"
+    },
+    "T": {
+      "item": "moreboots:titanium_block"
+    }
+  },
+  "result": {
+    "item": "moreboots:pure_bionic_core",
+    "count": 1
+  }
+}

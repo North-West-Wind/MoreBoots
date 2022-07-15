@@ -3,7 +3,7 @@
   "pattern": [
     "###",
     "EBE",
-    "PFP"
+    "YFY"
   ],
   "key": {
     "#": {
@@ -15,8 +15,8 @@
     "B": {
       "item": "moreboots:bahamuts_feet"
     },
-    "P": {
-      "item": "minecraft:piston"
+    "Y": {
+      "item": "minecraft:elytra"
     },
     "F": {
       "item": "moreboots:floating_core"
