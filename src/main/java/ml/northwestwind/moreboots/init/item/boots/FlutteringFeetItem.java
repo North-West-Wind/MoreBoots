@@ -24,6 +24,7 @@ public class FlutteringFeetItem extends BootsItem {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * flutterTicks, 0));
             entity.hasImpulse = true;
             tag.putInt("flutter_ticks", flutterTicks + 1);
+            entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.15, 0));
         } else if (flutterTicks > 0 && entity.isOnGround()) tag.putInt("flutter_ticks", 0);
         boots.setTag(tag);
     }
