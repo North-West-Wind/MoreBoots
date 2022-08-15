@@ -1,5 +1,6 @@
 package ml.northwestwind.moreboots.init.block;
 
+import com.google.common.collect.ImmutableList;
 import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -25,9 +26,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Random;
 
 @ParametersAreNonnullByDefault
@@ -35,6 +38,7 @@ import java.util.Random;
 public class ViscousLayerBlock extends Block {
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{Shapes.empty(), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
+    private static final List<RegistryObject<Item>> EXCLUSIONS = ImmutableList.of(ItemInit.SUPER_AVIAN_FEET, ItemInit.BIONIC_BEETLE_FEET);
 
     public ViscousLayerBlock(Properties p_49795_) {
         super(p_49795_);
@@ -50,7 +54,14 @@ public class ViscousLayerBlock extends Block {
     }
 
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.FEET).getItem().equals(ItemInit.SUPER_AVIAN_FEET.get()))) entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
+        if (!(entity instanceof LivingEntity livingEntity)) entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
+        else {
+            Item boots = livingEntity.getItemBySlot(EquipmentSlot.FEET).getItem();
+            for (RegistryObject<Item> item : EXCLUSIONS) {
+                if (boots.equals(item.get())) return;
+            }
+            entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75D, 0.8F));
+        }
     }
 
     public boolean useShapeForLightOcclusion(BlockState p_56630_) {

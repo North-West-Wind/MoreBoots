@@ -67,17 +67,15 @@ public class BionicBeetleFeetItem extends BootsItem {
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         boolean switched = tag.getBoolean("switched");
-        int viscousity = tag.getInt("worn") - tag.getInt("viscousity");
         int weight = tag.getInt("weight");
-        int bounciness = tag.getInt("bounciness");
         boolean[] abilities = new boolean[10];
         for (int ii = 0; ii < 10; ii++) {
             int finali = ii;
             abilities[ii] = Arrays.stream(tag.getIntArray("abilities")).anyMatch(jj -> jj == finali);
         }
-        if (viscousity == 0) sticky(entity, boots);
-        else slippery(entity);
-        if (bounciness == 0) buildSpeed(entity, boots, tag);
+        sticky(entity, boots);
+        slippery(entity);
+        buildSpeed(entity, boots, tag);
         if (abilities[0]) trailing(entity);
         if (abilities[2]) slowFalling(entity, weight);
         if (abilities[3]) speed(entity);
@@ -92,9 +90,8 @@ public class BionicBeetleFeetItem extends BootsItem {
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntityLiving();
         CompoundTag tag = entity.getItemBySlot(EquipmentSlot.FEET).getOrCreateTag();
-        int bounciness = tag.getInt("bounciness");
-        if (bounciness == 0) launchSpeed(entity);
-        else if (bounciness == 2) jumpBoost(entity);
+        launchSpeed(entity);
+        jumpBoost(entity);
     }
 
     @Override
@@ -142,7 +139,7 @@ public class BionicBeetleFeetItem extends BootsItem {
     @Override
     public void onJump() {
         LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null || player.isOnGround() || player.getAbilities().flying || player.getItemBySlot(EquipmentSlot.FEET).getOrCreateTag().getInt("bounciness") != 1) return;
+        if (player == null || player.isOnGround() || player.getAbilities().flying) return;
         player.jumpFromGround();
         player.setDeltaMovement(player.getDeltaMovement().add(0, 0.25, 0));
         if (player.level.isClientSide)
@@ -176,10 +173,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         CompoundTag tag = stack.getOrCreateTag();
         if (tag.getBoolean("inited")) return;
         MoreBootsConfig config = MoreBootsConfig.getConfig();
-        if (!tag.contains("viscousity")) tag.putInt("viscousity", config.getViscousity());
-        if (!tag.contains("bounciness")) tag.putInt("bounciness", config.getBounciness());
         if (!tag.contains("weight")) tag.putInt("weight", config.getWeight());
-        if (!tag.contains("worn")) tag.putInt("worn", config.getWorn());
         if (!tag.contains("abilities")) tag.putIntArray("abilities", config.getAbilities());
         if (!tag.contains("aftermaths")) tag.putIntArray("aftermaths", config.getAftermaths());
     }
@@ -232,18 +226,29 @@ public class BionicBeetleFeetItem extends BootsItem {
         }
     }
 
+    // this flutter isnt thy flutter
     private void flutter(LivingEntity entity, ItemStack boots, CompoundTag tag) {
-        int flutterTicks = tag.getInt("flutter_ticks");
+        /*int flutterTicks = tag.getInt("flutter_ticks");
         if (flutterTicks <= 20 && !entity.isOnGround() && entity.getDeltaMovement().y < 0.1 && ((MixinLivingEntityAccessor) entity).isJumping()) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * flutterTicks, 0));
             entity.hasImpulse = true;
             tag.putInt("flutter_ticks", flutterTicks + 1);
         } else if (flutterTicks > 0 && entity.isOnGround()) tag.putInt("flutter_ticks", 0);
-        boots.setTag(tag);
+        boots.setTag(tag);*/
+        if (!entity.isCrouching()) {
+            double addToY = 0;
+            if (entity.getDeltaMovement().y() < 0.02 &&  ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.05;
+            else if (entity.getDeltaMovement().y() < 0) addToY = -0.01;
+            if (addToY != 0) {
+                entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.05, 0, 1.05).add(0, addToY, 0));
+                entity.hasImpulse = true;
+                entity.fallDistance = 0;
+            }
+        }
     }
 
     private void buildSpeed(LivingEntity entity, ItemStack boots, CompoundTag tag) {
-        if (tag.getInt("bounciness") != 0) {
+        if (entity.isCrouching() && entity.isOnGround()) {
             long tickSneak = tag.getLong("tickSneak");
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             if (tickSneak < 200) {
