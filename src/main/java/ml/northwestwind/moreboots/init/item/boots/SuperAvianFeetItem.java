@@ -6,6 +6,7 @@ import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.BlockInit;
 import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
+import ml.northwestwind.moreboots.init.block.ViscousLayerBlock;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import ml.northwestwind.moreboots.mixins.MixinLivingEntityAccessor;
 import net.minecraft.core.BlockPos;
@@ -115,8 +116,8 @@ public class SuperAvianFeetItem extends BootsItem {
         BlockState state = entity.level.getBlockState(entity.blockPosition().below());
         if (state.getFriction(entity.level, entity.blockPosition().below(), entity) > 0.6f) entity.addEffect(new MobEffectInstance(EffectInit.SLIPPERINESS.get(), 600, 1, false, false));
         BlockState blockState = entity.level.getBlockState(entity.blockPosition());
-        if (blockState.is(BlockInit.VISCOUS_GOO.get()) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
-        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.get().defaultBlockState());
+        if (!blockState.isAir() || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
+        entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.get().defaultBlockState().setValue(ViscousLayerBlock.LONG_LASTING, true));
     }
 
     @Override

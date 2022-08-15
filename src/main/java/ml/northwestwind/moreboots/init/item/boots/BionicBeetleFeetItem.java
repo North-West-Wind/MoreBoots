@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.config.MoreBootsConfig;
 import ml.northwestwind.moreboots.handler.MoreBootsHandler;
 import ml.northwestwind.moreboots.handler.MoreBootsPacketHandler;
 import ml.northwestwind.moreboots.handler.Utils;
+import ml.northwestwind.moreboots.handler.packet.CActivateBootsPacket;
 import ml.northwestwind.moreboots.handler.packet.CPlayerDashPacket;
 import ml.northwestwind.moreboots.handler.packet.CPlayerMultiJumpPacket;
 import ml.northwestwind.moreboots.init.BlockInit;
@@ -66,7 +67,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         LivingEntity entity = event.getEntityLiving();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
-        boolean switched = tag.getBoolean("switched");
+        boolean switched = tag.getBoolean("Activated");
         int weight = tag.getInt("weight");
         boolean[] abilities = new boolean[10];
         for (int ii = 0; ii < 10; ii++) {
@@ -89,7 +90,6 @@ public class BionicBeetleFeetItem extends BootsItem {
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntityLiving();
-        CompoundTag tag = entity.getItemBySlot(EquipmentSlot.FEET).getOrCreateTag();
         launchSpeed(entity);
         jumpBoost(entity);
     }
@@ -103,7 +103,7 @@ public class BionicBeetleFeetItem extends BootsItem {
                 int finali = ii;
                 aftermaths[ii] = Arrays.stream(from.getOrCreateTag().getIntArray("aftermaths")).anyMatch(jj -> jj == finali);
             }
-            if (aftermaths[10] && (!aftermaths[9] || from.getOrCreateTag().getBoolean("switched"))) MoreBootsHandler.setCollision();
+            if (aftermaths[10] && (!aftermaths[9] || from.getOrCreateTag().getBoolean("Activated"))) MoreBootsHandler.setCollision();
             MoreBootsHandler.setAftermath(livingEvent -> {
                 boolean isUpdate = livingEvent instanceof LivingEvent.LivingUpdateEvent;
                 boolean isJump = livingEvent instanceof LivingEvent.LivingJumpEvent;
@@ -115,7 +115,7 @@ public class BionicBeetleFeetItem extends BootsItem {
                     boots = from;
                     tag = boots.getOrCreateTag();
                 }
-                boolean switched = tag == null ? from.getOrCreateTag().getBoolean("switched") : tag.getBoolean("switched");
+                boolean switched = tag == null ? from.getOrCreateTag().getBoolean("Activated") : tag.getBoolean("Activated");
                 int weight = tag == null ? from.getOrCreateTag().getInt("weight") : tag.getInt("weight");
 
                 if (aftermaths[0] && isUpdate) wiggly(livingEvent.getEntityLiving());
@@ -153,9 +153,10 @@ public class BionicBeetleFeetItem extends BootsItem {
         ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         IntStream abilities = Arrays.stream(tag.getIntArray("abilities"));
-        if (abilities.anyMatch(ii -> ii == 9)) dash();
-        else tag.putBoolean("switched", !tag.getBoolean("switched"));
-        boots.setTag(tag);
+        if (player.isCrouching()) {
+            MoreBootsPacketHandler.INSTANCE.sendToServer(new CActivateBootsPacket(!tag.getBoolean("Activated")));
+            player.displayClientMessage(new TranslatableComponent("info.moreboots.bionic.switched"), true);
+        } else if (abilities.anyMatch(ii -> ii == 9)) dash();
     }
 
     @Override
@@ -164,7 +165,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         if (!(ctx.getEntity() instanceof LivingEntity entity)) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
-        boolean switched = tag.getBoolean("switched");
+        boolean switched = tag.getBoolean("Activated");
         if (Arrays.stream(tag.getIntArray("abilities")).anyMatch(ii -> ii == 1) && (Arrays.stream(tag.getIntArray("abilities")).noneMatch(ii -> ii == 4) || !switched)) jesus(worldIn, pos, cir);
     }
 
@@ -181,7 +182,7 @@ public class BionicBeetleFeetItem extends BootsItem {
     private void trailing(LivingEntity entity) {
         BlockState state = entity.level.getBlockState(entity.blockPosition().below());
         BlockState blockState = entity.level.getBlockState(entity.blockPosition());
-        if (blockState.is(BlockInit.VISCOUS_GOO.get()) || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
+        if (!blockState.isAir() || !Block.isFaceFull(state.getCollisionShape(entity.level, entity.blockPosition()), Direction.UP) && (blockState.isAir() || !blockState.canBeReplaced(new BlockPlaceContext((Player) entity, InteractionHand.MAIN_HAND, new ItemStack(ItemInit.VISCOUS_GOO.get()), new BlockHitResult(new Vec3(0.5, 1, 0.5), Direction.UP, entity.blockPosition().below(), false))))) return;
         entity.level.setBlockAndUpdate(entity.blockPosition(), BlockInit.VISCOUS_GOO.get().defaultBlockState());
     }
 
@@ -228,14 +229,14 @@ public class BionicBeetleFeetItem extends BootsItem {
 
     // this flutter isnt thy flutter
     private void flutter(LivingEntity entity, ItemStack boots, CompoundTag tag) {
-        /*int flutterTicks = tag.getInt("flutter_ticks");
+        int flutterTicks = tag.getInt("flutter_ticks");
         if (flutterTicks <= 20 && !entity.isOnGround() && entity.getDeltaMovement().y < 0.1 && ((MixinLivingEntityAccessor) entity).isJumping()) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.01 * flutterTicks, 0));
             entity.hasImpulse = true;
             tag.putInt("flutter_ticks", flutterTicks + 1);
         } else if (flutterTicks > 0 && entity.isOnGround()) tag.putInt("flutter_ticks", 0);
-        boots.setTag(tag);*/
-        if (!entity.isCrouching()) {
+        boots.setTag(tag);
+        /*if (!entity.isCrouching()) {
             double addToY = 0;
             if (entity.getDeltaMovement().y() < 0.02 &&  ((MixinLivingEntityAccessor) entity).isJumping()) addToY = 0.05;
             else if (entity.getDeltaMovement().y() < 0) addToY = -0.01;
@@ -244,7 +245,7 @@ public class BionicBeetleFeetItem extends BootsItem {
                 entity.hasImpulse = true;
                 entity.fallDistance = 0;
             }
-        }
+        }*/
     }
 
     private void buildSpeed(LivingEntity entity, ItemStack boots, CompoundTag tag) {

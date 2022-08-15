@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
@@ -37,6 +38,7 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 public class ViscousLayerBlock extends Block {
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
+    public static final BooleanProperty LONG_LASTING = BooleanProperty.create("long_lasting");
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{Shapes.empty(), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
     private static final List<RegistryObject<Item>> EXCLUSIONS = ImmutableList.of(ItemInit.SUPER_AVIAN_FEET, ItemInit.BIONIC_BEETLE_FEET);
 
@@ -111,6 +113,7 @@ public class ViscousLayerBlock extends Block {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_56613_) {
         p_56613_.add(LAYERS);
+        p_56613_.add(LONG_LASTING);
     }
 
     @Override
@@ -125,7 +128,10 @@ public class ViscousLayerBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
-        if (random.nextDouble() < 0.1) {
+        double chance;
+        if (state.getValue(LONG_LASTING)) chance = 0.8;
+        else chance = 1;
+        if (random.nextDouble() < chance) {
             int layers = state.getValue(LAYERS);
             if (layers > 1) level.setBlockAndUpdate(pos, state.setValue(LAYERS, layers - 1));
             else level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());

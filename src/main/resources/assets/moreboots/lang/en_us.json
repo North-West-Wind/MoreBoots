@@ -255,5 +255,6 @@
 
   "container.moreboots.storage_boots": "Storage Boots",
 
-  "warning.moreboots.ender_boots": "Please avoid teleporting into solid blocks."
+  "warning.moreboots.ender_boots": "Please avoid teleporting into solid blocks.",
+  "info.moreboots.bionic.switched": "Switched Abilities"
 }
