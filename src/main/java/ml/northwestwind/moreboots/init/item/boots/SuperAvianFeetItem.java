@@ -43,6 +43,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
@@ -170,6 +171,12 @@ public class SuperAvianFeetItem extends BootsItem {
     @Override
     public void postRenderLiving(RenderLivingEvent.Post<?, ?> event) {
         event.getPoseStack().popPose();
+    }
+
+    @Override
+    public void onLivingKnockedBack(LivingKnockBackEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        if (entity.isOnGround() && entity.isCrouching()) event.setCanceled(true);
     }
 
     @Override

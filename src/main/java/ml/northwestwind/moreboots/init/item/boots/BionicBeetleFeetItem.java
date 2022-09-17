@@ -41,6 +41,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
@@ -81,7 +82,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         if (abilities[2]) slowFalling(entity, weight);
         if (abilities[3]) speed(entity);
         if (abilities[4] && (!abilities[1] || switched)) fastSwim(entity);
-        if (abilities[5] && (!abilities[7] || !switched)) levitate(entity);
+        if ((abilities[5] && (!abilities[7] || !switched)) || entity.getY() < entity.level.getMinBuildHeight()) levitate(entity);
         if (abilities[6]) wiggly(entity);
         if (abilities[7] && (!abilities[5] || switched)) flutter(entity, boots, tag);
         if (abilities[8]) buildSpeed(entity, boots, tag);
@@ -167,6 +168,12 @@ public class BionicBeetleFeetItem extends BootsItem {
         CompoundTag tag = boots.getOrCreateTag();
         boolean switched = tag.getBoolean("Activated");
         if (Arrays.stream(tag.getIntArray("abilities")).anyMatch(ii -> ii == 1) && (Arrays.stream(tag.getIntArray("abilities")).noneMatch(ii -> ii == 4) || !switched)) jesus(worldIn, pos, cir);
+    }
+
+    @Override
+    public void onLivingKnockedBack(LivingKnockBackEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        if (entity.isOnGround() && entity.isCrouching()) event.setCanceled(true);
     }
 
     @Override

@@ -103,7 +103,7 @@ public class ItemInit {
     public static final RegistryObject<Item> BAHAMUTS_FEET = ITEMS.register("bahamuts_feet", BahamutsFeetItem::new);
     public static final RegistryObject<Item> AWAKENED_BAHAMUTS_FEET = ITEMS.register("awakened_bahamuts_feet", AwakenedBahamutsFeet::new);
     public static final RegistryObject<Item> SPEEDSTER_FEET = ITEMS.register("speedster_feet", SpeedsterFeetItem::new);
-    public static final RegistryObject<Item> SUPER_BOUNCE_BOOTS = ITEMS.register("super_bounce_boots", SuperBounceBootsItem::new);
+    public static final RegistryObject<Item> BOUNCY_FEET = ITEMS.register("bouncy_feet", BouncyFeetItem::new);
     public static final RegistryObject<Item> SOUL_BOOTS = ITEMS.register("soul_boots", SoulBootsItem::new);
     public static final RegistryObject<Item> BOMBERFEET = ITEMS.register("bomber_feet", BomberFeetItem::new);
     public static final RegistryObject<Item> COSMIC_FIRE_FEET = ITEMS.register("cosmic_fire_feet", CosmicFireFeetItem::new);
@@ -247,7 +247,7 @@ public class ItemInit {
         BAHAMUTS(Reference.MODID + ":bahamuts", 20, 2, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 100000, () -> Ingredient.of(ItemInit.SOUL_STONE.get(), ItemInit.WAR_STONE.get())),
         AWAKENED(Reference.MODID + ":awakened_bahamuts", 20, 2, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 0f, 0f, 150000, () -> Ingredient.of(ItemInit.SOUL_STONE.get(), ItemInit.ELECTRIC_STONE.get())),
         SPEEDSTER(Reference.MODID + ":speedster", 20, 1, 10, SoundEvents.ARMOR_EQUIP_LEATHER, 0f, 0f, 40000, () -> Ingredient.of(ItemInit.ELECTRIC_STONE.get(), ItemInit.FIRE_STONE.get())),
-        SUPER_BOUNCE(Reference.MODID + ":super_bounce", 80, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
+        BOUNCY(Reference.MODID + ":bouncy", 80, 4, 45, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, 150000, () -> Ingredient.of(BlockInit.RAINBOW_WOOL.get())),
         SOUL(Reference.MODID + ":soul", 25, 3, 16, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, 0f, 0f, 30000, () -> Ingredient.of(ItemInit.SOUL_STONE.get())),
         BOMBER(Reference.MODID + ":bomber", 80, 4, 40, SoundEvents.GENERIC_EXPLODE, 1f, 0f, 150000, () -> Ingredient.EMPTY),
         COSMIC_FIRE(Reference.MODID + ":cosmic_fire", 40, 3, 20, SoundEvents.ARMOR_EQUIP_ELYTRA, 0f, 0f, 200000, () -> Ingredient.of(ItemInit.FLOATING_CORE.get())),

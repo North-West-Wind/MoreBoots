@@ -17,9 +17,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
-public class SuperBounceBootsItem extends BootsItem {
-    public SuperBounceBootsItem() {
-        super(ItemInit.ModArmorMaterial.SUPER_BOUNCE, "super_bounce_boots");
+public class BouncyFeetItem extends BootsItem {
+    public BouncyFeetItem() {
+        super(ItemInit.ModArmorMaterial.BOUNCY, "bouncy_feet");
     }
 
     @Override
