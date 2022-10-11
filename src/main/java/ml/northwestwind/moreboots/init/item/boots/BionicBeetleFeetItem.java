@@ -41,6 +41,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -184,6 +185,11 @@ public class BionicBeetleFeetItem extends BootsItem {
         if (!tag.contains("weight")) tag.putInt("weight", config.getWeight());
         if (!tag.contains("abilities")) tag.putIntArray("abilities", config.getAbilities());
         if (!tag.contains("aftermaths")) tag.putIntArray("aftermaths", config.getAftermaths());
+    }
+
+    @Override
+    public void onLivingFall(LivingFallEvent event) {
+        event.setCanceled(true);
     }
 
     private void trailing(LivingEntity entity) {
