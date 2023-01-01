@@ -28,8 +28,8 @@ public class SuperFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos blockPos = entity.blockPosition();
         if (!entity.level.getBlockState(blockPos.below()).getCollisionShape(entity.level, blockPos.below()).equals(Shapes.empty())) {
             Vec3 motion = entity.getDeltaMovement();
@@ -56,7 +56,7 @@ public class SuperFeetItem extends BootsItem {
 
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         if (source.isProjectile()) return;
         Entity attacker = source.getDirectEntity();

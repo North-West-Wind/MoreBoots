@@ -3,7 +3,8 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,8 +24,8 @@ public class AvianFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1) entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false, false));
         if (entity.getDeltaMovement().x() == 0 && entity.getDeltaMovement().z() == 0) return;
         if (entity.getDeltaMovement().y() < 0.02 && !entity.isCrouching()) {
@@ -36,7 +37,7 @@ public class AvianFeetItem extends BootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.15, 0));
     }
 
@@ -44,6 +45,6 @@ public class AvianFeetItem extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent("credit.moreboots."+registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("credit.moreboots."+registryName)));
     }
 }

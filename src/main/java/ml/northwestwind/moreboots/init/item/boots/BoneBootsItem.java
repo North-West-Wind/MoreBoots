@@ -18,8 +18,8 @@ public class BoneBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.level.isClientSide || entity instanceof ArmorStand) return;
         BlockPos pos = new BlockPos(entity.position());
         Iterator<BlockPos> iterator = BlockPos.betweenClosedStream(pos.offset(5, 5, 5), pos.offset(-5, -5, -5)).iterator();

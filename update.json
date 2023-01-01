@@ -1,5 +1,8 @@
 {
   "homepage": "https://github.com/North-West-Wind/MoreBoots/releases/latest",
+  "1.19.2": {
+    "4.0.0": "Release for 1.19.2"
+  },
   "1.18.2": {
     "3.0.0": "Release for 1.18",
     "3.0.1": "Fixed Bone Boots ticking everything",
@@ -165,6 +168,8 @@
     "1.12.4": "Fixed Bone Boots ticking everything"
   },
   "promos": {
+    "1.19.2-latest": "4.0.0",
+    "1.19.2-recommended": "4.0.0",
     "1.18.2-latest": "3.2.0",
     "1.18.2-recommended": "3.2.0",
     "1.18.1-latest": "3.2.0",

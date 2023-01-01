@@ -2,7 +2,8 @@ package ml.northwestwind.moreboots.init.item;
 
 import ml.northwestwind.moreboots.MoreBoots;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -28,6 +29,6 @@ public class TooltipItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(new TranslatableComponent("tooltip.moreboots." + registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("tooltip.moreboots." + registryName)));
     }
 }

@@ -4,6 +4,7 @@ import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.boots.SlipperyBootsItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,11 +17,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Random;
-
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    @Shadow public abstract Random getRandom();
+    @Shadow public abstract RandomSource getRandom();
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
     public float getFriction(BlockState instance, LevelReader levelReader, BlockPos blockPos, Entity entity) {

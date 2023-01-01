@@ -23,8 +23,8 @@ public class PlumberBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         List<Entity> collidedEntities = entity.level.getEntities(entity, entity.getBoundingBox(), EntitySelector.NO_SPECTATORS);
         Vec3 motion = entity.getDeltaMovement();
         boolean stomped = false;

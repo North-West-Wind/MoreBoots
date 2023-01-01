@@ -13,8 +13,8 @@ public class UpwarpBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos pos = new BlockPos(entity.position());
         BlockPos original = pos;
         if (!entity.isOnGround()) {

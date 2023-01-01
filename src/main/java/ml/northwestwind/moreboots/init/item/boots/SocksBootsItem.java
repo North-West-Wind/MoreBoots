@@ -4,7 +4,8 @@ import ml.northwestwind.moreboots.init.EffectInit;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -26,29 +27,29 @@ public class SocksBootsItem extends BootsItem {
 
     @Override
     public void onLivingHurt(final LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (event.getSource().equals(DamageSource.IN_FIRE) || event.getSource().equals(DamageSource.LAVA))
             boots.setDamageValue(boots.getMaxDamage());
     }
 
     @Override
-    public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(final LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         if (entity.isInWater() && !entity.isSpectator()) {
             if (!tag.getBoolean("wet")) tag.putBoolean("wet", true);
             tag.putLong("wetTick", System.currentTimeMillis());
             boots.setTag(tag);
-            boots.setHoverName(new TranslatableComponent("item.moreboots.socks_boots_wet"));
+            boots.setHoverName(MutableComponent.create(new TranslatableContents("item.moreboots.socks_boots_wet")));
         }
         if (tag.getBoolean("wet")) {
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 1));
             if (System.currentTimeMillis() - tag.getLong("wetTick") >= 300000) {
                 tag.putBoolean("wet", false);
                 tag.putLong("wetTick", 0);
-                boots.setHoverName(new TranslatableComponent("item.moreboots.socks_boots"));
+                boots.setHoverName(MutableComponent.create(new TranslatableContents("item.moreboots.socks_boots")));
             }
         } else {
             entity.addEffect(new MobEffectInstance(EffectInit.WARMTH.get(), 205));

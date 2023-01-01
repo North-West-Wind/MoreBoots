@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[43,)"
 license="MIT"
 issueTrackerURL="https://github.com/North-West-Wind/MoreBoots/issues"
 
 [[mods]]
 modId="moreboots"
-version="3.2.0"
+version="4.0.0"
 displayName="More Boots"
 updateJSONURL="https://github.com/North-West-Wind/MoreBoots/raw/main/update.json"
 displayURL="https://github.com/North-West-Wind/MoreBoots"
@@ -23,13 +23,13 @@ Heroic Update - Fully suggested by Zinaida
 [[dependencies.moreboots]]
     modId="forge"
     mandatory=true
-    versionRange="[38,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.moreboots]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"

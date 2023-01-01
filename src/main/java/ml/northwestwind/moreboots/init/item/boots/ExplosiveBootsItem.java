@@ -21,7 +21,7 @@ public class ExplosiveBootsItem extends BootsItem {
 
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         Entity attacker = event.getSource().getEntity();
         if (!(event.getSource() instanceof EntityDamageSource) || !(attacker instanceof LivingEntity))
             event.setCanceled(true);

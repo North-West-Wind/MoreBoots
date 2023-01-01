@@ -23,8 +23,8 @@ public class BlazeBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos blockPos = entity.blockPosition();
         BlockPos under = blockPos.below();
         BlockState underneath = entity.level.getBlockState(under);

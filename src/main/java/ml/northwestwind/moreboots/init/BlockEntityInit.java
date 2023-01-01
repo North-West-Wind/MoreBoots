@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class BlockEntityInit {
-    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Reference.MODID);
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Reference.MODID);
 
     public static final RegistryObject<BlockEntityType<?>> BOOT_RECYCLER = BLOCK_ENTITIES.register("boot_recycler", () -> BlockEntityType.Builder.of((BlockEntityType.BlockEntitySupplier<BlockEntity>) BootRecyclerBlockEntity::new, BlockInit.BOOT_RECYCLER.get()).build(null));
 

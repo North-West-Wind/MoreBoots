@@ -24,7 +24,7 @@ public class MoreBoots {
         ItemInit.registerItems();
         BlockInit.registerBlocks();
         BlockEntityInit.registerTileEntity();
-        ContainerInit.registerContainer();
+        MenuTypeInit.registerContainer();
         EffectInit.registerEffects();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MoreBootsConfig.getConfigSpec());

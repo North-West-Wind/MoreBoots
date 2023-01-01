@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
@@ -39,7 +39,7 @@ public class BootRecyclerBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         BootRecyclerBlockEntity tileEntity = (BootRecyclerBlockEntity) worldIn.getBlockEntity(pos);
         if (tileEntity == null || !(player.getItemInHand(handIn).getItem() instanceof ArmorItem) || !((ArmorItem) player.getItemInHand(handIn).getItem()).getSlot().equals(EquipmentSlot.FEET)) return InteractionResult.PASS;
-        IItemHandler itemHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, hit.getDirection()).resolve().get();
+        IItemHandler itemHandler = tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, hit.getDirection()).resolve().get();
         if (!itemHandler.getStackInSlot(0).isEmpty()) return InteractionResult.PASS;
         if (!worldIn.isClientSide) player.setItemInHand(handIn, itemHandler.insertItem(0, player.getItemInHand(handIn), false));
         else player.playSound(SoundEvents.WOOD_PLACE, 1, 1);
@@ -50,7 +50,7 @@ public class BootRecyclerBlock extends BaseEntityBlock {
     @Override
     public void playerWillDestroy(Level worldIn, @Nonnull BlockPos pos, BlockState state, @Nonnull Player player) {
         BootRecyclerBlockEntity tileEntity = (BootRecyclerBlockEntity) worldIn.getBlockEntity(pos);
-        if (tileEntity != null) worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0)));
+        if (tileEntity != null) worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get().getStackInSlot(0)));
         super.playerWillDestroy(worldIn, pos, state, player);
     }
 
@@ -58,7 +58,7 @@ public class BootRecyclerBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BootRecyclerBlockEntity tileEntity = (BootRecyclerBlockEntity) context.getLevel().getBlockEntity(context.getClickedPos());
         if (tileEntity == null) return this.defaultBlockState().setValue(POWERED, false);
-        return this.defaultBlockState().setValue(POWERED, !tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().get().getStackInSlot(0).isEmpty());
+        return this.defaultBlockState().setValue(POWERED, !tileEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get().getStackInSlot(0).isEmpty());
     }
 
     @Override

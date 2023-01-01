@@ -4,7 +4,8 @@ import com.google.common.collect.Maps;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -29,12 +30,12 @@ public class FlyingBootsItem extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent("credit.moreboots."+registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("credit.moreboots."+registryName)));
     }
 
     @Override
     public void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) {
-        if (!(event.getEntityLiving() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         ItemStack from = event.getFrom();
         ItemStack to = event.getTo();
         if (!from.getItem().equals(ItemInit.FLYING_BOOTS.get()) && to.getItem().equals(ItemInit.FLYING_BOOTS.get())) {

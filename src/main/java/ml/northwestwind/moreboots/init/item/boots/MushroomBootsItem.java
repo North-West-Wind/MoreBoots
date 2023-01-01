@@ -13,8 +13,8 @@ public class MushroomBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         Utils.changeGroundBlocks(entity, entity.level, new BlockPos(entity.position()).above(), 2, Utils.grass, Utils.air);
         Utils.changeGroundBlocks(entity, entity.level, new BlockPos(entity.position()), 2, Utils.target, Utils.to);
     }

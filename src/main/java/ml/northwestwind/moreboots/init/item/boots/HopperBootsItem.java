@@ -19,8 +19,8 @@ public class HopperBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (!(entity instanceof Player)) return;
         Player player = (Player) entity;
         List<Entity> entities = entity.level.getEntities(entity, new AABB(entity.blockPosition()).inflate(5), EntitySelector.NO_SPECTATORS);

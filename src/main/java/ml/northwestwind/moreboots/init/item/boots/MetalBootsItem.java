@@ -15,7 +15,7 @@ public class MetalBootsItem extends BootsItem {
 
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (entity.level.isClientSide) return;
         event.setCanceled(true);

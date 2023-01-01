@@ -1,5 +1,6 @@
 {
   "parent": "block/thin_block",
+  "render_type": "translucent",
   "textures": {
     "particle": "moreboots:blocks/viscous",
     "texture": "moreboots:blocks/viscous"

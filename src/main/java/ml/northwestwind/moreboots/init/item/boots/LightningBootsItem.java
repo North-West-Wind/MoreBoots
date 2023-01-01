@@ -14,7 +14,7 @@ public class LightningBootsItem extends BootsItem {
 
     @Override
     public void onLivingHurt(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level);
         lightning.setPos(entity.getX(), entity.getY(), entity.getZ());
         entity.level.addFreshEntity(lightning);

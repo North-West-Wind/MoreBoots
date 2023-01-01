@@ -20,7 +20,7 @@ public class AwakenedBahamutsFeet extends BootsItem {
 
     @Override
     public void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
-        if (!(event.getEntityLiving() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         ItemStack from = event.getFrom();
         ItemStack to = event.getTo();
         if (!from.getItem().equals(ItemInit.AWAKENED_BAHAMUTS_FEET.get()) && to.getItem().equals(ItemInit.AWAKENED_BAHAMUTS_FEET.get())) {

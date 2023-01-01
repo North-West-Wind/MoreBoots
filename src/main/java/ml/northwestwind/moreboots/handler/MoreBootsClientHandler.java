@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +28,7 @@ public class MoreBootsClientHandler {
     }
 
     @SubscribeEvent
-    public static void onKeyInput(final InputEvent.KeyInputEvent event) {
+    public static void onKeyInput(final InputEvent.Key event) {
         if (Minecraft.getInstance().options.keyShift.consumeClick() && event.getAction() == GLFW.GLFW_PRESS) {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player == null) return;
@@ -61,7 +61,7 @@ public class MoreBootsClientHandler {
     }
 
     @SubscribeEvent
-    public static void renderNameplate(final RenderNameplateEvent event) {
+    public static void renderNameplate(final RenderNameTagEvent event) {
         if (!(event.getEntity() instanceof LivingEntity)) return;
         ItemStack boots = ((LivingEntity) event.getEntity()).getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) ((BootsItem) boots.getItem()).renderNameplate(event);

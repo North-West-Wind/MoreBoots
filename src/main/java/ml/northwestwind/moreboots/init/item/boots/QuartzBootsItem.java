@@ -15,7 +15,7 @@ public class QuartzBootsItem extends BootsItem {
 
     @Override
     public void onLivingFall(final LivingFallEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         float distance = event.getDistance();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (entity.level.isClientSide) return;

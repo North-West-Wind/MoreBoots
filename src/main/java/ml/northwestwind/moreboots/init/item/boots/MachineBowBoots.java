@@ -38,8 +38,8 @@ public class MachineBowBoots extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         if (tag.getBoolean("Activated") && hasArrows(entity)) {

@@ -16,8 +16,8 @@ public class BatBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 upper = entity.position().add(0, entity.getBbHeight() + 1, 0);
         boolean climable = !entity.isOnGround() && !entity.level.isEmptyBlock(new BlockPos(upper)) && !entity.isCrouching();

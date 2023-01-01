@@ -29,6 +29,6 @@ public class MusicBootsItem extends BootsItem {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
         SoundInstance sound = event.getSound();
-        event.setSound(new SimpleSoundInstance(INSTRUMENTS.get(player.getRandom().nextInt(INSTRUMENTS.size())), SoundSource.RECORDS, 1, (float) Math.pow(2.0D, (double) (player.getRandom().nextInt(24) - 12) / 12.0D), sound.getX(), sound.getY(), sound.getZ()));
+        event.setSound(new SimpleSoundInstance(INSTRUMENTS.get(player.getRandom().nextInt(INSTRUMENTS.size())), SoundSource.RECORDS, 1, (float) Math.pow(2.0D, (double) (player.getRandom().nextInt(24) - 12) / 12.0D), player.getRandom(), sound.getX(), sound.getY(), sound.getZ()));
     }
 }

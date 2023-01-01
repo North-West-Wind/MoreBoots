@@ -28,8 +28,8 @@ public class StriderBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         entity.clearFire();
         if (entity.isInLava()) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1, 0));

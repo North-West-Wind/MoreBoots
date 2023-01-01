@@ -16,8 +16,8 @@ public class IceBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         FrostWalkerEnchantment.onEntityMoved(entity, entity.level, new BlockPos(entity.position()), 2);
         int num = entity.getRandom().nextInt(100);

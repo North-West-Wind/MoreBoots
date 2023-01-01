@@ -16,7 +16,7 @@ public class IncineratingFeetItem extends BootsItem {
     public void onLivingAttack(LivingHurtEvent event) {
         Entity source = event.getSource().getDirectEntity();
         if (source == null || source.isInWaterRainOrBubble()) return;
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (!entity.fireImmune()) {
             entity.setRemainingFireTicks(entity.getRemainingFireTicks() + 20);
             if (entity.getRemainingFireTicks() == 0) {

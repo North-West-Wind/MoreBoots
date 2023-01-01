@@ -7,7 +7,8 @@ import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import ml.northwestwind.moreboots.inventory.StorageBootsInventory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,7 +26,7 @@ public class StorageBootsItem extends BootsItem {
         ItemStack backpack = player.getItemBySlot(EquipmentSlot.FEET);
         if (!backpack.isEmpty()) {
             int rows = this.getRows();
-            NetworkHooks.openGui(player, new SimpleMenuProvider((id, playerInventory, entity) -> new StorageBootsContainer(id, player.getInventory(), new StorageBootsInventory(rows), rows), new TranslatableComponent("container.moreboots.storage_boots")), buffer -> buffer.writeVarInt(rows));
+            NetworkHooks.openScreen(player, new SimpleMenuProvider((id, playerInventory, entity) -> new StorageBootsContainer(id, player.getInventory(), new StorageBootsInventory(rows), rows), MutableComponent.create(new TranslatableContents("container.moreboots.storage_boots"))), buffer -> buffer.writeVarInt(rows));
         }
     }
 

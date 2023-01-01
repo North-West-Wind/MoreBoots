@@ -14,14 +14,14 @@ public class CinderingFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isInWaterRainOrBubble()) entity.hurt(Reference.WATER, 1);
     }
 
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (!entity.fireImmune()) {
             entity.setRemainingFireTicks(entity.getRemainingFireTicks() + 10);
             if (entity.getRemainingFireTicks() == 0) {

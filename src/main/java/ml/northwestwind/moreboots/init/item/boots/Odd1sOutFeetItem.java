@@ -26,7 +26,7 @@ public class Odd1sOutFeetItem extends BootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.25, 0));
         entity.hasImpulse = true;
     }

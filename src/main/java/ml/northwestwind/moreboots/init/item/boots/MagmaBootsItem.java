@@ -16,8 +16,8 @@ public class MagmaBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.level.getFluidState(entity.blockPosition()).getType() == Fluids.WATER || entity.level.getFluidState(entity.blockPosition()).getType() == Fluids.FLOWING_WATER) {
             if (entity.isSpectator() || (entity instanceof Player && ((Player) entity).getAbilities().flying))
                 return;

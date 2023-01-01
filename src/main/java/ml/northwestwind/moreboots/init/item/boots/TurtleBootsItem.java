@@ -3,7 +3,8 @@ package ml.northwestwind.moreboots.init.item.boots;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,8 +26,8 @@ public class TurtleBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (!entity.isVisuallySwimming() || !entity.isInWater()) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
@@ -44,6 +45,6 @@ public class TurtleBootsItem extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent("credit.moreboots."+registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("credit.moreboots."+registryName)));
     }
 }

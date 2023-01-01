@@ -21,8 +21,8 @@ public class WaterBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(final LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 pos = entity.position();
         BlockPos blockPos = new BlockPos(pos);

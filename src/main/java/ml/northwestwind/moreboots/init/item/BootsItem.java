@@ -3,7 +3,8 @@ package ml.northwestwind.moreboots.init.item;
 import ml.northwestwind.moreboots.MoreBoots;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
@@ -13,7 +14,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -46,7 +47,7 @@ public class BootsItem extends ArmorItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(new TranslatableComponent("tooltip.moreboots." + registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("tooltip.moreboots." + registryName)));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -58,7 +59,7 @@ public class BootsItem extends ArmorItem {
     public void onLivingAttack(final LivingHurtEvent event) { }
     public void onPlayerXpChange(final PlayerXpEvent.XpChange event) { }
     public void onLivingEquipmentChange(final LivingEquipmentChangeEvent event) { }
-    public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) { }
+    public void onLivingUpdate(final LivingEvent.LivingTickEvent event) { }
     public void onLivingKnockBack(final LivingKnockBackEvent event) { }
     public void onLivingKnockedBack(final LivingKnockBackEvent event) { }
     @OnlyIn(Dist.CLIENT)
@@ -72,7 +73,7 @@ public class BootsItem extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     public void postRenderLiving(final RenderLivingEvent.Post<?, ?> event) { }
     @OnlyIn(Dist.CLIENT)
-    public void renderNameplate(final RenderNameplateEvent event) { }
+    public void renderNameplate(final RenderNameTagEvent event) { }
 
     public void getCollisionShape(BlockGetter worldIn, BlockPos pos, CollisionContext context, CallbackInfoReturnable<VoxelShape> cir) { }
 }

@@ -15,7 +15,7 @@ public class PowerFeetItem extends BootsItem {
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
         event.setAmount(event.getAmount() * 1.1f);
-        event.getEntityLiving().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 255, false, false, false));
+        event.getEntity().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 255, false, false, false));
     }
 
     @Override

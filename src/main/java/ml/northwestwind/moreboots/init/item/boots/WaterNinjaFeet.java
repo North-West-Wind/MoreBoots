@@ -23,8 +23,8 @@ public class WaterNinjaFeet extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isUnderWater() && (!entity.hasEffect(MobEffects.INVISIBILITY) || entity.getEffect(MobEffects.INVISIBILITY).getDuration() < 10)) {
             entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 10, 0, false, false, false));
         }
@@ -37,7 +37,7 @@ public class WaterNinjaFeet extends BootsItem {
 
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isInWater()) event.setAmount(event.getAmount() * 1.1f);
     }
 

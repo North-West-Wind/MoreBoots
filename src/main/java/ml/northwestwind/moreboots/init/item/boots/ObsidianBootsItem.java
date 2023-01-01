@@ -17,7 +17,7 @@ public class ObsidianBootsItem extends BootsItem {
     public void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
         EquipmentSlot slot = event.getSlot();
         if (slot.equals(EquipmentSlot.FEET)) return;
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         ItemStack equipment = entity.getItemBySlot(slot);
         if (!equipment.isDamageableItem()) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);

@@ -13,8 +13,8 @@ public class MinerBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(final LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         entity.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20, 1));
         entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 1));
     }

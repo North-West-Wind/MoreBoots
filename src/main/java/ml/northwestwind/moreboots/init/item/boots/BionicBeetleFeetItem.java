@@ -17,7 +17,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -65,8 +66,8 @@ public class BionicBeetleFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         boolean switched = tag.getBoolean("Activated");
@@ -91,7 +92,7 @@ public class BionicBeetleFeetItem extends BootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         launchSpeed(entity);
         jumpBoost(entity);
     }
@@ -107,20 +108,20 @@ public class BionicBeetleFeetItem extends BootsItem {
             }
             if (aftermaths[10] && (!aftermaths[9] || from.getOrCreateTag().getBoolean("Activated"))) MoreBootsHandler.setCollision();
             MoreBootsHandler.setAftermath(livingEvent -> {
-                boolean isUpdate = livingEvent instanceof LivingEvent.LivingUpdateEvent;
+                boolean isUpdate = livingEvent instanceof LivingEvent.LivingTickEvent;
                 boolean isJump = livingEvent instanceof LivingEvent.LivingJumpEvent;
                 LivingEntity entity = null;
                 ItemStack boots = null;
                 CompoundTag tag = null;
                 if (livingEvent != null) {
-                    entity = livingEvent.getEntityLiving();
+                    entity = livingEvent.getEntity();
                     boots = from;
                     tag = boots.getOrCreateTag();
                 }
                 boolean switched = tag == null ? from.getOrCreateTag().getBoolean("Activated") : tag.getBoolean("Activated");
                 int weight = tag == null ? from.getOrCreateTag().getInt("weight") : tag.getInt("weight");
 
-                if (aftermaths[0] && isUpdate) wiggly(livingEvent.getEntityLiving());
+                if (aftermaths[0] && isUpdate) wiggly(livingEvent.getEntity());
                 if (aftermaths[1] && isUpdate) flutter(entity, boots, tag);
                 if (aftermaths[2] && isJump && (!aftermaths[7] || !switched)) jumpBoost(entity);
                 if (aftermaths[3] && isUpdate) speed(entity);
@@ -157,7 +158,7 @@ public class BionicBeetleFeetItem extends BootsItem {
         IntStream abilities = Arrays.stream(tag.getIntArray("abilities"));
         if (player.isCrouching()) {
             MoreBootsPacketHandler.INSTANCE.sendToServer(new CActivateBootsPacket(!tag.getBoolean("Activated")));
-            player.displayClientMessage(new TranslatableComponent("info.moreboots.bionic.switched"), true);
+            player.displayClientMessage(MutableComponent.create(new TranslatableContents("info.moreboots.bionic.switched")), true);
         } else if (abilities.anyMatch(ii -> ii == 9)) dash();
     }
 
@@ -173,7 +174,7 @@ public class BionicBeetleFeetItem extends BootsItem {
 
     @Override
     public void onLivingKnockedBack(LivingKnockBackEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isOnGround() && entity.isCrouching()) event.setCanceled(true);
     }
 
@@ -270,7 +271,7 @@ public class BionicBeetleFeetItem extends BootsItem {
                 tag.putLong("tickSneak", tickSneak);
             }
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_jump", tickSneak), true);
+                ((Player) entity).displayClientMessage(MutableComponent.create(new TranslatableContents("message.moreboots.charging_jump", tickSneak)), true);
             boots.setTag(tag);
         }
     }

@@ -13,7 +13,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -60,7 +61,7 @@ public class SuperAvianFeetItem extends BootsItem {
 
     @Override
     public void onLivingFall(final LivingFallEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         float distance = event.getDistance();
         if (entity.level.isClientSide) return;
         event.setCanceled(true);
@@ -69,8 +70,8 @@ public class SuperAvianFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1) entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, 0, false, false, false));
         if (!entity.isCrouching()) {
@@ -88,7 +89,7 @@ public class SuperAvianFeetItem extends BootsItem {
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             tickSneak += 1;
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.building_speed", tickSneak), true);
+                ((Player) entity).displayClientMessage(MutableComponent.create(new TranslatableContents("message.moreboots.building_speed", tickSneak)), true);
             if (tickSneak >= 864000 && !entity.isSpectator()) {
                 Vec3 pos = entity.position();
                 tag.putLong("tickSneak", 0);
@@ -123,7 +124,7 @@ public class SuperAvianFeetItem extends BootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isCrouching()) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
@@ -175,7 +176,7 @@ public class SuperAvianFeetItem extends BootsItem {
 
     @Override
     public void onLivingKnockedBack(LivingKnockBackEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isOnGround() && entity.isCrouching()) event.setCanceled(true);
     }
 
@@ -183,6 +184,6 @@ public class SuperAvianFeetItem extends BootsItem {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent("credit.moreboots."+registryName));
+        tooltip.add(MutableComponent.create(new TranslatableContents("credit.moreboots."+registryName)));
     }
 }

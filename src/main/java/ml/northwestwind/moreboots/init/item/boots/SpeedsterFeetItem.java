@@ -4,7 +4,8 @@ import ml.northwestwind.moreboots.handler.Utils;
 import ml.northwestwind.moreboots.init.ItemInit;
 import ml.northwestwind.moreboots.init.item.BootsItem;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -20,8 +21,8 @@ public class SpeedsterFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isOnGround()) {
             ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
             CompoundTag tag = boots.getOrCreateTag();
@@ -32,7 +33,7 @@ public class SpeedsterFeetItem extends BootsItem {
                     tag.putLong("tickSneak", tickSneak);
                 }
                 if (entity instanceof Player && !entity.level.isClientSide)
-                    ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_speed", Utils.roundTo(tickSneak / 60D, 2)), true);
+                    ((Player) entity).displayClientMessage(MutableComponent.create(new TranslatableContents("message.moreboots.charging_speed", Utils.roundTo(tickSneak / 60D, 2))), true);
                 boots.setTag(tag);
             } else if (!entity.getDeltaMovement().equals(Vec3.ZERO) && !entity.hasEffect(MobEffects.MOVEMENT_SPEED)) {
                 long tickSneak = tag.getLong("tickSneak");

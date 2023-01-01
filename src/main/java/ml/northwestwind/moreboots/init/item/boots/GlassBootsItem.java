@@ -8,7 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -39,7 +39,7 @@ public class GlassBootsItem extends BootsItem {
 
     @Override
     public void onLivingFall(LivingFallEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         float distance = event.getDistance();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         if (entity.level.isClientSide) return;
@@ -53,8 +53,8 @@ public class GlassBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Potion potion = PotionUtils.getPotion(boots);
         for (MobEffectInstance instance : potion.getEffects()) {
@@ -90,7 +90,7 @@ public class GlassBootsItem extends BootsItem {
         List<Pair<Attribute, AttributeModifier>> list1 = Lists.newArrayList();
         if (!list.isEmpty()) {
             for(MobEffectInstance effectinstance : list) {
-                MutableComponent iformattabletextcomponent = new TranslatableComponent(effectinstance.getDescriptionId());
+                MutableComponent iformattabletextcomponent = MutableComponent.create(new TranslatableContents(effectinstance.getDescriptionId()));
                 MobEffect effect = effectinstance.getEffect();
                 Map<Attribute, AttributeModifier> map = effect.getAttributeModifiers();
                 if (!map.isEmpty()) {
@@ -102,14 +102,14 @@ public class GlassBootsItem extends BootsItem {
                 }
 
                 if (effectinstance.getAmplifier() > 0) {
-                    iformattabletextcomponent = new TranslatableComponent("potion.withAmplifier", iformattabletextcomponent, new TranslatableComponent("potion.potency." + effectinstance.getAmplifier()));
+                    iformattabletextcomponent = MutableComponent.create(new TranslatableContents("potion.withAmplifier", iformattabletextcomponent, MutableComponent.create(new TranslatableContents("potion.potency." + effectinstance.getAmplifier()))));
                 }
 
                 lores.add(iformattabletextcomponent.withStyle(effect.getCategory().getTooltipFormatting()));
             }
         } else {
             Potion potion = PotionUtils.getPotion(itemIn);
-            MutableComponent iformattabletextcomponent = new TranslatableComponent(potion.getName("item.minecraft.potion.effect."));
+            MutableComponent iformattabletextcomponent = MutableComponent.create(new TranslatableContents(potion.getName("item.minecraft.potion.effect.")));
             lores.add(iformattabletextcomponent.withStyle(ChatFormatting.GREEN));
         }
     }

@@ -21,15 +21,15 @@ public class BolterFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (!entity.hasEffect(MobEffects.MOVEMENT_SPEED) || entity.getEffect(MobEffects.MOVEMENT_SPEED).getAmplifier() < 1)
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 10, 0, false, false, false));
     }
 
     @Override
     public void onLivingAttack(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level);
         lightning.setPos(entity.getX(), entity.getY(), entity.getZ());
         entity.level.addFreshEntity(lightning);

@@ -20,8 +20,8 @@ public class SpongeBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         boolean absorbed = Utils.absorb(entity.level, entity.blockPosition(), absorb);
         if (absorbed && entity.getRandom().nextInt(100) == 0)

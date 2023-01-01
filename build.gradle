@@ -6,7 +6,7 @@ buildscript {
         maven { url = "https://repo.spongepowered.org/maven" }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.36', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
@@ -15,7 +15,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '3.2.0'
+version = '4.0.0'
 group = 'ml.northwestwind.moreboots'
 archivesBaseName = 'moreboots'
 
@@ -23,7 +23,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: mc_version
     runs {
         client {
             workingDirectory project.file('run')
@@ -85,15 +85,17 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.25'
-    annotationProcessor "org.spongepowered:mixin:0.8.4:processor"
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 }
 
 jar {
     manifest {
-        classifier "1.18.2"
+        classifier mc_version
         attributes([
                 "Specification-Title": "moreboots",
                 "Specification-Vendor": "morebootsforyou",

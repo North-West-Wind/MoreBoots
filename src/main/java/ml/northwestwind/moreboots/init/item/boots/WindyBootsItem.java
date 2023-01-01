@@ -12,8 +12,8 @@ public class WindyBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isOnGround() || entity.isCrouching() || entity.isInWater() || entity.isInLava()) return;
         Vec3 motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.multiply(1.1, 1, 1.1));

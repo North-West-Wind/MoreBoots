@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -20,8 +20,8 @@ public class LokiBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         int tickStill = tag.getInt("tickStill");
@@ -40,7 +40,7 @@ public class LokiBootsItem extends BootsItem {
     public void onLivingEquipmentChange(LivingEquipmentChangeEvent event) {
         ItemStack to = event.getTo();
         ItemStack from = event.getFrom();
-        if (from.getItem().equals(ItemInit.LOKI_BOOTS.get()) && !from.getItem().equals(to.getItem())) event.getEntityLiving().setInvisible(false);
+        if (from.getItem().equals(ItemInit.LOKI_BOOTS.get()) && !from.getItem().equals(to.getItem())) event.getEntity().setInvisible(false);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class LokiBootsItem extends BootsItem {
     }
 
     @Override
-    public void renderNameplate(RenderNameplateEvent event) {
+    public void renderNameplate(RenderNameTagEvent event) {
         event.setResult(Event.Result.DENY);
     }
 }

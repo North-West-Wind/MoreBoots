@@ -17,8 +17,8 @@ public class GlidingBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.getDeltaMovement().x() == 0 && entity.getDeltaMovement().z() == 0) return;
         if (entity.getDeltaMovement().y() < 0.02 && !entity.isCrouching()) {
             if (entity instanceof Player player && player.getAbilities().flying) return;

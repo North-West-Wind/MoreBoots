@@ -16,7 +16,7 @@ public class SlimeBootsItem extends BootsItem {
 
     @Override
     public void onLivingFall(LivingFallEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isCrouching()) return;
         float distance = event.getDistance();
         if (distance < 1.5) return;

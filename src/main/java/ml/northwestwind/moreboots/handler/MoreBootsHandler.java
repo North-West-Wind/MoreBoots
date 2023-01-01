@@ -34,7 +34,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onPlayerLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
-        ItemStack boots = event.getPlayer().getItemBySlot(EquipmentSlot.FEET);
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onPlayerLeftClick(event);
             if (aftermathTicks > 0 && aftermathInjection != null) aftermathInjection.apply(event);
@@ -43,7 +43,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onLivingFall(final LivingFallEvent event) {
-        ItemStack boots = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onLivingFall(event);
             if (aftermathTicks > 0 && aftermathInjection != null) aftermathInjection.apply(event);
@@ -52,7 +52,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onLivingJump(final LivingEvent.LivingJumpEvent event) {
-        ItemStack boots = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onLivingJump(event);
             if (aftermathTicks > 0 && aftermathInjection != null) aftermathInjection.apply(event);
@@ -61,7 +61,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onLivingHurt(final LivingHurtEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         Entity attacker = event.getSource().getDirectEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         ItemStack atBoots;
@@ -77,7 +77,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onPlayerXpChange(final PlayerXpEvent.XpChange event) {
-        ItemStack boots = event.getPlayer().getItemBySlot(EquipmentSlot.FEET);
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onPlayerXpChange(event);
             if (aftermathTicks > 0 && aftermathInjection != null) aftermathInjection.apply(event);
@@ -101,13 +101,13 @@ public class MoreBootsHandler {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(final LivingEvent.LivingUpdateEvent event) {
+    public static void onLivingUpdate(final LivingEvent.LivingTickEvent event) {
         if (aftermathTicks > 0) aftermathTicks--;
         else {
             aftermathInjection = null;
             aftermathCollision = false;
         }
-        ItemStack boots = event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+        ItemStack boots = event.getEntity().getItemBySlot(EquipmentSlot.FEET);
         if (boots.getItem() instanceof BootsItem) {
             ((BootsItem) boots.getItem()).onLivingUpdate(event);
             if (aftermathTicks > 0 && aftermathInjection != null) aftermathInjection.apply(event);
@@ -119,7 +119,7 @@ public class MoreBootsHandler {
         int looting = event.getLootingLevel();
         int shouldDrop = rng.nextInt((1 + looting) * 2) + looting;
         if (shouldDrop < 1) return;
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.getType().equals(EntityType.BAT)) {
             ItemStack stack = new ItemStack(ItemInit.BAT_HIDE.get(), shouldDrop);
             ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
@@ -133,7 +133,7 @@ public class MoreBootsHandler {
 
     @SubscribeEvent
     public static void onLivingKnockBack(final LivingKnockBackEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         DamageSource source = entity.getLastDamageSource();
         if (source != null && (source.getDirectEntity() instanceof LivingEntity attacker)) {

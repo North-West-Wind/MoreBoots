@@ -10,7 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -29,8 +30,8 @@ public class MightyFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos blockPos = entity.blockPosition();
         if (entity.getItemBySlot(EquipmentSlot.FEET).getOrCreateTag().getBoolean("Activated") && !entity.level.getBlockState(blockPos.below()).getCollisionShape(entity.level, blockPos.below()).equals(Shapes.empty())) {
             Vec3 motion = entity.getDeltaMovement();
@@ -53,7 +54,7 @@ public class MightyFeetItem extends BootsItem {
                 tag.putLong("tickSneak", tickSneak);
             }
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_explosion", Utils.roundTo(tickSneak / 60D, 2)), true);
+                ((Player) entity).displayClientMessage(MutableComponent.create(new TranslatableContents("message.moreboots.charging_explosion", Utils.roundTo(tickSneak / 60D, 2))), true);
             boots.setTag(tag);
         }
     }

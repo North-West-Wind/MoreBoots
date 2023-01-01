@@ -1,6 +1,7 @@
 package ml.northwestwind.moreboots.init.brewing;
 
 import ml.northwestwind.moreboots.init.ItemInit;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,13 +36,13 @@ public class GlassBootsBrewingRecipe implements IBrewingRecipe {
         if (potion.equals(Potions.WATER)) {
             Potion pot = waterBrewing(ingredient);
             if (pot.equals(potion)) return ItemStack.EMPTY;
-            tag.putString("Potion", pot.getRegistryName().toString());
+            tag.putString("Potion", Registry.POTION.getKey(pot).toString());
         } else {
             ItemStack bottle = PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
             ItemStack result = PotionBrewing.mix(bottle, ingredient);
             Potion pot = PotionUtils.getPotion(result);
             if (pot.equals(potion)) return ItemStack.EMPTY;
-            tag.putString("Potion", pot.getRegistryName().toString());
+            tag.putString("Potion", Registry.POTION.getKey(pot).toString());
         }
         if (tag.contains("Duration") && ingredient.getItem().equals(Items.REDSTONE)) tag.putInt("Duration", 9600);
         input.setTag(tag);

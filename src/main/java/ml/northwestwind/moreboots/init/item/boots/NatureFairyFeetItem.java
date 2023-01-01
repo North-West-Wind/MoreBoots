@@ -25,8 +25,8 @@ public class NatureFairyFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         CompoundTag tag = boots.getOrCreateTag();
         int flutterTicks = tag.getInt("flutter_ticks");
@@ -55,7 +55,7 @@ public class NatureFairyFeetItem extends BootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.5, 0));
         entity.hasImpulse = true;
     }

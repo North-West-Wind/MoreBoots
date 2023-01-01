@@ -33,8 +33,8 @@ public class JoltFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos pos = entity.blockPosition();
         Optional<IReverseTag<Block>> thisBlockTag = ForgeRegistries.BLOCKS.tags().getReverseTag(entity.level.getBlockState(pos).getBlock());
         Optional<IReverseTag<Block>> downBlockTag = ForgeRegistries.BLOCKS.tags().getReverseTag(entity.level.getBlockState(pos.below()).getBlock());

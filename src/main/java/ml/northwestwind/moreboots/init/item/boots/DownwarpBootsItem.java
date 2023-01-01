@@ -13,8 +13,8 @@ public class DownwarpBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos pos = entity.blockPosition();
         if (!entity.isOnGround()) {
             boolean isThisAirBlock = entity.level.isEmptyBlock(pos) || entity.level.getBlockState(pos).getCollisionShape(entity.level, pos).equals(Shapes.empty());

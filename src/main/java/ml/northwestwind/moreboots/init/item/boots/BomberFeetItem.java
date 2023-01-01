@@ -32,8 +32,8 @@ public class BomberFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (!entity.isCrouching()) {
             double addToY = 0;
             if (entity instanceof Player && entity.getDeltaMovement().y() < 0.05 && ((MixinLivingEntityAccessor) entity).isJumping() && entity.blockPosition().getY() - Utils.getGroundHeight(entity.level, entity.blockPosition()) < 9) addToY = 0.05;

@@ -1,7 +1,7 @@
 package ml.northwestwind.moreboots.container;
 
-import ml.northwestwind.moreboots.init.ContainerInit;
 import ml.northwestwind.moreboots.init.ItemInit;
+import ml.northwestwind.moreboots.init.MenuTypeInit;
 import ml.northwestwind.moreboots.inventory.StorageBootsInventory;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +22,7 @@ public class StorageBootsContainer extends ChestMenu {
     }
 
     public StorageBootsContainer(int id, Inventory playerInventory, Container storage, int containerRows) {
-        super(ContainerInit.STORAGE_BOOTS.get(), id, playerInventory, storage, containerRows);
+        super(MenuTypeInit.STORAGE_BOOTS.get(), id, playerInventory, storage, containerRows);
         checkContainerSize(storage, containerRows * 9);
         this.storage = storage;
         this.containerRows = containerRows;

@@ -19,8 +19,8 @@ public class FloatieBootsItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isInWater()) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1, 0));
             entity.hasImpulse = true;

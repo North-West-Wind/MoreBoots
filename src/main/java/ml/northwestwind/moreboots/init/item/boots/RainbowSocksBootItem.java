@@ -2,7 +2,8 @@ package ml.northwestwind.moreboots.init.item.boots;
 
 import ml.northwestwind.moreboots.init.ItemInit;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -25,7 +26,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
 
     @Override
     public void onLivingFall(LivingFallEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isCrouching()) return;
         float distance = event.getDistance();
         if (distance < 1.5) return;
@@ -39,7 +40,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
 
     @Override
     public void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (entity.isCrouching()) return;
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
         Vec3 motion = entity.getDeltaMovement();
@@ -50,8 +51,8 @@ public class RainbowSocksBootItem extends SocksBootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         if (entity.isCrouching() && entity.isOnGround()) {
             ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
             CompoundTag tag = boots.getOrCreateTag();
@@ -59,7 +60,7 @@ public class RainbowSocksBootItem extends SocksBootsItem {
             tag.putLong("tickSneak", tag.getLong("tickSneak") + 1);
             tickSneak += 1;
             if (entity instanceof Player && !entity.level.isClientSide)
-                ((Player) entity).displayClientMessage(new TranslatableComponent("message.moreboots.charging_jump", tickSneak), true);
+                ((Player) entity).displayClientMessage(MutableComponent.create(new TranslatableContents("message.moreboots.charging_jump", tickSneak)), true);
             if (tickSneak >= 864000 && !entity.isSpectator()) {
                 Vec3 pos = entity.position();
                 tag.putLong("tickSneak", 0);

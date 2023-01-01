@@ -23,8 +23,8 @@ public class SalamanderFeetItem extends BootsItem {
     }
 
     @Override
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
-        LivingEntity entity = event.getEntityLiving();
+    public void onLivingUpdate(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
         BlockPos pos = entity.blockPosition();
         int skylight = entity.level.getLightEngine().getLayerListener(LightLayer.SKY).getLightValue(pos);
         Biome biome = entity.level.getBiome(pos).value();
